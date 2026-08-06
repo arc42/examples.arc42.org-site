@@ -1,0 +1,46 @@
+{%- comment -%}
+  Prev/next through this system's sections.
+
+  The index is found by walking sys_sections and comparing urls — Liquid has
+  no indexOf. `forloop.index0` of the match is captured on the way past.
+{%- endcomment -%}
+{%- assign here = -1 -%}
+{%- for s in sys_sections -%}
+  {%- if s.url == page.url -%}{%- assign here = forloop.index0 -%}{%- endif -%}
+{%- endfor -%}
+
+{%- if here >= 0 -%}
+{%- assign prev_i = here | minus: 1 -%}
+{%- assign next_i = here | plus: 1 -%}
+<nav class="ex-stepper" aria-label="Section navigation">
+  <div class="ex-stepper__side ex-stepper__side--prev">
+    {%- if here > 0 -%}
+    {%- assign p = sys_sections[prev_i] -%}
+    <a class="ex-stepper__link" href="{{ p.url | relative_url }}" rel="prev">
+      <span class="ex-stepper__dir">&larr; Previous</span>
+      <span class="ex-stepper__label">{{ p.order }}. {{ p.title }}</span>
+    </a>
+    {%- else -%}
+    <a class="ex-stepper__link" href="{{ sys_url | relative_url }}">
+      <span class="ex-stepper__dir">&larr; Back to</span>
+      <span class="ex-stepper__label">{{ sys.title | default: sys_slug }} overview</span>
+    </a>
+    {%- endif -%}
+  </div>
+
+  <div class="ex-stepper__side ex-stepper__side--next">
+    {%- if next_i < sys_sections.size -%}
+    {%- assign n = sys_sections[next_i] -%}
+    <a class="ex-stepper__link" href="{{ n.url | relative_url }}" rel="next">
+      <span class="ex-stepper__dir">Next &rarr;</span>
+      <span class="ex-stepper__label">{{ n.order }}. {{ n.title }}</span>
+    </a>
+    {%- else -%}
+    <a class="ex-stepper__link" href="{{ '/' | relative_url }}">
+      <span class="ex-stepper__dir">Finished &rarr;</span>
+      <span class="ex-stepper__label">All examples</span>
+    </a>
+    {%- endif -%}
+  </div>
+</nav>
+{%- endif -%}

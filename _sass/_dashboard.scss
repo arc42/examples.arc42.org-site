@@ -1,0 +1,180 @@
+// ============================================================================
+// The dashboard — the tile grid and its filter.
+//
+// Tiles are NEUTRAL. The domain is carried as text, not colour. The hook for
+// changing that is `[data-domain]` on the tile: one attribute selector setting
+// one custom property turns this into quality.arc42.org's `--cat` mechanism
+// with no template edit. See DESIGN.md "Open decision: colour on tiles".
+// ============================================================================
+
+.ex-grid {
+  list-style: none;
+  margin: var(--s6) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s5);
+
+  // auto-fill, not auto-fit: with two examples on a 1920 screen, auto-fit
+  // stretches them to 900px each and the dashboard stops reading as a grid.
+  // auto-fill keeps the tile at its designed size and leaves the row short,
+  // which is honest about there being two of them.
+  grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+
+  &__empty {
+    margin-top: var(--s6);
+    color: var(--muted);
+  }
+}
+
+.ex-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+  padding: var(--s5);
+  background: var(--paper);
+  border: 1px solid var(--wash-border);
+  border-radius: var(--radius);
+
+  // Interactive hover-lift is the one sanctioned DYNAMIC shadow (DESIGN.md
+  // §2.3). At rest the tile is flat — a card with a resting shadow is the
+  // Material idiom this family deliberately does not use.
+  transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
+
+  &:hover,
+  &:focus-within {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(47, 41, 34, 0.14);
+    border-color: var(--ground-deep);
+  }
+
+  &__domain {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);        // 5.50:1 on --paper
+  }
+
+  &__title {
+    font-size: 1.375rem;
+    margin: 0;
+  }
+
+  // Stretched link: one real <a>, expanded to the whole tile. Keeps exactly
+  // one link per tile in the tab order and the accessibility tree.
+  &__link {
+    text-decoration: none;
+    color: var(--ground-deep);
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+    }
+
+    &:hover {
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+    }
+  }
+
+  &__tagline {
+    color: var(--ink);
+  }
+
+  &__goal,
+  &__row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s1);
+    font-size: 0.9375rem;
+  }
+
+  &__label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  &__scale {
+    margin-top: auto;
+    padding-top: var(--s3);
+    border-top: 1px solid var(--hairline);
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+}
+
+// ---- Chips -------------------------------------------------------------------
+// `.ex-` and not `.arc42-`: the Same-Name Rule says a family class name is a
+// published interface. The family spec for `arc42-tag` is "pill radius, site-hue
+// wash, ALWAYS LINKS". These are not links — they are keyword labels on a site
+// with no hue — so they take a different, site-local name rather than shipping
+// a second incompatible design under a family name.
+.ex-chips {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s2);
+  padding: 0;
+  margin: 0;
+}
+
+.ex-chip {
+  display: inline-block;
+  padding: 2px var(--s3);
+  background: var(--wash-calm);
+  color: var(--ink);            // 11.64:1 on --wash-calm
+  border: 1px solid var(--wash-border);
+  border-radius: var(--radius-pill);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+
+  &--tech {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    background: var(--paper);
+  }
+}
+
+// ---- Filter ------------------------------------------------------------------
+// Rendered hidden and revealed by JS. Without JS every tile is already in the
+// DOM and visible; the filter is pure enhancement and never a prerequisite for
+// reaching an example.
+.ex-filter {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  flex-wrap: wrap;
+  margin-top: var(--s6);
+
+  &__label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  &__input {
+    flex: 1 1 18rem;
+    max-width: 26rem;
+    min-height: 44px;
+    padding: var(--s2) var(--s3);
+    font: inherit;
+    font-size: 0.9375rem;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--wash-border);
+    border-radius: var(--radius);
+  }
+
+  &__count {
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+}

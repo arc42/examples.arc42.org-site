@@ -1,0 +1,124 @@
+// ============================================================================
+// Design tokens — the single source of truth for colour, type, and metrics.
+//
+// Rule for every partial that imports this: use var(--token). Do not introduce
+// a new hex value. If a value is missing, add it here and to DESIGN.md
+// together (ADR-0003: values enter a site as CSS custom properties, never as
+// SCSS variables and never as a loose hex literal).
+//
+// Every text-bearing pair below records its MEASURED contrast ratio at the
+// declaration site (ADR-0002). Ratios were measured against the actual token
+// values, not estimated. Failing pairs are replaced, never waived.
+//
+// THIS SITE HAS NO SIGNATURE HUE. It is recognized by the spine — the
+// six-segment rule under the masthead (see _spine.scss and ADR-0008). The
+// ground is a neutral, and makes no hue claim, exactly as status.arc42.org's
+// slate makes none. Nothing here may grow into a signature hue by accident:
+// if you find yourself wanting "the site colour" for an accent, the answer is
+// a neutral plus a shape, or one of the shared family tokens with a named job.
+// ============================================================================
+
+:root {
+  // ---- Surfaces & text (family constants) ----------------------------------
+  --paper:      #fcfdff;   // near-white with the faintest cool tint, never #fff
+  --ink:        #2a2e34;   // soft near-black — 13.41:1 on --paper
+  --muted:      #5e6975;   // de-emphasized meta — 5.50:1 on --paper,
+                           //                      4.77:1 on --wash-calm
+  --hairline:   rgba(20, 44, 82, 0.12);   // table borders, nav dividers
+  --hairline-2: rgba(20, 44, 82, 0.16);   // borders that must actually be seen
+  --rule:       #c6ccd4;   // the one sanctioned thick left rule (blockquotes),
+                           // deliberately grey, never a brand accent stripe
+
+  // ---- The ground ----------------------------------------------------------
+  // Umber graphite. Registered in BRAND.md as a ground, not a signature hue.
+  // 13.9 dE00 from status' slate #3a4550 and 19.3 from the masthead navy
+  // #2b3a57 — more separation than slate itself has from navy (8.9), which is
+  // the precedent ADR-0007 set for a neutral that makes no hue claim.
+  --ground:      #3a332b;  // masthead fill, footer fill
+  --ground-deep: #2f2922;  // pinned-note shadow, rules, heading ink
+                           //   14.12:1 on --paper · white on it 14.37:1
+
+  // Text ON the ground band.
+  --tint:      #ffffff;    // 12.44:1 on --ground
+  --tint-soft: #dcdad9;    //  8.93:1 on --ground — this is rgba(255,255,255,.82)
+                           //   composited, written as a literal so the measured
+                           //   value belongs to the token and not to whatever
+                           //   happens to be behind it.
+
+  // ---- Links ---------------------------------------------------------------
+  // A site with no signature hue has no link colour to spend. Links are
+  // therefore ink-dark and carry a PERSISTENT UNDERLINE, which is what
+  // actually distinguishes them — colour never carries meaning alone
+  // (DESIGN.md §2.4). Hover thickens the underline and adds a wash; it does
+  // not introduce a hue.
+  //
+  // Rejected: an umber link ramp (#6a5439 etc). It measured fine on paper
+  // (7.02:1) but sat 12.4 dE00 from pdfminion's sienna — close enough to read
+  // as a quotation of another site's signature hue, which the Imprint Rule
+  // forbids in any role.
+  --link:       var(--ground-deep);        // 14.12:1 on --paper
+  --link-under: #9b9895;                   // --wash 50% — 2.49:1, decorative
+                                           //   only; the ink carries the text
+  // ---- Wash ladder ---------------------------------------------------------
+  // Exactly three steps plus two border steps (DESIGN.md §2.3). Applied as
+  // color-mix(in oklab, var(--paper), var(--ground) <step>). The literals below
+  // are the resolved sRGB values, recorded so their contrast can be measured.
+  --wash-calm-pct:   8%;
+  --wash-active-pct: 14%;
+  --wash-hover-pct:  25%;
+  --wash-border-pct: 35%;
+  --wash-border-hover-pct: 50%;
+
+  --wash-calm:   #ecedee;  // --ink on it 11.64:1 · --muted on it 4.77:1
+  --wash-active: #e1e1e1;  // --ink on it 10.44:1
+  --wash-hover:  #cccaca;  // --ink on it  8.36:1
+  --wash-border: #b8b6b5;  // --ink on it  6.76:1 (borders, not text)
+
+  // ---- Shared family tokens ------------------------------------------------
+  // Identical hex on every site (meta.arc42.org BRAND.md). On THIS site all six
+  // spine tokens have exactly one named, visible job: a segment of the spine.
+  // That makes examples.arc42.org the family's strongest Visible-Token Rule
+  // proof point — the one place where every shared token is on screen at once.
+  --arc42-amber:      #ffc95c;  // spine segment 3 · focus ring on the band
+  --arc42-amber-ink:  #4a3a0a;
+  --arc42-coral:      #ff5c7c;  // spine segment 5. NEVER white/body text on it
+  --arc42-coral-deep: #c22b47;  // spine segment 2 · errors, if a form ever ships
+  --arc42-emerald:    #2e9e67;  // reserved: status marks only
+  --arc42-green-ink:  #1b5e20;  // spine segment 4
+  --arc42-teal:       #5fb49c;  // spine segment 1
+  --arc42-maroon:     #8a2e2e;  // spine segment 6 · sponsor quarantine only
+  --arc42-maroon-bg:  #fcefef;
+
+  // ---- Focus rings ---------------------------------------------------------
+  // Two tokens, one per surface, both well over the 3:1 a focus indicator must
+  // carry (DESIGN.md §4). Writing `outline: none` obliges you to apply a ring.
+  --focus-ring:         var(--ground-deep);   // 14.12:1 on --paper
+  --focus-ring-on-band: var(--arc42-amber);   //  8.15:1 on --ground
+
+  // ---- Type (family constant #1) -------------------------------------------
+  --serif: "Libre Caslon Text", Georgia, "Times New Roman", serif;
+  --sans:  "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", system-ui,
+           -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono:  ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas,
+           "Liberation Mono", monospace;
+
+  // ---- Spacing scale -------------------------------------------------------
+  --s1: 4px;  --s2: 8px;  --s3: 12px; --s4: 16px;
+  --s5: 24px; --s6: 32px; --s7: 48px; --s8: 64px;
+
+  // ---- Metrics -------------------------------------------------------------
+  --shell-max: 1400px;
+  --rail-w:    clamp(210px, 19vw, 260px);
+  --measure:   68ch;
+
+  // The ceiling for scannable, non-prose blocks — the dashboard grid, wide
+  // tables. Reading measure does not apply to a grid of tiles, but *some*
+  // ceiling must, or it runs the full shell width on a 1920 screen.
+  --measure-wide: calc(var(--measure) * 1.7);   // ~116ch
+
+  --bar-h:     56px;   // condensed masthead height; anchors clear it
+  --spine-h:   6px;    // the device. Not a hairline, not a stripe.
+
+  --radius:      4px;
+  --radius-pill: 999px;
+}

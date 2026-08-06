@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://examples.arc42.org/sitemap.xml

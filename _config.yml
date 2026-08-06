@@ -1,0 +1,113 @@
+#
+# URL settings
+#
+# these need to be adjusted depending on target platform,
+# local Jekyll needs different settings than github-pages :-(
+
+# deployment with github-pages on custom domain
+url: https://examples.arc42.org
+baseurl:
+
+#
+# basic settings
+#
+title: arc42 Examples
+description: Real-world software architectures, documented with the arc42 template.
+
+# Shown under the wordmark in the full masthead on the home page. `description`
+# is written for search engines; this is the human-facing line.
+tagline: Complete architecture documentations of real systems — one template, many domains.
+
+# The arc42 logo in the masthead already reads "arc42", so the wordmark beside
+# it says only what this site is.
+masthead_title: Examples
+language: en
+
+repository: arc42/examples.arc42.org-site
+
+#
+# plugins
+#
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+#
+# Prettify url.
+#
+permalink: pretty
+
+# ============================================================================
+# The systems collection — one directory per documented system.
+#
+# `:path` for a collection is the path below _systems/ without the extension,
+# so `_systems/dokchess/03-context.md` renders at
+# `/systems/dokchess/03-context/`.
+#
+# The landing page of each system (`index.md`) overrides this in its own front
+# matter to `/systems/<slug>/`, because `:path` would otherwise give it the
+# trailing `/index/`. That single override line is the ONLY place a system's
+# slug is written down twice — everything else derives it from the directory
+# name (see _includes/system-context.html).
+# ============================================================================
+collections:
+  systems:
+    output: true
+    permalink: /systems/:path/
+
+defaults:
+  - scope:
+      path: ""
+      type: systems
+    values:
+      layout: system-section
+
+#
+# !! Danger zone !!
+#
+
+sitemap: true
+
+include:
+  - _pages
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+sass:
+  sass_dir: _sass
+  style: compressed
+
+exclude:
+  - AGENTS.md
+  - CLAUDE.md
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
+  - README.md
+  - CONTRIBUTING.md
+  - DESIGN.md
+  - docs
+  - .github
+  - Dockerfile
+  - docker
+  - docker-compose.yml
+  - .dockerignore
+  - Makefile
+  - scripts
+  - .gitignore
+  - vendor
+
+# Note on two conventions this site relies on instead of `exclude`:
+#
+#   _systems/_TEMPLATE/        the contributor skeleton
+#   _systems/<slug>/_originals/  per-system source material (PlantUML, drawio,
+#                                the original .adoc) kept for provenance
+#
+# Neither is listed above, because `exclude` globs are matched relative to the
+# *collection* directory for collection content and would not fire. Both rely
+# on Jekyll's EntryFilter instead, which skips any path segment beginning with
+# `_`. That is why the underscore on `_originals` is load-bearing — renaming it
+# to `originals/` would publish every source file.

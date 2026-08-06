@@ -1,0 +1,39 @@
+{%- comment -%}
+============================================================================
+system-context.html — the one place that resolves "which system am I in?"
+
+THE MODULARITY CONTRACT of this site is that one directory IS one system:
+adding an example is `cp -r _TEMPLATE myslug`, removing it is `rm -rf`, and
+NO FILE OUTSIDE THE DIRECTORY IS EVER EDITED. No central registry, no nav
+config, no list to keep in sync.
+
+That only holds if the slug is never written into the section files. So it is
+derived from the directory name here, once, and everything else consumes what
+this include sets:
+
+  sys_slug      "dokchess"
+  sys_url       "/systems/dokchess/"
+  sys           the system's index.md document (title, tagline, tile facts)
+  sys_sections  its 12 arc42 sections, ordered, landing page excluded
+
+Include it as:  {% include system-context.html %}
+============================================================================
+{%- endcomment -%}
+
+{%- assign sys_slug = page.path | remove_first: '_systems/' | split: '/' | first -%}
+{%- assign sys_url = '/systems/' | append: sys_slug | append: '/' -%}
+{%- assign sys_prefix = '_systems/' | append: sys_slug | append: '/' -%}
+
+{%- comment -%}
+  The landing page is found by URL rather than by filename so that a system
+  which someday renames index.md still resolves.
+{%- endcomment -%}
+{%- assign sys = site.systems | where: 'url', sys_url | first -%}
+
+{%- comment -%}
+  Sections = every document in this directory except the landing page, sorted
+  by the `order` each file declares. `order` is the arc42 section number, so
+  the sort is the template's own sequence and needs no separate nav list.
+{%- endcomment -%}
+{%- assign sys_docs = site.systems | where_exp: 'd', 'd.path contains sys_prefix' -%}
+{%- assign sys_sections = sys_docs | where_exp: 'd', 'd.url != sys_url' | sort: 'order' -%}

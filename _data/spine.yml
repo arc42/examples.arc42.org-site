@@ -1,0 +1,37 @@
+# ============================================================================
+# The spine — examples.arc42.org's signature device (ADR-0008).
+#
+# Six SHARED family tokens (meta.arc42.org BRAND.md → "Shared tokens"), tiled
+# edge to edge as a 6px rule under the masthead. No site's signature hue
+# appears here, so ADR-0001's Imprint Rule ("no satellite uses another site's
+# signature hue in any role") holds literally, not by argument.
+#
+# THE ORDER IS DELIBERATELY NON-SPECTRAL. Lightness alternates instead of
+# advancing through the colour wheel, so the device cannot read as a spectrum
+# or a rainbow. Do not "tidy" this into hue order.
+#
+# Measured (CIEDE2000, adjacent pairs):
+#   teal|coral-deep 64.0 · coral-deep|amber 52.4 · amber|green-ink 52.8
+#   green-ink|coral 71.3 · coral|maroon 30.1
+# Weakest adjacent pair 30.1 dE00, against the 18.8 the family treats as
+# adequate separation. Every neighbour is distinguishable side by side.
+#
+# The spine is DECORATIVE. It encodes nothing, it is not a control, and no
+# information is conveyed by these colours — which is why WCAG 1.4.11
+# non-text contrast does not apply to the segments. If you ever make a segment
+# mean something (a category, a filter, a current example), it stops being
+# decorative and every segment then needs 3:1 against its neighbours.
+# ============================================================================
+
+- token: teal
+  hex: '#5fb49c'
+- token: coral-deep
+  hex: '#c22b47'
+- token: amber
+  hex: '#ffc95c'
+- token: green-ink
+  hex: '#1b5e20'
+- token: coral
+  hex: '#ff5c7c'
+- token: maroon
+  hex: '#8a2e2e'

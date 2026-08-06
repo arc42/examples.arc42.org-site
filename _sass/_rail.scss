@@ -1,0 +1,153 @@
+// ============================================================================
+// The section rail.
+//
+// BREAKPOINT DERIVATION (DESIGN.md §2.4: breakpoints that affect the content
+// column are justified by the measure, not by device convention).
+//
+// At this site's body size — 17px Atkinson Hyperlegible Next, where the "0"
+// advance makes 1ch ≈ 9.35px — the railed layout gives the prose column
+//
+//     content = viewport − 48px (shell padding) − rail − 48px (gap)
+//     rail    = clamp(210px, 19vw, 260px)
+//
+//   viewport 1024px → 718px → 76.8ch   (at the top of the 65–75 band)
+//   viewport  940px → 634px → 67.8ch   (comfortably inside it)
+//   viewport  900px → 594px → 63.5ch   (BELOW the 65ch floor)
+//
+// So the rail gives way at 940px, not at a tablet-shaped round number: 900px
+// is where the prose breaks, and 940 is the nearest step with margin.
+//
+// One list serves both layouts. Below the breakpoint it becomes a horizontal
+// scrolling strip rather than disappearing — on a phone a reader still needs
+// to jump between sections, and a rail that only exists on desktop makes a
+// twelve-part document unnavigable exactly where navigation is hardest.
+// ============================================================================
+
+$rail-collapse: 940px;
+
+.ex-rail {
+  &__systitle {
+    font-family: var(--serif);
+    font-weight: 700;
+    color: var(--ground-deep);
+    margin-bottom: var(--s3);
+
+    a { text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__item a {
+    display: flex;
+    gap: var(--s3);
+    align-items: baseline;
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 0.9375rem;
+    line-height: 1.4;
+
+    &:hover {
+      background: var(--wash-hover);
+      text-decoration: underline;
+    }
+  }
+
+  &__num {
+    font-variant-numeric: tabular-nums;
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+
+  // "You are here" carries weight, a rule AND a fill — three signals, because
+  // colour alone may not mean anything (DESIGN.md §2.4).
+  &__item.is-current a {
+    font-weight: 700;
+    color: var(--ground-deep);
+    background: var(--wash-active);
+  }
+}
+
+// ---- ≥940px: a sticky vertical rail ------------------------------------------
+@media (min-width: $rail-collapse) {
+  .ex-shell--railed {
+    display: grid;
+    grid-template-columns: var(--rail-w) minmax(0, 1fr);
+    gap: var(--s7);
+    align-items: start;
+  }
+
+  .ex-rail {
+    position: sticky;
+    top: calc(var(--bar-h) + var(--spine-h) + var(--s4));
+    max-height: calc(100vh - var(--bar-h) - var(--spine-h) - var(--s6));
+    overflow-y: auto;
+    padding-right: var(--s4);
+    border-right: 1px solid var(--hairline);
+
+    &__item a {
+      padding: var(--s2) var(--s3) var(--s2) 0;
+    }
+
+    &__num { flex: 0 0 1.4em; }
+    &__name { flex: 1 1 auto; }
+
+    &__item.is-current a {
+      box-shadow: inset 3px 0 0 0 var(--ground-deep);
+      padding-left: var(--s3);
+    }
+  }
+
+  // The grid gives the column room; the measure decides how much it takes.
+  .ex-column {
+    max-width: calc(var(--measure) + 4ch);
+  }
+}
+
+// ---- <940px: a horizontal strip ----------------------------------------------
+@media (max-width: #{$rail-collapse - 1px}) {
+  .ex-rail {
+    margin-bottom: var(--s6);
+    padding-bottom: var(--s2);
+    border-bottom: 1px solid var(--hairline);
+
+    &__list {
+      display: flex;
+      gap: var(--s2);
+      overflow-x: auto;
+      // Momentum scrolling without a visible scrollbar eating the row height.
+      scrollbar-width: thin;
+      padding-bottom: var(--s2);
+      scroll-snap-type: x proximity;
+    }
+
+    &__item {
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+
+      a {
+        gap: var(--s2);
+        padding: var(--s2) var(--s3);
+        border: 1px solid var(--wash-border);
+        border-radius: var(--radius-pill);
+        white-space: nowrap;
+      }
+    }
+
+    // The name would make the strip several screens wide; the number plus the
+    // current section's name is enough to orient, and the current section is
+    // the one a reader is looking for.
+    &__item:not(.is-current) &__name,
+    &__item:not(.is-current) .ex-rail__name {
+      display: none;
+    }
+
+    &__item.is-current a {
+      border-color: var(--ground-deep);
+    }
+  }
+}

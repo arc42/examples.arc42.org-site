@@ -1,0 +1,33 @@
+{%- comment -%}
+  The left rail: this system's arc42 sections, in template order.
+  Expects system-context.html to have run (sys, sys_url, sys_sections).
+
+  ONE list, two presentations, no JS and no duplicated markup:
+    ≥940px  a sticky vertical rail beside the prose
+    <940px  a horizontally scrollable strip of numbered sections above it
+
+  An earlier draft wrapped this in <details open> so it could collapse on
+  small screens. That does not work: CSS cannot force a <details> back open
+  above the breakpoint, so the desktop rail would have been shuttable — and
+  a reader who closed it on a phone would find it closed on their laptop.
+  Presentation belongs in CSS; `open` is state, and state cannot be
+  responsive.
+{%- endcomment -%}
+<nav class="ex-rail" aria-labelledby="ex-rail-title">
+  <p class="ex-rail__systitle" id="ex-rail-title">
+    <a href="{{ sys_url | relative_url }}">{{ sys.title | default: sys_slug }}</a>
+  </p>
+
+  <ol class="ex-rail__list">
+    {%- for s in sys_sections -%}
+    {%- assign is_here = false -%}
+    {%- if s.url == page.url -%}{%- assign is_here = true -%}{%- endif -%}
+    <li class="ex-rail__item{% if is_here %} is-current{% endif %}">
+      <a href="{{ s.url | relative_url }}"{% if is_here %} aria-current="page"{% endif %}>
+        <span class="ex-rail__num">{{ s.order }}</span>
+        <span class="ex-rail__name">{{ s.title }}</span>
+      </a>
+    </li>
+    {%- endfor -%}
+  </ol>
+</nav>

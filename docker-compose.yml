@@ -1,0 +1,24 @@
+services:
+  jekyll:
+    build: .
+    image: examples-arc42-site:latest
+    init: true
+    environment:
+      JEKYLL_ENV: development
+      POLLING: "--force_polling"
+    volumes:
+      - .:/site
+      - jekyll_cache:/site/.jekyll-cache
+      - sass_cache:/site/.sass-cache
+    ports:
+      - '4000:4000'
+    # No --incremental: full rebuild on change. Incremental silently
+    # leaves stale/relocated output when permalinks or front matter change —
+    # and this site's permalinks are derived from directory names, so a
+    # renamed system directory is exactly the case it gets wrong.
+    command: >
+      sh -c "bundle exec jekyll serve --host 0.0.0.0 --watch $${POLLING}"
+
+volumes:
+  jekyll_cache:
+  sass_cache:

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 28" role="img" aria-label="arc42">
+  <!--
+    PLACEHOLDER — on-band (light) arc42 wordmark.
+
+    This is a stand-in so the masthead has correct metrics while the site is
+    scaffolded. Replace it with the family asset before launch: BRAND.md
+    ("Assets") records that a proper two-colour on-band variant, keeping the
+    azure swoosh instead of discarding it, is an open item (meta TODO OQ-2).
+    Do not treat this file as the family logo.
+  -->
+  <text x="0" y="21" font-family="Georgia, 'Times New Roman', serif"
+        font-size="20" font-weight="700" fill="#ffffff">arc42</text>
+</svg>

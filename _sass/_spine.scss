@@ -1,0 +1,29 @@
+// ============================================================================
+// The spine — this site's signature device (ADR-0008).
+//
+// Six shared family tokens tiled edge to edge under the masthead. Tokens,
+// order, and the adjacent-separation measurements live in _data/spine.yml;
+// the per-segment colour arrives as an inline background from that data.
+//
+// Flex with equal grow rather than a gradient: DESIGN.md §2.4 bans gradients,
+// and hard edges are the point — a gradient between six hues IS a spectrum,
+// which is the one thing this device must not be.
+// ============================================================================
+
+.ex-spine {
+  display: flex;
+  width: 100%;
+  height: var(--spine-h);
+
+  // The band ends at the spine. Nothing below it, no rule, no shadow.
+  &__seg {
+    flex: 1 1 0;
+    display: block;
+  }
+}
+
+// On the home page the spine is the transition from hero to content, and can
+// afford to be a touch heavier — it is the first thing a visitor meets.
+.ex-masthead--full .ex-spine {
+  height: calc(var(--spine-h) + 2px);
+}

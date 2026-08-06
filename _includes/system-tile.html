@@ -1,0 +1,66 @@
+{%- comment -%}
+  One dashboard tile. Everything it shows comes from `sys` — the system's
+  index.md front matter.
+
+  Colour: NONE. Per the design decision recorded in DESIGN.md, tiles are
+  neutral paper and the domain is carried as text. The hook for changing that
+  later is the `data-domain` attribute below: giving domains colour is a
+  CSS-only change (one attribute selector setting one custom property, the
+  `--cat` mechanism quality.arc42.org exports), with no template edit and no
+  content migration. Do not add colour without also giving it a legend — on
+  this site colour would be the ONLY category signal, and colour must never
+  carry meaning alone.
+
+  The whole tile is clickable via the stretched-link pattern: a single real
+  <a> around the title, expanded by a pseudo-element. This keeps exactly one
+  link per tile in the accessibility tree and in the tab order — a tile with
+  a link on the title AND the wrapper announces every example twice.
+{%- endcomment -%}
+<li class="ex-tile"
+    data-ex-item
+    data-domain="{{ sys.domain | default: 'Uncategorised' | slugify }}"
+    data-haystack="{{ sys.title }} {{ sys.tagline }} {{ sys.domain }} {{ sys.main_goal }} {{ sys.decisions | join: ' ' }} {{ sys.technologies | join: ' ' }}">
+
+  {%- if sys.domain -%}
+  <p class="ex-tile__domain">{{ sys.domain }}</p>
+  {%- endif -%}
+
+  <h2 class="ex-tile__title">
+    <a class="ex-tile__link" href="{{ sys.url | relative_url }}">{{ sys.title }}</a>
+  </h2>
+
+  <p class="ex-tile__tagline">{{ sys.tagline }}</p>
+
+  {%- if sys.main_goal -%}
+  <p class="ex-tile__goal">
+    <span class="ex-tile__label">Main goal</span>
+    {{ sys.main_goal }}
+  </p>
+  {%- endif -%}
+
+  {%- if sys.decisions and sys.decisions.size > 0 -%}
+  <div class="ex-tile__row">
+    <span class="ex-tile__label">Strategic decisions</span>
+    <ul class="ex-chips">
+      {%- for d in sys.decisions limit: 4 -%}
+      <li class="ex-chip">{{ d }}</li>
+      {%- endfor -%}
+    </ul>
+  </div>
+  {%- endif -%}
+
+  {%- if sys.technologies and sys.technologies.size > 0 -%}
+  <div class="ex-tile__row">
+    <span class="ex-tile__label">Technologies</span>
+    <ul class="ex-chips">
+      {%- for t in sys.technologies limit: 6 -%}
+      <li class="ex-chip ex-chip--tech">{{ t }}</li>
+      {%- endfor -%}
+    </ul>
+  </div>
+  {%- endif -%}
+
+  {%- if sys.scale -%}
+  <p class="ex-tile__scale">{{ sys.scale }}</p>
+  {%- endif -%}
+</li>

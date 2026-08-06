@@ -1,0 +1,111 @@
+// ============================================================================
+// The masthead band — family constant #2.
+//
+// Two variants on one band (the docs.arc42.org reference pattern): a hero on
+// the home page, a condensed sticky bar everywhere else, one --bar-h token.
+// Both terminate in the spine.
+// ============================================================================
+
+.ex-masthead {
+  background: var(--ground);
+  color: var(--tint);
+
+  &__inner {
+    max-width: var(--shell-max);
+    margin-inline: auto;
+    padding-inline: var(--s5);
+    min-height: var(--bar-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s5);
+    flex-wrap: wrap;
+  }
+
+  &__brand {
+    display: inline-flex;
+    align-items: baseline;
+    gap: var(--s3);
+    color: var(--tint);
+    text-decoration: none;
+    padding-block: var(--s2);
+  }
+
+  &__logo {
+    align-self: center;
+    height: 28px;
+    width: auto;
+  }
+
+  &__wordmark {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: 0.01em;
+  }
+
+  // ---- Hero variant (home only) ---------------------------------------------
+  &__hero {
+    max-width: var(--shell-max);
+    margin-inline: auto;
+    padding: var(--s6) var(--s5) var(--s8);
+  }
+
+  &__title {
+    color: var(--tint);          // 12.44:1 on --ground
+    font-size: clamp(2rem, 5vw, 3rem);
+  }
+
+  &__tagline {
+    margin-top: var(--s4);
+    color: var(--tint-soft);     // 8.93:1 on --ground
+    font-size: clamp(1.0625rem, 2vw, 1.25rem);
+    max-width: 46ch;
+  }
+}
+
+// The condensed bar sticks; the hero does not (a 300px hero pinned to the top
+// of a twelve-section document is a scroll tax, not navigation).
+.ex-masthead--bar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+// ---- Nav ---------------------------------------------------------------------
+.ex-nav {
+  &__list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s5);
+    padding: 0;
+    margin: 0;
+  }
+
+  a {
+    color: var(--tint-soft);     // 8.93:1 on --ground
+    text-decoration: none;
+    font-size: 0.9375rem;
+    padding-block: var(--s3);
+    display: inline-block;
+
+    &:hover {
+      color: var(--tint);
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 0.3em;
+    }
+
+    // "You are here" is marked by weight AND an underline, not by colour
+    // alone — the same rule that governs the rest of the site.
+    &[aria-current="page"] {
+      color: var(--tint);
+      font-weight: 700;
+      text-decoration: underline;
+      text-decoration-color: var(--arc42-amber);
+      text-decoration-thickness: 2px;
+      text-underline-offset: 0.3em;
+    }
+  }
+}

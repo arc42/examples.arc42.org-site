@@ -1,0 +1,144 @@
+// ============================================================================
+// Prose — the reading column inside a documentation section.
+//
+// Body prose is capped at the reading measure (DESIGN.md §2.4, 65–75ch).
+// Non-prose blocks that genuinely need more room — wide tables, diagrams —
+// are allowed to break out to --measure-wide, and say so where they do.
+// ============================================================================
+
+.ex-prose {
+  max-width: var(--measure);
+
+  > * + * { margin-top: var(--s4); }
+
+  h2, h3, h4 {
+    margin-top: var(--s7);
+    scroll-margin-top: calc(var(--bar-h) + var(--spine-h) + var(--s4));
+  }
+
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.1875rem; }
+  h4 { font-size: 1.0625rem; font-family: var(--sans); font-weight: 700; }
+
+  ul, ol {
+    padding-left: var(--s5);
+
+    li + li { margin-top: var(--s2); }
+  }
+
+  // ---- Media --------------------------------------------------------------
+  // Diagrams are the point of an architecture documentation, so they may take
+  // the wider ceiling. They still never exceed the shell.
+  img {
+    max-width: 100%;
+    margin-block: var(--s5);
+  }
+
+  figure {
+    margin-block: var(--s6);
+    max-width: var(--measure-wide);
+  }
+
+  figcaption {
+    margin-top: var(--s2);
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+
+  // ---- Tables -------------------------------------------------------------
+  // arc42 documentation is full of wide tables (building blocks, risks,
+  // decisions). They scroll inside their own container rather than making the
+  // page scroll sideways.
+  .ex-tablewrap,
+  > table {
+    display: block;
+    max-width: var(--measure-wide);
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    font-size: 0.9375rem;
+    border: 1px solid var(--wash-border);
+  }
+
+  th, td {
+    text-align: left;
+    vertical-align: top;
+    padding: var(--s2) var(--s3);
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  th {
+    background: var(--wash-calm);
+    font-weight: 700;
+    color: var(--ground-deep);
+  }
+
+  tbody tr:last-child td { border-bottom: 0; }
+
+  // ---- Code ---------------------------------------------------------------
+  code {
+    font-family: var(--mono);
+    font-size: 0.875em;
+    background: var(--wash-calm);
+    padding: 1px 4px;
+    border-radius: 3px;
+  }
+
+  pre {
+    max-width: var(--measure-wide);
+    overflow-x: auto;
+    padding: var(--s4);
+    background: var(--wash-calm);
+    border: 1px solid var(--wash-border);
+    border-radius: var(--radius);
+
+    code {
+      background: none;
+      padding: 0;
+      font-size: 0.875rem;
+    }
+  }
+
+  // ---- Quotation ----------------------------------------------------------
+  // The one sanctioned thick left rule, deliberately grey: a conventional
+  // quotation mark, never a brand-coloured accent stripe.
+  blockquote {
+    padding-left: var(--s4);
+    border-left: 4px solid var(--rule);
+    color: var(--muted);
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px solid var(--hairline);
+    margin-block: var(--s7);
+  }
+}
+
+// ---- Section head -------------------------------------------------------------
+.ex-sechead {
+  margin-bottom: var(--s6);
+
+  &__eyebrow {
+    font-size: 0.875rem;
+    color: var(--muted);
+    margin-bottom: var(--s2);
+  }
+
+  &__sep {
+    margin-inline: var(--s2);
+    color: var(--wash-border);
+  }
+
+  &__title {
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+  }
+}
+
+.ex-h2 {
+  font-size: 1.5rem;
+  margin-top: var(--s8);
+  margin-bottom: var(--s4);
+}

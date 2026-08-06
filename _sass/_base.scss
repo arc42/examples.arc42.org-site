@@ -1,0 +1,161 @@
+// ============================================================================
+// Base — page shell, typography floor, links, focus, shared primitives.
+// ============================================================================
+
+html {
+  // Anchors must clear the sticky condensed bar.
+  scroll-padding-top: calc(var(--bar-h) + var(--spine-h) + var(--s4));
+}
+
+.ex-body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1.0625rem;      // 17px — Atkinson runs small at 16
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+// ---- Skip link --------------------------------------------------------------
+.ex-skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: var(--s3) var(--s4);
+  background: var(--ground);
+  color: var(--tint);
+  border-radius: 0 0 var(--radius) 0;
+
+  &:focus {
+    left: 0;
+  }
+}
+
+// ---- Headings (family constant #1: serif for headings, never in a control) --
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--ground-deep);   // 14.12:1 on --paper
+  text-wrap: balance;
+}
+
+// ---- Links ------------------------------------------------------------------
+// The underline is what marks a link, not the colour — this site has no
+// signature hue to spend and colour must never carry meaning alone.
+a {
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-color: var(--link-under);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+
+  &:hover {
+    text-decoration-color: currentColor;
+    text-decoration-thickness: 2px;
+  }
+}
+
+// ---- Focus ------------------------------------------------------------------
+// Two rings, one per surface (DESIGN.md §4). Writing `outline: none` obliges
+// you to apply a ring — so nothing here removes one without replacing it.
+:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.ex-masthead :focus-visible,
+.ex-footer :focus-visible {
+  outline-color: var(--focus-ring-on-band);
+}
+
+// ---- Shell ------------------------------------------------------------------
+.ex-shell {
+  max-width: var(--shell-max);
+  margin-inline: auto;
+  padding: var(--s7) var(--s5) var(--s8);
+}
+
+// Prose pages cap at the reading measure (DESIGN.md §2.4: 65–75ch).
+.ex-shell--prose {
+  max-width: calc(var(--measure) + var(--s5) * 2);
+}
+
+.ex-main {
+  min-height: 50vh;
+}
+
+// ---- Buttons ----------------------------------------------------------------
+.ex-button {
+  display: inline-block;
+  padding: var(--s3) var(--s5);
+  min-height: 44px;
+  background: var(--ground);
+  color: var(--tint);          // 12.44:1
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: var(--radius);
+
+  &:hover {
+    background: var(--ground-deep);
+    text-decoration: none;
+  }
+}
+
+.ex-link-button {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--link);
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+// ---- The pinned note --------------------------------------------------------
+// The family's tactile signature and its ONE sanctioned static shadow
+// (DESIGN.md §2.3): zero blur, zero spread, in the site's deep hue. Reserved
+// for annotation-style elements pinned onto the page — never headings, never
+// cards at rest. On this site it has exactly one job: the source-and-licence
+// note on a system overview.
+.ex-pinned {
+  margin-top: var(--s8);
+  padding: var(--s5);
+  background: var(--wash-calm);
+  border: 1px solid var(--wash-border);
+  border-radius: var(--radius);
+  box-shadow: 3px 3px 0 0 var(--ground-deep);
+
+  &__title {
+    font-size: 1.0625rem;
+    margin-bottom: var(--s3);
+  }
+
+  &__note {
+    margin-top: var(--s4);
+    color: var(--muted);       // 4.77:1 on --wash-calm
+    font-size: 0.9375rem;
+  }
+}
+
+.ex-note {
+  padding: var(--s5);
+  background: var(--wash-calm);
+  border: 1px solid var(--wash-border);
+  border-radius: var(--radius);
+}
+
+// ---- Motion -----------------------------------------------------------------
+// Full coverage, per DESIGN.md §2.4.
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

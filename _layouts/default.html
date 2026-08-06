@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="{{ site.language | default: 'en' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  {%- comment -%}
+    theme-color IS the masthead fill (DESIGN.md §2.2): on a phone the first
+    pixels a visitor sees must not disagree with the band underneath them.
+  {%- endcomment -%}
+  <meta name="theme-color" content="#3a332b">
+
+  <title>{% if page.title %}{{ page.title }} · {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  {% seo title=false %}
+
+  <link rel="icon" href="{{ '/assets/images/brand/favicon.svg' | relative_url }}" type="image/svg+xml">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+
+  {%- comment -%}
+    Fonts are self-hosted (BRAND.md: no font CDNs — a third-party hop is a
+    render-blocking dependency and a privacy liability for a site with an
+    imprint). Preload only the two files every page certainly uses.
+  {%- endcomment -%}
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+        href="{{ '/assets/fonts/atkinson-hyperlegible-next-latin.woff2' | relative_url }}">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+        href="{{ '/assets/fonts/libre-caslon-text-700-latin.woff2' | relative_url }}">
+</head>
+<body class="ex-body">
+  <a class="ex-skip" href="#main">Skip to content</a>
+
+  {% include masthead.html %}
+
+  <main id="main" class="ex-main">
+    {{ content }}
+  </main>
+
+  {% include site-footer.html %}
+</body>
+</html>

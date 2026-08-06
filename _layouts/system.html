@@ -1,0 +1,104 @@
+---
+layout: default
+---
+{% include system-context.html %}
+
+<div class="ex-shell ex-shell--prose">
+
+  <nav class="ex-breadcrumb" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="{{ '/' | relative_url }}">Examples</a></li>
+      <li aria-current="page">{{ page.title }}</li>
+    </ol>
+  </nav>
+
+  <header class="ex-syshead">
+    {%- if page.domain -%}<p class="ex-syshead__domain">{{ page.domain }}</p>{%- endif -%}
+    <h1 class="ex-syshead__title">{{ page.title }}</h1>
+    <p class="ex-syshead__tagline">{{ page.tagline }}</p>
+  </header>
+
+  {%- comment -%}
+    The facts table repeats the tile, deliberately: a reader arriving from a
+    search engine never saw the tile.
+  {%- endcomment -%}
+  <dl class="ex-facts">
+    {%- if page.main_goal -%}
+    <dt>Main goal</dt><dd>{{ page.main_goal }}</dd>
+    {%- endif -%}
+    {%- if page.domain -%}
+    <dt>Business domain</dt><dd>{{ page.domain }}</dd>
+    {%- endif -%}
+    {%- if page.scale -%}
+    <dt>Size</dt><dd>{{ page.scale }}</dd>
+    {%- endif -%}
+    {%- if page.decisions and page.decisions.size > 0 -%}
+    <dt>Strategic decisions</dt>
+    <dd><ul class="ex-chips">{% for d in page.decisions %}<li class="ex-chip">{{ d }}</li>{% endfor %}</ul></dd>
+    {%- endif -%}
+    {%- if page.technologies and page.technologies.size > 0 -%}
+    <dt>Technologies</dt>
+    <dd><ul class="ex-chips">{% for t in page.technologies %}<li class="ex-chip ex-chip--tech">{{ t }}</li>{% endfor %}</ul></dd>
+    {%- endif -%}
+  </dl>
+
+  {%- if content != '' -%}
+  <div class="ex-prose">
+    {{ content }}
+  </div>
+  {%- endif -%}
+
+  {%- comment -%}
+    The section jump grid. Twelve cells, arc42's own shape — and the reason
+    the landing page needs no left rail: this IS the rail, laid flat.
+  {%- endcomment -%}
+  <h2 class="ex-h2" id="sections">The documentation</h2>
+  <ol class="ex-sectiongrid">
+    {%- for s in sys_sections -%}
+    <li class="ex-sectiongrid__cell">
+      <a href="{{ s.url | relative_url }}">
+        <span class="ex-sectiongrid__num">{{ s.order }}</span>
+        <span class="ex-sectiongrid__name">{{ s.title }}</span>
+      </a>
+    </li>
+    {%- endfor -%}
+  </ol>
+
+  {%- if sys_sections.size > 0 -%}
+  <p class="ex-startreading">
+    <a class="ex-button" href="{{ sys_sections.first.url | relative_url }}">
+      Start reading &rarr;
+    </a>
+  </p>
+  {%- endif -%}
+
+  {%- comment -%}
+    Attribution is not optional and not a footnote. These are other people's
+    systems and other people's writing; the pinned note is the family's
+    annotation treatment (DESIGN.md §2.3) and this is exactly an annotation
+    pinned onto the page.
+  {%- endcomment -%}
+  <aside class="ex-pinned" aria-labelledby="ex-attrib">
+    <h2 class="ex-pinned__title" id="ex-attrib">Source and licence</h2>
+    <dl class="ex-facts ex-facts--tight">
+      {%- if page.attribution -%}
+      <dt>Written by</dt><dd>{{ page.attribution }}</dd>
+      {%- endif -%}
+      {%- if page.licence -%}
+      <dt>Licence</dt>
+      <dd>{% if page.licence_url %}<a href="{{ page.licence_url }}">{{ page.licence }}</a>{% else %}{{ page.licence }}{% endif %}</dd>
+      {%- endif -%}
+      {%- if page.source_url -%}
+      <dt>Original</dt><dd><a href="{{ page.source_url }}">{{ page.source_url }}</a></dd>
+      {%- endif -%}
+      {%- if page.imported -%}
+      <dt>Imported</dt><dd>{{ page.imported }}</dd>
+      {%- endif -%}
+    </dl>
+    <p class="ex-pinned__note">
+      This documentation is reproduced here as a worked example. It is a
+      snapshot and is not maintained in step with the original system.
+    </p>
+  </aside>
+
+</div>

@@ -1,0 +1,113 @@
+// ============================================================================
+// The system overview page — head, facts, and the twelve-cell section grid.
+// ============================================================================
+
+.ex-syshead {
+  margin-bottom: var(--s6);
+
+  &__domain {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: var(--s2);
+  }
+
+  &__title {
+    font-size: clamp(2rem, 5vw, 2.75rem);
+  }
+
+  &__tagline {
+    margin-top: var(--s3);
+    font-size: 1.1875rem;
+    color: var(--ink);
+  }
+}
+
+// ---- Facts -------------------------------------------------------------------
+.ex-facts {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: var(--s2) var(--s5);
+  margin: 0 0 var(--s6);
+  padding: var(--s5);
+  background: var(--wash-calm);
+  border-radius: var(--radius);
+  font-size: 0.9375rem;
+
+  dt {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);        // 4.77:1 on --wash-calm
+    padding-top: 0.25em;
+  }
+
+  dd { margin: 0; }
+
+  &--tight {
+    padding: 0;
+    background: none;
+    margin-bottom: 0;
+  }
+
+  // Below the point where a two-column definition list starves the value
+  // column, stack it. 30rem is where the longest label ("Strategic decisions")
+  // plus a two-word value stops fitting on one line.
+  @media (max-width: 30rem) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--s1);
+
+    dd + dt { margin-top: var(--s3); }
+  }
+}
+
+// ---- The twelve-cell section grid ---------------------------------------------
+// arc42's own shape, laid flat. On the overview page this replaces the rail:
+// a reader who has just arrived wants the map, not a sidebar.
+.ex-sectiongrid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s3);
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+
+  &__cell a {
+    display: flex;
+    align-items: baseline;
+    gap: var(--s3);
+    height: 100%;
+    padding: var(--s3) var(--s4);
+    background: var(--paper);
+    border: 1px solid var(--wash-border);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 0.9375rem;
+    line-height: 1.35;
+
+    &:hover {
+      background: var(--wash-calm);
+      border-color: var(--ground-deep);
+      text-decoration: underline;
+    }
+  }
+
+  &__num {
+    flex: 0 0 auto;
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--ground-deep);
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__name { flex: 1 1 auto; }
+}
+
+.ex-startreading {
+  margin-top: var(--s6);
+}

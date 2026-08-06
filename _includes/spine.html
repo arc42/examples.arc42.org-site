@@ -1,0 +1,17 @@
+{%- comment -%}
+  The spine — see _data/spine.yml for the tokens, the measurements, and why
+  the order must not be tidied into hue order.
+
+  aria-hidden and role="presentation": the spine is decoration. It carries no
+  information, so it must not appear in the accessibility tree at all — a
+  screen reader announcing six colour names would be pure noise.
+
+  Inline `background` is the one sanctioned place for a token literal outside
+  the token file: the segments come from data, and Liquid cannot write a CSS
+  custom property per element from a loop without it.
+{%- endcomment -%}
+<div class="ex-spine" role="presentation" aria-hidden="true">
+  {%- for seg in site.data.spine -%}
+  <span class="ex-spine__seg" style="background: {{ seg.hex }}"></span>
+  {%- endfor -%}
+</div>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="arc42 Examples">
+  <!--
+    The site's device at favicon scale: the 42 glyph on the umber-graphite
+    ground, over the six-segment spine.
+
+    Deliberately NOT status.arc42.org's full-spectrum rim (ADR-0007 reserves
+    that as a class of one). The segments here are a straight rule along the
+    bottom edge, in six discrete shared family tokens in the same non-spectral
+    order as the masthead — not a ring, not a spectrum.
+
+    White on #3a332b measures 12.44:1, so the glyph is legible at 16px where a
+    glyph sitting on the colours themselves would not be.
+  -->
+  <rect width="64" height="64" rx="10" fill="#3a332b"/>
+
+  <text x="32" y="41" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="30" font-weight="700" fill="#ffffff">42</text>
+
+  <g>
+    <rect x="8"  y="50" width="8" height="6" fill="#5fb49c"/>
+    <rect x="16" y="50" width="8" height="6" fill="#c22b47"/>
+    <rect x="24" y="50" width="8" height="6" fill="#ffc95c"/>
+    <rect x="32" y="50" width="8" height="6" fill="#1b5e20"/>
+    <rect x="40" y="50" width="8" height="6" fill="#ff5c7c"/>
+    <rect x="48" y="50" width="8" height="6" fill="#8a2e2e"/>
+  </g>
+</svg>

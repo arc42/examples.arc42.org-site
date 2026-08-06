@@ -1,0 +1,40 @@
+{%- comment -%}
+  Two variants on one band, the docs.arc42.org pattern:
+  - `full`      the home page hero — wordmark, tagline, room to breathe
+  - condensed   everywhere else — one --bar-h row, sticky
+
+  Both end in the spine, which is the site's actual signature. The band ends
+  at the spine; there is no border below it (a rule under a 6px multicolour
+  device would only muddy it).
+{%- endcomment -%}
+{%- assign is_home = false -%}
+{%- if page.layout == 'home' -%}{%- assign is_home = true -%}{%- endif -%}
+
+<header class="ex-masthead {% if is_home %}ex-masthead--full{% else %}ex-masthead--bar{% endif %}">
+  <div class="ex-masthead__inner">
+    <a class="ex-masthead__brand" href="{{ '/' | relative_url }}">
+      <img class="ex-masthead__logo"
+           src="{{ '/assets/images/brand/arc42-logo-on-band.svg' | relative_url }}"
+           alt="" width="96" height="28">
+      <span class="ex-masthead__wordmark">{{ site.masthead_title }}</span>
+    </a>
+
+    <nav class="ex-nav" aria-label="Main">
+      <ul class="ex-nav__list">
+        <li><a href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>Examples</a></li>
+        <li><a href="{{ '/contribute/' | relative_url }}"{% if page.url == '/contribute/' %} aria-current="page"{% endif %}>Contribute</a></li>
+        <li><a href="{{ '/about/' | relative_url }}"{% if page.url == '/about/' %} aria-current="page"{% endif %}>About</a></li>
+        <li><a href="https://arc42.org">arc42.org</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  {%- if is_home -%}
+  <div class="ex-masthead__hero">
+    <h1 class="ex-masthead__title">{{ site.title }}</h1>
+    <p class="ex-masthead__tagline">{{ site.tagline }}</p>
+  </div>
+  {%- endif -%}
+
+  {% include spine.html %}
+</header>
