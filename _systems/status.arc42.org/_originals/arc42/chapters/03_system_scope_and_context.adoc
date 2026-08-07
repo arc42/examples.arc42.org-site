@@ -1,0 +1,46 @@
+:jbake-title: System Scope and Context
+:jbake-type: page_toc
+:jbake-status: published
+:jbake-menu: arc42
+:jbake-order: 3
+:filename: /chapters/03_system_scope_and_context.adoc
+ifndef::imagesdir[:imagesdir: ../../images]
+
+:toc:
+
+
+[[section-system-scope-and-context]]
+== System Scope and Context
+
+image::03-context-status-arc42-org4canvas.drawio.png[]
+
+[cols="1,3,1"]
+|===
+| Element | Responsibility | Code
+
+| Plausible.io
+| Web analytics SAAS platform, counts viewers and pageviews
+|`/internal/plausible`
+
+| Fly.io
+| Cloud (hyperscaler) platform, where the status.arc42.org application is deployed and executed. Besides deploying the golang application on their servers, We ask fly.io for the current server region, utilizing their https://fly.io/docs/reference/[API].
+|`/internal/fly`
+
+| GitHub
+| Hosting all repositories for arc42 sites and subdomains. API returns bug and issue count plus other info related to these repositories.
+| `/internal/github`
+
+| Slack
+| Notification service: Sends notifications to a configured Slack channel when an availability check fails for a monitored domain or subdomain.
+| `/internal/slack`
+
+| Turso Database
+| A cloud-hosted, multi-instance database storing several types of runtime data we need to persist. For example: availability snapshots, daily buckets, probe run heartbeats, and startup times of the app.
+| `internal/database`
+
+| cron-job.org
+| External cron trigger service: Periodically calls `POST /api/probe` every 15 minutes with a Bearer authentication token to trigger availability probing and keep the Fly.io app warm.
+| `/internal/api`, `/internal/probe`
+
+|===
+

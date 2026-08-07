@@ -11,13 +11,18 @@ services:
       - jekyll_cache:/site/.jekyll-cache
       - sass_cache:/site/.sass-cache
     ports:
-      - '4000:4000'
+      - '4042:4042'
     # No --incremental: full rebuild on change. Incremental silently
     # leaves stale/relocated output when permalinks or front matter change —
     # and this site's permalinks are derived from directory names, so a
     # renamed system directory is exactly the case it gets wrong.
+    #
+    # --port 4042: not just the host-side mapping. Jekyll's own "Server
+    # address:" banner reports whatever port it's told to bind, so leaving
+    # this at the default 4000 left the container's internal port and the
+    # printed address both wrong (4000) while only the host mapping said 4042.
     command: >
-      sh -c "bundle exec jekyll serve --host 0.0.0.0 --watch $${POLLING}"
+      sh -c "bundle exec jekyll serve --host 0.0.0.0 --port 4042 --watch $${POLLING}"
 
 volumes:
   jekyll_cache:

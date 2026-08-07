@@ -14,13 +14,17 @@ baseurl:
 title: arc42 Examples
 description: Real-world software architectures, documented with the arc42 template.
 
-# Shown under the wordmark in the full masthead on the home page. `description`
-# is written for search engines; this is the human-facing line.
-tagline: Complete architecture documentations of real systems — one template, many domains.
+# The home page H1, over the hero band. `description` is written for search
+# engines; this is the human-facing line.
+#
+# It is set in three short lines over the band art (_sass/_masthead.scss), so
+# its shape is a layout constraint and not just copy: the scrim that keeps the
+# H1 off the art is sized to the LONGEST WORD here, because a 15ch measure
+# cannot break one. "documentations" is currently that word, at 337px. A longer
+# one widens the scrim and hides specimens; a materially longer sentence adds a
+# fourth line. Either needs the stops in _masthead.scss re-derived.
+tagline: Architecture documentations of real systems
 
-# The arc42 logo in the masthead already reads "arc42", so the wordmark beside
-# it says only what this site is.
-masthead_title: Examples
 language: en
 
 repository: arc42/examples.arc42.org-site

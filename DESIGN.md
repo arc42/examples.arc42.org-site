@@ -49,6 +49,16 @@ This site is also the family's strongest **Visible-Token Rule** proof point:
 all six shared tokens have a named, visible job here, in one place, on screen
 at once.
 
+**The home page carries no spine** (2026-08-07). The hero band there is a row
+of fourteen coloured specimens, and six colour blocks immediately under it read
+as a second statement of the same idea rather than as the site's mark. Colour
+and spine divide the site between them: the hero carries the variety on the one
+page that has a hero, the spine carries it on every other page, where it is the
+only colour on screen. ADR-0008 is unaffected — the device is still this site's
+answer to having no signature hue — but the ADR should be annotated, because
+"the device appears under the masthead" is no longer true without exception.
+Reverting is one `unless` in `_includes/masthead.html`.
+
 ## The ground
 
 `--ground #3a332b` (umber graphite), `--ground-deep #2f2922`.
@@ -71,6 +81,56 @@ underline and adds a wash; it never introduces a hue.
 An umber link ramp (`#6a5439`, 7.02:1 on paper) was measured and rejected: at
 12.4 ΔE00 from pdfminion's sienna it read as a quotation of another site's
 signature hue, which the Imprint Rule forbids in any role.
+
+## The hero band
+
+The home page hero carries a **herbarium frieze**: a row of fourteen botanical
+specimens, no two alike, drawn in one flat illustrative hand — the metaphor for
+what this site is, many different specimens under one identical documentation
+format. Brief and export pipeline: `docs/hero-herbarium-prompt.md`.
+
+It is **in full colour** (2026-08-07). The first version was monochrome warm
+grey, so that the spine kept the site's only pigment; the hero and the spine
+have since swapped jobs (see *The spine*, above). Two rules make it safe:
+
+1. **The art never sits under text, and that is now load-bearing.**
+   `.ex-masthead__band` paints an opaque `--ground` scrim from the left edge to
+   just past the H1's last glyph, fading out over the 340px after it. Every
+   glyph is over flat `--ground`, so the recorded 12.44:1 stays a measurement.
+
+   With saturated art there is no ink ceiling underneath as a second line of
+   defence — white over the yellows in this frieze would read at under 2:1.
+   The scrim is the whole guarantee, which is why its stops are derived from
+   the tagline's **measured** width in the shipped font rather than estimated,
+   with the table recorded at the declaration in `_sass/_masthead.scss`. The
+   tagline's length is therefore a layout constraint; `_config.yml` says so.
+
+2. **The art's ground is the site's ground.** The export remaps the
+   generator's background to `--ground`, so the scrim and the image meet with
+   no seam. Measured on the shipped file: `#3c322a` against the token's
+   `#3a332b`, one WebP quantisation step.
+
+It is declared only above 700px: below that the text column is the full width,
+the scrim would cover the art entirely, and a phone should not download it.
+
+The H1 is deliberately **tall and narrow** — three short lines capped at `15ch`,
+at up to 2.5rem — and sits at the top of the band rather than centred in it.
+Both follow from the scrim: the heading's *width* is the width of ground that
+has to be painted over the art, so a heading set across the band buys its own
+size out of the specimens. Three lines make the block ~337px wide where one
+line was 603px, and the type is 54% larger at the same time.
+
+The **lockup** is the `arc42` mark plus the word *Examples*, in the bar, in
+sans (Two Voices Rule — it sits inside a link in the chrome). It moved there
+from the hero on 2026-08-07. The word is sized off the mark, not off the nav:
+the logo renders 28px of cap height, Atkinson's cap height is 0.67em, so
+2.375rem sets the two at the same visual size. The hero's H1 is the
+**tagline**, this page's only H1 and its actual subject line; the site name is
+not repeated below the wordmark that already says it.
+
+Brand left, then **search and nav pushed to the right end** of the bar by an
+auto margin on the lockup. The nav is last in the DOM as well as last on
+screen, so the tab order still runs the way the eye does.
 
 ## Site-local components
 

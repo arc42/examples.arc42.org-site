@@ -22,8 +22,7 @@
   }
 }
 
-// On the home page the spine is the transition from hero to content, and can
-// afford to be a touch heavier — it is the first thing a visitor meets.
-.ex-masthead--full .ex-spine {
-  height: calc(var(--spine-h) + 2px);
-}
+// The home page renders no spine at all since 2026-08-07 — the hero band
+// carries the colour there, and _includes/masthead.html says why. The
+// `.ex-masthead--full .ex-spine` rule that used to thicken it by 2px is gone
+// with it rather than left behind as a selector that matches nothing.

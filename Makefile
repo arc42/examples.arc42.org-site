@@ -5,8 +5,8 @@
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-14s\033[0m %s\n", $$1, $$2}'
 
-dev: ## Start the local Jekyll dev server with live reload (http://localhost:4000)
-	@echo "==> Open http://localhost:4000  (NOT http://0.0.0.0:4000 — Firefox refuses to connect to 0.0.0.0)"
+dev: ## Start the local Jekyll dev server with live reload (http://localhost:4042)
+	@echo "==> Open http://localhost:4042  (NOT http://0.0.0.0:4042 — Firefox refuses to connect to 0.0.0.0)"
 	docker compose up --build
 
 build: ## Build the Docker dev image (examples-arc42-site:latest) from the Gemfile-pinned gems
@@ -27,9 +27,14 @@ check-links: site ## Validate internal links, images, and HTML in the built _sit
 	docker compose run --rm jekyll bundle exec htmlproofer ./_site --disable-external --allow-hash-href
 
 clean: ## Remove generated _site AND the Docker cache volumes (a true reset)
-	rm -rf _site .sass-cache .jekyll-cache .jekyll-metadata
-	@# .jekyll-cache/.sass-cache live in named Docker volumes, not on the host,
-	@# so a host rm alone leaves them stale — wipe the volumes too.
+	-docker compose run --rm jekyll rm -rf _site .jekyll-metadata
+	-rm -rf _site .jekyll-metadata
+	@# .jekyll-cache and .sass-cache are named Docker volumes (see
+	@# docker-compose.yml), not host directories or plain files inside the
+	@# container — they are mount points, so `rm -rf` on them always fails on
+	@# the directory itself with "Device or resource busy", from the host or
+	@# from inside the container. `docker compose down -v` is the only way to
+	@# actually remove a named volume; that is the real cache wipe.
 	-docker compose down -v --remove-orphans
 
 install: build ## Install/refresh gems into the dev image after editing the Gemfile

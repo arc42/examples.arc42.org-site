@@ -27,7 +27,15 @@
   <div class="footer-inner">
     <p class="footer-icons">
       <a href="https://www.innoq.com" target="_blank" rel="noopener noreferrer nofollow">
-        <img class="supported-by-innoq" src="{{ '/assets/images/brand/supported-by-innoq.svg' | relative_url }}" alt="Supported by INNOQ" width="110" height="24">
+        {%- comment -%}
+          110x39 is the file's own ratio (226x81) at the width the CSS sets, so
+          the box the browser reserves before the SVG paints is the box it ends
+          up in. The `height="24"` this carried until 2026-08-07 was inherited
+          from docs.arc42.org, where it is equally wrong and equally harmless —
+          CSS wins either way — but it reserved a box 15px too short and moved
+          the rest of the footer when the mark loaded.
+        {%- endcomment -%}
+        <img class="supported-by-innoq" src="{{ '/assets/images/brand/supported-by-innoq.svg' | relative_url }}" alt="Supported by INNOQ" width="110" height="39">
       </a>
     </p>
 
@@ -48,8 +56,8 @@
     <p class="footer-note">
       Site content is licensed
       <a target="_blank" rel="noopener noreferrer nofollow" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.
-      Each example additionally carries its own licence and attribution on its
-      overview page — the systems documented here belong to their authors.
+      Each example additionally carries its own licence and attribution on its overview page.
+      All systems documented here belong to their respective authors.
     </p>
   </div>
 </footer>

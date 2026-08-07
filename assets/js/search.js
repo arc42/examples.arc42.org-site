@@ -222,6 +222,9 @@
         " focuses this search. Enter opens the highlighted suggestion; " +
         (apple ? "Command-Enter" : "Control-Enter") + " opens all results.";
     }
+    // Same chord the badge above already advertises, echoed in the panel's
+    // own footer (below) — ported from arc42.de's masthead autocomplete.
+    var chordLabel = apple ? "⌘⏎" : "Ctrl⏎";
 
     var rows = [];
     var active = -1;
@@ -259,7 +262,7 @@
         return;
       }
 
-      panel.innerHTML = shown.map(function (match, i) {
+      var rowsHtml = shown.map(function (match, i) {
         var doc = Engine.byUrl[match.ref];
         var where = whereLine(doc);
         return '<a class="arc42-search__row" role="option" aria-selected="false"' +
@@ -268,6 +271,18 @@
           (where ? '<span class="arc42-search__row-where">' + escapeHtml(where) + "</span>" : "") +
           "</a>";
       }).join("");
+
+      // Rows scroll; the footer below is outside .arc42-search__scroll so it
+      // stays put. Decorative (aria-hidden) — the aria-live status span below
+      // carries the counts for assistive tech.
+      panel.innerHTML = '<div class="arc42-search__scroll">' + rowsHtml + "</div>" +
+        '<div class="arc42-search__footer" aria-hidden="true">' +
+        '<span class="arc42-search__footer-hint">' +
+        "<kbd>↵</kbd> open" +
+        " · <kbd>" + escapeHtml(chordLabel) + "</kbd> all results" +
+        " · <kbd>↑↓</kbd> navigate" +
+        " · <kbd>esc</kbd> close" +
+        "</span></div>";
 
       panel.hidden = false;
       input.setAttribute("aria-expanded", "true");

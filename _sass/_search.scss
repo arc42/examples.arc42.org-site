@@ -106,9 +106,11 @@
     top: calc(100% + var(--s2) + var(--spine-h));
     right: 0;
     z-index: 30;
+    display: flex;
+    flex-direction: column;
     width: min(30rem, calc(100vw - var(--s5) * 2));
     max-height: min(60vh, 26rem);
-    overflow-y: auto;
+    overflow: hidden;
     background: var(--paper);
     border: 1px solid var(--wash-border);
     border-radius: var(--radius);
@@ -116,6 +118,15 @@
     // The family's one sanctioned dynamic shadow, same as the tile hover-lift:
     // this panel is genuinely floating above the page while it is open.
     box-shadow: 0 6px 20px rgba(47, 41, 34, 0.18);
+  }
+
+  // The rows scroll; &__footer below stays outside this box so the keyboard
+  // hints never scroll out of view (same split as arc42.de's masthead
+  // autocomplete, which this panel otherwise mirrors class-for-class).
+  &__scroll {
+    flex: 1 1 auto;
+    min-height: 0;   // let the flex child shrink, or it never scrolls
+    overflow-y: auto;
   }
 
   &__row {
@@ -156,6 +167,31 @@
     padding: var(--s4);
     font-size: 0.9375rem;
     color: var(--muted);
+  }
+
+  // Persistent hint row, ported from arc42.de's masthead autocomplete
+  // (itself ported from quality.arc42.org). Never shown on the empty state —
+  // "esc close" is the one hint worth keeping there, and it is inert either
+  // way since focus never leaves the input.
+  &__footer {
+    flex: 0 0 auto;
+    padding: var(--s2) var(--s4);
+    border-top: 1px solid var(--hairline);
+    font-size: 0.75rem;
+    color: var(--muted);
+
+    // Scoped to the footer: &__hint above is the band's own chip, styled for
+    // --ground, not for this --paper card.
+    kbd {
+      padding: 1px 5px;
+      background: var(--wash-calm);
+      border: 1px solid var(--wash-border);
+      border-radius: 4px;
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 0.6875rem;
+      line-height: 1;
+    }
   }
 
   // Below the rail breakpoint the masthead already wraps to two rows. The

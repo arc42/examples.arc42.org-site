@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:init logger, db, cache;
+
+
+:siteStats = loadStats();
+
+:cache siteStats, expiry 10min;
+
+:repoStats = loadRepoStats();
+:cache repoStats, expiry 1min;
+
+group API Server Process
+:apiGateway.StartAPIServer();
+
+detach
+
+:wait for http request;
+
+if (External Event occurs) then (yes)
+    :execute method B;
+else (no)
+    :skip method B;
+endif
+
+end group
+:finalize process;
+@enduml

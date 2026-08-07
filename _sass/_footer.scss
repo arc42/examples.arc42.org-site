@@ -35,17 +35,23 @@
   // The one place besides the masthead where --ground-deep appears at full
   // strength: it closes the page against the band that opened it.
   border-top: 3px solid var(--ground-deep);
-  margin-top: var(--s8);
+  margin-top: var(--s7);
 }
 
+// The row gap is --s3, not --s5. Three of the four items here are full-width
+// rows, so the row gap is spent three times over and is what actually sets the
+// footer's height; at --s5 it stacked 24px between every line of a four-line
+// colophon and read as four separate blocks rather than one. The COLUMN gap
+// stays --s6, where it separates the sponsor mark from the links and is doing
+// real work.
 .footer-inner {
   max-width: var(--shell-max);
   margin: 0 auto;
-  padding: var(--s6) var(--s5);
+  padding: var(--s5);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--s5) var(--s6);
+  gap: var(--s3) var(--s6);
   font-size: 0.92rem;
   text-align: left;
 }
@@ -56,10 +62,25 @@
   align-items: center;
 }
 
+// Sized by WIDTH, exactly as docs.arc42.org sizes it (_sass/_utilities.scss
+// there), because the two sites must show the sponsor's mark at the same size
+// and it is the same 226x81 file in both repos. Constraining the height to 24px
+// — which this did until 2026-08-07 — rendered it 67px wide against docs' 110px,
+// i.e. at 61% of the size every other family site gives INNOQ.
+//
+// The three widths and their breakpoints are docs' numbers, unchanged. Height
+// comes from the reset's `img { height: auto }`, so the ratio is the file's.
 .supported-by-innoq {
   display: block;
-  height: 24px;
-  width: auto;
+  width: 110px;
+}
+
+@media (max-width: 900px) {
+  .supported-by-innoq { width: 100px; }
+}
+
+@media (max-width: 600px) {
+  .supported-by-innoq { width: 90px; }
 }
 
 .footer-links {
@@ -93,12 +114,22 @@
   font-size: 0.82rem;
 }
 
-.footer-maintainer {
-  padding-top: var(--s2);
-}
-
+// The 68ch cap came off the note on 2026-08-07 so the licence line can set on
+// ONE line. 68ch is 578px at 0.82rem, and the sentence measures 1097px in
+// Atkinson at that size (summed from the shipped woff2, not estimated) — so the
+// cap guaranteed two lines at every viewport, including the ones with 1352px of
+// shell going spare.
+//
+// Breaking the family's 65–75ch measure is deliberate and bounded to this
+// element. The measure exists to keep the EYE from losing its place returning
+// to the start of the next line; a colophon that is one line long never asks it
+// to. It is also not reading matter — it is the licence, scanned once. Nothing
+// else on the site may take this exemption by citing it.
+//
+// One line needs ~1145px of viewport. Below that it wraps, which is the correct
+// outcome and not a fallback worth engineering around.
 .footer-note {
-  max-width: 68ch;
+  max-width: none;
 }
 
 @media (max-width: 800px) {

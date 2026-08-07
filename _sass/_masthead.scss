@@ -17,18 +17,27 @@
     min-height: var(--bar-h);
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     gap: var(--s5);
     flex-wrap: wrap;
   }
 
+  // `center`, not `baseline`: the mark is an image with no baseline of its
+  // own, so baseline alignment would position the word against nothing and
+  // let the 28px logo hang off it.
+  //
+  // The auto end-margin is what puts the search box and the nav at the right
+  // end of the bar: an auto margin eats all the free space before
+  // justify-content gets any, so the other two items pack against the far
+  // edge and stay adjacent to each other.
   &__brand {
     display: inline-flex;
-    align-items: baseline;
+    align-items: center;
     gap: var(--s3);
     color: var(--tint);
     text-decoration: none;
-    padding-block: var(--s2);
+    padding-block: var(--s1);
+    margin-inline-end: auto;
   }
 
   &__logo {
@@ -37,30 +46,187 @@
     width: auto;
   }
 
+  // The one word beside the mark. SANS, not the heading serif: this sits
+  // inside a link in the chrome, and the Two Voices Rule puts every UI
+  // control in Atkinson.
+  //
+  // Sized off the MARK, not off the nav (2026-08-07). The logo renders 28px of
+  // ink — its viewBox is 450.47 x 126.4 and the paths fill it — and "arc42" has
+  // no descender, so those 28px are a cap height. Atkinson Hyperlegible's cap
+  // height is 0.70em, which puts the matching body size at 28 / 0.70 = 40px.
+  // 2.375rem (38px, cap 26.6px) is one step under that: it reads as the same
+  // size as the mark, and the pair still clears --bar-h once the link's
+  // padding is counted (38 + 2 x 4 = 46px inside 56px). 2.5rem lands exactly
+  // on 56 and leaves the bar no room at all.
   &__wordmark {
-    font-family: var(--serif);
+    color: var(--tint);          // 12.44:1 on --ground
+    font-family: var(--sans);
+    font-size: 2.375rem;
     font-weight: 700;
-    font-size: 1.25rem;
+    line-height: 1;
     letter-spacing: 0.01em;
   }
 
   // ---- Hero variant (home only) ---------------------------------------------
+  //
+  // `__band` is full-bleed and carries the herbarium art; `__hero` inside it
+  // holds the measure. Two layers, in paint order:
+  //
+  //   1. a --ground scrim, left to right, OPAQUE across the text column and
+  //      clear a few hundred px past it. This is what keeps --tint's 12.44:1 a
+  //      measured fact: no glyph is ever over anything but flat --ground.
+  //   2. the art, anchored right, so its whole width lands in the space the
+  //      H1's single line does not reach.
+  //
+  // THE ART IS IN FULL COLOUR since 2026-08-07, and that changes what the
+  // scrim is. The shipped file (assets/images/hero/herbarium-band.webp,
+  // 2560x465, 101 KB) carries saturated specimens — yellows and cyans that
+  // white would read against at well under 2:1. There is no ink ceiling to
+  // fall back on any more: the scrim is LOAD-BEARING, not a backstop.
+  //
+  // Which means the one rule that must survive every future edit of this file
+  // is that the opaque stop stays right of the H1's last glyph at every
+  // viewport width. The stops below are derived for that, and _config.yml's
+  // `tagline` comment says so at the other end.
+  //
+  // The art's own ground is remapped to --ground in the export pipeline
+  // (docs/hero-herbarium-prompt.md), so image and scrim meet with no seam;
+  // measured on the shipped file it lands at #3c322a against the token's
+  // #3a332b, which is one quantisation step, not a colour.
+  //
+  // The art is a background-image, so a missing file degrades to plain band —
+  // there is no broken-image box on a masthead. It is also declared only
+  // above 700px: below that the text column is the whole width, the scrim
+  // would cover the art entirely, and a phone should not pay to download it.
+  &__band {
+    background-color: var(--ground);
+    background-repeat: no-repeat;
+  }
+
+  // Top-weighted, not centred (2026-08-07). The heading sits just under the bar
+  // and the band's remaining height belongs to the specimens, which are drawn
+  // full-height and were being read as a strip floating beside a centred line.
+  // The band's `align-items` does the lifting; this only sets how close to the
+  // bar the first line lands.
   &__hero {
     max-width: var(--shell-max);
     margin-inline: auto;
-    padding: var(--s6) var(--s5) var(--s8);
+    padding: var(--s5) var(--s5) var(--s7);
   }
 
+  // The tagline IS the H1 here (see masthead.html). It is a sentence, so it
+  // takes a sentence's size — the old 3rem display cut was for a two-word
+  // site name.
+  //
+  // TALL AND NARROW, not wide and short (2026-08-07). This replaces both a
+  // 2.125rem single line and the 1.625rem one that followed it, and the reason
+  // is the scrim: the heading's WIDTH is the width of the ground that has to be
+  // painted over the art, so a heading that runs across the band buys its size
+  // out of the specimens.
+  //
+  // Setting it in three short lines inverts that. At the 2.5rem ceiling the
+  // line breaks are "Architecture" (265px) / "documentations" (337px) / "of
+  // real systems" (307px) — measured from the shipped woff2 — so the block is
+  // ~337px wide where the single line was 603px, and the type is 54% larger at
+  // the same time. The scrim comes left with it; see the media queries.
+  //
+  // 15ch is what forces exactly that break and nothing worse. It is set in ch
+  // rather than px so it scales with the clamp: the same three lines appear at
+  // every width, and the whole composition is one shape that grows, not four
+  // different shapes at four breakpoints. Widening it past ~23ch pulls
+  // "documentations" back up onto line one and undoes all of it.
   &__title {
     color: var(--tint);          // 12.44:1 on --ground
-    font-size: clamp(2rem, 5vw, 3rem);
+    font-size: clamp(1.75rem, 2.6vw, 2.5rem);
+    line-height: 1.2;
+    max-width: 15ch;
+    text-wrap: balance;
+  }
+}
+
+@media (min-width: 700px) {
+  .ex-masthead__band {
+    // 700–1100px the font-size clamp is pinned to its 1.75rem floor, so the
+    // heading is a fixed ~294px block while the viewport nearly doubles around
+    // it. Percentages are the safe expression for exactly that: they track the
+    // viewport, so they over-cover at the top of the range (at 1099px the
+    // opaque half is 549px against a 294px block) and stay honest at the
+    // bottom (at 700px, 350px against 294px). At these widths the art is a
+    // sliver either way, so over-covering costs nothing.
+    //
+    // From 1100px the heading grows again and the stops become calc()s off the
+    // centre; see the block below for why.
+    background-image:
+      linear-gradient(to right,
+        var(--ground) 0,
+        var(--ground) 50%,
+        transparent   84%),
+      url('/assets/images/hero/herbarium-band.webp');
+    background-position: center, right center;
+
+    // `auto 100%` for the art, NOT `cover`. The file is 2560x465 (5.51:1) and
+    // the band is 260px tall at any width, so above ~1435px `cover` would
+    // scale to the WIDTH and crop 44% off the top and bottom — decapitating
+    // every specimen. `auto 100%` pins the art to the band's height instead:
+    // the specimens are always whole, the strip is always 5.52 x 260 = 1435px
+    // wide, anchored right, and the ground it does not reach is the ground the
+    // text sits on. On a wide monitor that is the composition, not a fallback.
+    background-size: 100% 100%, auto 100%;
+
+    // The band grows with the viewport because the ART's width is tied to its
+    // HEIGHT (`auto 100%`, 5.52:1). At a fixed 260px the strip is 1435px wide
+    // whatever the monitor, so a 2560px window got the specimens huddled in
+    // its right 56% and a bare half beside them. Growing the band to 380px
+    // widens the strip to ~2100px and the composition holds. It stops at
+    // 380px: a hero is not a scroll tax (see the sticky-bar note below).
+    min-height: clamp(260px, 18vw, 380px);
+    display: flex;
+    align-items: flex-start;
   }
 
-  &__tagline {
-    margin-top: var(--s4);
-    color: var(--tint-soft);     // 8.93:1 on --ground
-    font-size: clamp(1.0625rem, 2vw, 1.25rem);
-    max-width: 46ch;
+  // A flex item with a max-width and `margin-inline: auto` still needs a
+  // width to grow into, or it shrinks to its text and the measure stops
+  // centring on the shell.
+  .ex-masthead__hero { width: 100%; }
+}
+
+// ---- The scrim, where the heading grows ---------------------------------------
+//
+// 1100px is where the font-size clamp comes off its floor and the heading
+// starts growing with the viewport again, so it is where percentages stop being
+// the right expression and calc()s off the centre take over. Both the shell and
+// the viewport are centred, so 50% is the one origin they agree on, and the
+// clearance then stays constant above --shell-max instead of drifting.
+//
+// MEASURED, not estimated. The heading box is `24px of shell padding + 15ch`,
+// and ch here is Libre Caslon Text 700's '0' advance, 0.644em, read from the
+// shipped woff2. Font-size is clamp(1.75rem, 2.6vw, 2.5rem).
+//
+//   viewport   font    box ends at   opaque stop   clearance
+//   1100px     28.6px      300px         350px        50px    <- the tight one
+//   1200px     31.2px      325px         400px        75px
+//   1400px     36.4px      376px         500px       124px
+//   >=1538px   40px     50% - 290px   50% - 200px     90px    (type at the
+//                                                     ceiling, shell centred)
+//
+// The 1100px row is the constraint on the whole declaration: everywhere else
+// has 75px or more to give. Moving the stop further left starts eating into
+// the heading at laptop widths first, which is the width nobody tests at.
+//
+// An earlier version of this block sized the scrim off an EYEBALLED line width
+// and left 2px of clearance at 1100px. Measure the string.
+@media (min-width: 1100px) {
+  .ex-masthead__band {
+    // 260px of ramp, not 340px. The stop is where the art starts appearing and
+    // the second value is where it is fully itself; a shorter ramp is what
+    // actually brings the specimens forward, and 260px across a band 260–380px
+    // tall is still far too soft to read as an edge.
+    background-image:
+      linear-gradient(to right,
+        var(--ground) 0,
+        var(--ground) calc(50% - 200px),
+        transparent   calc(50% + 60px)),
+      url('/assets/images/hero/herbarium-band.webp');
   }
 }
 
@@ -97,10 +263,15 @@
     margin: 0;
   }
 
+  // Matches arc42.org's own nav-2026.css (.arc42-nav__inline > li > a):
+  // 0.95rem / weight 600, not the body's regular weight. A same-family site
+  // reusing a lighter, smaller cut of the same font pair read as a visibly
+  // different navbar, not just a different site.
   a {
     color: var(--tint-soft);     // 8.93:1 on --ground
     text-decoration: none;
-    font-size: 0.9375rem;
+    font-size: 0.95rem;
+    font-weight: 600;
     padding-block: var(--s3);
     display: inline-block;
 

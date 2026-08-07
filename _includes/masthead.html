@@ -13,25 +13,47 @@
 <header class="ex-masthead {% if is_home %}ex-masthead--full{% else %}ex-masthead--bar{% endif %}">
   <div class="ex-masthead__inner">
     {%- comment -%}
-      The logo is decorative (alt=""), so this link's accessible name is the
-      wordmark alone — "Examples" — which is also the name of the first nav
-      item pointing at the same URL. Two adjacent links announced identically
-      is a coin toss for a screen-reader user, so this one says what it is.
+      The lockup is the family mark plus one word: the SVG already reads
+      "arc42", so the text beside it only has to say which arc42 site this is.
+      It lives here rather than in the hero (2026-08-07) — the hero's job is
+      now to carry the band art, and a site name repeated in the wordmark AND
+      an H1 400px below it was the redundancy, not the word itself.
+
+      The logo stays decorative (alt=""), so the link's accessible name is
+      "Examples" from the visible text, widened by aria-label to name the
+      destination. The label CONTAINS the visible word, which is what WCAG
+      2.5.3 Label in Name requires — do not shorten it to just "Home".
     {%- endcomment -%}
     <a class="ex-masthead__brand" href="{{ '/' | relative_url }}"
        aria-label="{{ site.title }} — home">
       <img class="ex-masthead__logo"
            src="{{ '/assets/images/brand/arc42-logo-on-band.svg' | relative_url }}"
-           alt="" width="96" height="28">
-      <span class="ex-masthead__wordmark">{{ site.masthead_title }}</span>
+           alt="" width="100" height="28">
+      <span class="ex-masthead__wordmark">Examples</span>
     </a>
 
+    {%- comment -%}
+      Nav then search, both packed against the right edge by the auto margin on
+      the lockup above. The search box is the RIGHTMOST element in the bar
+      (2026-08-07) — it is the one control with a keyboard shortcut and the one
+      people reach for repeatedly, and the family's other sites put it in the
+      same corner.
+
+      Source order matches visual order, left to right, so the tab sequence
+      follows the eye. Do not reorder these two with CSS `order` — that splits
+      the two apart.
+
+      No "Examples" item, and no "arc42.org" item — the brand mark above
+      already reads "arc42" and already links home, so a nav item repeating
+      either name is redundant with the logo sitting right next to it. When
+      there are more surfaces to link to (dozens of examples in, per the
+      2026-08-07 note), this list grows; it does not need a home link or an
+      arc42.org link added back, the logo already is both.
+    {%- endcomment -%}
     <nav class="ex-nav" aria-label="Main">
       <ul class="ex-nav__list">
-        <li><a href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>Examples</a></li>
         <li><a href="{{ '/contribute/' | relative_url }}"{% if page.url == '/contribute/' %} aria-current="page"{% endif %}>Contribute</a></li>
         <li><a href="{{ '/about/' | relative_url }}"{% if page.url == '/about/' %} aria-current="page"{% endif %}>About</a></li>
-        <li><a href="https://arc42.org">arc42.org</a></li>
       </ul>
     </nav>
 
@@ -83,11 +105,41 @@
   </div>
 
   {%- if is_home -%}
-  <div class="ex-masthead__hero">
-    <h1 class="ex-masthead__title">{{ site.title }}</h1>
-    <p class="ex-masthead__tagline">{{ site.tagline }}</p>
+  {%- comment -%}
+    Two elements, because they have two different widths. `__band` is
+    full-bleed and carries the herbarium art; `__hero` holds the shell measure
+    and the text. Putting the art on `__hero` would clip it to --shell-max and
+    leave bare ground either side of it above 1400px.
+
+    The H1 is the TAGLINE, not the site name. The name is in the lockup at the
+    top of this file; an H1 that repeats it says nothing, and this page needs
+    exactly one H1 (the home layout renders index.md without one). The
+    sentence also happens to be the page's real subject line, which is what an
+    H1 is for.
+
+    Contrast: the art never sits under text. `__band` paints a --ground scrim
+    over its left portion, opaque where the H1 is, so the measured 12.44:1
+    stays literally true rather than approximately true. Since the art went to
+    full colour (2026-08-07) that scrim is load-bearing, not a backstop — see
+    the measurements in _masthead.scss.
+  {%- endcomment -%}
+  <div class="ex-masthead__band">
+    <div class="ex-masthead__hero">
+      <h1 class="ex-masthead__title">{{ site.tagline }}</h1>
+    </div>
   </div>
   {%- endif -%}
 
-  {% include spine.html %}
+  {%- comment -%}
+    The spine closes the condensed bar, but NOT the hero (2026-08-07). On every
+    other page it is the only colour on screen and it still does its job. On the
+    home page the hero band now carries the variety in the specimens themselves,
+    and six colour blocks directly beneath fourteen coloured plants read as a
+    second, competing statement of the same idea.
+
+    ADR-0008 registers the spine as this site's device in place of a signature
+    hue. The device is still present on every page but one; if it should also
+    close the hero, delete the `unless` and nothing else changes.
+  {%- endcomment -%}
+  {%- unless is_home -%}{% include spine.html %}{%- endunless -%}
 </header>

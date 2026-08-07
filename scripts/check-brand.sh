@@ -36,11 +36,17 @@ fail=0
 # recolour someone else's trademark. If this file ever stops matching the copy
 # in docs.arc42.org-site, that is the real defect, and it is a different check.
 #
+# Every system's `_originals/` is excluded for the same reason as docs/: it
+# is unpublished by contract (_config.yml excludes "**/_originals/**" from
+# the Jekyll build) and holds source material imported byte-for-byte, colours
+# and all — an example's original logo or diagram is not this site's colour
+# choice to police.
+#
 # The rule this encodes: naming a colour is fine, shipping it is not.
 scan_files() {
   find . \
     \( -path ./_site -o -path ./.git -o -path ./vendor -o -path ./scripts \
-       -o -path ./docs -o -path ./node_modules \) -prune -o \
+       -o -path ./docs -o -path ./node_modules -o -name _originals \) -prune -o \
     \( -name '*.scss' -o -name '*.css' -o -name '*.html' -o -name '*.svg' \
        -o -name '*.yml' -o -name '*.js' -o -name '*.md' \) -print \
   | grep -vE '^\./(README|DESIGN|CONTRIBUTING|LICENSE|AGENTS|CLAUDE)\.md$' \
