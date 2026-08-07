@@ -28,6 +28,14 @@ fail=0
 # evidence ADR-0002 asks authors to write down. A checker that forbids citing a
 # hue would forbid the documentation the family wants.
 #
+# The sponsor mark is excluded, and this is not a loophole. INNOQ's logo is a
+# third-party trademark carried under an obligation, byte-identical across
+# docs, faq and this site; its blue happens to sit inside docs' deep #0e4f80.
+# The Imprint Rule governs the colours a site CHOOSES. A sponsor's logo is not
+# a choice, and the only conforming way to "fix" a hit here would be to
+# recolour someone else's trademark. If this file ever stops matching the copy
+# in docs.arc42.org-site, that is the real defect, and it is a different check.
+#
 # The rule this encodes: naming a colour is fine, shipping it is not.
 scan_files() {
   find . \
@@ -35,7 +43,8 @@ scan_files() {
        -o -path ./docs -o -path ./node_modules \) -prune -o \
     \( -name '*.scss' -o -name '*.css' -o -name '*.html' -o -name '*.svg' \
        -o -name '*.yml' -o -name '*.js' -o -name '*.md' \) -print \
-  | grep -vE '^\./(README|DESIGN|CONTRIBUTING|LICENSE|AGENTS|CLAUDE)\.md$'
+  | grep -vE '^\./(README|DESIGN|CONTRIBUTING|LICENSE|AGENTS|CLAUDE)\.md$' \
+  | grep -v '^\./assets/images/brand/supported-by-innoq\.svg$'
 }
 
 # Emit "path:line:code" with comments removed, so only real uses are matched.

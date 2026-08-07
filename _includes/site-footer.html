@@ -1,28 +1,53 @@
-<footer class="ex-footer">
-  <div class="ex-footer__inner">
-    <p class="ex-footer__lead">
-      <strong>arc42 Examples</strong> collects complete architecture
-      documentations of real systems, all written along the same
-      <a href="https://arc42.org">arc42</a> structure.
+{%- comment -%}
+  The site footer — docs.arc42.org's and faq.arc42.org's, cloned.
+
+  This replaces a footer invented for this site: an editorial lead paragraph
+  restating the masthead tagline, a two-column sitemap of eight links, and a
+  legal line, on a 410px dark slab — 34% of the home page, and the last thing
+  a reader saw on every one of them.
+
+  What was actually wrong with it was not its height. It omitted the INNOQ
+  sponsor mark and the maintainer credit that every other family site carries,
+  and it omitted Contact and Status entirely. Those are obligations, not
+  styling. The family already has a settled component for all of it, so this
+  site now uses that component rather than a third arrangement of the same
+  facts. The class names are the family's (`.site-footer`, not `.ex-footer`):
+  per the Same-Name Rule a family name is a published interface, and this
+  matches the family spec, so it takes the family name.
+
+  Imprint and Contact point at arc42.org, which is where they live — this site
+  has no such pages of its own and should not grow duplicates of them.
+
+  One line is site-specific and stays: the per-example licence note. These are
+  other people's systems reproduced here, and that is a fact about this site
+  which no other family site has to state.
+{%- endcomment -%}
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p class="footer-icons">
+      <a href="https://www.innoq.com" target="_blank" rel="noopener noreferrer nofollow">
+        <img class="supported-by-innoq" src="{{ '/assets/images/brand/supported-by-innoq.svg' | relative_url }}" alt="Supported by INNOQ" width="110" height="24">
+      </a>
     </p>
 
-    <nav class="ex-footer__nav" aria-label="Footer">
-      <ul>
-        <li><a href="{{ '/' | relative_url }}">All examples</a></li>
-        <li><a href="{{ '/contribute/' | relative_url }}">Contribute an example</a></li>
-        <li><a href="{{ '/about/' | relative_url }}">About this site</a></li>
-        <li><a href="https://github.com/{{ site.repository }}">Source on GitHub</a></li>
-      </ul>
-      <ul>
-        <li><a href="https://docs.arc42.org">Template documentation</a></li>
-        <li><a href="https://faq.arc42.org">FAQ</a></li>
-        <li><a href="https://quality.arc42.org">Quality model</a></li>
-        <li><a href="https://arc42.org/imprint">Imprint &amp; privacy</a></li>
-      </ul>
+    <nav class="footer-links" aria-label="Site">
+      <a href="https://status.arc42.org">Status</a>
+      <a href="https://arc42.org/imprint/">Imprint + Privacy</a>
+      <a href="https://arc42.org/contact/">Contact</a>
+      <a href="https://github.com/{{ site.repository }}" target="_blank" rel="noopener noreferrer nofollow">GitHub</a>
     </nav>
 
-    <p class="ex-footer__legal">
-      Site content is licensed <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.
+    <p class="footer-maintainer">
+      &copy; 2026 arc42, created by
+      <a target="_blank" rel="noopener noreferrer nofollow" href="https://gernotstarke.de">Gernot Starke</a>
+      &amp; Contributors. Supported by
+      <a href="https://kroener-starke.ch/projekte/" target="_blank" rel="noopener noreferrer">Kröner &amp; Starke</a>.
+    </p>
+
+    <p class="footer-note">
+      Site content is licensed
+      <a target="_blank" rel="noopener noreferrer nofollow" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.
       Each example additionally carries its own licence and attribution on its
       overview page — the systems documented here belong to their authors.
     </p>

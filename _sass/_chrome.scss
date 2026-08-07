@@ -80,53 +80,6 @@
   }
 }
 
-// ---- Footer ---------------------------------------------------------------------
-.ex-footer {
-  margin-top: var(--s8);
-  background: var(--ground);
-  color: var(--tint-soft);      // 8.93:1 on --ground
-
-  &__inner {
-    max-width: var(--shell-max);
-    margin-inline: auto;
-    padding: var(--s7) var(--s5);
-    display: grid;
-    gap: var(--s6);
-  }
-
-  &__lead {
-    max-width: 52ch;
-    color: var(--tint-soft);
-
-    strong { color: var(--tint); }   // 12.44:1
-  }
-
-  a {
-    color: var(--tint-soft);
-    text-decoration-color: rgba(255, 255, 255, 0.45);
-
-    &:hover { color: var(--tint); }
-  }
-
-  &__nav {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
-    gap: var(--s5);
-
-    ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: grid;
-      gap: var(--s2);
-      font-size: 0.9375rem;
-    }
-  }
-
-  &__legal {
-    padding-top: var(--s5);
-    border-top: 1px solid rgba(255, 255, 255, 0.18);
-    font-size: 0.875rem;
-    max-width: 68ch;
-  }
-}
+// The footer moved to _footer.scss and to the family's `.site-footer` names —
+// `.ex-` was declaring a deviation from the family spec that this site does
+// not actually want. See _footer.scss for the token mapping and measurements.

@@ -1,0 +1,109 @@
+// ============================================================================
+// Footer — the family band. Cloned from docs.arc42.org-site/_sass/_footer.scss
+// and faq.arc42.org-site/_sass/_footer.scss, which are the same file.
+//
+// What this replaces: `.ex-footer`, a dark --ground slab 410px tall carrying a
+// lead paragraph and a two-column sitemap. The family footer is a light band
+// closed by a 3px rule in the site's deep value — the page opens on the deep
+// band and closes against it.
+//
+// TOKEN MAPPING to the family reference. docs and faq name these hues for
+// their own palettes; this site's equivalents are:
+//
+//   docs --surface-1  →  --wash-calm     (the calm tinted surface)
+//   docs --deep       →  --ground-deep   (the band's deep value)
+//   docs --signal-dk  →  --link          (see LINKS below — no hue here)
+//
+// Colour pairs, measured (ADR-0002):
+//   --ground-deep on --wash-calm   12.26:1   (links)
+//   --muted       on --wash-calm    4.77:1   (maintainer and note lines)
+//
+// 4.77:1 clears AA for normal text and is the thinnest margin on this site;
+// it is --muted's real value on the calm wash, not its value on --paper
+// (5.50:1). Recorded here so the next person does not re-derive it, and so a
+// change to either token is visibly a change to this pair.
+//
+// LINKS. The family sets `text-decoration: none` here and lets the site's
+// signature hue identify the link. This site has no hue (ADR-0008), so it
+// keeps the persistent underline it uses everywhere else — without it a footer
+// link is ink-coloured text among ink-coloured text. This is the same
+// deviation, from the same cause, that the site's link rule already documents.
+// ============================================================================
+
+.site-footer {
+  background: var(--wash-calm);
+  // The one place besides the masthead where --ground-deep appears at full
+  // strength: it closes the page against the band that opened it.
+  border-top: 3px solid var(--ground-deep);
+  margin-top: var(--s8);
+}
+
+.footer-inner {
+  max-width: var(--shell-max);
+  margin: 0 auto;
+  padding: var(--s6) var(--s5);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s5) var(--s6);
+  font-size: 0.92rem;
+  text-align: left;
+}
+
+.footer-icons {
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.supported-by-innoq {
+  display: block;
+  height: 24px;
+  width: auto;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--s3);
+
+  a {
+    color: var(--link);              // 12.26:1 on --wash-calm
+  }
+
+  // Middot separators (matches docs, faq, quality's footer-colophon and
+  // arc42.org's .footer-links). Pseudo-content, so a screen reader hears only
+  // the nav links themselves.
+  a + a::before {
+    content: "\00B7";
+    margin-right: var(--s3);
+    color: var(--muted);
+    // The separator is decoration between two links, not part of either name.
+    text-decoration: none;
+    display: inline-block;
+  }
+}
+
+.footer-maintainer,
+.footer-note {
+  flex-basis: 100%;
+  margin: 0;
+  color: var(--muted);               // 4.77:1 on --wash-calm
+  font-size: 0.82rem;
+}
+
+.footer-maintainer {
+  padding-top: var(--s2);
+}
+
+.footer-note {
+  max-width: 68ch;
+}
+
+@media (max-width: 800px) {
+  .footer-inner {
+    padding: var(--s5) var(--s4);
+    gap: var(--s4);
+  }
+}
