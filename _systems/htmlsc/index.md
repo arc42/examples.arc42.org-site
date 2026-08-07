@@ -29,16 +29,10 @@ scale: Small open-source tool · single maintainer · on GitHub since 2014
 
 order: 10
 
-# ---------------------------------------------------------------------------
-# LICENCE NEEDS CONFIRMING, same as MaMa-CRM.
-#
-# The chapter carries no licence statement of its own. The SOFTWARE is
-# Apache-2.0 (see the repository), but that says nothing about the prose,
-# which is what is reproduced here. CC BY-SA 4.0 is the site default and
-# Gernot is the author, so it is the likeliest answer — but it is an
-# assumption, and this block exists precisely so the site does not assume
-# other people's terms.
-# ---------------------------------------------------------------------------
+# Provenance. Confirmed by Gernot Starke, 2026-08-07: he is the author of
+# this documentation and it is CC BY-SA 4.0. That covers the PROSE reproduced
+# here, which is the thing this block is about — HtmlSanityCheck the software
+# is separately Apache-2.0, and that licence is not what governs this page.
 attribution: Gernot Starke
 licence: CC BY-SA 4.0
 licence_url: https://creativecommons.org/licenses/by-sa/4.0/

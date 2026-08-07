@@ -30,15 +30,9 @@ scale: 7–10 developers · 2–4 week iterations · ~15 months
 
 order: 20
 
-# ---------------------------------------------------------------------------
-# LICENCE IS A PLACEHOLDER AND NEEDS GERNOT'S CONFIRMATION.
-#
-# The source chapter carries no licence statement of its own. CC BY-SA 4.0 is
-# the site default and the author is the site's maintainer, so it is the
-# likeliest answer — but it is an assumption, and the whole point of this
-# block is that the site does not assume other people's terms. Confirm or
-# correct before this goes public.
-# ---------------------------------------------------------------------------
+# Provenance. Confirmed by Gernot Starke, 2026-08-07: he is the author of
+# this documentation and it is CC BY-SA 4.0. The source chapter carries no
+# licence statement of its own, so this is recorded here rather than derived.
 attribution: Gernot Starke
 licence: CC BY-SA 4.0
 licence_url: https://creativecommons.org/licenses/by-sa/4.0/
