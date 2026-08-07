@@ -12,7 +12,14 @@
 
 <header class="ex-masthead {% if is_home %}ex-masthead--full{% else %}ex-masthead--bar{% endif %}">
   <div class="ex-masthead__inner">
-    <a class="ex-masthead__brand" href="{{ '/' | relative_url }}">
+    {%- comment -%}
+      The logo is decorative (alt=""), so this link's accessible name is the
+      wordmark alone — "Examples" — which is also the name of the first nav
+      item pointing at the same URL. Two adjacent links announced identically
+      is a coin toss for a screen-reader user, so this one says what it is.
+    {%- endcomment -%}
+    <a class="ex-masthead__brand" href="{{ '/' | relative_url }}"
+       aria-label="{{ site.title }} — home">
       <img class="ex-masthead__logo"
            src="{{ '/assets/images/brand/arc42-logo-on-band.svg' | relative_url }}"
            alt="" width="96" height="28">

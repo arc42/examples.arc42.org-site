@@ -70,6 +70,15 @@ $rail-collapse: 940px;
     color: var(--ground-deep);
     background: var(--wash-active);
   }
+
+  // --muted is measured against --paper (5.50:1) and was inherited unchanged
+  // onto the active fill, where it measures 4.28:1 — below AA. The Measured-
+  // Pair Rule is per pair, not per token: a colour that moves to a new ground
+  // is a new pair. On --wash-active, --ink measures 11.13:1.
+  &__item.is-current &__num,
+  &__item.is-current .ex-rail__num {
+    color: var(--ink);
+  }
 }
 
 // ---- ≥940px: a sticky vertical rail ------------------------------------------
@@ -117,7 +126,9 @@ $rail-collapse: 940px;
 
     &__list {
       display: flex;
-      gap: var(--s2);
+      // Was --s2, which measured 7.1–7.8px between pills — under the 8px that
+      // WCAG 2.5.8's spacing exception needs to excuse an undersized target.
+      gap: var(--s3);
       overflow-x: auto;
       // Momentum scrolling without a visible scrollbar eating the row height.
       scrollbar-width: thin;
@@ -131,6 +142,9 @@ $rail-collapse: 940px;
 
       a {
         gap: var(--s2);
+        // 44px is the comfortable target floor; --s2 block padding gave 37.6.
+        min-height: 44px;
+        align-items: center;
         padding: var(--s2) var(--s3);
         border: 1px solid var(--wash-border);
         border-radius: var(--radius-pill);
@@ -138,12 +152,20 @@ $rail-collapse: 940px;
       }
     }
 
-    // The name would make the strip several screens wide; the number plus the
-    // current section's name is enough to orient, and the current section is
-    // the one a reader is looking for.
+    // Names are TRUNCATED, not hidden.
+    //
+    // Hiding them made the strip twelve bare numerals — the primary navigation
+    // of a twelve-part document reduced to pure recall of arc42's ordering, for
+    // the readers least likely to have it memorised. The rationale for hiding
+    // was strip width, but the strip already scrolls, so length is free; and it
+    // accepted a horizontal scroll to show the label of the section the reader
+    // is already in, which is the one label they do not need.
     &__item:not(.is-current) &__name,
     &__item:not(.is-current) .ex-rail__name {
-      display: none;
+      display: block;
+      max-width: 11ch;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     &__item.is-current a {

@@ -18,7 +18,10 @@
   // stretches them to 900px each and the dashboard stops reading as a grid.
   // auto-fill keeps the tile at its designed size and leaves the row short,
   // which is honest about there being two of them.
-  grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+  //
+  // min(19rem, 100%), not 19rem: below 352px the track floor was wider than the
+  // column it sat in and pushed the page 8px sideways at 320.
+  grid-template-columns: repeat(auto-fill, minmax(min(19rem, 100%), 1fr));
 
   &__empty {
     margin-top: var(--s6);
@@ -41,7 +44,18 @@
   // Material idiom this family deliberately does not use.
   transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
 
-  &:hover,
+  // hover: hover — on a touch screen the lift is applied by the tap and then
+  // stays applied, so a reader who taps a tile and comes back finds one card
+  // permanently raised for no reason. :focus-within is kept unconditionally,
+  // because that one is real on every input type.
+  @media (hover: hover) {
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(47, 41, 34, 0.14);
+      border-color: var(--ground-deep);
+    }
+  }
+
   &:focus-within {
     transform: translateY(-2px);
     box-shadow: 0 4px 14px rgba(47, 41, 34, 0.14);

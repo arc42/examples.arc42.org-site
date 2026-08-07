@@ -20,7 +20,7 @@ layout: default
     <header class="ex-sechead">
       <p class="ex-sechead__eyebrow">
         <a href="{{ sys_url | relative_url }}">{{ sys.title | default: sys_slug }}</a>
-        <span class="ex-sechead__sep">·</span>
+        <span class="ex-sechead__sep" aria-hidden="true">·</span>
         arc42 section {{ page.order }}
       </p>
       <h1 class="ex-sechead__title">{{ page.title }}</h1>

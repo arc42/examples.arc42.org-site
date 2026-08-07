@@ -34,6 +34,25 @@ ul, ol, pre {
   margin: 0;
 }
 
+// `hidden` must beat a component's own `display`.
+//
+// The UA rule is `[hidden] { display: none }`, which any component setting
+// `display` on the same element silently overrides — `.ex-filter { display:
+// flex }` did exactly that, leaving a search box that the markup said was
+// hidden rendered on screen and in the tab order. Progressive enhancement
+// depends on this attribute working, so it is enforced here rather than
+// defended per component.
+[hidden] {
+  display: none !important;
+}
+
+// A URL is one unbreakable word, and this site prints them: every example
+// carries its `source_url` verbatim so the original is citable. Breaking one
+// is always better than scrolling the page sideways to read it.
+a {
+  overflow-wrap: break-word;
+}
+
 // Media behaves as a block and never overflows its column.
 img {
   max-width: 100%;

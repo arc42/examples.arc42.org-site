@@ -133,6 +133,16 @@ a {
     margin-bottom: var(--s3);
   }
 
+  // The `Original` row is a bare source_url. `min-width: 0` releases the
+  // grid/flex item's automatic min-content floor, without which the longest
+  // word in the cell sets the cell's minimum width and `overflow-wrap` never
+  // gets a chance to act — this pushed a system page 29px sideways at 320.
+  dd {
+    min-width: 0;
+
+    a { overflow-wrap: anywhere; }
+  }
+
   &__note {
     margin-top: var(--s4);
     color: var(--muted);       // 4.77:1 on --wash-calm

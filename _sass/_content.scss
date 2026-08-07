@@ -11,6 +11,10 @@
 
   > * + * { margin-top: var(--s4); }
 
+  // Imported documentation cites raw URLs, and a raw URL is one unbreakable
+  // word. One of them pushed a system page 29px sideways at 320.
+  a { overflow-wrap: anywhere; }
+
   h2, h3, h4 {
     margin-top: var(--s7);
     scroll-margin-top: calc(var(--bar-h) + var(--spine-h) + var(--s4));

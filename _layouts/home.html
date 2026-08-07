@@ -16,7 +16,14 @@ layout: default
 
 <div class="ex-shell">
 
-  {{ content }}
+  {%- comment -%}
+    The measure applies here too. Rendered bare into .ex-shell this ran to
+    117–130 characters a line at 1440 and above — the one page on the site
+    that broke the family's 65–75ch constant, and the first one anybody sees.
+  {%- endcomment -%}
+  <div class="ex-prose">
+    {{ content }}
+  </div>
 
   {%- if systems.size > 0 -%}
   <div class="ex-filter" data-ex-filter hidden>

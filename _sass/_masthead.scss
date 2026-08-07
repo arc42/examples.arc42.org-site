@@ -66,10 +66,24 @@
 
 // The condensed bar sticks; the hero does not (a 300px hero pinned to the top
 // of a twelve-section document is a scroll tax, not navigation).
-.ex-masthead--bar {
-  position: sticky;
-  top: 0;
-  z-index: 20;
+//
+// It sticks ONLY where it is one --bar-h row. Below the rail breakpoint the
+// brand and the nav wrap onto separate lines and the bar measures ~128px
+// (~201px at 320px) — but `--bar-h` stays 56px, and with it the
+// `scroll-padding-top` and `scroll-margin-top` derived from it. Every anchor
+// then landed 50–123px underneath an opaque band.
+//
+// The fix is not a second --bar-h guess for a height that depends on how the
+// nav happens to wrap. Below 940px nothing else is sticky either — the rail is
+// a horizontal strip that scrolls away with the page — so the bar scrolls away
+// too. Anchors cannot be occluded by chrome that is not there, and a phone
+// gets back 15% of its viewport that a nav nobody reads with was holding.
+@media (min-width: 940px) {
+  .ex-masthead--bar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+  }
 }
 
 // ---- Nav ---------------------------------------------------------------------
