@@ -34,6 +34,13 @@ ul, ol, pre {
   margin: 0;
 }
 
+// A heading must never push the page sideways. System names are routinely one
+// long unbroken word — "HtmlSanityCheck" set 298px wide in a 272px column at
+// 320px and gave the whole overview page a horizontal scroll.
+h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
 // `hidden` must beat a component's own `display`.
 //
 // The UA rule is `[hidden] { display: none }`, which any component setting

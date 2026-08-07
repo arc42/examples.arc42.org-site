@@ -88,6 +88,17 @@
     background: var(--wash-calm);
     padding: 1px 4px;
     border-radius: 3px;
+
+    // A fully-qualified name is one unbreakable word, and architecture
+    // documentation is made of them: `org.aim42.htmlsanitycheck.suggest`
+    // measured 389px inside a 272px column and pushed the whole page
+    // sideways. Block code is exempt — a <pre> scrolls in its own container,
+    // where breaking a line would change what the code says.
+    overflow-wrap: anywhere;
+  }
+
+  pre code {
+    overflow-wrap: normal;
   }
 
   pre {
