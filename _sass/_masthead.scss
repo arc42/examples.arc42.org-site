@@ -146,21 +146,26 @@
 
 @media (min-width: 700px) {
   .ex-masthead__band {
-    // 700–1100px the font-size clamp is pinned to its 1.75rem floor, so the
-    // heading is a fixed ~294px block while the viewport nearly doubles around
-    // it. Percentages are the safe expression for exactly that: they track the
-    // viewport, so they over-cover at the top of the range (at 1099px the
-    // opaque half is 549px against a 294px block) and stay honest at the
-    // bottom (at 700px, 350px against 294px). At these widths the art is a
-    // sliver either way, so over-covering costs nothing.
+    // FIXED PIXELS below --shell-max, not percentages. Under 1400px the shell
+    // IS the viewport, so the heading starts at a fixed 24px from the left edge
+    // and ends at 260–330px depending only on the font-size clamp. None of that
+    // tracks the window — so a stop that tracks the window is measuring the
+    // wrong thing, and the error is worst where it is most visible: at 1099px a
+    // 50% stop painted 549px of ground over a 264px heading, i.e. 285px of bare
+    // band between the text and the first specimen. Shrinking the window made
+    // that gap GROW, which is the opposite of what a reader expects and was
+    // exactly the reported bug.
     //
-    // From 1100px the heading grows again and the stops become calc()s off the
-    // centre; see the block below for why.
+    // 380px clears the widest this heading ever gets below 1400px (329.5px at
+    // 1399px) by 50px, and the narrowest (259.2px, anywhere at or below 1077px
+    // where the clamp floors out) by 121px. The art now simply loses width off
+    // its left as the window narrows, instead of being pushed away from the
+    // text.
     background-image:
       linear-gradient(to right,
         var(--ground) 0,
-        var(--ground) 50%,
-        transparent   84%),
+        var(--ground) 380px,
+        transparent   640px),
       url('/assets/images/hero/herbarium-band.webp');
     background-position: center, right center;
 
@@ -190,42 +195,41 @@
   .ex-masthead__hero { width: 100%; }
 }
 
-// ---- The scrim, where the heading grows ---------------------------------------
+// ---- The scrim, once the shell stops growing ----------------------------------
 //
-// 1100px is where the font-size clamp comes off its floor and the heading
-// starts growing with the viewport again, so it is where percentages stop being
-// the right expression and calc()s off the centre take over. Both the shell and
-// the viewport are centred, so 50% is the one origin they agree on, and the
-// clearance then stays constant above --shell-max instead of drifting.
+// 1400px is --shell-max, and it is the only breakpoint this declaration needs:
+// it is exactly where the heading stops being anchored to the viewport's left
+// edge and starts riding the centred shell. Below it, fixed pixels (above);
+// from it, calc()s off the centre, because the shell and the viewport are both
+// centred and 50% is the one origin they agree on.
 //
-// MEASURED, not estimated. The heading box is `24px of shell padding + 15ch`,
-// and ch here is Libre Caslon Text 700's '0' advance, 0.644em, read from the
-// shipped woff2. Font-size is clamp(1.75rem, 2.6vw, 2.5rem).
+// MEASURED, not estimated — from the shipped woff2, for the actual longest
+// line, which is "documentations" at 8.399em (a 15ch measure cannot break a
+// word, so the longest WORD is what sets this, not the longest line of prose).
+// Font-size is clamp(1.75rem, 2.6vw, 2.5rem); the heading starts 24px inside
+// the shell.
 //
-//   viewport   font    box ends at   opaque stop   clearance
-//   1100px     28.6px      300px         350px        50px    <- the tight one
-//   1200px     31.2px      325px         400px        75px
-//   1400px     36.4px      376px         500px       124px
-//   >=1538px   40px     50% - 290px   50% - 200px     90px    (type at the
-//                                                     ceiling, shell centred)
+//   viewport   font    text ends at   opaque stop   clearance
+//   1400px    36.4px      329.7px        410.0px      80.3px
+//   1538px    40px        428.9px        479.0px      50.1px   <- type at the
+//   1920px    40px        620.0px        670.0px      50.0px      ceiling: the
+//   2560px    40px        940.0px        990.0px      50.0px      constant case
 //
-// The 1100px row is the constraint on the whole declaration: everywhere else
-// has 75px or more to give. Moving the stop further left starts eating into
-// the heading at laptop widths first, which is the width nobody tests at.
+// 50px is the floor and it is deliberate, not luck. The stop is where the art
+// is still at ZERO opacity — it only begins to appear there and needs the whole
+// 260px ramp to arrive — so 50px of flat ground past the last glyph is already
+// generous. Anything more is just band nobody is using.
 //
-// An earlier version of this block sized the scrim off an EYEBALLED line width
-// and left 2px of clearance at 1100px. Measure the string.
-@media (min-width: 1100px) {
+// Earlier revisions sized this off an eyeballed line width (2px of clearance at
+// one width) and off `15ch` rather than the rendered text (49px of scrim spent
+// on the gap between the measure and the longest word). Measure the string.
+@media (min-width: 1400px) {
   .ex-masthead__band {
-    // 260px of ramp, not 340px. The stop is where the art starts appearing and
-    // the second value is where it is fully itself; a shorter ramp is what
-    // actually brings the specimens forward, and 260px across a band 260–380px
-    // tall is still far too soft to read as an edge.
     background-image:
       linear-gradient(to right,
         var(--ground) 0,
-        var(--ground) calc(50% - 200px),
-        transparent   calc(50% + 60px)),
+        var(--ground) calc(50% - 290px),
+        transparent   calc(50% - 30px)),
       url('/assets/images/hero/herbarium-band.webp');
   }
 }

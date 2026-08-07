@@ -95,8 +95,16 @@ have since swapped jobs (see *The spine*, above). Two rules make it safe:
 
 1. **The art never sits under text, and that is now load-bearing.**
    `.ex-masthead__band` paints an opaque `--ground` scrim from the left edge to
-   just past the H1's last glyph, fading out over the 340px after it. Every
-   glyph is over flat `--ground`, so the recorded 12.44:1 stays a measurement.
+   50px past the H1's longest line, then ramps to clear over the next 260px.
+   Every glyph is over flat `--ground`, so the recorded 12.44:1 stays a
+   measurement.
+
+   The stop is expressed in **fixed pixels below `--shell-max` and as a calc()
+   off the centre from 1400px up**, because that is where the heading itself
+   changes what it is anchored to. A percentage stop anywhere below 1400px is a
+   bug, not a simplification: it tracks the window while the heading tracks the
+   window's left edge, so narrowing the window *grows* the gap between the text
+   and the first specimen.
 
    With saturated art there is no ink ceiling underneath as a second line of
    defence — white over the yellows in this frieze would read at under 2:1.
