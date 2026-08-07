@@ -36,7 +36,7 @@ layout: default
 
   <ul class="ex-grid" data-ex-grid>
     {%- for sys in systems -%}
-      {% include system-tile.html sys=sys %}
+      {% include system-tile.html sys=sys index=forloop.index %}
     {%- endfor -%}
   </ul>
 

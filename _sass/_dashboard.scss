@@ -62,12 +62,30 @@
     border-color: var(--ground-deep);
   }
 
+  // The catalogue number. Decorative (aria-hidden in the template), so no
+  // contrast minimum applies and it is deliberately below the noise floor of
+  // reading — it should register as texture, not compete with the title.
+  // Sits in the flow's top-right corner; the domain eyebrow reserves room for
+  // it so a long domain name cannot collide.
+  &__mark {
+    position: absolute;
+    top: var(--s3);
+    right: var(--s4);
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 3.25rem;
+    line-height: 1;
+    color: var(--wash-hover);
+    user-select: none;
+  }
+
   &__domain {
     font-size: 0.8125rem;
     font-weight: 700;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--muted);        // 5.50:1 on --paper
+    padding-right: 3rem;        // clears the catalogue number
   }
 
   &__title {
@@ -98,20 +116,24 @@
     color: var(--ink);
   }
 
-  &__goal,
-  &__row {
-    display: flex;
-    flex-direction: column;
-    gap: var(--s1);
-    font-size: 0.9375rem;
+  // The main goal carried a MAIN GOAL caption in the same grey uppercase as
+  // every other row. It does not need one: it needs to look different from
+  // the sentence above it. Caslon against the sans tagline does that, costs
+  // no pigment, and gives the card a second serif anchor under the title.
+  &__goal {
+    font-family: var(--serif);
+    font-size: 1.0625rem;
+    line-height: 1.45;
+    color: var(--ink);
   }
 
-  &__label {
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--muted);
+  // Decisions and technologies are one keyword block now, not two captioned
+  // rows. The chip styles already tell them apart on screen; the lists carry
+  // aria-label so they are still told apart out loud.
+  &__keywords {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s2);
   }
 
   &__scale {

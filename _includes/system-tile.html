@@ -1,6 +1,7 @@
 {%- comment -%}
   One dashboard tile. Everything it shows comes from `sys` — the system's
-  index.md front matter.
+  index.md front matter. `index` is the tile's position in the sorted
+  collection, used only as a catalogue number.
 
   Colour: NONE. Per the design decision recorded in DESIGN.md, tiles are
   neutral paper and the domain is carried as text. The hook for changing that
@@ -11,6 +12,14 @@
   this site colour would be the ONLY category signal, and colour must never
   carry meaning alone.
 
+  LABELS. This tile used to caption every row — MAIN GOAL, STRATEGIC
+  DECISIONS, TECHNOLOGIES — in the same small grey uppercase, so one texture
+  repeated four times down the card and each caption carried as much visual
+  weight as the content beside it. The tile read as a form. The captions are
+  gone from the page and kept for screen readers on the lists that need them:
+  a mono chip already says "technology" and a word chip already says
+  "decision" to anyone looking at it, but neither says it to anyone listening.
+
   The whole tile is clickable via the stretched-link pattern: a single real
   <a> around the title, expanded by a pseudo-element. This keeps exactly one
   link per tile in the accessibility tree and in the tab order — a tile with
@@ -20,6 +29,24 @@
     data-ex-item
     data-domain="{{ sys.domain | default: 'Uncategorised' | slugify }}"
     data-haystack="{{ sys.title }} {{ sys.tagline }} {{ sys.domain }} {{ sys.main_goal }} {{ sys.decisions | join: ' ' }} {{ sys.technologies | join: ' ' }}">
+
+  {%- comment -%}
+    The catalogue number. Decorative and aria-hidden: it names a position in
+    a list the reader can already see, and announcing "zero one" before every
+    example title is noise. It is the tile's one piece of character, and it
+    is borrowed from the best component on the site — the twelve-cell section
+    grid, whose oversized Caslon numerals carry a whole hierarchy without
+    spending a single hue. A site with no colour to give a card still has a
+    typeface.
+  {%- endcomment -%}
+  {%- comment -%}
+    `include.index`, not a bare `index`: include parameters live under
+    `include.`. `sys` reads bare only because it is the for-loop variable in
+    the layout that includes this file, which is a different thing entirely.
+  {%- endcomment -%}
+  {%- if include.index -%}
+  <span class="ex-tile__mark" aria-hidden="true">{{ include.index | prepend: '0' | slice: -2, 2 }}</span>
+  {%- endif -%}
 
   {%- if sys.domain -%}
   <p class="ex-tile__domain">{{ sys.domain }}</p>
@@ -32,31 +59,26 @@
   <p class="ex-tile__tagline">{{ sys.tagline }}</p>
 
   {%- if sys.main_goal -%}
-  <p class="ex-tile__goal">
-    <span class="ex-tile__label">Main goal</span>
-    {{ sys.main_goal }}
-  </p>
+  <p class="ex-tile__goal">{{ sys.main_goal }}</p>
   {%- endif -%}
 
-  {%- if sys.decisions and sys.decisions.size > 0 -%}
-  <div class="ex-tile__row">
-    <span class="ex-tile__label">Strategic decisions</span>
-    <ul class="ex-chips">
+  {%- if sys.decisions.size > 0 or sys.technologies.size > 0 -%}
+  <div class="ex-tile__keywords">
+    {%- if sys.decisions and sys.decisions.size > 0 -%}
+    <ul class="ex-chips" aria-label="Strategic decisions">
       {%- for d in sys.decisions limit: 4 -%}
       <li class="ex-chip">{{ d }}</li>
       {%- endfor -%}
     </ul>
-  </div>
-  {%- endif -%}
+    {%- endif -%}
 
-  {%- if sys.technologies and sys.technologies.size > 0 -%}
-  <div class="ex-tile__row">
-    <span class="ex-tile__label">Technologies</span>
-    <ul class="ex-chips">
+    {%- if sys.technologies and sys.technologies.size > 0 -%}
+    <ul class="ex-chips" aria-label="Technologies">
       {%- for t in sys.technologies limit: 6 -%}
       <li class="ex-chip ex-chip--tech">{{ t }}</li>
       {%- endfor -%}
     </ul>
+    {%- endif -%}
   </div>
   {%- endif -%}
 
