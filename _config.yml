@@ -100,14 +100,22 @@ exclude:
   - .gitignore
   - vendor
 
-# Note on two conventions this site relies on instead of `exclude`:
+  # Per-system source material (.graffle, .xmind, PlantUML, the original
+  # .adoc) kept for provenance but never published.
+  #
+  # The pattern has no `_systems/` prefix ON PURPOSE. For collection content
+  # `exclude` is matched relative to the COLLECTION directory, so the entry
+  # here is `mama/_originals/MaMa-CRM-2016.graffle`, and both
+  # `_systems/*/_originals` and `_systems/**/_originals/**` silently fail to
+  # match it. Verified by building with each and looking in _site.
+  - "**/_originals/**"
+
+# `_systems/_TEMPLATE/` needs no entry: Jekyll's EntryFilter drops any
+# collection entry whose path STARTS WITH an underscore, which is true of
+# `_TEMPLATE/index.md` and is why the template never ships.
 #
-#   _systems/_TEMPLATE/        the contributor skeleton
-#   _systems/<slug>/_originals/  per-system source material (PlantUML, drawio,
-#                                the original .adoc) kept for provenance
-#
-# Neither is listed above, because `exclude` globs are matched relative to the
-# *collection* directory for collection content and would not fire. Both rely
-# on Jekyll's EntryFilter instead, which skips any path segment beginning with
-# `_`. That is why the underscore on `_originals` is load-bearing — renaming it
-# to `originals/` would publish every source file.
+# It is NOT true of `mama/_originals/x.xmind`, whose path starts with `mama`.
+# The underscore on `_originals` is still load-bearing — the exclude pattern
+# above keys on it — but it is the pattern doing the work, not the filter.
+# An earlier version of this comment claimed otherwise and was wrong; the
+# originals were published.
