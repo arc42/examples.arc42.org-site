@@ -1,0 +1,60 @@
+---
+layout: none
+sitemap: false
+---
+{%- comment -%}
+  The search index. One entry per searchable page, built by Liquid at build
+  time — no plugin, no Node step, nothing GitHub Pages cannot run.
+
+  Body text is indexed, not just titles. On this site that is the whole point:
+  a reader searches for "Drools", "template method" or "quality scenario", and
+  those words live in section 8 of an example, never in a page title. That is
+  also why this site uses lunr for the masthead suggestions where arc42.de
+  uses a lighter title-only scorer — its titles are meaningful on their own,
+  and these are not.
+
+  `system` and `section` let a hit say WHERE it is: "MaMa-CRM · 3. Context and
+  Scope" rather than a bare "Context and Scope", which is the same title in
+  every example.
+{%- endcomment -%}
+{%- assign landings = site.systems | where_exp: 'd', 'd.tagline' -%}
+[
+{%- assign sep = '' -%}
+
+{%- for doc in site.systems -%}
+  {%- assign slug = doc.path | remove_first: '_systems/' | split: '/' | first -%}
+  {%- assign sys_url = '/systems/' | append: slug | append: '/' -%}
+  {%- assign sys = landings | where: 'url', sys_url | first -%}
+  {%- comment -%}
+    No system landing page means the directory is a template or is broken; it
+    is not something a reader can be sent to.
+  {%- endcomment -%}
+  {%- if sys and doc.title -%}
+{{ sep }}{
+  "url": {{ doc.url | relative_url | jsonify }},
+  "title": {{ doc.title | jsonify }},
+  "system": {{ sys.title | jsonify }},
+  "section": {{ doc.order | jsonify }},
+  "content": {{ doc.content | strip_html | strip_newlines | jsonify }}
+}
+    {%- assign sep = ',' -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- for page in site.pages -%}
+  {%- comment -%}
+    Real pages only: search.json itself, 404, robots.txt and the sitemap carry
+    either no title or nothing a reader wants to land on.
+  {%- endcomment -%}
+  {%- if page.title and page.url != '/404.html' and page.search != false -%}
+{{ sep }}{
+  "url": {{ page.url | relative_url | jsonify }},
+  "title": {{ page.title | jsonify }},
+  "system": null,
+  "section": null,
+  "content": {{ page.content | strip_html | strip_newlines | jsonify }}
+}
+    {%- assign sep = ',' -%}
+  {%- endif -%}
+{%- endfor -%}
+]

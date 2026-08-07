@@ -32,6 +32,23 @@ html {
   }
 }
 
+// Visible to a screen reader, not to the eye. Used for the search field's
+// label, its keyboard hint in prose, and its live region — all of which are
+// real content that simply has no room in a masthead bar. Never `display:
+// none`, which would take them out of the accessibility tree as well.
+.ex-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
 // ---- Headings (family constant #1: serif for headings, never in a control) --
 h1, h2, h3, h4 {
   font-family: var(--serif);
@@ -66,8 +83,11 @@ a {
   border-radius: 2px;
 }
 
-.ex-masthead :focus-visible,
-.ex-footer :focus-visible {
+// Only the masthead is a dark band now. `.ex-footer` used to be listed here
+// and was left behind when the footer became the family's light component —
+// on --wash-calm the default --focus-ring is the correct one, and the amber
+// would have been the weaker choice.
+.ex-masthead :focus-visible {
   outline-color: var(--focus-ring-on-band);
 }
 

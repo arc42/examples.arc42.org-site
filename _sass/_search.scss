@@ -1,0 +1,251 @@
+// ============================================================================
+// Search — the masthead combobox and the /search/ results page.
+//
+// `.arc42-search` is the family component (arc42.de owns it); the tokens under
+// it are this site's. Everything here that would carry a hue elsewhere carries
+// a wash or the tint instead, because this site has none (ADR-0008).
+//
+// Colour pairs, measured (ADR-0002):
+//   --tint       on --ground        12.44:1   (typed text in the bar)
+//   --tint-soft  on --ground         8.93:1   (placeholder, icon, kbd hint)
+//   --ink        on --paper         13.41:1   (suggestion titles)
+//   --muted      on --paper          5.50:1   (the "system · section" line)
+//   --ink        on --wash-hover     9.42:1   (highlighted suggestion)
+// ============================================================================
+
+.arc42-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  flex: 0 1 22ch;
+  min-width: 0;
+  min-height: 44px;             // the whole pill is the target, not the input
+  padding: 0 var(--s3);
+  border-radius: var(--radius-pill);
+
+  // A field ON the band. The band is --ground, so the field is a step deeper
+  // rather than a step lighter: a pale box in a dark bar reads as the primary
+  // element of the masthead, which it is not.
+  background: var(--ground-deep);
+  border: 1px solid transparent;
+
+  // The ring goes on the PILL, not on the input inside it — an outline drawn
+  // tight around a borderless input sitting in a rounded field draws a second
+  // box inside the first. Same 3px amber every other focusable thing on this
+  // band gets (8.15:1), so the search field is not the one control with a
+  // weaker focus indicator than its neighbours.
+  &:focus-within {
+    border-color: var(--tint-soft);
+    outline: 3px solid var(--focus-ring-on-band);
+    outline-offset: 2px;
+  }
+
+  &__icon {
+    flex: 0 0 auto;
+    color: var(--tint-soft);      // 8.93:1 on --ground-deep is 8.4:1 — decorative anyway
+  }
+
+  &__input {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: var(--s2) 0;
+    font-size: 0.9375rem;
+    color: var(--tint);           // 12.44:1
+    background: none;
+    border: 0;
+
+    &::placeholder {
+      color: var(--tint-soft);    // 8.93:1
+      opacity: 1;                 // Firefox dims placeholders by default
+    }
+
+    // The field carries its own focus ring via :focus-within on the wrapper,
+    // so a second ring inside it would draw two boxes around one control.
+    &:focus { outline: none; }
+
+    // Safari draws its own clear button and a magnifier; both fight the icon
+    // and the kbd hint for the same few pixels.
+    &::-webkit-search-decoration,
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-results-button { -webkit-appearance: none; }
+  }
+
+  // Empty until the JS fills it in — a hint for a shortcut that never got
+  // installed is worse than no hint.
+  &__hint {
+    flex: 0 0 auto;
+    font-family: var(--sans);
+    font-size: 0.6875rem;
+    letter-spacing: 0.04em;
+    color: var(--tint-soft);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 4px;
+    padding: 1px 5px;
+    white-space: nowrap;
+
+    &:empty { display: none; }
+
+    // A keyboard chord is worth advertising only to someone holding a
+    // keyboard. On a touch device it is a glyph that cannot be pressed, and
+    // in a wrapped masthead it competes for the width the field wants. The
+    // shortcut still works; only the badge goes.
+    @media (max-width: 939px), (hover: none) {
+      display: none;
+    }
+  }
+
+  // ---- The suggestion panel ------------------------------------------------
+  // Paper, not band: it is a sheet laid over the page, and it holds the same
+  // kind of content the page holds.
+  &__panel {
+    position: absolute;
+    // Clear of the spine, not across it. The masthead ends in the 6px device
+    // and a panel laid over it cuts the site's own signature in half every
+    // time someone types.
+    top: calc(100% + var(--s2) + var(--spine-h));
+    right: 0;
+    z-index: 30;
+    width: min(30rem, calc(100vw - var(--s5) * 2));
+    max-height: min(60vh, 26rem);
+    overflow-y: auto;
+    background: var(--paper);
+    border: 1px solid var(--wash-border);
+    border-radius: var(--radius);
+
+    // The family's one sanctioned dynamic shadow, same as the tile hover-lift:
+    // this panel is genuinely floating above the page while it is open.
+    box-shadow: 0 6px 20px rgba(47, 41, 34, 0.18);
+  }
+
+  &__row {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: var(--s3) var(--s4);
+    text-decoration: none;
+    color: var(--ink);
+    border-bottom: 1px solid var(--hairline);
+
+    &:last-child { border-bottom: 0; }
+
+    // Keyboard highlight and pointer hover are the same state, so they look
+    // the same. aria-selected is the source of truth; :hover just mirrors it.
+    &[aria-selected="true"],
+    &:hover {
+      background: var(--wash-hover);
+      text-decoration: none;
+    }
+  }
+
+  &__row-title {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 0.9375rem;
+    line-height: 1.3;
+  }
+
+  &__row-where {
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--muted);          // 5.50:1 on --paper
+  }
+
+  &__empty {
+    padding: var(--s4);
+    font-size: 0.9375rem;
+    color: var(--muted);
+  }
+
+  // Below the rail breakpoint the masthead already wraps to two rows. The
+  // field takes the full second row rather than being squeezed beside four
+  // nav items, and the panel widens with it.
+  @media (max-width: 939px) {
+    flex: 1 1 100%;
+    order: 3;
+
+    &__panel { left: 0; right: 0; width: auto; }
+  }
+}
+
+// ---- /search/ ------------------------------------------------------------------
+.ex-searchpage {
+  &__form {
+    margin-top: var(--s6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s2);
+  }
+
+  &__label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  &__input {
+    width: 100%;
+    min-height: 44px;
+    padding: var(--s2) var(--s3);
+    font-size: 1.0625rem;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--wash-border);
+    border-radius: var(--radius);
+  }
+
+  &__count {
+    margin-top: var(--s5);
+    font-size: 0.875rem;
+    color: var(--muted);
+
+    &:empty { display: none; }
+  }
+
+  &__results {
+    list-style: none;
+    margin: var(--s5) 0 0;
+    padding: 0;
+
+    li + li {
+      margin-top: var(--s5);
+      padding-top: var(--s5);
+      border-top: 1px solid var(--hairline);
+    }
+  }
+}
+
+.ex-hit {
+  &__where {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: var(--s1);
+  }
+
+  &__title {
+    font-size: 1.1875rem;
+    margin: 0;
+  }
+
+  &__excerpt {
+    margin-top: var(--s2);
+    color: var(--ink);
+  }
+}
+
+// The matched words. A site with no hue marks a match by WEIGHT and a wash,
+// never by colour — which is also the accessible answer, since colour alone
+// may not carry meaning.
+mark {
+  background: var(--wash-active);
+  color: var(--ink);              // 11.13:1 on --wash-active
+  font-weight: 700;
+  padding: 0 2px;
+  border-radius: 2px;
+}

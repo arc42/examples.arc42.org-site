@@ -34,6 +34,52 @@
         <li><a href="https://arc42.org">arc42.org</a></li>
       </ul>
     </nav>
+
+    {%- comment -%}
+      A real form, not a link: it submits to /search/?q=… so the field still
+      goes somewhere with JavaScript disabled. assets/js/search.js turns it
+      into an ARIA combobox on top of that — filling the panel while typing
+      and binding Cmd/Ctrl-K — and everything the combobox needs is inert
+      without it: the panel stays `hidden`, aria-expanded stays "false".
+
+      `.arc42-search` is the FAMILY class name, not `.ex-`. arc42.de owns this
+      component and this is the same component: same markup contract, same
+      ARIA roles, same keyboard down to Cmd-Enter for all results. Per the
+      Same-Name Rule a component matching the family spec takes the family
+      name; only the tokens underneath it differ, because this site has no hue.
+
+      The role/aria-*/data-* attributes are the JS and CSS contract. Do not
+      rename them without changing both files.
+    {%- endcomment -%}
+    <form class="arc42-search" role="search" method="get"
+          action="{{ '/search/' | relative_url }}"
+          data-arc42-search="{{ '/search.json' | relative_url }}">
+      <label class="ex-sr-only" for="masthead-search">Search the examples</label>
+      <svg class="arc42-search__icon" width="15" height="15" viewBox="0 0 16 16"
+           fill="none" aria-hidden="true" focusable="false">
+        <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="2"/>
+        <path d="M11 11l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <input class="arc42-search__input" type="search" id="masthead-search" name="q"
+             placeholder="Search" autocomplete="off" autocorrect="off"
+             autocapitalize="off" spellcheck="false"
+             role="combobox" aria-autocomplete="list" aria-expanded="false"
+             aria-controls="arc42-search-panel" aria-haspopup="listbox"
+             aria-describedby="arc42-search-hint-desc">
+
+      {%- comment -%}
+        The kbd is a glyph, not a sentence, so it is aria-hidden and the
+        shortcut is stated once in prose beside it. Both are rewritten by the
+        JS to the platform's actual chord — and both start empty, because a
+        hint for a shortcut that JavaScript has not installed is a lie.
+      {%- endcomment -%}
+      <kbd class="arc42-search__hint" aria-hidden="true" data-arc42-search-hint></kbd>
+      <span class="ex-sr-only" id="arc42-search-hint-desc" data-arc42-search-hint-desc></span>
+
+      <div class="arc42-search__panel" id="arc42-search-panel" role="listbox"
+           aria-label="Search suggestions" data-arc42-search-panel hidden></div>
+      <div class="ex-sr-only" aria-live="polite" data-arc42-search-status></div>
+    </form>
   </div>
 
   {%- if is_home -%}

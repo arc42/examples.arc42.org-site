@@ -26,6 +26,28 @@
         href="{{ '/assets/fonts/atkinson-hyperlegible-next-latin.woff2' | relative_url }}">
   <link rel="preload" as="font" type="font/woff2" crossorigin
         href="{{ '/assets/fonts/libre-caslon-text-700-latin.woff2' | relative_url }}">
+
+  {%- comment -%}
+    Analytics, per ADR-0005: every host keeps its own Plausible site AND
+    reports into the shared rollup, own host first. Same-`data-domain`
+    tracking is what keeps one visitor's journey across arc42 subdomains a
+    single session in the rollup — and only in the rollup.
+
+    The LEGACY script, deliberately. Plausible's own update guide says
+    multi-dashboard tracking is not supported by the new one, so feature
+    selection happens through the `src` filename rather than dashboard
+    toggles. outbound-links gives the "taken to docs.arc42.org" signal;
+    file-downloads counts what readers take away.
+
+    This is the documented exception to LP-1 (no third-party scripts): see
+    ADR-0005. Cookie-less, so no consent banner.
+
+    ADR-0005's roster does not list examples.arc42.org — it predates this
+    site. Adding it here extends that roster, which is a meta.arc42.org edit
+    someone still has to make.
+  {%- endcomment -%}
+  <script defer data-domain="examples.arc42.org,rollup.arc42.com"
+          src="https://plausible.io/js/script.outbound-links.file-downloads.js"></script>
 </head>
 <body class="ex-body">
   <a class="ex-skip" href="#main">Skip to content</a>
@@ -44,5 +66,13 @@
   {% include site-footer.html %}
 
   <script src="{{ '/assets/js/scrollable.js' | relative_url }}" defer></script>
+
+  {%- comment -%}
+    Deferred and in order: lunr defines window.lunr, search.js reads it. The
+    index itself (/search.json) is NOT fetched here — search.js loads it on
+    first focus or Cmd-K, so a reader who never searches never pays for it.
+  {%- endcomment -%}
+  <script src="{{ '/assets/lib/lunr/lunr.min.js' | relative_url }}" defer></script>
+  <script src="{{ '/assets/js/search.js' | relative_url }}" defer></script>
 </body>
 </html>
