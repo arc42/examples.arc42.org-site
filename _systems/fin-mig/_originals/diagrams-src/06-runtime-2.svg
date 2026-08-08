@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1016" height="450" viewBox="0 0 1016 450" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="ah" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#333"/></marker></defs>
+<rect width="1016" height="450" fill="#fff"/>
+<rect x="16" y="12" width="176" height="58" fill="#fff" stroke="#333" stroke-width="1.6"/>
+<text x="104" y="38" text-anchor="middle" font-size="16" fill="#111">Migration</text>
+<text x="104" y="58" text-anchor="middle" font-size="16" fill="#111">Controller</text>
+<line x1="104" y1="70" x2="104" y2="426" stroke="#333" stroke-width="1.2" stroke-dasharray="7,6"/>
+<rect x="212" y="12" width="176" height="58" fill="#fff" stroke="#333" stroke-width="1.6"/>
+<text x="300" y="38" text-anchor="middle" font-size="16" fill="#111">Migration</text>
+<text x="300" y="58" text-anchor="middle" font-size="16" fill="#111">database</text>
+<line x1="300" y1="70" x2="300" y2="426" stroke="#333" stroke-width="1.2" stroke-dasharray="7,6"/>
+<rect x="408" y="12" width="176" height="58" fill="#fff" stroke="#333" stroke-width="1.6"/>
+<text x="496" y="48" text-anchor="middle" font-size="16" fill="#111">Segmentizer</text>
+<line x1="496" y1="70" x2="496" y2="426" stroke="#333" stroke-width="1.2" stroke-dasharray="7,6"/>
+<rect x="604" y="12" width="176" height="58" fill="#fff" stroke="#333" stroke-width="1.6"/>
+<text x="692" y="38" text-anchor="middle" font-size="16" fill="#111">Rule</text>
+<text x="692" y="58" text-anchor="middle" font-size="16" fill="#111">Processor</text>
+<line x1="692" y1="70" x2="692" y2="426" stroke="#333" stroke-width="1.2" stroke-dasharray="7,6"/>
+<rect x="800" y="12" width="176" height="58" fill="#fff" stroke="#333" stroke-width="1.6"/>
+<text x="888" y="38" text-anchor="middle" font-size="16" fill="#111">Target System</text>
+<text x="888" y="58" text-anchor="middle" font-size="16" fill="#111">Adapter</text>
+<line x1="888" y1="70" x2="888" y2="426" stroke="#333" stroke-width="1.2" stroke-dasharray="7,6"/>
+<rect x="96" y="100" width="16" height="200" fill="#fff" stroke="#333" stroke-width="1.4"/>
+<rect x="488" y="112" width="16" height="64" fill="#fff" stroke="#333" stroke-width="1.4"/>
+<rect x="292" y="130" width="16" height="46" fill="#fff" stroke="#333" stroke-width="1.4"/>
+<line x1="112" y1="112" x2="488" y2="112" stroke="#333" stroke-width="1.4" marker-end="url(#ah)"/>
+<text x="280" y="104" text-anchor="middle" font-size="16" fill="#111">start()</text>
+<line x1="488" y1="146" x2="308" y2="146" stroke="#333" stroke-width="1.4" marker-end="url(#ah)"/>
+<text x="398" y="138" text-anchor="middle" font-size="16" fill="#111">segmentize</text>
+<line x1="485" y1="165" x2="507" y2="187" stroke="#333" stroke-width="2"/>
+<line x1="485" y1="187" x2="507" y2="165" stroke="#333" stroke-width="2"/>
+<line x1="112" y1="218" x2="684" y2="218" stroke="#333" stroke-width="1.4" marker-end="url(#ah)"/>
+<text x="330" y="210" text-anchor="middle" font-size="16" fill="#111">start()</text>
+<path d="M266,238 L990,238 L990,420 L266,420 z" fill="none" stroke="#2f7a4f" stroke-width="1.6"/>
+<path d="M266,238 L512,238 L512,268 L490,288 L266,288 z" fill="#f2f7f3" stroke="#2f7a4f" stroke-width="1.6"/>
+<text x="280" y="261" font-size="16" fill="#1f5637">parallel and repeated,</text>
+<text x="280" y="281" font-size="16" fill="#1f5637">until all data is migrated</text>
+<rect x="684" y="306" width="16" height="106" fill="#fff" stroke="#333" stroke-width="1.4"/>
+<rect x="292" y="324" width="16" height="32" fill="#fff" stroke="#333" stroke-width="1.4"/>
+<rect x="880" y="380" width="16" height="32" fill="#fff" stroke="#333" stroke-width="1.4"/>
+<line x1="684" y1="334" x2="308" y2="334" stroke="#333" stroke-width="1.4" marker-end="url(#ah)"/>
+<text x="496" y="326" text-anchor="middle" font-size="16" fill="#111">getPackage</text>
+<path d="M700,352 L752,352 L752,374 L702,374" fill="none" stroke="#333" stroke-width="1.4" marker-end="url(#ah)"/>
+<text x="762" y="357" font-size="16" fill="#111">migrate package</text>
+<line x1="700" y1="400" x2="880" y2="400" stroke="#333" stroke-width="1.4" marker-end="url(#ah)"/>
+<text x="790" y="392" text-anchor="middle" font-size="16" fill="#111">writePackage</text>
+</svg>

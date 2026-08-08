@@ -1,0 +1,35 @@
+digraph vsamreader {
+  rankdir=TB; bgcolor="white"; nodesep=0.5; ranksep=0.75;
+  node [fontname="Helvetica", fontsize=14, shape=box, style="filled", fillcolor="white", color="#333333", penwidth=1.4, margin="0.22,0.16"];
+  edge [fontname="Helvetica", fontsize=12, color="#333333", penwidth=1.2];
+
+  src [label="«external»  VSAM source data\nperson · account · address · bank data", fillcolor="#d9d9d9"];
+
+  subgraph cluster_reader {
+    label="VSAM Reader"; labelloc=t; fontname="Helvetica"; fontsize=16;
+    style="rounded"; color="#333333"; penwidth=1.6; margin=18;
+    pr  [label="Person\nReader"];
+    kr  [label="Account\nReader"];
+    ar  [label="Address\nReader"];
+    br  [label="Bank Data\nReader"];
+    npr [label="Natural Person\nReader"];
+    nnr [label="Non-natural\nPerson Reader"];
+    conv [label="EBCDIC2ASCII Converter", fillcolor="#f0f0f0"];
+
+    pr -> npr; pr -> nnr;
+    { rank=same; pr; kr; ar; br; }
+    { rank=same; npr; nnr; }
+
+    npr -> conv [style=dashed, label="uses"];
+    nnr -> conv [style=dashed];
+    kr  -> conv [style=dashed];
+    ar  -> conv [style=dashed];
+    br  -> conv [style=dashed];
+  }
+
+  migdb [label="Migration database"];
+
+  src -> pr; src -> kr; src -> ar; src -> br;
+  conv -> migdb [style=invis];
+  npr -> migdb; nnr -> migdb; kr -> migdb; ar -> migdb; br -> migdb;
+}

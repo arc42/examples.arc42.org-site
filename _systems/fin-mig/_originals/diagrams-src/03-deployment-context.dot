@@ -1,0 +1,14 @@
+digraph deploycontext {
+  rankdir=LR; bgcolor="white"; nodesep=0.4; ranksep=1.0;
+  node [fontname="Helvetica", fontsize=15, shape=box, style="filled", fillcolor="white", color="#333333", penwidth=1.4, margin="0.26,0.20"];
+  edge [fontname="Helvetica", fontsize=13, color="#333333", penwidth=1.2];
+
+  mf    [label="Mainframe\nIBM, OS/390", shape=box3d];
+  tapes [label="account data\nperson data\naddress data\nbank data", shape=note, fillcolor="#eeeeee", fontsize=13];
+  mig   [label="Migration server\nLinux", shape=box3d, fillcolor="#d9d9d9", penwidth=2.2];
+  db    [label="Database server\nLinux", shape=box3d, fillcolor="#d9d9d9", penwidth=2.2];
+
+  mf    -> tapes [label="writes"];
+  tapes -> mig   [label="reads"];
+  mig   -> db    [label="writes"];
+}

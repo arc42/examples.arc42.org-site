@@ -1,0 +1,12 @@
+digraph purpose {
+  rankdir=LR; bgcolor="white"; nodesep=0.4; ranksep=1.1;
+  node [fontname="Helvetica", fontsize=15, shape=box, style="filled", fillcolor="white", color="#333333", penwidth=1.4, margin="0.28,0.22"];
+  edge [fontname="Helvetica", fontsize=13, color="#333333", penwidth=1.2];
+
+  old [label="existing\nmainframe system\n\nbasis: VSAM"];
+  data [label="account data\nbank data\nperson data\naddress data", shape=box3d, fillcolor="#eeeeee"];
+  new [label="future\nclient/server system\n\nbasis: Java and OO", fillcolor="#d9d9d9", penwidth=2.2];
+
+  old -> data [label="holds"];
+  data -> new [label="migrate"];
+}

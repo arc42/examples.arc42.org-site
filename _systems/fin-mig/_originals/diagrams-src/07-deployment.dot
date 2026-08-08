@@ -1,0 +1,38 @@
+digraph deployment {
+  rankdir=TB; bgcolor="white"; nodesep=0.6; ranksep=0.55; compound=true;
+  node [fontname="Helvetica", fontsize=15, shape=box, style="filled", fillcolor="white", color="#333333", penwidth=1.4, margin="0.24,0.17"];
+  edge [fontname="Helvetica", fontsize=14, color="#333333", penwidth=1.4];
+  graph [fontname="Helvetica", fontsize=16];
+
+  mf      [label="old: Mainframe (IBM OS/390)", shape=box3d];
+  tapedrv [label="old: tape drives", shape=box3d];
+
+  subgraph cluster_m2 {
+    label="migration-2: application server, Linux"; labelloc=t;
+    style="rounded"; color="#333333"; penwidth=1.6; margin=14;
+    ctrl [label="Migration Controller"];
+    inst [label="application server (4 instances)\nPackager & RuleProcessor"];
+    tsa  [label="Target System Adapter"];
+    ejb  [label="EJB container", fillcolor="#d9ead9"];
+    ctrl -> inst [style=dashed];
+    inst -> tsa  [style=invis];
+    tsa  -> ejb  [style=invis];
+  }
+
+  subgraph cluster_m1 {
+    label="migration-1: database server, Linux"; labelloc=t;
+    style="rounded"; color="#333333"; penwidth=1.6; margin=14;
+    rdr [label="VSAM Reader & Segmentizer"];
+    mdb [label="migration database"];
+    tdb [label="target database"];
+    ora [label="Oracle 9i database", fillcolor="#d9ead9"];
+    rdr -> mdb [style=invis];
+    mdb -> tdb [style=invis];
+    tdb -> ora [style=invis];
+  }
+
+  mf      -> tapedrv [arrowhead=none];
+  tapedrv -> ctrl    [arrowhead=none, lhead=cluster_m2, label="phys. channel"];
+  tapedrv -> rdr     [style=invis];
+  inst    -> mdb     [arrowhead=none, constraint=false, ltail=cluster_m2, lhead=cluster_m1, label="fast bus"];
+}

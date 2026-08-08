@@ -1,0 +1,21 @@
+digraph ruleprocessor {
+  rankdir=TB; bgcolor="white"; nodesep=0.5; ranksep=0.9;
+  node [fontname="Helvetica", fontsize=15, shape=box, style="filled", fillcolor="white", color="#333333", penwidth=1.4, margin="0.24,0.18"];
+  edge [fontname="Helvetica", fontsize=12, color="#333333", penwidth=1.2];
+
+  disp [label="UseCase\nDispatcher", penwidth=2.0];
+  nat  [label="Natural Person\nMapper"];
+  nnat [label="Non-natural\nPerson Mapper"];
+  spouse [label="Spouse\nMapper"];
+  addr [label="Address\nMapper"];
+  bank [label="Bank Data\nMapper"];
+  acct [label="Account\nMapper"];
+
+  disp -> nnat; disp -> nat;
+  nat -> spouse;
+  nat -> addr; nat -> bank; nat -> acct;
+  nnat -> addr; nnat -> bank; nnat -> acct;
+
+  { rank=same; nat; nnat; }
+  { rank=same; addr; bank; acct; spouse; }
+}

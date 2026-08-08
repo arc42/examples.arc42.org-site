@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="470" viewBox="0 0 820 470" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="ah" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#333"/></marker></defs>
+<rect width="820" height="470" fill="#fff"/>
+<rect x="16" y="12" width="176" height="58" fill="#fff" stroke="#333" stroke-width="1.6"/>
+<text x="104" y="38" text-anchor="middle" font-size="16" fill="#111">Migration</text>
+<text x="104" y="58" text-anchor="middle" font-size="16" fill="#111">Controller</text>
+<line x1="104" y1="70" x2="104" y2="446" stroke="#333" stroke-width="1.2" stroke-dasharray="7,6"/>
+<rect x="212" y="12" width="176" height="58" fill="#fff" stroke="#333" stroke-width="1.6"/>
+<text x="300" y="38" text-anchor="middle" font-size="16" fill="#111">«external»</text>
+<text x="300" y="58" text-anchor="middle" font-size="16" fill="#111">VSAM source data</text>
+<line x1="300" y1="70" x2="300" y2="446" stroke="#333" stroke-width="1.2" stroke-dasharray="7,6"/>
+<rect x="408" y="12" width="176" height="58" fill="#fff" stroke="#333" stroke-width="1.6"/>
+<text x="496" y="38" text-anchor="middle" font-size="16" fill="#111">VSAM</text>
+<text x="496" y="58" text-anchor="middle" font-size="16" fill="#111">Reader</text>
+<line x1="496" y1="70" x2="496" y2="446" stroke="#333" stroke-width="1.2" stroke-dasharray="7,6"/>
+<rect x="604" y="12" width="176" height="58" fill="#fff" stroke="#333" stroke-width="1.6"/>
+<text x="692" y="38" text-anchor="middle" font-size="16" fill="#111">Migration</text>
+<text x="692" y="58" text-anchor="middle" font-size="16" fill="#111">database</text>
+<line x1="692" y1="70" x2="692" y2="446" stroke="#333" stroke-width="1.2" stroke-dasharray="7,6"/>
+<rect x="96" y="100" width="16" height="320" fill="#fff" stroke="#333" stroke-width="1.4"/>
+<rect x="488" y="112" width="16" height="288" fill="#fff" stroke="#333" stroke-width="1.4"/>
+<rect x="292" y="148" width="16" height="232" fill="#fff" stroke="#333" stroke-width="1.4"/>
+<rect x="684" y="176" width="16" height="234" fill="#fff" stroke="#333" stroke-width="1.4"/>
+<line x1="112" y1="112" x2="488" y2="112" stroke="#333" stroke-width="1.4" marker-end="url(#ah)"/>
+<text x="300" y="104" text-anchor="middle" font-size="16" fill="#111">start()</text>
+<line x1="488" y1="152" x2="308" y2="152" stroke="#333" stroke-width="1.4" marker-end="url(#ah)"/>
+<text x="398" y="144" text-anchor="middle" font-size="16" fill="#111">read persons</text>
+<line x1="504" y1="182" x2="684" y2="182" stroke="#333" stroke-width="1.4" marker-end="url(#ah)"/>
+<text x="594" y="174" text-anchor="middle" font-size="16" fill="#111">write persons</text>
+<line x1="488" y1="212" x2="308" y2="212" stroke="#333" stroke-width="1.4" marker-end="url(#ah)"/>
+<text x="398" y="204" text-anchor="middle" font-size="16" fill="#111">read accounts</text>
+<line x1="504" y1="242" x2="684" y2="242" stroke="#333" stroke-width="1.4" marker-end="url(#ah)"/>
+<text x="594" y="234" text-anchor="middle" font-size="16" fill="#111">write accounts</text>
+<line x1="488" y1="272" x2="308" y2="272" stroke="#333" stroke-width="1.4" marker-end="url(#ah)"/>
+<text x="398" y="264" text-anchor="middle" font-size="16" fill="#111">read addresses</text>
+<line x1="504" y1="302" x2="684" y2="302" stroke="#333" stroke-width="1.4" marker-end="url(#ah)"/>
+<text x="594" y="294" text-anchor="middle" font-size="16" fill="#111">write addresses</text>
+<line x1="488" y1="332" x2="308" y2="332" stroke="#333" stroke-width="1.4" marker-end="url(#ah)"/>
+<text x="398" y="324" text-anchor="middle" font-size="16" fill="#111">read bank data</text>
+<line x1="504" y1="362" x2="684" y2="362" stroke="#333" stroke-width="1.4" marker-end="url(#ah)"/>
+<text x="594" y="354" text-anchor="middle" font-size="16" fill="#111">write bank data</text>
+<line x1="485" y1="389" x2="507" y2="411" stroke="#333" stroke-width="2"/>
+<line x1="485" y1="411" x2="507" y2="389" stroke="#333" stroke-width="2"/>
+</svg>
