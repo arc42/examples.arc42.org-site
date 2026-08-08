@@ -34,6 +34,6 @@ The few constraints on this project are reflected in the final solution. This se
 | ID | Convention | Background and / or motivation |
 |---|---|---|
 | C1 | Architecture documentation | Structure based on the English arc42 template, version 6.5. |
-| C2 | Coding conventions | The project uses the [Code Conventions for the Java Programming Language](http://www.oracle.com/technetwork/java/codeconvtoc-136057.html). The conventions are enforced through Checkstyle. |
+| C2 | Coding conventions | The project uses the [Code Conventions for the Java Programming Language](https://www.oracle.com/technetwork/java/codeconvtoc-136057.html). The conventions are enforced through Checkstyle. |
 | C3 | Language | English. The project and the corresponding blog target an international audience, so English is used throughout the whole project. |
 | C4 | Naming conventions | A number of naming conventions are checked and enforced with [jQAssistant](https://jqassistant.org). |

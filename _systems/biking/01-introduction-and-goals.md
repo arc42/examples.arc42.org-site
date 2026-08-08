@@ -3,14 +3,14 @@ title: Introduction and Goals
 order: 1
 ---
 
-[biking.michael-simons.eu](http://biking.michael-simons.eu) is a project for
+[biking.michael-simons.eu](https://biking.michael-simons.eu) is a project for
 
 - tracking my bike activities
 - evaluating technology
 - learn stuff
 - showcasing my skills
 
-For more background see [this blog post](http://info.michael-simons.eu/2014/02/20/developing-a-web-application-with-spring-boot-angularjs-and-java-8/) as a starting point.
+For more background see [this blog post](https://info.michael-simons.eu/2014/02/20/developing-a-web-application-with-spring-boot-angularjs-and-java-8/) as a starting point.
 
 I'd like to thank all the people working at the Spring Eco System for doing their amazing work. Also a big thank you to Dr. Gernot Starke and Dr. Peter Hruschka for their inspiring workshop "Mastering Software Architecture" in Munich, December 2015. I took not only a nice _CPSA-F_ certificate home, but really valuable and practical patterns for improving "my" software.
 

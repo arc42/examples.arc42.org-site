@@ -48,7 +48,7 @@ Those tables are mapped to the following domain model:
 
 ## Persistency
 
-_biking2_ uses an [H2](http://www.h2database.com/html/main.html) database for storing relational data, and the file system for binary image files and large ASCII files (especially all GPS files).
+_biking2_ uses an [H2](https://www.h2database.com/html/main.html) database for storing relational data, and the file system for binary image files and large ASCII files (especially all GPS files).
 
 During development and production the H2 database is retained and not in-memory based. The location of this file is configured through the `biking2.database-file` property, and its default value during development is `./var/dev/db/biking-dev`, relative to the working directory of the VM.
 
@@ -68,13 +68,13 @@ The default user interface for _biking2_, packaged within the final artifact, is
 
 For using the real time location update interface, choose one of the many MQTT clients out there.
 
-There is a second user interface written in Java, called [bikingFX](http://info.michael-simons.eu/2014/10/22/getting-started-with-javafx-8-developing-a-rest-client-application-from-scratch/).
+There is a second user interface written in Java, called [bikingFX](https://info.michael-simons.eu/2014/10/22/getting-started-with-javafx-8-developing-a-rest-client-application-from-scratch/).
 
 ## JavaScript and CSS optimization
 
-JavaScript and CSS dependencies are managed through Maven dependencies in the form of [webjars](http://www.webjars.org) wherever possible, without the need for brew, npm, bower and the like.
+JavaScript and CSS dependencies are managed through Maven dependencies in the form of [webjars](https://www.webjars.org) wherever possible, without the need for brew, npm, bower and the like.
 
-Furthermore _biking2_ uses [wro4j](http://alexo.github.io/wro4j/), together with a small [Spring Boot Starter](https://github.com/michael-simons/wro4j-spring-boot-starter), to optimize JavaScript and CSS web resources.
+Furthermore _biking2_ uses [wro4j](https://alexo.github.io/wro4j/), together with a small [Spring Boot Starter](https://github.com/michael-simons/wro4j-spring-boot-starter), to optimize JavaScript and CSS web resources.
 
 wro4j provides a model like this:
 
@@ -139,7 +139,7 @@ _biking2_ uses an internal Apache ActiveMQ broker on the same VM as the applicat
 
 ## Plausibility and Validity Checks
 
-Datatypes and ranges are checked via [JSR-303](http://beanvalidation.org/1.0/spec/) annotations on classes representing the [domain models](#domain-models). Those classes are directly bound to external REST interfaces.
+Datatypes and ranges are checked via [JSR-303](https://beanvalidation.org/1.0/spec/) annotations on classes representing the [domain models](#domain-models). Those classes are directly bound to external REST interfaces.
 
 There are three important business checks:
 

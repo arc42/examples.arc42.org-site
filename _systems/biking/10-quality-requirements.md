@@ -11,7 +11,7 @@ order: 10
 
 **Testability / Coverage**
 
-By using JaCoCo during [development and the build process](http://info.michael-simons.eu/2014/05/22/jacoco-maven-and-netbeans-8-integration/), ensure a code coverage of at least 95%.
+By using JaCoCo during [development and the build process](https://info.michael-simons.eu/2014/05/22/jacoco-maven-and-netbeans-8-integration/), ensure a code coverage of at least 95%.
 
 **Testability / Independent from external services**
 

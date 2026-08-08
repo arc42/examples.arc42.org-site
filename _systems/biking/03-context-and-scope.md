@@ -37,7 +37,7 @@ The API runs on a supported application server, using either an embedded contain
 
 The connection to _Daily Fratze_ is an http based RSS feed. The feed is paginated and provides all images with a given tag, but older images may no longer be available once the owner decides to add a digital expiry.
 
-Furthermore _biking2_ provides an [oEmbed](http://oembed.com) interface for all tracks stored in the system. Arbitrary websites supporting that protocol can request embeddable content over http knowing only a link to the track, without working against the track or map APIs themselves.
+Furthermore _biking2_ provides an [oEmbed](https://oembed.com) interface for all tracks stored in the system. Arbitrary websites supporting that protocol can request embeddable content over http knowing only a link to the track, without working against the track or map APIs themselves.
 
 **Frontend (biking2::spa and biking2::bikingFX)**
 

@@ -11,7 +11,7 @@ Use GPSBabel for converting TCX into GPX format
 
 : **Assumptions:** using an external, non-Java based tool makes it harder for people who just want to try out this application. Although well documented, both file types can contain varieties of information (routes, tracks, waypoints), which makes them hard to parse.
 
-: **Considered alternatives:** writing a custom converter, or using the existing swiss army knife for GPS data, [GPSBabel](http://www.gpsbabel.org) — "GPSBabel converts waypoints, tracks, and routes between popular GPS receivers such as Garmin or Magellan and mapping programs like Google Earth or Basecamp. [...] It has been downloaded and used tens of millions of times since it was first created in 2001, so it's stable and trusted."
+: **Considered alternatives:** writing a custom converter, or using the existing swiss army knife for GPS data, [GPSBabel](https://www.gpsbabel.org) — "GPSBabel converts waypoints, tracks, and routes between popular GPS receivers such as Garmin or Magellan and mapping programs like Google Earth or Basecamp. [...] It has been downloaded and used tens of millions of times since it was first created in 2001, so it's stable and trusted."
 
 : **Decision:** _biking2_ uses GPSBabel for the heavy lifting of GPS related data. The project's README states that GPSBabel must be installed. GPSBabel can be installed on Windows with an installer, and on most Linux systems through the official package manager. Under OS X it is available via MacPorts or Homebrew.
 

@@ -43,7 +43,7 @@ All components depend on a standard JPA `EntityManager`, and some on local file 
 | trips API | REST API for adding new trips. |
 | oEmbed | HTTP based oEmbed interface, generating URLs with embeddable content. |
 | Real time locations | WebSocket / STOMP based interface on which new locations are published. |
-| Real time location updates | MQTT interface to which MQTT compatible systems like [OwnTracks](http://owntracks.org) can offer location updates. |
+| Real time location updates | MQTT interface to which MQTT compatible systems like [OwnTracks](https://owntracks.org) can offer location updates. |
 | RSS feed reader | Needs a _Daily Fratze_ OAuth token for accessing an RSS feed containing biking pictures, which are then grabbed from _Daily Fratze_. |
 | galleryPictures API | REST API for uploading and reading arbitrary image files (pictures related to biking). |
 
@@ -96,7 +96,7 @@ All components depend on a standard JPA `EntityManager`, and some on local file 
 |---|---|
 | REST interface `/api/locations/*` | For retrieving all locations from the last 30 minutes. |
 | WebSocket / STOMP topic `/topic/currentLocation` | Interface for getting notification of new locations. |
-| MQTT interface | Listens for new locations coming in via MQTT, in [OwnTracks format](http://owntracks.org/booklet/tech/json/). |
+| MQTT interface | Listens for new locations coming in via MQTT, in [OwnTracks format](https://owntracks.org/booklet/tech/json/). |
 
 **Files:** the `locations` module and all of its dependencies are contained inside the Java package `ac.simons.biking2.tracker`. The module is configured through `ac.simons.biking2.config.TrackerConfig`.
 
@@ -149,7 +149,7 @@ The `BikeRepository` is a Spring Data JPA based repository for `BikeEntities`. T
 
 | Building block | Description |
 |---|---|
-| highcharts | Contains logic for generating configurations and definitions for [Highcharts](http://www.highcharts.com) on the server side. |
+| highcharts | Contains logic for generating configurations and definitions for [Highcharts](https://www.highcharts.com) on the server side. |
 
 ### tracks (Whitebox)
 

@@ -5,8 +5,7 @@ title: Architecture examples
 
 Every example below is a **complete architecture documentation** of a real
 system, written along the same twelve-part arc42 structure. Different domains,
-different scales, different technologies — one structure, so you can read any
-two of them against each other.
+different scales, different technologies.
 
 Looking for short, section-sized illustrations instead? Those live with the
 template documentation at [docs.arc42.org](https://docs.arc42.org).
