@@ -51,16 +51,22 @@
       arc42.org link added back, the logo already is both.
     {%- endcomment -%}
     {%- comment -%}
-      "Elsewhere" is first because it is the only content item here: it leads
+      "In the Wild" is first because it is the only content item here: it leads
       to documentation, which is what a reader came for, while Contribute and
-      About are about the site. It is deliberately NOT called "More examples" —
-      *more* would claim these are more of the same thing, and the whole point
-      of that page is that they are not: nobody here has read them end to end.
-      See _pages/elsewhere.md.
+      About are about the site.
+
+      The name is doing real work, so do not shorten it to something tidier.
+      The home page hero is a HERBARIUM — specimens collected, pressed and
+      mounted in one identical format — and "in the wild" is the exact
+      complementary category: the same plants, where they actually grow,
+      uncollected by us. It also says "not vetted" without saying "worse",
+      which "More examples" would fail at twice over: *more* claims they are
+      more of the same thing, and they are not, because nobody here has read
+      them end to end. See _pages/in-the-wild.md.
     {%- endcomment -%}
     <nav class="ex-nav" aria-label="Main">
       <ul class="ex-nav__list">
-        <li><a href="{{ '/elsewhere/' | relative_url }}"{% if page.url == '/elsewhere/' %} aria-current="page"{% endif %}>Elsewhere</a></li>
+        <li><a href="{{ '/in-the-wild/' | relative_url }}"{% if page.url == '/in-the-wild/' %} aria-current="page"{% endif %}>In the Wild</a></li>
         <li><a href="{{ '/contribute/' | relative_url }}"{% if page.url == '/contribute/' %} aria-current="page"{% endif %}>Contribute</a></li>
         <li><a href="{{ '/about/' | relative_url }}"{% if page.url == '/about/' %} aria-current="page"{% endif %}>About</a></li>
       </ul>

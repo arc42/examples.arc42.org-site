@@ -118,8 +118,25 @@ have since swapped jobs (see *The spine*, above). Two rules make it safe:
    no seam. Measured on the shipped file: `#3c322a` against the token's
    `#3a332b`, one WebP quantisation step.
 
-It is declared only above 700px: below that the text column is the full width,
-the scrim would cover the art entirely, and a phone should not download it.
+**Below 700px the art comes out from behind the text** and sits under it as a
+140px frieze (`.ex-masthead__band::after`), between the heading and the page
+body. The scrim treatment cannot work down there — the text column is the full
+width, so an opaque scrim would cover the whole picture — but that is an
+argument against putting the art *behind* the text, not against showing it.
+
+The frieze has no scrim and must never grow one: nothing is set over it, which
+is the only reason it is safe. Its height is derived rather than chosen.
+`background-size: auto 100%` ties the art's rendered width to its height at the
+file's 5.505:1, so covering the widest viewport this rule sees (699px) needs at
+least 127px; 140px clears that with room. The pay-off is that **the specimens
+never shrink**: a 320px phone shows about six of them at full size and a 699px
+tablet about thirteen of the same size, where scaling the whole strip to the
+width would fit all fourteen at 28px each and read as coloured noise.
+
+It is the same file at both sizes on purpose. At 140 CSS px on a 3× phone the
+frieze wants roughly 420 × 2100 device pixels, which is close enough to the
+shipped 2560 × 465 that a second asset would save nothing and add a second
+export to keep in step with the brief.
 
 The H1 is deliberately **tall and narrow** — three short lines capped at `15ch`,
 at up to 2.5rem — and sits at the top of the band rather than centred in it.
@@ -140,10 +157,19 @@ Brand left, then **search and nav pushed to the right end** of the bar by an
 auto margin on the lockup. The nav is last in the DOM as well as last on
 screen, so the tab order still runs the way the eye does.
 
-## Documented elsewhere — a bibliography, not a second dashboard
+## In the wild — a bibliography, not a second dashboard
 
-`/elsewhere/` lists arc42 documentation we link to but do not host, from
-`_data/elsewhere.yml`. Expected size 10–40 entries.
+`/in-the-wild/` lists arc42 documentation we link to but do not host, from
+`_data/in-the-wild.yml`. Expected size 10–40 entries. Component `.ex-wild`,
+styles in `_sass/_in-the-wild.scss`.
+
+**The name is load-bearing** (renamed from "Elsewhere", 2026-08-09). The home
+page hero is a *herbarium*: specimens collected, pressed and mounted in one
+identical format. *In the wild* is the exact complementary category — the same
+plants, where they actually grow, uncollected by us. The site's own metaphor
+therefore carries the distinction this page has to make, before the disclaimer
+says a word. Nothing else on the site depends on the word, but a rename back to
+something inert would cost that.
 
 **It has no tiles, and that is the design.** A dashboard tile is not a card, it
 is the summary of a completed audit: `domain`, `main_goal`, four `decisions`,
@@ -187,7 +213,7 @@ a shared one.
   order and the accessibility tree.
 - **`.ex-chip`** — keyword label. Deliberately *not* `arc42-tag`: the family
   spec for that is "site-hue wash, always links", and these are neither.
-- **`.ex-elsewhere`** — the external reading list. Defined as much by what it
+- **`.ex-wild`** — the external reading list. Defined as much by what it
   omits as by what it has: no border, no fill, no radius, no hover-lift, no
   stretched link, no catalogue number, no chips. See the section above.
 - **`.ex-spine`**, **`.ex-rail`**, **`.ex-stepper`**, **`.ex-sectiongrid`**,

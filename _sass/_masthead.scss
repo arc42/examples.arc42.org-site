@@ -95,12 +95,63 @@
   // #3a332b, which is one quantisation step, not a colour.
   //
   // The art is a background-image, so a missing file degrades to plain band —
-  // there is no broken-image box on a masthead. It is also declared only
-  // above 700px: below that the text column is the whole width, the scrim
-  // would cover the art entirely, and a phone should not pay to download it.
+  // there is no broken-image box on a masthead.
+  //
+  // The BEHIND-THE-TEXT treatment is declared only above 700px, because below
+  // that the text column is the whole width and the scrim would cover the art
+  // completely. It does not follow that a phone gets no herbarium — see the
+  // frieze below.
   &__band {
     background-color: var(--ground);
     background-repeat: no-repeat;
+
+    // ---- The mobile frieze (2026-08-09) ------------------------------------
+    //
+    // Under 700px the art comes OUT from behind the text and sits under it as
+    // a strip. Same picture, different relationship to the words: nothing is
+    // set over it, so the contrast question that makes the scrim load-bearing
+    // above 700px simply does not arise down here. There is no scrim on this
+    // element and there must never be one — if a future edit puts text over
+    // this strip, the 12.44:1 recorded on --tint stops being a measurement.
+    //
+    // A pseudo-element, not a div: this is the same decorative frieze the wide
+    // band carries as a background-image, and it belongs in the stylesheet
+    // rather than the markup. It renders after `__hero`, which is exactly
+    // "between the hero text and the page body".
+    //
+    // HEIGHT 140px, and the floor is derived, not chosen. `auto 100%` ties the
+    // art's rendered WIDTH to its height: 2560/465 = 5.505, so a strip h px
+    // tall is 5.505h px wide. To reach the right edge of the widest viewport
+    // this rule ever sees (699px, since 700 switches to the band) the height
+    // must be at least 699 / 5.505 = 127px. 140 clears that by 13px, so the
+    // strip always covers the full width and never leaves a bare wedge of
+    // ground at the edge.
+    //
+    // What that buys, and it is the good part: the specimens never shrink. A
+    // 320px phone shows 5.8 of them at full size, a 699px tablet shows 12.7 of
+    // the same size. Scaling `100% auto` instead would fit all fourteen at any
+    // width — 28px wide on a phone, which reads as coloured noise rather than
+    // as plants.
+    //
+    // Same file as the desktop band, deliberately. At 140 CSS px on a 3x phone
+    // the strip wants ~420 device px of height and at most ~2100 of width; the
+    // shipped 2560x465 is almost exactly that, so a second, smaller asset
+    // would save nothing and add a second export to keep in step with
+    // docs/hero-herbarium-prompt.md.
+    &::after {
+      content: "";
+      display: block;
+      height: 140px;
+      background-image: url('/assets/images/hero/herbarium-band.webp');
+      background-repeat: no-repeat;
+      background-position: center bottom;
+
+      // The art's own ground is remapped to --ground in the export, so the
+      // strip and the flat band above it meet with no seam and the whole thing
+      // reads as one hero that has plants at the bottom — not as a stripe
+      // bolted under a brown box.
+      background-size: auto 100%;
+    }
   }
 
   // Top-weighted, not centred (2026-08-07). The heading sits just under the bar
@@ -108,10 +159,15 @@
   // full-height and were being read as a strip floating beside a centred line.
   // The band's `align-items` does the lifting; this only sets how close to the
   // bar the first line lands.
+  // The bottom padding is --s5 here and --s7 from 700px up (see the media
+  // query). Below 700px the frieze provides the break between the heading and
+  // the page, so 48px of empty ground under the last line is 48px of phone
+  // screen spent saying nothing — and the hero already costs 205px before the
+  // strip is added.
   &__hero {
     max-width: var(--shell-max);
     margin-inline: auto;
-    padding: var(--s5) var(--s5) var(--s7);
+    padding: var(--s5);
   }
 
   // The tagline IS the H1 here (see masthead.html). It is a sentence, so it
@@ -187,12 +243,27 @@
     min-height: clamp(260px, 18vw, 380px);
     display: flex;
     align-items: flex-start;
+
+    // The frieze is the mobile treatment of the same art, and up here the art
+    // is already behind the text. Leaving it would print the herbarium twice.
+    //
+    // `display: none` and not just `height: 0`: this element is a FLEX ITEM
+    // from here up, so a zero-height box would still take a slot in the row
+    // next to `__hero` and steal width from the measure.
+    &::after { display: none; }
   }
 
   // A flex item with a max-width and `margin-inline: auto` still needs a
   // width to grow into, or it shrinks to its text and the measure stops
   // centring on the shell.
-  .ex-masthead__hero { width: 100%; }
+  //
+  // The lower bottom padding from the base rule is restored here: above 700px
+  // the band's own min-height is what sets the hero's size, and --s7 is what
+  // keeps the three-line heading from sitting on the fold of a 260px band.
+  .ex-masthead__hero {
+    width: 100%;
+    padding-bottom: var(--s7);
+  }
 }
 
 // ---- The scrim, once the shell stops growing ----------------------------------

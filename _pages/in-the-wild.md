@@ -1,10 +1,10 @@
 ---
 layout: default
-title: Documented elsewhere
-permalink: /elsewhere/
+title: arc42 Documentation in the Wild
+permalink: /in-the-wild/
 ---
 {%- comment -%}
-  The external reading list. Content comes entirely from _data/elsewhere.yml,
+  The external reading list. Content comes entirely from _data/in-the-wild.yml,
   whose header documents the fields and says why the tile fields are absent.
 
   NOT TILES, and that is the whole design. A dashboard tile is the summary of a
@@ -24,11 +24,11 @@ permalink: /elsewhere/
   If someone later "unifies" this page with the dashboard, they will have
   quietly promised that these links have been checked. They have not.
 {%- endcomment -%}
-{%- assign entries = site.data.elsewhere | sort_natural: 'title' -%}
+{%- assign entries = site.data['in-the-wild'] | sort_natural: 'title' -%}
 
 <div class="ex-shell ex-shell--prose">
   <div class="ex-prose">
-    <h1>Documented elsewhere</h1>
+    <h1>arc42 Documentation in the Wild</h1>
 
     <p>These are arc42 documentations we cannot host — usually because their
     licence does not allow it. We link them because they are useful, not
@@ -40,7 +40,7 @@ permalink: /elsewhere/
   </div>
 
   {%- if entries and entries.size > 0 -%}
-  <ol class="ex-elsewhere">
+  <ol class="ex-wild">
     {%- for entry in entries -%}
     {%- comment -%}
       The host, shown in the facts line, is how a reader knows where a link
@@ -51,23 +51,23 @@ permalink: /elsewhere/
       destination is the warning.
     {%- endcomment -%}
     {%- assign host = entry.url | split: '//' | last | split: '/' | first | remove_first: 'www.' -%}
-    <li class="ex-elsewhere__item">
+    <li class="ex-wild__item">
       {%- comment -%}
         Exactly ONE link per entry, on the title — the same discipline the
         dashboard tiles keep. A second link on the URL would announce every
         entry twice to a screen reader.
       {%- endcomment -%}
-      <h2 class="ex-elsewhere__name">
+      <h2 class="ex-wild__name">
         <a href="{{ entry.url }}" rel="noopener noreferrer">{{ entry.title }}</a>
       </h2>
 
-      <p class="ex-elsewhere__desc">{{ entry.description }}</p>
+      <p class="ex-wild__desc">{{ entry.description }}</p>
 
       {%- if entry.note -%}
-      <p class="ex-elsewhere__note">{{ entry.note }}</p>
+      <p class="ex-wild__note">{{ entry.note }}</p>
       {%- endif -%}
 
-      <p class="ex-elsewhere__facts">
+      <p class="ex-wild__facts">
         {{- entry.author -}}
         {%- if entry.language %} &middot; {{ entry.language }}{% endif -%}
         {%- if entry.year %} &middot; {{ entry.year }}{% endif -%}
@@ -81,7 +81,7 @@ permalink: /elsewhere/
   <div class="ex-prose">
     <div class="ex-note">
       <p><strong>Nothing here yet.</strong> This list is filled from
-      <code>_data/elsewhere.yml</code>. If you know of arc42 documentation that
+      <code>_data/in-the-wild.yml</code>. If you know of arc42 documentation that
       cannot be republished here, see
       <a href="{{ '/contribute/' | relative_url }}">Contribute</a>.</p>
     </div>

@@ -1,5 +1,5 @@
 // ============================================================================
-// "Documented elsewhere" — the external reading list.
+// "arc42 Documentation in the Wild" — the external reading list.
 //
 // This component exists to NOT look like .ex-tile, and the omissions below are
 // the design, not laziness. No border, no background fill, no radius, no
@@ -20,7 +20,7 @@
 //   --muted       on --paper    5.50:1   (note and facts line)
 // ============================================================================
 
-.ex-elsewhere {
+.ex-wild {
   list-style: none;
   margin: var(--s7) 0 0;
   padding: 0;
@@ -80,7 +80,7 @@
 
   // Author, language, year, when we added it, and the DESTINATION HOST. The
   // host is not decoration: these links deliberately do not open in a new tab
-  // (see _pages/elsewhere.md), so showing where a link goes is what replaces
+  // (see _pages/in-the-wild.md), so showing where a link goes is what replaces
   // the new-tab warning.
   &__facts {
     margin: var(--s3) 0 0;

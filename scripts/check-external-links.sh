@@ -1,11 +1,11 @@
 #!/bin/sh
 # ============================================================================
-# Check that every URL in _data/elsewhere.yml still resolves.
+# Check that every URL in _data/in-the-wild.yml still resolves.
 #
 # WHY THIS EXISTS. `make check-links` runs html-proofer with
 # `--disable-external`, so nothing in the normal build looks at an off-site
 # URL. That is the right default — a build must not fail because somebody
-# else's server is having a bad morning. But /elsewhere/ is a page whose
+# else's server is having a bad morning. But /in-the-wild/ is a page whose
 # entire content IS off-site URLs, and a dead link there is worse than no page
 # at all, so those specific links need something watching them.
 #
@@ -24,7 +24,7 @@
 # ============================================================================
 set -eu
 
-DATA="${1:-_data/elsewhere.yml}"
+DATA="${1:-_data/in-the-wild.yml}"
 
 if [ ! -f "$DATA" ]; then
   echo "check-external: $DATA not found" >&2
@@ -77,6 +77,6 @@ if [ "$FAILED" -eq 0 ]; then
 fi
 
 echo "check-external: $FAILED of $TOTAL link(s) failed." >&2
-echo "Fix the URL in $DATA, or drop the entry. A dead link on /elsewhere/ is" >&2
+echo "Fix the URL in $DATA, or drop the entry. A dead link on /in-the-wild/ is" >&2
 echo "worse than a missing one." >&2
 exit 1

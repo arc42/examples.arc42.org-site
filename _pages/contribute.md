@@ -23,7 +23,7 @@ is it complete, and are you allowed to republish it?</p>
     </tr>
     <tr>
       <td>Complete, but not republishable</td>
-      <td><a href="#documentation-we-cannot-host">A link under <em>Elsewhere</em></a></td>
+      <td><a href="#documentation-we-cannot-host">A link under <em>In the Wild</em></a></td>
     </tr>
     <tr>
       <td>A fragment of a single section</td>
@@ -88,7 +88,7 @@ GitHub Pages.</p>
 
 <p>Plenty of good arc42 documentation cannot be republished here — the licence
 does not allow it, or it belongs on the site it already lives on. We link to it
-from <a href="{{ '/elsewhere/' | relative_url }}">Elsewhere</a> instead.</p>
+from <a href="{{ '/in-the-wild/' | relative_url }}">In the Wild</a> instead.</p>
 
 <p>Be clear about what that page is: a reading list, not a second shelf of
 examples. Nothing on it has been read end to end by us, and it is deliberately
@@ -97,7 +97,7 @@ twelve sections.</p>
 
 <h3>How</h3>
 
-<p>Add one entry to <code>_data/elsewhere.yml</code> and open a pull request.
+<p>Add one entry to <code>_data/in-the-wild.yml</code> and open a pull request.
 Nothing else changes — there is no page to edit and no navigation to update.</p>
 
 <pre><code>- title:       Name of the documentation

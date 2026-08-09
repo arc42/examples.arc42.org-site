@@ -1,6 +1,11 @@
-# Elsewhere — linking arc42 documentation we cannot host
+# In the Wild — linking arc42 documentation we cannot host
 
 Status: approved and built · 2026-08-09
+
+Shipped first as **"Elsewhere"** and renamed the same day. The old name survives
+nowhere in the repository; if you are following a link or a memory that used it,
+the page is `/in-the-wild/`, the data is `_data/in-the-wild.yml`, and the
+component is `.ex-wild`.
 
 ## The problem
 
@@ -15,7 +20,7 @@ it believes four examples are all that exist.
 
 ## What we are building
 
-A page, `/elsewhere/`, holding an annotated list of links to arc42
+A page, `/in-the-wild/`, holding an annotated list of links to arc42
 documentation we cannot host. Expected size **10–40 entries**, growing slowly.
 Each entry carries a neutral one-line description and **one short editorial note
 in our own voice** saying what is worth looking at or what is thin.
@@ -49,20 +54,32 @@ Rejected alternatives, and why:
 
 ## Placement and naming
 
-- Nav label **"Elsewhere"**. Page H1 **"Documented elsewhere"**. Permalink
-  `/elsewhere/`.
-- Nav becomes *Elsewhere · Contribute · About*, search still rightmost.
+- Nav label **"In the Wild"**. Page H1 **"arc42 Documentation in the Wild"**.
+  Permalink `/in-the-wild/`.
+- Nav becomes *In the Wild · Contribute · About*, search still rightmost.
 - `index.md` gains one sentence, directly after the existing docs.arc42.org
   line and in the same voice, naming **licensing** as the reason these are not
   hosted. That is true, and it is neutral: "we could not vet these" would read
   as a slight against the authors.
 
-"Elsewhere" over "More examples": *more* implies these are more of the same
-thing, which is the claim the page exists to avoid making.
+**Why this name.** The home page hero is a *herbarium* — specimens collected,
+pressed and mounted in one identical format. "In the wild" is the exact
+complementary category: the same plants, where they actually grow, uncollected.
+The site's own metaphor therefore carries the distinction the page has to make,
+before the disclaimer says a word.
+
+It also beats the obvious alternatives. "More examples" claims these are more
+of the same thing, which is precisely the claim the page exists to avoid.
+"Elsewhere" — the name this page shipped under until 2026-08-09 — was accurate
+and inert: it said *not here* and nothing else.
+
+The one cost, accepted: "in the wild" leans a shade further than *not vetted*,
+toward *untamed*. That lean points the right way for this page, and the framing
+paragraph does the precise work.
 
 ## Data model
 
-`_data/elsewhere.yml`, one file. Not a collection — entries have no body and
+`_data/in-the-wild.yml`, one file. Not a collection — entries have no body and
 need no page of their own, and one file is one reviewable diff.
 
 ```yaml
@@ -118,8 +135,8 @@ smaller and muted.
 The hairline rule sits **between** entries (`& + &`), not around them. A border
 on four sides is a card, and a card is a tile with the label filed off.
 
-New component `.ex-elsewhere` — site-local `ex-` prefix per the Same-Name Rule —
-in a new `_sass/_elsewhere.scss`, imported after `_dashboard`.
+New component `.ex-wild` — site-local `ex-` prefix per the Same-Name Rule —
+in a new `_sass/_in-the-wild.scss`, imported after `_dashboard`.
 
 Markup is an `<ol>` of `<li>`, with exactly **one real `<a>` per entry**, on the
 title. That is the same one-link-per-item discipline the tiles already keep, for
@@ -134,7 +151,7 @@ catalogue number, chips, filter box. Every one of those is a tile affordance.
 is shown in the facts line, so the reader knows where they are going before
 clicking.
 
-Empty state: if `_data/elsewhere.yml` has no entries, the page says so plainly
+Empty state: if `_data/in-the-wild.yml` has no entries, the page says so plainly
 rather than rendering an empty `<ol>`, matching the home page's existing
 "No examples yet" treatment.
 
@@ -159,7 +176,7 @@ A third destination now exists, so the boundary needs restating:
 | What you have | Where it goes |
 |---|---|
 | Complete, and you may republish it | An example directory (`make new-system`) |
-| Complete, but not republishable here | `_data/elsewhere.yml` |
+| Complete, but not republishable here | `_data/in-the-wild.yml` |
 | A fragment of one section | docs.arc42.org |
 
 Plus the field list and the one rule that keeps the notes honest: **submit a
@@ -173,7 +190,7 @@ This is the running cost, and it is the only new operational burden.
 checks these today. A dead link on a page whose entire content is links is
 worse than no page.
 
-`scripts/check-external-links.sh` reads `_data/elsewhere.yml`, requests each
+`scripts/check-external-links.sh` reads `_data/in-the-wild.yml`, requests each
 URL, and reports anything that is not 2xx. A dedicated script rather than
 html-proofer's external mode: it is precise, fast, needs no build, and can run
 on a schedule without slowing the normal one.
@@ -189,9 +206,9 @@ automation needs an owner before it is added.
 
 New:
 
-- `_pages/elsewhere.md`
-- `_data/elsewhere.yml`
-- `_sass/_elsewhere.scss`
+- `_pages/in-the-wild.md`
+- `_data/in-the-wild.yml`
+- `_sass/_in-the-wild.scss`
 - `scripts/check-external-links.sh`
 
 Edited:
@@ -218,10 +235,10 @@ Grouping by language is the first thing to add if it outgrows that.
 
 ## Seeding
 
-The list ships **empty**, and `_data/elsewhere.yml` is the schema plus `[]`.
+The list ships **empty**, and `_data/in-the-wild.yml` is the schema plus `[]`.
 Real external documentation and its URLs have to come from someone who knows
 they are real; `make check-external` verifies that a URL resolves, not that the
-thing behind it is what we claim. Until the first entry lands, `/elsewhere/`
+thing behind it is what we claim. Until the first entry lands, `/in-the-wild/`
 renders its empty state and points at Contribute.
 
 ## How this was verified

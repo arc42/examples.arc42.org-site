@@ -21,13 +21,13 @@ instead.
 
 A documentation can be complete, real and excellent and still not be
 publishable here — most often because its licence does not allow it. Send us a
-**link** instead: one entry in `_data/elsewhere.yml`, which renders on
-[/elsewhere/](https://examples.arc42.org/elsewhere/).
+**link** instead: one entry in `_data/in-the-wild.yml`, which renders on
+[/in-the-wild/](https://examples.arc42.org/in-the-wild/).
 
 | What you have | Where it goes |
 |---|---|
 | Complete, and republishable here | An example directory — the rest of this file |
-| Complete, but not republishable | `_data/elsewhere.yml` |
+| Complete, but not republishable | `_data/in-the-wild.yml` |
 | A fragment of one section | [docs.arc42.org](https://docs.arc42.org) |
 
 Supply `title`, `url`, `author` and `description` (one factual sentence, no

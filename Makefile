@@ -29,7 +29,7 @@ check-links: site ## Validate internal links, images, and HTML in the built _sit
 # Deliberately NOT a dependency of `check` or `check-links`. Everything it
 # tests belongs to somebody else, so it must never be able to fail a build or
 # block a merge. Run it by hand, or from a scheduled job that opens an issue.
-check-external: ## Check that every off-site URL in _data/elsewhere.yml still resolves
+check-external: ## Check that every off-site URL in _data/in-the-wild.yml still resolves
 	sh scripts/check-external-links.sh
 
 clean: ## Remove generated _site AND the Docker cache volumes (a true reset)
