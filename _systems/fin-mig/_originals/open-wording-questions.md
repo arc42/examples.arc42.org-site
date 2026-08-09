@@ -12,17 +12,27 @@ ships.
 
 ## P — Provenance (the one that is not about wording)
 
-**P1. What licence covers this text?**
-`index.md` deliberately carries **no `licence:` field**, unlike `mama` and
-`htmlsc`. Those two are CC BY-SA 4.0 because their source is *arc42 by example*
-on Leanpub, confirmed by you on 2026-08-07. This chapter comes from *Effektive
-Softwarearchitekturen* (Hanser) instead, and a Hanser book chapter is not
-automatically yours to relicense. `source_url` is currently set to
-`https://esabuch.de`.
+**P1. What licence covers this text? — ANSWERED 2026-08-08.**
+Rights are held jointly by **Gernot Starke and Carl Hanser Verlag**, the
+publisher of *Effektive Softwarearchitekturen*. `index.md` now carries
+`licence: © Gernot Starke and Carl Hanser Verlag` with no `licence_url`, and the
+overview page renders it under "Licence" beside the attribution.
 
-*Needed:* the licence to state, and the URL the "Original" link should point at.
-Until then the overview page says who wrote it and where it came from, and
-claims nothing further.
+Two consequences, both recorded in a comment in `index.md` so nobody tidies them
+away:
+
+* **This is the only example on the site that is not CC BY-SA 4.0.** mama, htmlsc
+  and status.arc42.org are, because their source is *arc42 by example* on
+  Leanpub. The site-wide CC BY-SA in the footer does not reach this example's
+  text or figures — which is what the footer's second sentence exists for.
+* **The redrawn figures inherit it.** They are derivative works of the book's
+  figures, not new illustrations, so the same joint copyright applies to
+  `images/*.png` and to the sources in `diagrams-src/`. Do not relicense them
+  separately.
+
+Still open, if you care: `source_url` points at `https://esabuch.de`, the book's
+own site. A Hanser product page for the current edition would be the more
+canonical "Original" link.
 
 ---
 

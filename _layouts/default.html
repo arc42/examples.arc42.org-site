@@ -28,26 +28,22 @@
         href="{{ '/assets/fonts/libre-caslon-text-700-latin.woff2' | relative_url }}">
 
   {%- comment -%}
-    Analytics, per ADR-0005: every host keeps its own Plausible site AND
-    reports into the shared rollup, own host first. Same-`data-domain`
-    tracking is what keeps one visitor's journey across arc42 subdomains a
-    single session in the rollup — and only in the rollup.
+    Analytics: examples.arc42.org's own Plausible site only (2026-08-08).
+    ADR-0005's roster does not list examples.arc42.org and its shared-rollup
+    reporting (own host first, then rollup.arc42.com via a shared
+    data-domain) is not wired up here — that's a meta.arc42.org roster edit
+    someone still has to make, same gap the legacy comment already flagged.
 
-    The LEGACY script, deliberately. Plausible's own update guide says
-    multi-dashboard tracking is not supported by the new one, so feature
-    selection happens through the `src` filename rather than dashboard
-    toggles. outbound-links gives the "taken to docs.arc42.org" signal;
-    file-downloads counts what readers take away.
-
-    This is the documented exception to LP-1 (no third-party scripts): see
-    ADR-0005. Cookie-less, so no consent banner.
-
-    ADR-0005's roster does not list examples.arc42.org — it predates this
-    site. Adding it here extends that roster, which is a meta.arc42.org edit
-    someone still has to make.
+    This is the current (non-legacy) Plausible script: outbound-links and
+    file-downloads are enabled via plausible.init() rather than the `src`
+    filename. This is the documented exception to LP-1 (no third-party
+    scripts): see ADR-0005. Cookie-less, so no consent banner.
   {%- endcomment -%}
-  <script defer data-domain="examples.arc42.org,rollup.arc42.com"
-          src="https://plausible.io/js/script.outbound-links.file-downloads.js"></script>
+  <script async src="https://plausible.io/js/pa-1JAjkSk3mLzRJv71qr3sC.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init({outboundLinks: true, fileDownloads: true});
+  </script>
 </head>
 <body class="ex-body">
   <a class="ex-skip" href="#main">Skip to content</a>

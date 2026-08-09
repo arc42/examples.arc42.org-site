@@ -31,19 +31,23 @@ scale: ~20 million persons · 50+ million accounts · 24-hour migration window �
 order: 40
 
 # ---------------------------------------------------------------------------
-# Provenance. INCOMPLETE ON PURPOSE — do not fill `licence` in by analogy with
-# the other examples.
+# Provenance. THE ONE EXAMPLE ON THIS SITE THAT IS NOT CC BY-SA 4.0 — do not
+# "harmonize" it with the others.
 #
-# mama and htmlsc are CC BY-SA 4.0 because their source is «arc42 by example»
-# (Leanpub), and Gernot Starke confirmed that on 2026-08-07. THIS example comes
-# from a different source: chapter 12 of «Effektive Softwarearchitekturen»,
-# a book published by Hanser, whose reproduction terms are not the same thing
-# and have not been confirmed. Until they are, this page states who wrote the
-# text and where it came from, and claims no licence.
+# mama, htmlsc and status.arc42.org are CC BY-SA 4.0 because their source is
+# «arc42 by example» (Leanpub). This one comes from chapter 12 of «Effektive
+# Softwarearchitekturen», a book published by Carl Hanser Verlag, so the rights
+# are held jointly by the author and the publisher. Confirmed by Gernot Starke,
+# 2026-08-08.
 #
-# See _originals/open-wording-questions.md, question P1.
+# The site-wide CC BY-SA 4.0 in the footer therefore does NOT cover this
+# example's text or figures. That is exactly what the footer's second sentence
+# is for ("each example additionally carries its own licence and attribution on
+# its overview page"), and why `licence` is a free-text field rather than an
+# enum.
 # ---------------------------------------------------------------------------
 attribution: Gernot Starke
+licence: © Gernot Starke and Carl Hanser Verlag
 source_url: https://esabuch.de
 imported: 2026-08
 ---

@@ -1,0 +1,90 @@
+// ============================================================================
+// "Documented elsewhere" — the external reading list.
+//
+// This component exists to NOT look like .ex-tile, and the omissions below are
+// the design, not laziness. No border, no background fill, no radius, no
+// hover-lift, no stretched link, no catalogue number, no chips, no filter.
+// Every one of those is a dashboard affordance, and the dashboard makes a
+// promise this page cannot keep: a tile summarises a documentation somebody
+// read end to end.
+//
+// What is left — a name, a sentence, a note, a hairline rule — is a
+// bibliography. A reader identifies the genre instantly and without a legend,
+// which is the point: DESIGN.md forbids a purely visual distinction from
+// carrying meaning on its own, and "same card, dashed border" would have been
+// exactly that.
+//
+// Colour pairs, measured (ADR-0002):
+//   --ground-deep on --paper   14.12:1   (entry title link)
+//   --ink         on --paper   11.68:1   (description)
+//   --muted       on --paper    5.50:1   (note and facts line)
+// ============================================================================
+
+.ex-elsewhere {
+  list-style: none;
+  margin: var(--s7) 0 0;
+  padding: 0;
+
+  // Capped at the reading measure like the prose above it, because that is
+  // what this is: prose in a list. .ex-shell--prose already caps the page, so
+  // this only matters if the component is ever reused inside a wider shell.
+  max-width: var(--measure);
+
+  &__item {
+    padding-block: var(--s5);
+
+    // A rule BETWEEN entries, not around them. A border on all four sides is
+    // a card, and a card is a tile with the label filed off.
+    & + & {
+      border-top: 1px solid var(--hairline);
+    }
+  }
+
+  // h3-sized although it is an <h2>. Level and size are different things: the
+  // entries really are sections of this page, but at h2's 1.5rem they would
+  // compete with the page title and the list would read as a stack of
+  // headlines rather than as a list.
+  &__name {
+    font-size: 1.1875rem;
+    line-height: 1.3;
+    margin: 0;
+
+    a {
+      color: var(--link);          // --ground-deep, 14.12:1 on --paper
+
+      // The site-wide persistent underline stays. On a site with no signature
+      // hue the underline is the only thing that makes a link a link, and a
+      // page that is nothing but links is the last place to drop it.
+      &:hover {
+        text-decoration-thickness: 2px;
+      }
+    }
+  }
+
+  &__desc {
+    margin: var(--s2) 0 0;
+    color: var(--ink);             // 11.68:1
+  }
+
+  // Our editorial voice, and the one thing on the page that is an opinion.
+  // Set in Caslon against the sans description for the same reason the tile
+  // sets its main goal in Caslon: it has to look different from the sentence
+  // above it, and this site has no pigment to spend on the difference.
+  &__note {
+    margin: var(--s3) 0 0;
+    font-family: var(--serif);
+    font-size: 1.0625rem;
+    line-height: 1.45;
+    color: var(--muted);           // 5.50:1
+  }
+
+  // Author, language, year, when we added it, and the DESTINATION HOST. The
+  // host is not decoration: these links deliberately do not open in a new tab
+  // (see _pages/elsewhere.md), so showing where a link goes is what replaces
+  // the new-tab warning.
+  &__facts {
+    margin: var(--s3) 0 0;
+    font-size: 0.875rem;
+    color: var(--muted);           // 5.50:1
+  }
+}

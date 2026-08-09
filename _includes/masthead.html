@@ -50,8 +50,17 @@
       2026-08-07 note), this list grows; it does not need a home link or an
       arc42.org link added back, the logo already is both.
     {%- endcomment -%}
+    {%- comment -%}
+      "Elsewhere" is first because it is the only content item here: it leads
+      to documentation, which is what a reader came for, while Contribute and
+      About are about the site. It is deliberately NOT called "More examples" —
+      *more* would claim these are more of the same thing, and the whole point
+      of that page is that they are not: nobody here has read them end to end.
+      See _pages/elsewhere.md.
+    {%- endcomment -%}
     <nav class="ex-nav" aria-label="Main">
       <ul class="ex-nav__list">
+        <li><a href="{{ '/elsewhere/' | relative_url }}"{% if page.url == '/elsewhere/' %} aria-current="page"{% endif %}>Elsewhere</a></li>
         <li><a href="{{ '/contribute/' | relative_url }}"{% if page.url == '/contribute/' %} aria-current="page"{% endif %}>Contribute</a></li>
         <li><a href="{{ '/about/' | relative_url }}"{% if page.url == '/about/' %} aria-current="page"{% endif %}>About</a></li>
       </ul>

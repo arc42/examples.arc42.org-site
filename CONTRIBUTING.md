@@ -17,6 +17,28 @@ An example is **one directory**. Adding one changes nothing outside it.
 Short, section-sized snippets belong on [docs.arc42.org](https://docs.arc42.org)
 instead.
 
+### If you cannot republish it
+
+A documentation can be complete, real and excellent and still not be
+publishable here — most often because its licence does not allow it. Send us a
+**link** instead: one entry in `_data/elsewhere.yml`, which renders on
+[/elsewhere/](https://examples.arc42.org/elsewhere/).
+
+| What you have | Where it goes |
+|---|---|
+| Complete, and republishable here | An example directory — the rest of this file |
+| Complete, but not republishable | `_data/elsewhere.yml` |
+| A fragment of one section | [docs.arc42.org](https://docs.arc42.org) |
+
+Supply `title`, `url`, `author` and `description` (one factual sentence, no
+praise). **Leave `note` out** — that sentence is the maintainers' editorial
+voice, and notes written by the documentation's owner turn into blurbs. The file
+header documents every field.
+
+That page is a reading list, not a second shelf of examples: nothing on it has
+been read end to end by us, which is why it is deliberately not laid out as
+tiles.
+
 ## Steps
 
 1. Fork and clone.

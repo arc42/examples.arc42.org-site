@@ -140,6 +140,40 @@ Brand left, then **search and nav pushed to the right end** of the bar by an
 auto margin on the lockup. The nav is last in the DOM as well as last on
 screen, so the tab order still runs the way the eye does.
 
+## Documented elsewhere — a bibliography, not a second dashboard
+
+`/elsewhere/` lists arc42 documentation we link to but do not host, from
+`_data/elsewhere.yml`. Expected size 10–40 entries.
+
+**It has no tiles, and that is the design.** A dashboard tile is not a card, it
+is the summary of a completed audit: `domain`, `main_goal`, four `decisions`,
+six `technologies`, `scale`. Every one of those fields can only be filled in by
+someone who has read all twelve sections. For a link nobody here has audited, a
+tile would be either half-empty or fabricated — so the data file deliberately
+has no field to put in one.
+
+What the page uses instead is **genre**. Name, description, note, a hairline
+facts line, a rule between entries: that is a bibliography, and a reader
+identifies it as a different kind of thing from a dashboard before reading a
+word of the disclaimer. This matters because the Visible-Token Rule's sibling
+constraint applies here too — a purely visual distinction must never be the only
+signal. "The same tile with a dashed border" was considered and rejected for
+exactly that reason: near-equivalence is what implies equivalence of quality.
+
+Two smaller departures, both deliberate:
+
+- **Links open in the same tab**, unlike the external links in the footer. A
+  page whose entire content is off-site links would spawn one tab per click,
+  and WCAG 2.2 §3.2.5 asks us not to open windows without warning. The
+  destination host is shown in the facts line instead; showing where a link
+  goes *is* the warning.
+- **The disclaimer appears once**, in the framing paragraph, not per entry.
+  Thirty repetitions of "not reviewed" is noise.
+
+Link rot is the page's one running cost. `make check-external` reads the data
+file and requests every URL; it is **not** part of `make check` or
+`make check-links`, because a build must not fail over somebody else's server.
+
 ## Site-local components
 
 All prefixed `.ex-`, never `.arc42-`. Per the **Same-Name Rule**, a family class
@@ -153,6 +187,9 @@ a shared one.
   order and the accessibility tree.
 - **`.ex-chip`** — keyword label. Deliberately *not* `arc42-tag`: the family
   spec for that is "site-hue wash, always links", and these are neither.
+- **`.ex-elsewhere`** — the external reading list. Defined as much by what it
+  omits as by what it has: no border, no fill, no radius, no hover-lift, no
+  stretched link, no catalogue number, no chips. See the section above.
 - **`.ex-spine`**, **`.ex-rail`**, **`.ex-stepper`**, **`.ex-sectiongrid`**,
   **`.ex-facts`**, **`.ex-pinned`**.
 

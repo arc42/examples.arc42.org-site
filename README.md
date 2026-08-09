@@ -15,6 +15,7 @@ make dev          # local dev server via Docker (http://localhost:4042)
 make site         # build the static site into _site/
 make check        # brand deny-list + Imprint Rule checks
 make check-links  # build + validate internal links/HTML (html-proofer)
+make check-external  # check the off-site URLs in _data/elsewhere.yml still resolve
 make new-system SLUG=my-system   # scaffold a new example
 make clean        # remove _site and the Docker cache volumes
 make help         # all targets
@@ -71,7 +72,9 @@ Two naming rules are load-bearing:
 | `_includes/` | `system-context.html` resolves "which system am I in?"; masthead, spine, rail, stepper, tile |
 | `_sass/` | `_tokens.scss` is the only file allowed to contain a hex literal |
 | `_data/spine.yml` | The six spine segments, with their measurements |
+| `_data/elsewhere.yml` | Links to arc42 documentation we do **not** host — see below |
 | `scripts/check-brand.sh` | ADR-0003 mechanical floor, run by `make check` |
+| `scripts/check-external-links.sh` | Link-rot check for `elsewhere.yml`, run by `make check-external` |
 
 ## Design and brand
 
@@ -89,6 +92,29 @@ system. The family definition lives in
 
 `make check` enforces the mechanical part — retired colours, no other site's
 signature hue in any role, and no hex literal outside `_sass/_tokens.scss`.
+
+## Documentation we link but do not host
+
+`/elsewhere/` is an annotated list of arc42 documentation that cannot be
+republished here — usually for licensing reasons. It is filled from
+`_data/elsewhere.yml`, whose header documents the fields.
+
+**It is not a second dashboard, and it has no tiles on purpose.** A tile carries
+`domain`, `main_goal`, `decisions`, `technologies` and `scale`, and every one of
+those can only be filled in by somebody who read all twelve sections. Nobody has
+done that for these links, so the data file has no field to put in a tile and
+the page is set as a bibliography instead. If you are tempted to unify the two,
+read the "Documented elsewhere" section of [DESIGN.md](DESIGN.md) first — the
+visual difference is carrying a factual claim.
+
+Adding an entry is one block of YAML and no other change. Contributors supply
+`title`, `url`, `author` and `description`; the `note` — the one editorial
+sentence — is written by the maintainers, because author-supplied notes turn
+into blurbs.
+
+`make check-external` requests every URL in the file and reports anything that
+is not 2xx. It is deliberately excluded from `make check` and `make check-links`:
+a build must never fail because somebody else's server is down.
 
 ## Relationship to docs.arc42.org
 

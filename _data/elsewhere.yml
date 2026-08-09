@@ -1,0 +1,52 @@
+# ============================================================================
+# Documented elsewhere — arc42 documentation we link to but do not host.
+#
+# Rendered by _pages/elsewhere.md. THIS IS NOT A LIST OF EXAMPLES. Everything
+# under _systems/ has been read end to end and carries its provenance;
+# everything here has not. The page says so once, at the top, and the page is
+# deliberately set as a bibliography rather than as tiles so that a reader can
+# see the difference before reading the disclaimer.
+#
+# WHY THERE ARE NO tile fields HERE (domain, technologies, decisions, scale):
+# every one of those is an AUDIT OUTPUT — you can only fill them in after
+# reading twelve sections. Leaving them out is the mechanism that stops this
+# list drifting back into being a second tile grid. If you find yourself
+# wanting to add one, that entry probably belongs in _systems/ instead.
+#
+# FIELDS
+#   title        required  Name of the documentation, as its authors write it.
+#   url          required  Where it lives. Checked by `make check-external`.
+#   author       required  Who wrote it.
+#   description  required  ONE neutral sentence: what the system is. No praise.
+#   note         required  OUR sentence: what is worth looking at, or what is
+#                          thin. Written by us, not by the author — a
+#                          contributor supplies title/url/author/description
+#                          and we write this. Author-supplied notes turn into
+#                          blurbs.
+#   added        required  YYYY-MM. Lets a reader discount an old note without
+#                          us re-checking every entry.
+#   language     optional  Omit when it is English.
+#   year         optional  When the documentation was written, if knowable.
+#
+# ORDER DOES NOT MATTER: the page sorts by title. Keep the file alphabetical
+# anyway, so a pull request adding one entry is a one-line diff in a
+# predictable place.
+#
+# Example entry, for copying:
+#
+#   - title:       Fizzbuzz Enterprise Platform
+#     url:         https://beispiel-firma.de/architektur/
+#     author:      Marie Fischer
+#     description: A logistics scheduling system for a mid-sized freight operator.
+#     note:        Sections 1–6 only, but section 4 is unusually candid about
+#                  the strategy that was abandoned.
+#     language:    German
+#     year:        2019
+#     added:       2026-08
+#
+# The list is EMPTY on purpose. Real external documentation and its URLs have
+# to come from someone who knows they are real; `make check-external` can
+# verify that a URL resolves, not that the thing behind it is what we claim.
+# ============================================================================
+
+[]
