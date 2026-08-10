@@ -1,0 +1,218 @@
+---
+title: Runtime View
+order: 6
+---
+
+Diese Sicht thematisiert dynamische Aspekte von SNS und visualisiert, wie die einzelnen Teile zusammenspielen.
+
+Um die nachfolgenden Szenarien besser verstehen zu können, hier eine kurze Erläuterung der in SKOS (Simple Knowledge Organisation System) und damit in iQvoc benutzten Begrifflichkeiten:
+
+* **Konzept**: zentrales Element von SKOS. Konzepte repräsentieren die Idee hinter einem Begriff.
+* **Label**: werden dem im 1. Schritt festgelegten Konzept zugewiesen. Es gibt zwei Arten von Label: `prefLabel` (bevorzugte Label) und `altLabel` (alternative Label). `prefLabel` fungieren als Vorzugsbenennung von Konzepten, `altLabel` als zusätzliche alternative Benennung(en). Sehr vereinfacht dargestellt, entsprechen somit `prefLabel` den Deskriptoren und `altLabel` den Nicht-Deskriptoren aus Thesauri.
+
+## Similar Terms
+
+### Vorbedingungen
+
+* Es ist keine Vorbedingung (z.B. Anmeldung) notwendig.
+
+### Ablauf
+
+Ablauf von SimilarTerms am Beispiel der Eingabe "baum" aus [https://github.com/innoq/iqvoc_umt/issues/437](https://github.com/innoq/iqvoc_umt/issues/437)
+
+1. Suche in der aktuellen Sprache alle Label (egal ob pref/alt), die die Schreibweise "baum" beinhalten:
+   * Sucheingabe: `terms = "baum"`, `lang = de`
+
+```text
+labels = [
+   Baum (https://sns.uba.de/umthes/de/labels/TH_00003834.html)
+]
+```
+
+2. Sammle die verbundenen Konzepte der vorherigen Labelsuche:
+
+```text
+concepts = [
+   Baum (https://sns.uba.de/umthes/de/concepts/_00003834.html)
+]
+```
+
+3. Erstelle eine vorläufige Ergebnismenge mit den Labeln des gefundenen Konzepts inkl. Gewichtung:
+   * Gewichtungsfaktoren:
+     * `'Labeling::SKOSXL::PrefLabel'` => 5
+     * `'Labeling::SKOSXL::AltLabel'` => 2
+     * `'Labeling::SKOSXL::HiddenLabel'` => 1
+   * Zwischenergebnis wird im Laufe des Prozesses erweitert
+
+```text
+Zwischenergebnis = {
+  "Baumphysiologie" = [2, https://sns.uba.de/umthes/de/concepts/_00003834.html]
+  "Baumwachstum" = [2, https://sns.uba.de/umthes/de/concepts/_00003834.html]
+  "Pionierbaumart" = [2, https://sns.uba.de/umthes/de/concepts/_00003834.html]
+  "Baumkrankheit" = [2, https://sns.uba.de/umthes/de/concepts/_00003834.html]
+  "Baumplantage" = [2, https://sns.uba.de/umthes/de/concepts/_00003834.html]
+  "Nährstoffversorgung von Bäumen" = [2, https://sns.uba.de/umthes/de/concepts/_00003834.html]
+  "Baumpflanzung" = [2, https://sns.uba.de/umthes/de/concepts/_00003834.html]
+  "Baum" = [5, https://sns.uba.de/umthes/de/concepts/_00003834.html]
+}
+```
+
+4. Narrower/Related Analyse (`find_related_and_narrower_concepts`):
+   * Sammle Spezifischere und Verwandte Konzepte zu Konzept "Baum" in neuer Datenstruktur
+   * Ablauf:
+     * füge Spezifischere Begriffe/Narrower hinzu
+     * füge Verwandte Begriffe/Related hinzu
+     * füge Zusammengesetzt-In-Zusammensetzungen hinzu (nur wenn a. & b. keine Ergebnisse liefern)
+
+```text
+related/narrower = [
+    Baumstamm (https://sns.uba.de/umthes/de/concepts/_00003860.html)
+    Waldbaum (https://sns.uba.de/umthes/de/concepts/_00027032.html)
+    Baumform (https://sns.uba.de/umthes/de/concepts/_00030245.html)
+    Obstbaum (https://sns.uba.de/umthes/de/concepts/_00030595.html)
+    Speierling (https://sns.uba.de/umthes/de/concepts/_00603839.html)
+    Kakaobaum (https://sns.uba.de/umthes/de/concepts/_00604135.html)
+    Nussbaum (https://sns.uba.de/umthes/de/concepts/_00649690.html)
+    Biotopbaum (https://sns.uba.de/umthes/de/concepts/_00655034.html)
+    Kautschukbaum (https://sns.uba.de/umthes/de/concepts/_00666651.html)
+    Stadtbaum (https://sns.uba.de/umthes/de/concepts/_00023103.html)
+    Straßenbaum (https://sns.uba.de/umthes/de/concepts/_00023670.html)
+    Laubbaum (https://sns.uba.de/umthes/de/concepts/_00015861.html)
+    Nadelbaum (https://sns.uba.de/umthes/de/concepts/_00017738.html)
+    Baumart (https://sns.uba.de/umthes/de/concepts/_00003837.html)
+    Baumkrone (https://sns.uba.de/umthes/de/concepts/_00003849.html) <-- bis hier Spezifischere Begriffe/Narrower
+    Baumfällung (https://sns.uba.de/umthes/de/concepts/_00003846.html) <-- ab hier neu Verwandte Begriffe
+    Baumschutz (https://sns.uba.de/umthes/de/concepts/_00003855.html)
+    Baumwurzel (https://sns.uba.de/umthes/de/concepts/_00003867.html)
+    Dendrometrie (https://sns.uba.de/umthes/de/concepts/_00006549.html)
+    Baumgrenze (https://sns.uba.de/umthes/de/concepts/_00030248.html)
+    Dendrologie (https://sns.uba.de/umthes/de/concepts/_00030298.html)
+    Windbruch (https://sns.uba.de/umthes/de/concepts/_00051506.html)
+    Palmen (https://sns.uba.de/umthes/de/concepts/_00608682.html)
+    Baumschule (https://sns.uba.de/umthes/de/concepts/_00003854.html)
+    Baum des Jahres (https://sns.uba.de/umthes/de/concepts/_00045805.html)
+    Baumschaden (https://sns.uba.de/umthes/de/concepts/_00003852.html)
+    Baumrinde (https://sns.uba.de/umthes/de/concepts/_00003851.html)
+    Holz (https://sns.uba.de/umthes/de/concepts/_00028848.html)
+]
+```
+
+5. Füge Begriffe aus Schritt 4 den Zwischenergebnissen hinzu:
+   * Gewichtung = 1
+   * Gewichtung erhöht sich jeweils um 1, wenn ein Konzept mit zwei unterschiedlichen Label vorhanden ist
+
+```text
+Zwischenergebnis = {
+  "Baumphysiologie" = [2, 'https://sns.uba.de/umthes/de/concepts/_00003834']
+  "Baumwachstum" = [2, 'https://sns.uba.de/umthes/de/concepts/_00003834']
+  "Pionierbaumart" = [2, 'https://sns.uba.de/umthes/de/concepts/_00003834']
+  "Baumkrankheit" = [2, 'https://sns.uba.de/umthes/de/concepts/_00003834']
+  "Baumplantage" = [2, 'https://sns.uba.de/umthes/de/concepts/_00003834']
+  "Nährstoffversorgung von Bäumen" = [2, 'https://sns.uba.de/umthes/de/concepts/_00003834']
+  "Baumpflanzung" = [2, 'https://sns.uba.de/umthes/de/concepts/_00003834']
+  "Baum" = [5, 'https://sns.uba.de/umthes/de/concepts/_00003834']
+  "Baumstamm" = [1, 'https://sns.uba.de/umthes/de/concepts/_00003860'] <-- ab hier neue Narrower/Related
+  "Waldbaum" = [1, 'https://sns.uba.de/umthes/de/concepts/_00027032']
+  "Baumform" = [1, 'https://sns.uba.de/umthes/de/concepts/_00030245']
+  "Obstbaum" = [1, 'https://sns.uba.de/umthes/de/concepts/_00030595']
+  "Speierling" = [1, 'https://sns.uba.de/umthes/de/concepts/_00603839']
+  "Kakaobaum" = [1, 'https://sns.uba.de/umthes/de/concepts/_00604135']
+  "Nussbaum" = [1, 'https://sns.uba.de/umthes/de/concepts/_00649690']
+  "Biotopbaum" = [1, 'https://sns.uba.de/umthes/de/concepts/_00655034']
+  "Kautschukbaum" = [1, 'https://sns.uba.de/umthes/de/concepts/_00666651']
+  "Baumfällung" = [1, 'https://sns.uba.de/umthes/de/concepts/_00003846']
+  "Baumschutz" = [1, 'https://sns.uba.de/umthes/de/concepts/_00003855']
+  "Baumwurzel" = [1, 'https://sns.uba.de/umthes/de/concepts/_00003867']
+  "Dendrometrie" = [1, 'https://sns.uba.de/umthes/de/concepts/_00006549']
+  "Baumgrenze" = [1, 'https://sns.uba.de/umthes/de/concepts/_00030248']
+  "Dendrologie" = [1, 'https://sns.uba.de/umthes/de/concepts/_00030298']
+  "Windbruch" = [1, 'https://sns.uba.de/umthes/de/concepts/_00051506']
+  "Palmen" = [1, 'https://sns.uba.de/umthes/de/concepts/_00608682']
+  "Baumschule" = [1, 'https://sns.uba.de/umthes/de/concepts/_00003854']
+  "Stadtbaum" = [1, 'https://sns.uba.de/umthes/de/concepts/_00023103']
+  "Straßenbaum" = [1, 'https://sns.uba.de/umthes/de/concepts/_00023670']
+  "Baum des Jahres" = [1, 'https://sns.uba.de/umthes/de/concepts/_00045805']
+  "Laubbaum" = [1, 'https://sns.uba.de/umthes/de/concepts/_00015861']
+  "Nadelbaum" = [1, 'https://sns.uba.de/umthes/de/concepts/_00017738']
+  "Baumart" = [1, 'https://sns.uba.de/umthes/de/concepts/_00003837']
+  "Baumschaden" = [1, 'https://sns.uba.de/umthes/de/concepts/_00003852']
+  "Baumkrone" = [1, 'https://sns.uba.de/umthes/de/concepts/_00003849']
+  "Baumrinde" = [1, 'https://sns.uba.de/umthes/de/concepts/_00003851']
+  "Holz" = [1, 'https://sns.uba.de/umthes/de/concepts/_00028848']
+}
+```
+
+6. Sortiere Zwischenergebnisse nach Gewichtung und gebe Ergebnis aus. Dies führt dann zu der Ergebnismenge von 36 Ähnlichen Begriffen.
+
+## Verschlagwortung mit AutoClassify (Plain Text)
+
+### Vorbedingungen
+
+* Es ist keine Vorbedingung (z.B. Anmeldung) notwendig.
+
+### Ablauf
+
+Das AutoClassify-Verfahren gliedert sich in fünf Hauptphasen:
+
+1. **Dokumentvorbereitung**: Eingabevalidierung, Textkombination und -normalisierung
+2. **Linguistische Analyse**: Tokenisierung, Phrasenerkennung und sprachspezifische Verarbeitung
+3. **Thesaurus-Abgleich**: Hash-basierte Suche und Datenbankabfragen
+4. **Erweiterte Begriffsverarbeitung**: Homographenauflösung und Compound-Form-Erkennung
+5. **Konzeptzuordnung und Gewichtung**: Label-zu-Konzept-Mapping und Rangierung
+
+### Technischer Verarbeitungsablauf
+
+Als Beispiel wird der Titel des Artikels "Schwammstadt: Der Städtebau der Zukunft - Grün in die Stadt"[^1] verwendet.
+
+[^1]: https://www.gruen-in-die-stadt.de/schwammstadt/, letzter Zugriff: 20.07.2025
+
+1. Verschlagwortungsanfrage des Benutzers wird durch den Reverse Proxy auf das SNS-Subsystem UMTHES in den Plain Controller weitergeleitet/dispatched.
+2. Instanziierung einer neuen `Document::Plain` mit `title` und `content` der Verschlagwortungsanfrage.
+3. Verschlagwortung wird durch den Aufruf der `classify!`-Methode gestartet:
+   * bisherige Verschlagwortungsergebnisse für das Dokument werden entfernt (`classifications.destroy_all`)
+   * `concepts`-Methode startet die Analyse, ruft `determine_concepts` auf, was wiederum `determine_labels` startet
+   * Der zu verschlagwortende Text wird durch `DocumentParser::German` in Sätze aufgeteilt (`PragmaticSegmenter`)
+   * Deutsche Sprachnormalisierung durch `DocumentParser::German.normalize_sentence`:
+     * Entfernung von Stoppwörtern: `['oder']`
+     * Eliminierung irrelevanter Abkürzungen: `['ca.', 'etc.', 'usw.', 'bzw.', 'vgl.', 'evtl.', 'P.S.', 'z. B.', 'd. h.', 's. o.', 'u.a.', 'z. T.', 'z. Zt.', 'i. A.', 'i. V.', 'i. d. R.', 'Min.', 'min.', 'Mio.', 'Mrd.', 'Nr.', 'Dr.', 'Prof.', 'Fa.', 'ff.']`
+   * Tokenisierung durch `DocumentParser::Base` entlang von Trennzeichen `[' ', "\t", ',', ':', ';', '"', "'", '(', ')']`
+   * Token-Normalisierung durch `TokenNormalizer.do_it` (deutsche Sonderzeichen bleiben erhalten)
+   * Instanziierung einer neuen `WordMatcher`-Instanz mit dem Satz-Array
+   * Der `WordMatcher` wird zum Auffinden von Labels verwendet (`def labels` in `WordMatcher`). Hierzu wird über die zuvor gebildeten Einzelsätze iteriert:
+     * `phrase_recognition_variants`: Zum Auffinden von Mehrwortbegriffen werden Varianten aufsteigender Größe von Phrasen gebildet (z.B. "schwammstadt der", "der städtebau", "städtebau der", "der zukunft", "schwammstadt der städtebau", "der städtebau der zukunft")
+     * `add_non_dotted_variants`: Zur Sonderbehandlung von Phrasen mit Punkten werden zusätzliche Varianten ohne Punkt hinzugefügt (z.B. "CO₂-Äquiv." → "CO₂-Äquiv." und "CO₂-Äquiv")
+     * `find_existing_inflectionals`: die zuvor gesammelten Phrasen werden verwendet, um Varianten in der Datenbank zu finden und zurückzugeben (z.B. Gefunden werden "schwammstadt", "stadt", "städtebau" als existierende Inflektionsformen)
+     * `remove_duplicate_word_partials`: stellt sicher, dass speziellere Varianten von Phrasen gegenüber allgemeineren bevorzugt werden (z.B. `["monetäre bewertung von umweltschäden", "monetäre bewertung"]` => `["monetäre bewertung von umweltschäden"]`)
+     * `label_index`: Die Hashes (wegen sparsamerer Suche) der bereinigten Varianten werden verwendet, um Labels zu den Inflektionsformen zu finden:
+       * "schwammstadt" → Hash `ae9fc10c8688d3889701b94d504fd56a` → Label-ID 107562
+       * "städtebau" → Hash `cfbe280de98e35e5e7a6601f21aba0c4` → Label-ID 171360
+       * "stadt" → Hash `37b9e141bf7fa3a8f592e2f56fb5de18` → Label-ID 194652
+     * `homographs(label_seqs)`: Kombiniert Label-IDs zu Homographen/Qualifizierern (z.B. Label-ID 95326 "Berlin [Stadt]" hat sowohl Homograph 132357 "Berlin" als auch Qualifier 194652 "Stadt", die beide im Text vorkommen. Dadurch wird das mehrdeutige Label "Berlin" durch "Berlin[Stadt]" ersetzt)
+     * `compound_forms(label_seqs)`: Kombiniert Label-IDs zu zusammengesetzten Labels, sofern die Option aktiviert ist
+     * `remove_autoclassify_disabled_label_seq(label_seqs)`: Entfernt Label, für die AutoClassify explizit deaktiviert wurde
+     * Die gefundenen Label je Satz werden gesammelt und für das gesamte Dokument zurückgegeben
+   * Über die Label-Ergebnismenge wird in `determine_concepts` iteriert:
+     * Label von nicht veröffentlichten Konzepten werden aussortiert (`!concept.published?`)
+     * Label von abgelaufenen Konzepten werden aussortiert (`concept.expired?`)
+     * Label von deaktivierten Konzepten werden aussortiert (`!concept.auto_classify?`) - nur wenn `exclude_disabled_concepts` aktiviert ist
+     * Label von Kollektionen werden explizit ausgeschlossen (`.where.not(labelings: { owner_type: Iqvoc::Collection.base_class_name })`)
+     * Verbliebene Label werden verwendet, um Konzepte im Wortgut zu finden mit Gewichtung nach Benennungstyp:
+       * `'Labeling::Skosxl::PrefLabel'` => 1.0
+       * `'Labeling::Skosxl::AltLabel'` => 0.8
+       * `'Labeling::Skosxl::HiddenLabel'` => 0.3
+     * **Titel-Bonus**: Konzepte aus dem Dokumenttitel erhalten fünffache Gewichtung (`determine_title_concepts`)
+     * **Beziehungsanalyse**: Beziehungen der gefundenen Konzepte werden verwendet, um die Gewichtung zu konkretisieren mit konfigurierbaren Faktoren:
+       * Broader-Relation: 1.5x
+       * Narrower-Relation: 2.0x
+       * Related-Relation: 1.3x
+     * `Classification`-Objekte werden erstellt und nach Gewichtung sortiert
+     * `create_classification_trace` speichert die vollständige Verarbeitungsspur als JSON (z.B. `@trace` für "Schwammstadt"-Titel):
+       * `token_index`: `{"schwammstadt der städtebau...": ["-", "in", "die", "der", "grün", "stadt", "zukunft", "städtebau", "schwammstadt"]}`
+       * `label_index`: `{"schwammstadt der städtebau...": [194652, 171360, 107562]}`
+       * `homograph_index`: `{"schwammstadt der städtebau...": []}`
+       * `result_index`: `{"schwammstadt der städtebau...": [194652, 171360, 107562]}`
+4. Im Wortgut gefundene Konzepte werden über den Plain-Controller des UMTHES über den Reverse Proxy an den anfragenden Benutzer zurückgeliefert.
+
+### Darstellung
+
+![Ablauf AutoClassify](../images/runtime_autoclassify.jpg)

@@ -1,0 +1,20 @@
+---
+title: Risks and Technical Debt
+order: 11
+---
+
+## Rails vs. iQvoc
+
+iQvoc ist ein quelloffenes Thesaurus-Framework, basierend auf den Web-Standards SKOS und RDF. Die technische Grundlage von iQvoc bildet das Ruby on Rails-Framework (https://rubyonrails.org/). Der Quellcode von iQvoc sowie der funktionalen Erweiterungen ist frei auf der Plattform GitHub verfügbar (https://github.com/innoq/iqvoc).
+
+Bei der Implementierung des Frameworks wurden generelle Best-Practices und Prinzipien der Entwicklung von Ruby on Rails-Anwendungen angewendet. iQvoc hingegen ist keine klassische Ruby on Rails-Anwendung, sondern bildet eine Abstraktionsschicht über dem Applikations-Framework zur Entwicklung von Thesauri auf SKOS und Linked Data Prinzipien.
+
+Zusätzliche Funktionen wurden abstrakt und wiederverwendbar in Form von Rails-Engines (https://guides.rubyonrails.org/engines.html) implementiert und in das SNS-System integriert. Diese Art der Entwicklung erfordert Einarbeitung in fortgeschrittene Techniken bei der Entwicklung mit dem Ruby on Rails Applikations-Framework.
+
+## Single-Sign-On (SSO)
+
+Derzeit existiert kein zentrales Single-Sign-On System zur zentralen Nutzerauthentifizierung, d.h. jedes Teilsystem (UMTHES, Chronik) implementiert seine eigene Benutzerverwaltung. Eine zentrale Nutzerverwaltung war bisher nicht im Fokus des Projekts, da bisher ohnehin verschiedene konkrete Benutzer für die Pflege der Anwendungen verantwortlich waren.
+
+## Bootstrap 4 Styleguide
+
+Die visuelle Gestaltung von SNS basiert auf dem separat entwickelten UBA-Bootstrap Theme. Dieses liegt mittlerweile in einer neueren Version vor, die auf dem Frontend-Framework Bootstrap v5 basiert. SNS verwendet noch eine ältere Version dieses Styleguides (Bootstrap 4). Die Migration auf die neue Version steht noch aus.
