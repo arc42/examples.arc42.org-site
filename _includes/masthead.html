@@ -10,7 +10,20 @@
 {%- assign is_home = false -%}
 {%- if page.layout == 'home' -%}{%- assign is_home = true -%}{%- endif -%}
 
-<header class="ex-masthead {% if is_home %}ex-masthead--full{% else %}ex-masthead--bar{% endif %}">
+{%- comment -%}
+  A page opts into a hero by naming its art: `hero: wild` in the front matter
+  gets `.ex-masthead__band--wild`. Home is the exception that needs no opt-in,
+  because its hero is the layout, not a page decision.
+
+  Two variables and not one: `page.hero` picks WHICH art, `has_hero` answers
+  the several places that only care WHETHER there is a band at all (the header
+  modifier, the spine). Collapsing them means every one of those has to repeat
+  `is_home or page.hero`, and the next hero page is the one that gets missed.
+{%- endcomment -%}
+{%- assign has_hero = is_home -%}
+{%- if page.hero -%}{%- assign has_hero = true -%}{%- endif -%}
+
+<header class="ex-masthead {% if has_hero %}ex-masthead--full{% else %}ex-masthead--bar{% endif %}">
   <div class="ex-masthead__inner">
     {%- comment -%}
       The lockup is the family mark plus one word: the SVG already reads
@@ -138,23 +151,27 @@
     full colour (2026-08-07) that scrim is load-bearing, not a backstop — see
     the measurements in _masthead.scss.
   {%- endcomment -%}
-  {%- comment -%}
-    The count in the H1. Same filter as _layouts/home.html, and it has to stay
-    the same: the number in the sentence and the number of tiles below it are
-    the same claim, and a reader will check. If that filter changes, change it
-    here too.
-
-    `%count%` lives in site.tagline (_config.yml) rather than the sentence
-    living here, so the copy stays in one place and this file stays layout.
-  {%- endcomment -%}
-  {%- assign example_count = site.systems
-        | where_exp: 'd', 'd.url contains "/systems/"'
-        | where_exp: 'd', 'd.title'
-        | where_exp: 'd', 'd.tagline'
-        | size -%}
   <div class="ex-masthead__band">
     <div class="ex-masthead__hero">
-      <h1 class="ex-masthead__title">{{ site.tagline | replace: '%count%', example_count }}</h1>
+      <h1 class="ex-masthead__title">{{ site.tagline }}</h1>
+    </div>
+  </div>
+
+  {%- comment -%}
+    Same band, different art and a different source for the heading: home's H1
+    is the site tagline, a hero page's H1 is its own title. Which means the
+    page must NOT also print an <h1> in its body — see _pages/in-the-wild.md,
+    where the heading was moved up here and a comment left in its place.
+
+    The modifier is built from `page.hero`, so adding a third hero page is a
+    front-matter line plus one block of SCSS, with nothing to change in this
+    file. Keep it that way: a Liquid `case` over page names here would put the
+    site's page list inside its masthead.
+  {%- endcomment -%}
+  {%- elsif page.hero -%}
+  <div class="ex-masthead__band ex-masthead__band--{{ page.hero }}">
+    <div class="ex-masthead__hero">
+      <h1 class="ex-masthead__title">{{ page.title }}</h1>
     </div>
   </div>
   {%- endif -%}
@@ -170,5 +187,5 @@
     hue. The device is still present on every page but one; if it should also
     close the hero, delete the `unless` and nothing else changes.
   {%- endcomment -%}
-  {%- unless is_home -%}{% include spine.html %}{%- endunless -%}
+  {%- unless has_hero -%}{% include spine.html %}{%- endunless -%}
 </header>

@@ -2,6 +2,14 @@
 layout: default
 title: arc42 Documentation in the Wild
 permalink: /in-the-wild/
+
+# Opts this page into a hero band and names its art. Home's herbarium is
+# specimens collected, pressed and mounted in one identical format; this is a
+# roadside verge with the roots showing — the same plants, where they actually
+# grow, which is the metaphor the page name already carries. See
+# _sass/_masthead.scss for the crop, and _includes/masthead.html for the H1,
+# which moves into the band and must not be repeated in the body below.
+hero: wild
 ---
 {%- comment -%}
   The external reading list. Content comes entirely from _data/in-the-wild.yml,
@@ -35,8 +43,11 @@ permalink: /in-the-wild/
 
 <div class="ex-shell ex-shell--prose">
   <div class="ex-prose">
-    <h1>arc42 Documentation in the Wild</h1>
-
+    {%- comment -%}
+      No <h1> here. It lives in the hero band (front matter `hero: wild`,
+      rendered by _includes/masthead.html from page.title), and a second one
+      on the page would be a second H1 announcing the same words twice.
+    {%- endcomment -%}
     <p>These are arc42 documentations we cannot host — usually because their
     licence does not allow it. We link them because they are useful, not
     because we have checked them. Nobody here has read every one of these end

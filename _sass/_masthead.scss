@@ -154,6 +154,47 @@
     }
   }
 
+  // ---- The wild band --------------------------------------------------------
+  //
+  // /in-the-wild/ (front matter `hero: wild`). Same band, second picture:
+  // assets/images/hero/wild-verge-band.webp, 2079x756, 156 KB — a roadside
+  // verge with the soil cut away and the roots showing. The home page is a
+  // herbarium, specimens pressed and mounted alike; this is the same plants
+  // where they actually grow, which is the page's name made literal.
+  //
+  // ONLY the frieze is overridden here. The art declarations for the wide band
+  // are NOT in this block, and that is the one thing to know before editing:
+  // `.ex-masthead__band` is restated inside @media (min-width: 700px) below, at
+  // equal specificity and later in the file, so a `--wild` rule declared here
+  // LOSES to it and the wild page silently shows the herbarium. Both media
+  // queries therefore carry a `--wild` twin beside the herbarium rule. Keep the
+  // pairs together; splitting them is how this breaks without erroring.
+  //
+  // `cover` and `center bottom`, not the herbarium's `auto 100%` / right. The
+  // herbarium is fourteen discrete specimens on flat ground, so it can be
+  // height-fitted and anchored to one edge — the ground it does not reach is
+  // just more ground. The verge is a CONTINUOUS SCENE with one unbroken soil
+  // line across it, so the same treatment would leave a vertical cut through
+  // the soil where the image ends. `cover` keeps the scene edge to edge and
+  // spends the mismatch on the crop instead. `bottom` decides where the crop
+  // is taken from, and it is the invariant worth stating: the roots are the
+  // subject, so the crop always eats sky.
+  &__band--wild {
+    &::after {
+      height: 160px;
+      background-image: url('/assets/images/hero/wild-verge-band.webp');
+      background-position: center bottom;
+
+      // 160px, not the herbarium's derived 140. That number came from
+      // `auto 100%` tying width to height (699 / 5.505 = 127px minimum);
+      // `cover` always fills the width, so nothing forces a floor here. 160 is
+      // chosen instead: at 2.75:1 the frieze shows a 440px-wide slice of a
+      // 2079px scene, and below ~150px the roots and the soil line stop being
+      // separable and it reads as a brown smear.
+      background-size: cover;
+    }
+  }
+
   // Top-weighted, not centred (2026-08-07). The heading sits just under the bar
   // and the band's remaining height belongs to the specimens, which are drawn
   // full-height and were being read as a strip floating beside a centred line.
@@ -253,6 +294,39 @@
     &::after { display: none; }
   }
 
+  // The wild twin of the rule above — same scrim stops, different art and a
+  // different fit. It has to live HERE and not up in the base block: equal
+  // specificity, and the herbarium rule is declared first, so the later of the
+  // two wins wherever both apply. See the note on `&__band--wild`.
+  //
+  // The scrim stops are reused UNCHANGED, and that is a measurement, not an
+  // assumption. This band's heading is the page title, whose longest word is
+  // "Documentation" at 325.4px in the shipped woff2 at the 2.5rem ceiling —
+  // narrower than the home tagline's "documentations" (336.0px) that the 380px
+  // stop was derived for. The wild H1 therefore clears the stop by more than
+  // the home H1 does, and nothing needs re-deriving. If this page is ever
+  // retitled to something with a longer word, it does.
+  .ex-masthead__band--wild {
+    background-image:
+      linear-gradient(to right,
+        var(--ground) 0,
+        var(--ground) 380px,
+        transparent   640px),
+      url('/assets/images/hero/wild-verge-band.webp');
+    background-position: center, center bottom;
+    background-size: 100% 100%, cover;
+
+    // Taller than the herbarium's clamp(260px, 18vw, 380px), and chosen by
+    // looking rather than derived. At the herbarium's height `cover` on a
+    // 2.75:1 image threw away about half the scene at both 1400px and 1920px —
+    // the roots survived (the crop takes from the top) but the plants above
+    // them did not. clamp(300px, 24vw, 460px) crops 34%, which keeps the
+    // stems. It costs ~80px more scroll than home's hero on a wide monitor;
+    // this page is a list, not a document, so that is affordable here in a way
+    // the sticky-bar note below says it would not be on a system page.
+    min-height: clamp(300px, 24vw, 460px);
+  }
+
   // A flex item with a max-width and `margin-inline: auto` still needs a
   // width to grow into, or it shrinks to its text and the measure stops
   // centring on the shell.
@@ -302,6 +376,17 @@
         var(--ground) calc(50% - 290px),
         transparent   calc(50% - 30px)),
       url('/assets/images/hero/herbarium-band.webp');
+  }
+
+  // The wild twin. Same stops, same reason (see the 700px block): the wild H1's
+  // longest word is narrower than the one the table above was measured for.
+  .ex-masthead__band--wild {
+    background-image:
+      linear-gradient(to right,
+        var(--ground) 0,
+        var(--ground) calc(50% - 290px),
+        transparent   calc(50% - 30px)),
+      url('/assets/images/hero/wild-verge-band.webp');
   }
 }
 
