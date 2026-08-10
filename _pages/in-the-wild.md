@@ -41,7 +41,14 @@ hero: wild
 {%- endcomment -%}
 {%- assign entries = site.data['in-the-wild'] -%}
 
-<div class="ex-shell ex-shell--prose">
+{%- comment -%}
+  Not --prose. This page needs room for the catalogue rail beside the entries,
+  and _sass/_in-the-wild.scss derives the exact cap from the measure plus the
+  rail. The intro paragraph below is capped at --measure by .ex-prose on its
+  own, so it keeps the same left edge and the same line length it had — the
+  shell got wider, the reading column did not.
+{%- endcomment -%}
+<div class="ex-shell ex-shell--wild">
   <div class="ex-prose">
     {%- comment -%}
       No <h1> here. It lives in the hero band (front matter `hero: wild`,
@@ -69,7 +76,19 @@ hero: wild
       destination is the warning.
     {%- endcomment -%}
     {%- assign host = entry.url | split: '//' | last | split: '/' | first | remove_first: 'www.' -%}
+    {%- comment -%}
+      Two children, and above 1040px they are two columns: everything a reader
+      READS on the left, the catalogue data on the right. The wrapper div is
+      what makes that a two-track grid without the entry's five text blocks
+      each becoming a track of their own.
+
+      Source order is reading order and is unchanged by the grid — title,
+      author, description, facets, note, then provenance. Nothing here is
+      reordered visually, so nobody hears it in a different order than they
+      see it.
+    {%- endcomment -%}
     <li class="ex-wild__item">
+      <div class="ex-wild__main">
       {%- comment -%}
         Exactly ONE link per entry, on the title — the same discipline the
         dashboard tiles keep. A second link on the URL would announce every
@@ -78,6 +97,16 @@ hero: wild
       <h2 class="ex-wild__name">
         <a href="{{ entry.url }}" rel="noopener noreferrer">{{ entry.title }}</a>
       </h2>
+
+      {%- comment -%}
+        The author is a BYLINE under the title now, not an item in the rail,
+        and the reason is measurement rather than bibliographic taste (though
+        it is also the bibliographic form): "Students of the Software
+        Engineering degree, University of Oviedo" is 433.4px in the shipped
+        Atkinson woff2 at 0.875rem, which is three wrapped lines in a 200px
+        rail and one line here.
+      {%- endcomment -%}
+      <p class="ex-wild__by">{{ entry.author }}</p>
 
       <p class="ex-wild__desc">{{ entry.description }}</p>
 
@@ -117,21 +146,34 @@ hero: wild
       {%- if entry.note -%}
       <p class="ex-wild__note">{{ entry.note }}</p>
       {%- endif -%}
+      </div>
 
       {%- comment -%}
-        The licence sits next to the host rather than in the facets, and the
-        pairing is deliberate: the page opens by saying these are documentations
-        we cannot host, and for most entries the licence IS that reason. Putting
-        it beside the destination puts the claim and its evidence in one line.
+        The rail: where this documentation came from and what you may do with
+        it. A LIST and no longer a middot-separated sentence, because above
+        1040px it sets one fact per line and a run of fragments glued with
+        middots is not a sentence in any case — it was a list wearing prose
+        punctuation. Below the breakpoint the same list runs inline again,
+        separated by a hairline border rather than by a generated middot: a
+        border is never announced, and CSS-generated punctuation is.
+
+        The sr-only labels are the other half of that. On screen, position and
+        format say which fact is which; out loud, "2024 to 2025" and "CC BY-NC
+        4.0" arrive as bare strings. `added` keeps its visible prefix because
+        it is the one fact that is about US rather than about the document —
+        it dates our note, not their work — and it is last for the same reason.
+
+        The licence sits beside the host deliberately: the page opens by saying
+        these are documentations we cannot host, and for most entries the
+        licence IS that reason.
       {%- endcomment -%}
-      <p class="ex-wild__facts">
-        {{- entry.author -}}
-        {%- if entry.language %} &middot; {{ entry.language }}{% endif -%}
-        {%- if entry.year %} &middot; {{ entry.year }}{% endif -%}
-        {%- if entry.added %} &middot; added {{ entry.added }}{% endif -%}
-        {%- if entry.licence %} &middot; {{ entry.licence }}{% endif -%}
-        {%- if host %} &middot; {{ host }}{% endif -%}
-      </p>
+      <ul class="ex-wild__facts" aria-label="Provenance">
+        {%- if entry.language %}<li><span class="ex-sr-only">Language: </span>{{ entry.language }}</li>{% endif -%}
+        {%- if entry.year %}<li><span class="ex-sr-only">Written: </span>{{ entry.year }}</li>{% endif -%}
+        {%- if entry.licence %}<li><span class="ex-sr-only">Licence: </span>{{ entry.licence }}</li>{% endif -%}
+        {%- if host %}<li><span class="ex-sr-only">Published at: </span>{{ host }}</li>{% endif -%}
+        {%- if entry.added %}<li>added {{ entry.added }}</li>{% endif -%}
+      </ul>
     </li>
     {%- endfor -%}
   </ol>

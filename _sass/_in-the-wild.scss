@@ -35,15 +35,50 @@
 //   --muted       on --paper    5.50:1   (note and facts line)
 // ============================================================================
 
+// ---- The catalogue rail ------------------------------------------------------
+//
+// BREAKPOINT DERIVATION (DESIGN.md §2.4: a breakpoint that moves the content
+// column is justified by the measure, not by a device size).
+//
+// MEASURED from the shipped woff2, not estimated: the "0" advance of Atkinson
+// Hyperlegible Next at the 17px body size is 11.016px, so 1ch = 11.016px and
+// --measure (68ch) renders at 749.1px. Confirmed against a screenshot, where
+// the prose column measured 750px.
+//
+//   shell padding  48px   (--s5 either side of .ex-shell)
+//   prose column  749.1px (--measure)
+//   gap            32px   (--s6)
+//   rail          200px
+//   ------------------------------------
+//   total        1029.1px
+//
+// So at any viewport of 1029px or more the rail is free: the shell caps at
+// exactly that total, the prose column sits at exactly 68ch, and the rail
+// takes only space the reading column was never going to use. Below it the
+// column would have to give width up — it crosses the 65ch floor (716.0px) at
+// 996px. The rail therefore appears at 1040px and not a pixel less, which is
+// the nearest round step above the point where it starts costing something.
+//
+// RAIL WIDTH 200px, and the number comes from the strings. At 0.875rem the
+// longest values are "German, with an English translation" (232.3px),
+// "docs.georchestra.org" (136.6px) and "English and Spanish" (132.6px). 200px
+// puts every value on one line except the first, which wraps to two — a rail
+// is a column of short facts, and sizing it to the single longest string would
+// have spent 32px of everyone's entry on one entry's language note.
+$wild-rail:          200px;
+$wild-rail-collapse: 1040px;
+
+// The page's shell. Wider than --prose by exactly the rail and its gap, so the
+// intro paragraph (capped at --measure by .ex-prose) and the entry titles keep
+// the same left edge and the same line length they had before the rail existed.
+.ex-shell--wild {
+  max-width: calc(var(--measure) + var(--s6) + #{$wild-rail} + var(--s5) * 2);
+}
+
 .ex-wild {
   list-style: none;
   margin: var(--s7) 0 0;
   padding: 0;
-
-  // Capped at the reading measure like the prose above it, because that is
-  // what this is: prose in a list. .ex-shell--prose already caps the page, so
-  // this only matters if the component is ever reused inside a wider shell.
-  max-width: var(--measure);
 
   &__item {
     padding-block: var(--s5);
@@ -59,6 +94,13 @@
   // entries really are sections of this page, but at h2's 1.5rem they would
   // compete with the page title and the list would read as a stack of
   // headlines rather than as a list.
+  // The reading column. Capped at the measure in BOTH layouts, not just the
+  // railed one: below the breakpoint there is no rail to hold it back, and a
+  // 1039px-wide window would otherwise set the note across the full shell.
+  &__main {
+    max-width: var(--measure);
+  }
+
   &__name {
     font-size: 1.1875rem;
     line-height: 1.3;
@@ -76,8 +118,17 @@
     }
   }
 
+  // The byline. Small and --muted, directly under the title: it is part of the
+  // citation, not part of the sentence, and at --ink it competed with the
+  // description for the eye immediately below it.
+  &__by {
+    margin: var(--s1) 0 0;
+    font-size: 0.875rem;
+    color: var(--muted);           // 5.50:1
+  }
+
   &__desc {
-    margin: var(--s2) 0 0;
+    margin: var(--s3) 0 0;
     color: var(--ink);             // 11.68:1
   }
 
@@ -112,13 +163,64 @@
     color: var(--muted);           // 5.50:1
   }
 
-  // Author, language, year, when we added it, and the DESTINATION HOST. The
+  // Language, year, licence, the DESTINATION HOST, and when we added it. The
   // host is not decoration: these links deliberately do not open in a new tab
   // (see _pages/in-the-wild.md), so showing where a link goes is what replaces
   // the new-tab warning.
+  //
+  // NARROW LAYOUT (below the breakpoint): one inline row, divided by a hairline
+  // rather than by the middot this used to carry. The middots were content —
+  // they lived in the markup and screen readers read them — and one fact per
+  // line with a rule between is the same information without punctuation
+  // anybody has to hear.
   &__facts {
-    margin: var(--s3) 0 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    margin: var(--s4) 0 0;
+    padding: 0;
     font-size: 0.875rem;
     color: var(--muted);           // 5.50:1
+
+    li + li {
+      margin-left: var(--s3);
+      padding-left: var(--s3);
+      border-left: 1px solid var(--hairline);
+    }
+  }
+}
+
+// ---- ≥1040px: the rail ------------------------------------------------------
+// See the derivation at the top of this file. Everything a reader READS stays
+// in the left column at exactly the measure it had before; the catalogue data
+// moves out beside it.
+@media (min-width: $wild-rail-collapse) {
+  .ex-wild__item {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) #{$wild-rail};
+    column-gap: var(--s6);
+  }
+
+  .ex-wild__facts {
+    // Stacked, one fact per line, so the rule below is a column and not a row.
+    flex-direction: column;
+    margin-top: 0;
+    padding-left: var(--s5);
+
+    // The hairline runs the FULL HEIGHT of the entry, not the height of the
+    // facts. That is the grid's default `stretch` doing the work, and it is
+    // the point of the whole layout: five short facts beside a six-line note
+    // would otherwise leave a 40px tick floating at the top of a 200px block,
+    // and the page would gain a rail without gaining any rhythm.
+    border-left: 1px solid var(--hairline);
+
+    li + li {
+      // The inline divider is a NARROW-layout device. Left in place it would
+      // draw a second, vertical rule between every stacked fact.
+      margin-left: 0;
+      padding-left: 0;
+      border-left: 0;
+      margin-top: var(--s2);
+    }
   }
 }
