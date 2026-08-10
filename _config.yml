@@ -24,18 +24,15 @@ description: Real-world software architectures, documented with the arc42 templa
 # one widens the scrim and hides specimens; a materially longer sentence adds a
 # fourth line. Either needs the stops in _masthead.scss re-derived.
 #
-# `%count%` is substituted in _includes/masthead.html with the number of
-# published examples, so the sentence counts itself and nobody has to remember
-# to bump it. Keep the token: without it the line silently stops counting, and
-# a hand-typed number here goes stale the next time a system directory lands.
-#
-# It costs the composition nothing, which is why it is allowed to be in the H1
-# at all. Measured from the shipped woff2 (libre-caslon-text-700) at the 2.5rem
-# ceiling: "of real systems" 306.6px -> "of 6 real systems" 340.8px, against a
-# 15ch measure of 386.4px and a 380px scrim stop. Still three lines, still
-# clear of the specimens. Two digits ("of 10 real systems", 366.6px) still fit;
-# three would not, and would need both stops re-derived.
-tagline: Architecture documentations of %count% real systems
+# A live example count ("…of 6 real systems") was built and then dropped on
+# 2026-08-10. The decision is about COPY, not layout — at single digits the
+# number reads as "only six" — so the measurements are recorded here rather
+# than re-derived if it ever comes back. Measured from the shipped woff2
+# (libre-caslon-text-700) at the 2.5rem ceiling: "of real systems" 306.6px ->
+# "of 6 real systems" 340.8px, against a 15ch measure of 386.4px and a 380px
+# scrim stop. It fits in three lines and clears the specimens; two digits
+# ("of 10 real systems", 366.6px) still fit, three would not.
+tagline: Architecture documentations of real systems
 
 language: en
 
