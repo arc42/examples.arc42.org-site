@@ -3,10 +3,25 @@
 //
 // This component exists to NOT look like .ex-tile, and the omissions below are
 // the design, not laziness. No border, no background fill, no radius, no
-// hover-lift, no stretched link, no catalogue number, no chips, no filter.
-// Every one of those is a dashboard affordance, and the dashboard makes a
-// promise this page cannot keep: a tile summarises a documentation somebody
-// read end to end.
+// hover-lift, no stretched link, no catalogue number, no filter. Every one of
+// those is a dashboard affordance, and the dashboard makes a promise this page
+// cannot keep: a tile summarises a documentation somebody read end to end.
+//
+// CHIPS were on that list until 2026-08 and are not any more, so here is the
+// argument, because reinstating one omission from a list of omissions looks
+// like drift unless the line is written down. The list was one item too long:
+// it banned a SHAPE when what needed banning was a CLAIM. A tile's chips say
+// "event-driven", "4M requests/day" — findings from a full read, which is the
+// promise this page cannot make. These say "Markdown", "All 12 sections",
+// "Fictional" — facts anyone can check in five minutes with the repository
+// open, and the ones a reader most needs before spending an hour on a link
+// nobody here has vetted. _data/in-the-wild.yml holds the test that keeps them
+// apart and is the file to read before adding a field.
+//
+// What still carries the genre is the structure, not the absence of pills: no
+// card, no fill, no lift, a rule between entries instead of around them. That
+// difference is legible to a reader who has never seen the dashboard, which a
+// missing chip never was.
 //
 // What is left — a name, a sentence, a note, a hairline rule — is a
 // bibliography. A reader identifies the genre instantly and without a legend,
@@ -64,6 +79,25 @@
   &__desc {
     margin: var(--s2) 0 0;
     color: var(--ink);             // 11.68:1
+  }
+
+  // Spacing only — .ex-chips (dashboard) supplies the layout and .ex-chip the
+  // look. Tighter to the description above (--s2) than to the note below
+  // (--s4), so the chips group with the sentence they qualify instead of
+  // floating between two paragraphs. Without that asymmetry the row reads as a
+  // third, unrelated block.
+  //
+  // The gap below is set on the NOTE and not as a bottom margin here: adjacent
+  // siblings collapse their margins, so a bottom margin smaller than the
+  // note's own --s3 would have had no effect at all and a larger one would
+  // have silently overridden it. The sibling selector states the intent and is
+  // the thing that actually runs.
+  &__facets {
+    margin: var(--s2) 0 0;
+  }
+
+  &__facets + &__note {
+    margin-top: var(--s4);
   }
 
   // Our editorial voice, and the one thing on the page that is an opinion.

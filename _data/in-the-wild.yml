@@ -7,26 +7,54 @@
 # deliberately set as a bibliography rather than as tiles so that a reader can
 # see the difference before reading the disclaimer.
 #
-# WHY THERE ARE NO tile fields HERE (domain, technologies, decisions, scale):
+# WHY THERE ARE NO tile fields HERE (domain, main_goal, decisions, scale):
 # every one of those is an AUDIT OUTPUT — you can only fill them in after
 # reading twelve sections. Leaving them out is the mechanism that stops this
 # list drifting back into being a second tile grid. If you find yourself
 # wanting to add one, that entry probably belongs in _systems/ instead.
+#
+# `facets` (below) is the ONE exception, and the line it draws is the whole
+# reason it is allowed to exist: a facet describes the DOCUMENT, never the
+# system. "Markdown", "All 12 sections", "Fictional" are things you can settle
+# in five minutes with the repository open, and they are precisely what a
+# reader needs in order to decide whether to spend an hour on a link we have
+# not vetted. "Event-driven", "handles 4M requests/day", "main goal" are
+# things you can only settle by reading it all, which is what the tiles
+# promise and this page must not. Same test, applied per chip: could a
+# stranger check this without reading the documentation? If not, it is not a
+# facet — put it in `note`, where it is visibly OUR opinion and dated.
 #
 # FIELDS
 #   title        required  Name of the documentation, as its authors write it.
 #   url          required  Where it lives. Checked by `make check-external`.
 #   author       required  Who wrote it.
 #   description  required  ONE neutral sentence: what the system is. No praise.
-#   note         required  OUR sentence: what is worth looking at, or what is
+#   note         required  OUR paragraph: what is worth looking at, or what is
 #                          thin. Written by us, not by the author — a
 #                          contributor supplies title/url/author/description
 #                          and we write this. Author-supplied notes turn into
-#                          blurbs.
+#                          blurbs. Two or three sentences; long enough to be
+#                          worth reading, short enough not to be a review.
 #   added        required  YYYY-MM. Lets a reader discount an old note without
 #                          us re-checking every entry.
-#   language     optional  Omit when it is English.
+#   facets       optional  Up to FIVE short checkable facts about the document,
+#                          shown as chips. Read the paragraph above before
+#                          adding one. Order them the way a reader triages:
+#                          what kind of thing it is, how complete it is, what
+#                          form it is in. Five is a hard ceiling — the template
+#                          truncates silently past it, because a sixth chip
+#                          turns a triage aid into a specification sheet.
+#   licence      optional  SPDX-ish short form ("CC BY-NC 4.0"). Shown in the
+#                          facts line beside the host, because on this page the
+#                          licence is usually the ANSWER to the question the
+#                          page opens with — why we link it instead of hosting
+#                          it. Omit when unstated rather than guessing; "no
+#                          licence given" is itself worth writing out.
+#   language     optional  Omit when it is English. Name every language when
+#                          there is more than one — a second edition is a
+#                          reason to click.
 #   year         optional  When the documentation was written, if knowable.
+#                          A range is fine when it was revised substantially.
 #
 # ORDER DOES NOT MATTER: the page sorts by title. Keep the file alphabetical
 # anyway, so a pull request adding one entry is a one-line diff in a
@@ -40,13 +68,37 @@
 #     description: A logistics scheduling system for a mid-sized freight operator.
 #     note:        Sections 1–6 only, but section 4 is unusually candid about
 #                  the strategy that was abandoned.
+#     facets:      [Sections 1–6, HTML, PlantUML]
+#     licence:     CC BY-SA 4.0
 #     language:    German
 #     year:        2019
 #     added:       2026-08
 #
-# The list is EMPTY on purpose. Real external documentation and its URLs have
-# to come from someone who knows they are real; `make check-external` can
-# verify that a URL resolves, not that the thing behind it is what we claim.
+# Entries are added by someone who has at least opened the thing. `make
+# check-external` can verify that a URL resolves, not that the documentation
+# behind it is what we claim.
 # ============================================================================
 
-[]
+- title:       Star Wars Death Star arc42 Documentation
+  url:         https://github.com/juangcarmona/starwars-deathstar-arc42-documentation
+  author:      Juan G. Carmona
+  description: >-
+    The battle station from Star Wars, documented as if it were a system under
+    construction — an invented subject used to walk through the arc42 template
+    end to end, not a system anyone operates.
+  note: >-
+    Read it for the shape of the template rather than for depth: roughly 5,000
+    words across all twelve sections, largely bullet lists, and the subject
+    matter means no section has to survive contact with a real constraint. What
+    it does teach well is traceability. Section 9 records the single central
+    reactor as a decision, states the single point of failure in the rationale,
+    and hands it forward to section 11, where it reappears as risk R1 with a
+    mitigation — the decision-to-risk chain that real documentation usually
+    leaves for the reader to reconstruct. Every diagram is Mermaid inside the
+    Markdown, so GitHub renders them in place and there is nothing to check out
+    or build.
+  facets:      [Fictional teaching example, All 12 sections, Markdown, Mermaid diagrams]
+  licence:     CC BY-NC 4.0
+  language:    English and Spanish
+  year:        2024–2025
+  added:       2026-08

@@ -63,15 +63,55 @@ permalink: /in-the-wild/
 
       <p class="ex-wild__desc">{{ entry.description }}</p>
 
+      {%- comment -%}
+        Facets sit ABOVE the note, not down with the facts line, because they
+        answer a question that comes first. A reader meeting "Fictional
+        teaching example" has already decided whether to spend an hour here,
+        and should not have to read our opinion of a document to find out what
+        kind of document it is. The note is a judgement about something you
+        have already identified; these are the identification.
+
+        The rule for what may appear here is in _data/in-the-wild.yml and is
+        not a formatting rule: a facet is a checkable fact about the DOCUMENT.
+        The moment one describes the SYSTEM this page is a tile grid again,
+        promising an audit nobody performed.
+
+        Chips, which _sass/_in-the-wild.scss once ruled out for this component
+        — see the note there for why that changed. Same `.ex-chip` as the
+        dashboard on purpose: it is the site's small neutral label and there is
+        no reason for a second one. The genre distance from a tile is carried
+        by everything this entry still does not have (card, fill, lift,
+        catalogue number, stretched link), which is a structural difference and
+        survives a reader who has never seen the dashboard.
+
+        aria-label, because a row of four unlabelled list items announces as a
+        list of four items and nothing else. `limit: 5` matches the ceiling the
+        data file documents; it truncates rather than wrapping to a second row.
+      {%- endcomment -%}
+      {%- if entry.facets and entry.facets.size > 0 -%}
+      <ul class="ex-chips ex-wild__facets" aria-label="About this documentation">
+        {%- for f in entry.facets limit: 5 -%}
+        <li class="ex-chip">{{ f }}</li>
+        {%- endfor -%}
+      </ul>
+      {%- endif -%}
+
       {%- if entry.note -%}
       <p class="ex-wild__note">{{ entry.note }}</p>
       {%- endif -%}
 
+      {%- comment -%}
+        The licence sits next to the host rather than in the facets, and the
+        pairing is deliberate: the page opens by saying these are documentations
+        we cannot host, and for most entries the licence IS that reason. Putting
+        it beside the destination puts the claim and its evidence in one line.
+      {%- endcomment -%}
       <p class="ex-wild__facts">
         {{- entry.author -}}
         {%- if entry.language %} &middot; {{ entry.language }}{% endif -%}
         {%- if entry.year %} &middot; {{ entry.year }}{% endif -%}
         {%- if entry.added %} &middot; added {{ entry.added }}{% endif -%}
+        {%- if entry.licence %} &middot; {{ entry.licence }}{% endif -%}
         {%- if host %} &middot; {{ host }}{% endif -%}
       </p>
     </li>
