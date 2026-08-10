@@ -56,9 +56,22 @@
 #   year         optional  When the documentation was written, if knowable.
 #                          A range is fine when it was revised substantially.
 #
-# ORDER DOES NOT MATTER: the page sorts by title. Keep the file alphabetical
-# anyway, so a pull request adding one entry is a one-line diff in a
-# predictable place.
+# ORDER IS EDITORIAL, and this file is where it is decided: the page renders
+# these top to bottom exactly as they appear below. It used to sort by title,
+# which is the right default for a bibliography nobody curates and the wrong
+# one here — alphabetical put a fictional teaching example and a decade-deep
+# book case study side by side with nothing to tell a newcomer which to open
+# first.
+#
+# The order is roughly EASIEST FIRST: shortest and most self-contained at the
+# top, deepest and least immediately accessible at the bottom. It is NOT a
+# ranking, and nothing on this page is better than anything else on it — the
+# note under each entry is the only quality signal, and it is dated and signed
+# by being ours.
+#
+# The cost of dropping the sort is that adding an entry is now a decision
+# rather than an alphabetical insert. Say in the pull request why the new entry
+# sits where it does.
 #
 # Example entry, for copying:
 #
@@ -101,4 +114,62 @@
   licence:     CC BY-NC 4.0
   language:    English and Spanish
   year:        2024–2025
+  added:       2026-08
+
+# Second: the first REAL system on the page, and deliberately right after the
+# invented one — a reader who has just seen what a tidy arc42 walkthrough looks
+# like meets a version of the same template bent to fit a running product.
+- title:       geOrchestra Gateway — Architecture Documentation
+  url:         https://docs.georchestra.org/gateway/en/latest/arc42/
+  author:      The geOrchestra project
+  description: >-
+    The authentication gateway of geOrchestra, an open-source spatial data
+    infrastructure run largely by public bodies — a Spring Cloud Gateway
+    specialisation that fronts every other service in the platform and handles
+    login, authorisation and routing for all of them.
+  note: >-
+    The documentation lives in the gateway's own repository and is released
+    with it, which is the first thing worth noticing: it is maintained as code,
+    not as a deliverable. Every diagram is generated from a checked-in
+    Structurizr model with a build script beside it, so the pictures cannot
+    quietly drift away from the prose. Read it also for what it changes: there
+    is no solution strategy section and no architecture decisions section at
+    all, and the building block view is replaced by C4's container and
+    component views. Be clear about the scope before you start — this documents
+    one component of geOrchestra, not the platform, and the longest sections by
+    some way are quality requirements and risks.
+  facets:      [Production system, Gateway component only, C4 section structure, Markdown, Structurizr diagrams]
+  licence:     GPL-3.0
+  added:       2026-08
+
+# LAST BY DECISION, and the one entry whose position is not the easiest-first
+# rule: it is the deepest example on the page and the only one whose primary
+# edition is not English, so it is the wrong thing to open first and the right
+# thing to arrive at. If the list grows past a screen, this ordering needs
+# revisiting — an entry nobody scrolls to is not being recommended.
+#
+# The URL is the SITE ROOT, not the /dokchess/arc42/ path that arc42.org still
+# links to: that path 301s to a broken `https://www.dokchess.de//`. Checked
+# 2026-08.
+- title:       DokChess
+  url:         https://www.dokchess.de/
+  author:      Stefan Zörner
+  description: >-
+    A chess engine in Java, written so that its architecture could be
+    documented — the running case study from Zörner's book on architecture
+    documentation, published in full as a browsable arc42 site.
+  note: >-
+    This is what a finished arc42 documentation looks like, and it is the
+    reason to have a list like this at all: every one of the twelve sections is
+    filled, and the substantial ones are broken into pages of their own rather
+    than padded — the building block view alone runs to eight, down to move
+    search and position evaluation. Section 4 is the one to read if you only
+    read one, because it argues the playing strategy before it draws anything.
+    The subject is small and invented for teaching, so do not come here for
+    scale or for the mess of a real deployment; come for the depth and the
+    finish.
+  facets:      [All 12 sections, Java, Book case study]
+  licence:     CC BY-NC-SA
+  language:    German, with an English translation
+  year:        2025
   added:       2026-08

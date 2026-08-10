@@ -24,7 +24,14 @@ permalink: /in-the-wild/
   If someone later "unifies" this page with the dashboard, they will have
   quietly promised that these links have been checked. They have not.
 {%- endcomment -%}
-{%- assign entries = site.data['in-the-wild'] | sort_natural: 'title' -%}
+{%- comment -%}
+  No sort. The order in _data/in-the-wild.yml IS the order on the page, and
+  that file's header explains the editorial rule behind it (easiest first,
+  deepest last, not a ranking). If you reinstate `| sort_natural: 'title'`
+  here, delete that rule there too — a documented reading order that the
+  template silently overrides is worse than no order at all.
+{%- endcomment -%}
+{%- assign entries = site.data['in-the-wild'] -%}
 
 <div class="ex-shell ex-shell--prose">
   <div class="ex-prose">
