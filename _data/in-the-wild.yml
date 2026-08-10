@@ -142,6 +142,35 @@
   licence:     GPL-3.0
   added:       2026-08
 
+# Third: the one entry that is not a document but a corpus, so it asks more of
+# a reader than the two above — you have to pick a team before you can read
+# anything. It sits after them and before DokChess for that reason.
+- title:       Software Architecture course, University of Oviedo
+  url:         https://arquisoft.github.io/
+  author:      Students of the Software Engineering degree, University of Oviedo
+  description: >-
+    Not one documentation but several hundred: every team on this course
+    documents the web application it builds over the semester using arc42 and
+    publishes it, roughly twenty-five new ones a year since 2018, in Spanish
+    and English cohorts working to the same brief.
+  note: >-
+    Read this one as coursework and it will not disappoint you. It is written
+    by undergraduates in the second semester of their third year, under
+    deadline, about systems that live for one term — nothing here has been
+    maintained, operated, or argued over by anyone who had to live with the
+    consequences. What no other link on this page can offer is the sample size.
+    Twenty-five teams document the same brief in the same template in the same
+    semester, which turns the template itself into the subject: the sections
+    everybody fills in usefully and the ones everybody pads are visible at a
+    glance, and that is a genuinely useful thing to see before you write your
+    own. Start from the course page, pick a year, then pick a team — the
+    2025-26 cohort is `yovi`, and yovi_en3a is a representative one, arc42 8.2
+    in AsciiDoc with a Testing section added as 12.
+  facets:      [Student coursework, ~25 new documentations a year, AsciiDoc, Spanish and English cohorts]
+  language:    English and Spanish
+  year:        2018–2026
+  added:       2026-08
+
 # LAST BY DECISION, and the one entry whose position is not the easiest-first
 # rule: it is the deepest example on the page and the only one whose primary
 # edition is not English, so it is the wrong thing to open first and the right
