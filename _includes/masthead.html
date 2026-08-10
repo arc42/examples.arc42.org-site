@@ -138,9 +138,23 @@
     full colour (2026-08-07) that scrim is load-bearing, not a backstop — see
     the measurements in _masthead.scss.
   {%- endcomment -%}
+  {%- comment -%}
+    The count in the H1. Same filter as _layouts/home.html, and it has to stay
+    the same: the number in the sentence and the number of tiles below it are
+    the same claim, and a reader will check. If that filter changes, change it
+    here too.
+
+    `%count%` lives in site.tagline (_config.yml) rather than the sentence
+    living here, so the copy stays in one place and this file stays layout.
+  {%- endcomment -%}
+  {%- assign example_count = site.systems
+        | where_exp: 'd', 'd.url contains "/systems/"'
+        | where_exp: 'd', 'd.title'
+        | where_exp: 'd', 'd.tagline'
+        | size -%}
   <div class="ex-masthead__band">
     <div class="ex-masthead__hero">
-      <h1 class="ex-masthead__title">{{ site.tagline }}</h1>
+      <h1 class="ex-masthead__title">{{ site.tagline | replace: '%count%', example_count }}</h1>
     </div>
   </div>
   {%- endif -%}
