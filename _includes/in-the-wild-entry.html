@@ -3,17 +3,32 @@
   caller (_pages/in-the-wild.md), which renders one per run.
 
   BLOCK ORDER IS THE TRIAGE ORDER, and it is not the order the fields are
-  declared in: title, who wrote it and where it lives, the checkable chips,
-  the neutral description, then our opinion. A reader deciding whether to
-  spend an hour on an unvetted link needs identity and facts first; the note
-  is the longest block and the last, so skipping it costs nothing. It used to
-  sit between the description and the chips, which put the one thing nobody
-  else could have written in the way of the four things anybody can check.
+  declared in: what sort of thing it is, its title, who wrote it and where it
+  lives, what form it is in, the neutral description, then our opinion. A
+  reader deciding whether to spend an hour on an unvetted link needs identity
+  and facts first; the note is the longest block and the last, so skipping it
+  costs nothing. It used to sit between the description and the facts, which
+  put the one thing nobody else could have written in the way of the four
+  things anybody can check.
 {%- endcomment -%}
 {%- assign host = entry.url | split: '//' | last | split: '/' | first | remove_first: 'www.' -%}
 {%- assign anchor = entry.title | slugify -%}
 <li class="ex-wild__item" id="{{ anchor }}">
   <div class="ex-wild__main">
+    {%- comment -%}
+      The kind, and the only chip on the page. It sits ABOVE the title because
+      it is the question that decides whether the title is worth reading at all
+      — a production system and a fictional teaching example are not the same
+      offer, and a reader who wants one is wasting their time in the other.
+
+      A <p> and not a one-item <ul>: a list of one announces "list, 1 item"
+      and then reads the item, which is two thirds noise. The vocabulary is
+      closed and checked (scripts/check-wild-fields.sh); the value is not
+      free text, so it does not need a label to be understood next to the
+      entry below it.
+    {%- endcomment -%}
+    <p class="ex-wild__kind"><span class="ex-chip">{{ entry.kind }}</span></p>
+
     {%- comment -%}
       Exactly one link per entry, on the title, and no `rel`. It carried
       `noopener noreferrer` until 2026-08-11. `noopener` does nothing without
@@ -45,20 +60,23 @@
     </p>
 
     {%- comment -%}
-      A facet is a checkable fact about the DOCUMENT, never about the system —
-      the rule and the five-item ceiling are in _data/in-the-wild.yml, as is
-      why section coverage is NOT one of these.
+      What form the document is in. One quiet line of plain text, NOT chips:
+      these were pills until 2026-08-11, and eighteen of them across five
+      entries made the page look like a grid of buttons while telling a reader
+      nothing they could rank. The rule for what belongs here, and the
+      five-item ceiling, are in _data/in-the-wild.yml.
 
-      Both lists name their entry. Twenty lists all labelled "About this
-      documentation" are twenty identical rows in a screen reader's element
-      list, which is the same as having no label at all.
+      The separator is a real middot in the markup rather than a CSS
+      ::before, for the same reason .ex-wild__by uses a border instead of one:
+      generated punctuation gets announced, and this one is read as part of
+      the sentence or not at all.
     {%- endcomment -%}
     {%- if entry.facets and entry.facets.size > 0 -%}
-    <ul class="ex-chips ex-wild__facets" aria-label="About {{ entry.title }}">
+    <p class="ex-wild__form">
       {%- for f in entry.facets limit: 5 -%}
-      <li class="ex-chip">{{ f }}</li>
+      {%- unless forloop.first %} · {% endunless -%}{{ f }}
       {%- endfor -%}
-    </ul>
+    </p>
     {%- endif -%}
 
     <p class="ex-wild__desc">{{ entry.description }}</p>

@@ -13,23 +13,32 @@
 # list drifting back into being a second tile grid. If you find yourself
 # wanting to add one, that entry probably belongs in _systems/ instead.
 #
-# `facets` and `sections` are the TWO exceptions, and the line they draw is the
-# whole reason they are allowed to exist: they describe the DOCUMENT, never the
-# system. "Markdown", "All 12", "Fictional" are things you can settle in five
-# minutes with the repository open, and they are precisely what a reader needs
-# in order to decide whether to spend an hour on a link we have not vetted.
+# `kind`, `sections` and `facets` are the THREE exceptions, and the line they
+# draw is the whole reason they are allowed to exist: they describe the
+# DOCUMENT, never the system. "Markdown", "All 12", "Fictional teaching example"
+# are things you can settle in five minutes with the repository open, and they
+# are precisely what a reader needs in order to decide whether to spend an hour
+# on a link we have not vetted.
 # "Event-driven", "handles 4M requests/day", "main goal" are things you can only
 # settle by reading it all, which is what the tiles promise and this page must
 # not. Same test, applied per chip: could a stranger check this without reading
 # the documentation? If not, it is not a facet — put it in `note`, where it is
 # visibly OUR opinion and dated.
 #
-# COVERAGE IS NOT A CHIP. "All 12 sections" used to be one, and it was the least
-# useful chip on the page precisely because it was the most important fact:
-# every entry answers it, so as a chip it is present on some and silently absent
-# on others, and a reader cannot compare it to the entry below. It is now
-# `sections`, first row of the rail, on every entry. Do not put it back in the
-# chip row.
+# THERE IS EXACTLY ONE CHIP, and it is `kind`. Everything else that used to be a
+# chip is now plain text, because eighteen identical pills across five entries
+# were the most clickable-looking things on a page where only the title is a
+# link, and they gave a reader no way to tell the one fact that decides whether
+# to open a link (is this a real system or a teaching toy?) from the four that
+# do not. One pill, always present, always from the same short list, is
+# comparable straight down the page. A second one is not.
+#
+# COVERAGE IS NOT A CHIP EITHER. "All 12 sections" used to be one, and it was
+# the least useful chip on the page precisely because it was the most important
+# fact: every entry answers it, so as a chip it is present on some and silently
+# absent on others, and a reader cannot compare it to the entry below. It is now
+# `sections`, first row of the rail, on every entry. Do not put it back beside
+# the kind.
 #
 # FIELDS
 #   title        required  Name of the documentation, as its authors write it.
@@ -46,8 +55,24 @@
 #                          rather than the notes: the note is the only thing on
 #                          this page nobody else could have written, and it is
 #                          the last block in an entry, so a reader who does not
-#                          want it has already had the title, the chips and the
+#                          want it has already had the title, the kind and the
 #                          description. Past 150 words it is a review.
+#   kind         required  What sort of documentation this is, and the ONE chip
+#                          on the entry. A closed vocabulary, because a chip
+#                          that reads differently on every entry cannot be
+#                          compared down the page, which is the only job it has:
+#
+#                            Production system
+#                            Fictional teaching example
+#                            Student coursework
+#                            Book case study
+#                            Corpus
+#
+#                          `make check` fails anything else. Widening the list
+#                          is a real decision, not a typo fix: add the term to
+#                          this list AND to scripts/check-wild-fields.sh in the
+#                          same commit, and say in the pull request what it
+#                          tells a reader that no existing term does.
 #   sections     required  How much of the template the document actually
 #                          fills, shown as the FIRST row of the rail because it
 #                          is the question every visitor has. Keep the wording
@@ -63,24 +88,31 @@
 #                          runs are ordered and described. An entry whose group
 #                          matches no run renders unheaded at the foot of the
 #                          page and fails `make check`.
-#   facets       optional  Up to FIVE short checkable facts about the document,
-#                          shown as chips. Read the paragraph above before
-#                          adding one. Order them the way a reader triages:
-#                          what kind of thing it is, how complete it is, what
-#                          form it is in. Five is a hard ceiling: the template
-#                          renders five and drops the rest, because a sixth chip
-#                          turns a triage aid into a specification sheet.
+#   facets       optional  Up to FIVE short checkable facts about the FORM of
+#                          the document, set as one quiet line of plain text
+#                          under the byline. Not chips: see the paragraph above.
+#                          What it is written in and drawn with belongs here
+#                          ("Markdown", "AsciiDoc", "Structurizr diagrams"), and
+#                          so does a structural departure a reader meets on the
+#                          first screen ("C4 section structure"). Its kind does
+#                          NOT: that is `kind`, and repeating it here prints it
+#                          twice. Neither does anything the note already argues
+#                          at length, which is where most of these came from.
+#                          Five is a hard ceiling: the template renders five and
+#                          drops the rest, because past five this line is a
+#                          specification sheet.
 #                          THIS IS A YAML FLOW SEQUENCE, so every comma starts a
-#                          new chip: [Sections 3, 5, 7] is three chips, two of
+#                          new facet: [Sections 3, 5, 7] is three facets, two of
 #                          them reading "5" and "7". Section coverage goes in
 #                          `sections:` and never here. `make check` fails on
 #                          both, because the template says nothing about either.
-#   licence      optional  SPDX-ish short form ("CC BY-NC 4.0"). Shown in the
-#                          facts line beside the host, because on this page the
+#   licence      optional  SPDX-ish short form ("CC BY-NC 4.0"). Second row of
+#                          the rail, and never omitted from it: on this page the
 #                          licence is usually the ANSWER to the question the
 #                          page opens with — why we link it instead of hosting
-#                          it. Omit when unstated rather than guessing; "no
-#                          licence given" is itself worth writing out.
+#                          it. Omit the field when unstated rather than
+#                          guessing, and the rail prints "not stated", which is
+#                          itself worth writing out.
 #   language     optional  Omit when it is English — the rail PRINTS "English"
 #                          for an absent value, so omitting it is a statement
 #                          and not a gap. Name every language when there is
@@ -119,6 +151,7 @@
 #     description: A logistics scheduling system for a mid-sized freight operator.
 #     note:        Sections 1–6 only, but section 4 is unusually candid about
 #                  the strategy that was abandoned.
+#     kind:        Production system
 #     facets:      [HTML, PlantUML]
 #     sections:    1–6
 #     licence:     CC BY-SA 4.0
@@ -150,7 +183,8 @@
     leaves for the reader to reconstruct. Every diagram is Mermaid inside the
     Markdown, so GitHub renders them in place and there is nothing to check out
     or build.
-  facets:      [Fictional teaching example, Markdown, Mermaid diagrams]
+  kind:        Fictional teaching example
+  facets:      [Markdown, Mermaid diagrams]
   sections:    All 12
   licence:     CC BY-NC 4.0
   language:    English and Spanish
@@ -177,7 +211,8 @@
     component views. Be clear about the scope before you start — this documents
     one component of geOrchestra, not the platform, and the longest sections by
     some way are quality requirements and risks.
-  facets:      [Production system, Gateway component only, C4 section structure, Markdown, Structurizr diagrams]
+  kind:        Production system
+  facets:      [Gateway component only, C4 section structure, Markdown, Structurizr diagrams]
   sections:    All but 4 and 9
   licence:     GPL-3.0
   added:       2026-08
@@ -205,7 +240,8 @@
     rarely publish that sentence about themselves, which is most of why this
     entry is here. It sits on openCode, the German public sector's own code
     platform, and has been quiet since May 2025.
-  facets:      [Production system, Public sector, AsciiDoc, 7 decision records]
+  kind:        Production system
+  facets:      [Public sector, AsciiDoc, 7 decision records]
   sections:    All but 6, 10 and 11
   licence:     CC BY-SA 4.0
   year:        2024–2025
@@ -233,7 +269,8 @@
     own. Start from the course page, pick a year, then pick a team — the
     2025-26 cohort is `yovi`, and yovi_en3a is a representative one, arc42 8.2
     in AsciiDoc with a Testing section added as 12.
-  facets:      [Student coursework, ~25 new documentations a year, AsciiDoc, Spanish and English cohorts]
+  kind:        Student coursework
+  facets:      [~25 new documentations a year, AsciiDoc, Spanish and English cohorts]
   sections:    Varies by team
   language:    English and Spanish
   year:        2018–2026
@@ -260,7 +297,8 @@
     The subject is small and invented for teaching, so do not come here for
     scale or for the mess of a real deployment; come for the depth and the
     finish.
-  facets:      [Java, Book case study]
+  kind:        Book case study
+  facets:      [Java]
   sections:    All 12
   licence:     CC BY-NC-SA
   language:    German, with an English translation

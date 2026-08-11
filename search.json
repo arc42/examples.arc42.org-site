@@ -99,7 +99,7 @@ sitemap: false
   {%- capture wild_url -%}/in-the-wild/#{{ anchor }}{%- endcapture -%}
   {%- capture wild_content -%}
     {{ entry.author }} {{ entry.description }} {{ entry.note }}
-    {{ entry.facets | join: ' ' }} Sections {{ entry.sections }}
+    {{ entry.kind }} {{ entry.facets | join: ' ' }} Sections {{ entry.sections }}
     {{ entry.licence }} {{ entry.language | default: 'English' }} {{ entry.year }} {{ host }}
   {%- endcapture -%}
 {{ sep }}{

@@ -18,6 +18,16 @@
 // nobody here has vetted. _data/in-the-wild.yml holds the test that keeps them
 // apart and is the file to read before adding a field.
 //
+// AND THEN THERE WAS ONE (2026-08-11). The shape came back too far: eighteen
+// pills across five entries, all at one weight, on a page where the title is
+// the only thing that can be clicked. A reader could not tell the fact that
+// decides whether to open a link from the four that do not, and the row read
+// as a set of buttons. `kind` keeps the pill, one per entry, from a closed
+// vocabulary, above the title. Everything else is one line of plain text under
+// the byline. The rule stands where it always did — a chip may carry a fact,
+// never a finding — and now the page spends its one pill on the fact that
+// ranks first.
+//
 // What still carries the genre is the structure, not the absence of pills: no
 // card, no fill, no lift, a rule between entries instead of around them. That
 // difference is legible to a reader who has never seen the dashboard, which a
@@ -220,6 +230,13 @@ $wild-rail-collapse: 1040px;
     max-width: var(--measure);
   }
 
+  // The kind, and the page's only pill. Above the title and tight to it
+  // (--s2 down, nothing up), so it reads as a label ON this entry rather than
+  // as a leftover of the one above.
+  &__kind {
+    margin: 0 0 var(--s2);
+  }
+
   // An <h3> under its run's <h2>, and sized below it deliberately: the run
   // name is what a reader navigates by, the entry title is what they read.
   // At the run heading's 1.5rem the list would be a stack of headlines.
@@ -270,13 +287,18 @@ $wild-rail-collapse: 1040px;
     color: var(--ink);             // 13.41:1
   }
 
-  // Spacing only — .ex-chips (dashboard) supplies the layout and .ex-chip the
-  // look. The chips now sit directly under the byline and above the
-  // description, so they group with the citation they qualify rather than
-  // floating between two paragraphs. --s3 up to the byline, --s4 down to the
-  // description: the asymmetry is what keeps them attached upwards.
-  &__facets {
-    margin: var(--s3) 0 0;
+  // What form the document is in. Sits directly under the byline and above the
+  // description, so it groups with the citation it qualifies rather than
+  // floating between two paragraphs; --s2 up to the byline against --s4 down
+  // to the description, and the asymmetry is what keeps it attached upwards.
+  //
+  // A step smaller than the byline and --muted like it. This line is the last
+  // thing on the entry a reader should stop at, and at body size a list of
+  // formats reads as a sentence somebody wrote rather than as a caption.
+  &__form {
+    margin: var(--s2) 0 0;
+    font-size: 0.8125rem;
+    color: var(--muted);           // 5.50:1
   }
 
   // Our editorial voice, and the one thing on the page that is an opinion.

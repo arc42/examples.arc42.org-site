@@ -241,7 +241,12 @@ a shared one.
   spec for that is "site-hue wash, always links", and these are neither.
 - **`.ex-wild`** — the external reading list. Defined as much by what it
   omits as by what it has: no border, no fill, no radius, no hover-lift, no
-  stretched link, no catalogue number, no chips. See the section above.
+  stretched link, no catalogue number, and **exactly one chip** — `kind`, from a
+  closed vocabulary, above the title (2026-08-11). Everything else that was a
+  chip is one line of plain text under the byline. Eighteen pills across five
+  entries were the most clickable-looking things on a page where only the title
+  is a link, and at one weight they gave a reader nothing to rank. See the
+  section above.
 - **`.ex-spine`**, **`.ex-rail`**, **`.ex-stepper`**, **`.ex-sectiongrid`**,
   **`.ex-facts`**, **`.ex-pinned`**.
 
