@@ -14,9 +14,21 @@
 {%- assign anchor = entry.title | slugify -%}
 <li class="ex-wild__item" id="{{ anchor }}">
   <div class="ex-wild__main">
-    {%- comment -%} Exactly one link per entry, on the title. {%- endcomment -%}
+    {%- comment -%}
+      Exactly one link per entry, on the title, and no `rel`. It carried
+      `noopener noreferrer` until 2026-08-11. `noopener` does nothing without
+      target="_blank", which these links deliberately do not have. `noreferrer`
+      did do something: it stripped the Referer header, so a project we send
+      readers to could not see that the referral came from here. Sending it is
+      the courtesy, and the default strict-origin-when-cross-origin sends the
+      origin and nothing more.
+
+      DO NOT add target="_blank" to make a rel meaningful again. Opening in the
+      same tab is the decision (WCAG 3.2.5, argued at the host line below); the
+      rel was the leftover.
+    {%- endcomment -%}
     <h3 class="ex-wild__name">
-      <a href="{{ entry.url }}" rel="noopener noreferrer">{{ entry.title }}</a>
+      <a href="{{ entry.url }}">{{ entry.title }}</a>
     </h3>
 
     {%- comment -%}

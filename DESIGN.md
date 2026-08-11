@@ -178,21 +178,47 @@ someone who has read all twelve sections. For a link nobody here has audited, a
 tile would be either half-empty or fabricated — so the data file deliberately
 has no field to put in one.
 
-What the page uses instead is **genre**. Name, description, note, a hairline
-facts line, a rule between entries: that is a bibliography, and a reader
-identifies it as a different kind of thing from a dashboard before reading a
-word of the disclaimer. This matters because the Visible-Token Rule's sibling
-constraint applies here too — a purely visual distinction must never be the only
-signal. "The same tile with a dashed border" was considered and rejected for
-exactly that reason: near-equivalence is what implies equivalence of quality.
+What the page uses instead is **genre**. Name, byline, description, note, a
+column of labelled facts, a rule between entries: that is a bibliography, and a
+reader identifies it as a different kind of thing from a dashboard before
+reading a word of the disclaimer. This matters because the Visible-Token Rule's
+sibling constraint applies here too — a purely visual distinction must never be
+the only signal. "The same tile with a dashed border" was considered and
+rejected for exactly that reason: near-equivalence is what implies equivalence
+of quality.
+
+**The list is grouped into runs** (2026-08-11), named and ordered in
+`_data/in-the-wild-runs.yml`, with each entry naming its run in `group`. The
+order is editorial and roughly easiest-first, and nothing is sorted at render
+time. A run is marked by space and a Caslon heading, pointedly not by a rule:
+there is already a rule between entries, and two breaks on one axis leave only
+weight to tell them apart. An entry whose `group` matches no run renders
+unheaded at the foot of the page and fails `make check`.
+
+**Every entry is addressable.** Its `<li>` carries the slugified title as an
+`id`, `search.json` emits one record per entry pointing at that anchor rather
+than one record for the whole page, and from eight entries up the page renders a
+contents block listing every title under its run. Below eight, every run heading
+is already on screen and an index would print each title twice for nothing.
+
+**The facts are a labelled `<dl>`, not a hairline facts line** (2026-08-11).
+Four rows in a fixed order, Sections first because it is the question every
+visitor has. An absent licence prints "not stated" and an absent language prints
+"English", so the first three rows always render and only `year` can be missing;
+that fixed order is what lets a reader compare a value to the same value one
+entry below. Above 1040px the `<dl>` is a 200px rail beside the reading column,
+with one continuous rule per run; below that its rows wrap into a single line
+under the entry.
 
 Two smaller departures, both deliberate:
 
 - **Links open in the same tab**, unlike the external links in the footer. A
   page whose entire content is off-site links would spawn one tab per click,
   and WCAG 2.2 §3.2.5 asks us not to open windows without warning. The
-  destination host is shown in the facts line instead; showing where a link
-  goes *is* the warning.
+  destination host is printed under the title beside the author; showing where a
+  link goes *is* the warning, and that only works while it is visible at the
+  moment the reader decides to click. For the same reason these links carry no
+  `rel="noopener noreferrer"`: see `_includes/in-the-wild-entry.html`.
 - **The disclaimer appears once**, in the framing paragraph, not per entry.
   Thirty repetitions of "not reviewed" is noise.
 
@@ -241,13 +267,28 @@ Prose caps at `--measure: 68ch`. Non-prose blocks (tables, diagrams, code) may
 take `--measure-wide` (~116ch) and scroll inside their own container — the page
 body never scrolls sideways.
 
-The rail collapses at **940px**, derived from the measure and not from device
-convention. At 17px Atkinson, 1ch ≈ 9.35px, and the railed layout gives:
-1024px → 76.8ch, 940px → 67.8ch, 900px → **63.5ch** (below the 65ch floor). The
-derivation is recorded in `_sass/_rail.scss` at the breakpoint itself.
+**1ch is 11.016px**, measured from the shipped woff2 and not estimated. CSS
+defines `ch` as the advance of `0`, which Atkinson Hyperlegible Next sets at
+648/1000 em, so at the 17px body size it is 11.016px and `--measure` renders at
+749.1px. The 9.35px this section used to quote is the advance of `n` (550/1000):
+a different letter, and 0.85 of the right number.
 
-Below 940px the rail becomes a horizontal scrolling strip rather than
-disappearing: a twelve-part document must stay navigable on a phone.
+`/in-the-wild/` has exactly one breakpoint, **1040px**, and the shell has two
+widths either side of it: the measure plus its own padding below (797.1px), the
+measure plus the 200px rail and its gap above (1029.1px). The reading column is
+68ch on both sides. The derivation is in `_sass/_in-the-wild.scss` at the
+declarations.
+
+The systems rail collapses at **940px**, and that number is wrong. At 11.016px a
+ch, the railed layout gives 1024px → 65.2ch, 940px → 57.6ch and 900px → 53.9ch,
+so 940px is already 7ch below the 65ch floor this section invokes; the floor is
+crossed at 1022px and the breakpoint belongs at 1024px. Correcting it moves a
+breakpoint on every system page, so it is a change of its own and is **not done
+yet**: `_sass/_rail.scss` still carries the old number and the `n` advance it
+was derived from.
+
+Below the rail breakpoint the rail becomes a horizontal scrolling strip rather
+than disappearing: a twelve-part document must stay navigable on a phone.
 
 ## Open decision: colour on tiles
 
