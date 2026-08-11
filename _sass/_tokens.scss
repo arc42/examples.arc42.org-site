@@ -57,8 +57,9 @@
   // as a quotation of another site's signature hue, which the Imprint Rule
   // forbids in any role.
   --link:       var(--ground-deep);        // 14.12:1 on --paper
-  --link-under: #9b9895;                   // --wash 50% — 2.49:1, decorative
-                                           //   only; the ink carries the text
+  --link-under: #9b9895;                   // --wash 50% — 2.82:1 on --paper,
+                                           //   decorative only; the ink
+                                           //   carries the text
   // ---- Wash ladder ---------------------------------------------------------
   // Exactly three steps plus two border steps (DESIGN.md §2.3). Applied as
   // color-mix(in oklab, var(--paper), var(--ground) <step>). The literals below

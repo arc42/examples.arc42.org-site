@@ -46,7 +46,9 @@
 
   &__icon {
     flex: 0 0 auto;
-    color: var(--tint-soft);      // 8.93:1 on --ground-deep is 8.4:1 — decorative anyway
+    // The token records 8.93:1 on --ground; the field it sits in is the deeper
+    // --ground-deep, where the same ink measures 10.32:1. Decorative anyway.
+    color: var(--tint-soft);
   }
 
   &__input {
@@ -362,7 +364,7 @@
 // may not carry meaning.
 mark {
   background: var(--wash-active);
-  color: var(--ink);              // 11.13:1 on --wash-active
+  color: var(--ink);              // 10.44:1 on --wash-active
   font-weight: 700;
   padding: 0 2px;
   border-radius: 2px;

@@ -108,7 +108,7 @@ $rail-collapse: 1040px;
   // --muted is measured against --paper (5.50:1) and was inherited unchanged
   // onto the active fill, where it measures 4.28:1 — below AA. The Measured-
   // Pair Rule is per pair, not per token: a colour that moves to a new ground
-  // is a new pair. On --wash-active, --ink measures 11.13:1.
+  // is a new pair. On --wash-active, --ink measures 10.44:1.
   &__item.is-current &__num,
   &__item.is-current .ex-rail__num {
     color: var(--ink);
