@@ -210,6 +210,12 @@ entry below. Above 1040px the `<dl>` is a 200px rail beside the reading column,
 with one continuous rule per run; below that its rows wrap into a single line
 under the entry.
 
+`sections` is the one value printed twice, and deliberately: in the rail, where
+it can be compared down the page, and beside the kind chip above the title,
+where it arrives *before* the decision it informs. On a phone the rail lands
+after 150 words of our opinion, which is the same fault this page already fixed
+by moving the destination host up to the byline.
+
 Two smaller departures, both deliberate:
 
 - **Links open in the same tab**, unlike the external links in the footer. A
@@ -236,17 +242,25 @@ a shared one.
 - **`.ex-tile`** — dashboard tile. Neutral paper, hairline border, flat at rest,
   hover-lift (the one sanctioned dynamic shadow). Stretched link: one real `<a>`
   expanded by a pseudo-element, so exactly one link per tile reaches the tab
-  order and the accessibility tree.
+  order and the accessibility tree. **One pill row only** (2026-08-11):
+  `technologies`, at most four, one token each. `decisions` is a plain list.
 - **`.ex-chip`** — keyword label. Deliberately *not* `arc42-tag`: the family
-  spec for that is "site-hue wash, always links", and these are neither.
+  spec for that is "site-hue wash, always links", and these are neither. **A
+  value earns a pill only if it can recur.** The dashboard carried 58 of them
+  across six tiles and 55 of the values appeared exactly once, which is a
+  bulleted list with a border drawn round every bullet: all 24 `decisions`
+  values are clauses averaging 6.4 words, and each rendered on a line of its
+  own at 1440px as well as on a phone. Decisions lost the pill and kept the
+  content; technologies kept the pill and lost two of their six.
 - **`.ex-wild`** — the external reading list. Defined as much by what it
   omits as by what it has: no border, no fill, no radius, no hover-lift, no
   stretched link, no catalogue number, and **exactly one chip** — `kind`, from a
-  closed vocabulary, above the title (2026-08-11). Everything else that was a
-  chip is one line of plain text under the byline. Eighteen pills across five
-  entries were the most clickable-looking things on a page where only the title
-  is a link, and at one weight they gave a reader nothing to rank. See the
-  section above.
+  closed vocabulary (`Production system` · `Invented subject` ·
+  `Student coursework`), above the title with section coverage printed beside it
+  as plain text (2026-08-11). Everything else that was a chip is one line of
+  plain text under the byline. Eighteen pills across five entries were the most
+  clickable-looking things on a page where only the title is a link, and at one
+  weight they gave a reader nothing to rank. See the section above.
 - **`.ex-spine`**, **`.ex-rail`**, **`.ex-stepper`**, **`.ex-sectiongrid`**,
   **`.ex-facts`**, **`.ex-pinned`**.
 
@@ -310,6 +324,20 @@ template edit and no content migration.
 If it is ever taken up, two things must come with it, not after it: a **legend**
 (colour must never be the only category signal) and a **fixed domain
 vocabulary** (today `domain:` is free text).
+
+That second condition is stronger than it sounds, and it is now measured: the
+six `domain` values are six distinct strings for six systems, so the mechanism
+would today produce **six colours for six single-member categories**, plus a
+legend of six entries with one item each. That is not a category system, it is a
+colour-coded list. Two of the values also carry two axes in one slash
+("Personal / fitness tracking" is audience plus domain, "Embedded / law
+enforcement" is platform plus sector), and three of six wrap to two lines at
+1440px and push their tile titles out of alignment across a row.
+
+So the vocabulary has to close **before** the hook is switched on, not with it:
+terms that can recur, at most 18 characters (the eyebrow track is ~174px after
+the catalogue number's 3rem clearance), no "/" in a value, and a
+`check-system-fields.sh` beside the existing wild-fields check to hold it.
 
 ## Deferred: cross-system section views
 

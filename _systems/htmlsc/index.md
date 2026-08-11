@@ -23,7 +23,6 @@ technologies:
   - Java
   - Gradle
   - jsoup
-  - Asciidoctor
 
 scale: Small open-source tool · single maintainer · on GitHub since 2014
 

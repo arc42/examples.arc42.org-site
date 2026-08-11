@@ -24,8 +24,6 @@ technologies:
   - Jekyll
   - Fly.io
   - Turso
-  - Plausible.io
-  - Slack
 
 scale: 9 arc42 family sites monitored · single maintainer · in production since 2023
 

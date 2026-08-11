@@ -230,11 +230,23 @@ $wild-rail-collapse: 1040px;
     max-width: var(--measure);
   }
 
-  // The kind, and the page's only pill. Above the title and tight to it
-  // (--s2 down, nothing up), so it reads as a label ON this entry rather than
-  // as a leftover of the one above.
+  // The kind, and the page's only pill, with section coverage riding beside
+  // it. Above the title and tight to it (--s2 down, nothing up), so it reads
+  // as a label ON this entry rather than as a leftover of the one above.
+  //
+  // Inline, not flex: the middot has to sit in the text where a screen reader
+  // meets it in order, and a flex `gap` either side of a separate separator
+  // element would space it twice.
   &__kind {
     margin: 0 0 var(--s2);
+    line-height: 1.6;   // the pill's own line-box, so two wrapped lines clear
+  }
+
+  // Set like the form line below the byline, because it is the same kind of
+  // fact: small, --muted, and reading as a caption rather than as a claim.
+  &__coverage {
+    font-size: 0.8125rem;
+    color: var(--muted);           // 5.50:1
   }
 
   // An <h3> under its run's <h2>, and sized below it deliberately: the run

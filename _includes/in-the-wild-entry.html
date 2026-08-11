@@ -26,8 +26,22 @@
       closed and checked (scripts/check-wild-fields.sh); the value is not
       free text, so it does not need a label to be understood next to the
       entry below it.
+
+      COVERAGE RIDES ALONG, and this is the one duplication on the page that
+      is worth its cost. _data/in-the-wild.yml calls `sections` "the question
+      every visitor has", and the rail answers it 200px to the right on a
+      desktop and BELOW 150 words of our opinion on a phone — which is the
+      same criticism this file already makes of where the host used to sit:
+      after the decision, not before it. So the two ranking facts share one
+      line above the title, and the rail keeps Sections as its first row,
+      where the value can still be compared down the page. The label is
+      screen-reader-only because the chip beside it is already the sentence's
+      subject; out loud, "Production system, Sections: All 12".
     {%- endcomment -%}
-    <p class="ex-wild__kind"><span class="ex-chip">{{ entry.kind }}</span></p>
+    <p class="ex-wild__kind">
+      <span class="ex-chip">{{ entry.kind }}</span>
+      <span class="ex-wild__coverage"> · <span class="ex-sr-only">Sections: </span>{{ entry.sections }}</span>
+    </p>
 
     {%- comment -%}
       Exactly one link per entry, on the title, and no `rel`. It carried

@@ -42,10 +42,8 @@ fi
 # reader, not a typo fix: add the term here AND in the schema header of
 # _data/in-the-wild.yml in the same commit.
 KINDS="Production system
-Fictional teaching example
-Student coursework
-Book case study
-Corpus"
+Invented subject
+Student coursework"
 
 # awk -v cannot carry a newline, so the vocabulary crosses as one pipe-joined
 # string. $KINDS keeps its newlines for the error message at the bottom.

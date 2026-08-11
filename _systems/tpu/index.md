@@ -21,11 +21,9 @@ decisions:
 
 technologies:
   - C++
-  - Embedded real-time OS
-  - RT Debian Linux
-  - PC/104
+  - RTOS
   - ARM
-  - GPS (SiRF / NMEA)
+  - GPS
 
 scale: Hardware/software product · in police cars · successor to an earlier TPU generation
 

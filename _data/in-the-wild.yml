@@ -15,8 +15,8 @@
 #
 # `kind`, `sections` and `facets` are the THREE exceptions, and the line they
 # draw is the whole reason they are allowed to exist: they describe the
-# DOCUMENT, never the system. "Markdown", "All 12", "Fictional teaching example"
-# are things you can settle in five minutes with the repository open, and they
+# DOCUMENT, never the system. "Markdown", "All 12", "Invented subject" are
+# things you can settle in five minutes with the repository open, and they
 # are precisely what a reader needs in order to decide whether to spend an hour
 # on a link we have not vetted.
 # "Event-driven", "handles 4M requests/day", "main goal" are things you can only
@@ -33,12 +33,16 @@
 # do not. One pill, always present, always from the same short list, is
 # comparable straight down the page. A second one is not.
 #
-# COVERAGE IS NOT A CHIP EITHER. "All 12 sections" used to be one, and it was
-# the least useful chip on the page precisely because it was the most important
-# fact: every entry answers it, so as a chip it is present on some and silently
-# absent on others, and a reader cannot compare it to the entry below. It is now
-# `sections`, first row of the rail, on every entry. Do not put it back beside
-# the kind.
+# COVERAGE IS NOT A CHIP EITHER, BUT IT IS NOT BURIED. "All 12 sections" used
+# to be a chip, and it was the least useful chip on the page precisely because
+# it was the most important fact: every entry answers it, so as a chip it was
+# present on some and silently absent on others, and a reader could not compare
+# it to the entry below. It is `sections` now, first row of the rail, on every
+# entry — and since 2026-08-11 it is ALSO printed as plain text beside the kind,
+# because the rail sits below 150 words of our opinion on a phone, i.e. after
+# the decision it is supposed to inform. One short value, printed twice, in two
+# forms with two jobs: compare it in the rail, read it before the title. Do not
+# make either of them a second chip.
 #
 # FIELDS
 #   title        required  Name of the documentation, as its authors write it.
@@ -63,10 +67,8 @@
 #                          compared down the page, which is the only job it has:
 #
 #                            Production system
-#                            Fictional teaching example
+#                            Invented subject
 #                            Student coursework
-#                            Book case study
-#                            Corpus
 #
 #                          `make check` fails anything else. Widening the list
 #                          is a real decision, not a typo fix: add the term to
@@ -183,7 +185,7 @@
     leaves for the reader to reconstruct. Every diagram is Mermaid inside the
     Markdown, so GitHub renders them in place and there is nothing to check out
     or build.
-  kind:        Fictional teaching example
+  kind:        Invented subject
   facets:      [Markdown, Mermaid diagrams]
   sections:    All 12
   licence:     CC BY-NC 4.0
@@ -297,7 +299,7 @@
     The subject is small and invented for teaching, so do not come here for
     scale or for the mess of a real deployment; come for the depth and the
     finish.
-  kind:        Book case study
+  kind:        Invented subject
   facets:      [Java]
   sections:    All 12
   licence:     CC BY-NC-SA

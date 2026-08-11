@@ -19,11 +19,10 @@ decisions:
   - MQTT (via ActiveMQ) for near real-time tracking
 
 technologies:
-  - Java 8
+  - Java
   - Spring Boot
   - AngularJS
-  - MQTT / ActiveMQ
-  - Highcharts
+  - MQTT
 
 scale: Single maintainer · personal project · in production since 2014
 

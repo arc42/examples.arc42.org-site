@@ -20,9 +20,7 @@ decisions:
 
 technologies:
   - Java
-  - Hibernate
   - Oracle
-  - JBoss
   - Drools
   - ANTLR
 

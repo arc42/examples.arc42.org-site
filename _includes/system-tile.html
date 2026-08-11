@@ -62,19 +62,38 @@
   <p class="ex-tile__goal">{{ sys.main_goal }}</p>
   {%- endif -%}
 
+  {%- comment -%}
+    DECISIONS ARE A LIST, NOT CHIPS (2026-08-11). They were pills until a count
+    said what they are: all 24 values in the corpus are clauses, averaging 6.4
+    words, and every one of them rendered on a line of its own at 1440px as
+    well as on a phone. That is a bulleted list with a border drawn round each
+    bullet, and boxed prose is harder to read than unboxed prose. A pill is for
+    a token from a recurring set; 55 of the 58 values on this page appeared
+    exactly once.
+
+    They keep their aria-label. Without the chip shape nothing else says
+    "decision", and the caption was removed from the page on purpose.
+  {%- endcomment -%}
   {%- if sys.decisions.size > 0 or sys.technologies.size > 0 -%}
   <div class="ex-tile__keywords">
     {%- if sys.decisions and sys.decisions.size > 0 -%}
-    <ul class="ex-chips" aria-label="Strategic decisions">
+    <ul class="ex-tile__decisions" aria-label="Strategic decisions">
       {%- for d in sys.decisions limit: 4 -%}
-      <li class="ex-chip">{{ d }}</li>
+      <li>{{ d }}</li>
       {%- endfor -%}
     </ul>
     {%- endif -%}
 
+    {%- comment -%}
+      Four, not six, and one token each: no parentheses, no slashes. Six ran to
+      two lines on every tile and turned a scannable row into a paragraph of
+      boxes. The limit is silent, and nothing checks the data yet — that is the
+      `check-system-fields.sh` still owed alongside closing the `domain`
+      vocabulary.
+    {%- endcomment -%}
     {%- if sys.technologies and sys.technologies.size > 0 -%}
     <ul class="ex-chips" aria-label="Technologies">
-      {%- for t in sys.technologies limit: 6 -%}
+      {%- for t in sys.technologies limit: 4 -%}
       <li class="ex-chip ex-chip--tech">{{ t }}</li>
       {%- endfor -%}
     </ul>
