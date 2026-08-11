@@ -68,11 +68,27 @@
 $wild-rail:          200px;
 $wild-rail-collapse: 1040px;
 
-// The page's shell. Wider than --prose by exactly the rail and its gap, so the
-// intro paragraph (capped at --measure by .ex-prose) and the entry titles keep
-// the same left edge and the same line length they had before the rail existed.
+// The page's shell, and it has TWO widths because the page has two layouts.
+//
+// RAILED (≥1040px, at the foot of this file): wider than --prose by exactly the
+// rail and its gap, so the intro paragraph (capped at --measure by .ex-prose)
+// and the entry titles keep the same left edge and the same line length they
+// had before the rail existed. 1029.1px, derived above.
+//
+// UNRAILED: the measure plus the shell's own padding, which is exactly
+// .ex-shell--prose. It used to hold the railed width in both layouts and
+// nothing occupied the difference — .ex-wild__main caps at --measure either
+// way, so at 1039px every entry separator was drawn 1029px wide over text that
+// stopped at 749px. Measured at 1039px: the separator spanned x≈29→1010 and the
+// text ended at x≈778, so 232px of each rule, 24% of it, was ruled across
+// nothing. The band ran from 1029px down to ≈797px, where it closes on its own.
+//
+// The cost is that crossing 1040px now moves the content sideways as well as
+// growing a rail beside it. That is the trade: within any one viewport every
+// edge on the page lines up, and the reading column is the same 68ch either
+// side of the breakpoint, which is the number that actually has to hold.
 .ex-shell--wild {
-  max-width: calc(var(--measure) + var(--s6) + #{$wild-rail} + var(--s5) * 2);
+  max-width: calc(var(--measure) + var(--s5) * 2);
 }
 
 // ---- Runs --------------------------------------------------------------------
@@ -179,38 +195,6 @@ $wild-rail-collapse: 1040px;
     font-size: 0.9375rem;
 
     li + li { margin-top: var(--s1); }
-  }
-}
-
-// Two columns once a column is wide enough to hold a title on ONE line, and
-// not one pixel earlier: a second column bought by wrapping every other title
-// onto two lines makes the index longer AND harder to scan, which is both of
-// its jobs lost at once.
-//
-// MEASURED from the shipped woff2 at the 0.9375rem list size, not estimated.
-// The longest title in the data today is "geOrchestra Gateway — Architecture
-// Documentation" at 347.3px; "Software Architecture course, University of
-// Oviedo" is 330.9px. Budgeting 400px per column leaves room for a title about
-// a fifth longer than anything here before it wraps:
-//
-//   column       400px
-//   column-gap    48px   (--s7)
-//   column       400px
-//   padding       96px   (--s5 either side of .ex-shell)
-//   --------------------
-//   total        944px   ->  960px, the nearest round step above it
-//
-// At the shell's 1029.1px cap each column is 442.5px, so the columns get wider
-// than the budget, never narrower. Below 960px it is one column, which is the
-// right shape for a phone anyway.
-//
-// Not `column-width`: at 981px of content that resolves to three or four
-// columns, and twenty titles in four columns is a directory, not a contents
-// page.
-@media (min-width: 960px) {
-  .ex-wild-toc__runs {
-    columns: 2;
-    column-gap: var(--s7);
   }
 }
 
@@ -356,6 +340,43 @@ $wild-rail-collapse: 1040px;
 // in the left column at exactly the measure it had before; the catalogue data
 // moves out beside it.
 @media (min-width: $wild-rail-collapse) {
+  // The wide shell. Everything below in this block assumes it.
+  .ex-shell--wild {
+    max-width: calc(var(--measure) + var(--s6) + #{$wild-rail} + var(--s5) * 2);
+  }
+
+  // The contents block goes to two columns, and only here. A column has to be
+  // wide enough to hold a title on ONE line: a second column bought by wrapping
+  // every other title onto two lines makes the index longer AND harder to scan,
+  // which is both of its jobs lost at once.
+  //
+  // MEASURED from the shipped woff2 at the 0.9375rem list size, not estimated.
+  // The longest title in the data today is "geOrchestra Gateway — Architecture
+  // Documentation" at 347.3px; "Software Architecture course, University of
+  // Oviedo" is 330.9px. Budget 400px a column, room for a title a fifth longer
+  // than anything here:
+  //
+  //   shell content   981.1px   (the 1029.1px cap less --s5 either side)
+  //   column-gap       48px     (--s7)
+  //   -------------------------
+  //   per column      466.6px
+  //
+  // It used to start at 960px, from when the shell held the railed width in
+  // both layouts. It cannot any more: below this breakpoint the shell is the
+  // measure, which gives (749.1 - 48) / 2 = 350.5px a column, and today's
+  // longest title clears that by 2.7px. That is a coincidence, not a budget, so
+  // the index stays one column there — one column is also the right shape for a
+  // phone, and the page now has exactly one breakpoint, derived from the
+  // measure like every other one on this site.
+  //
+  // Not `column-width`: at 981px of content that resolves to three or four
+  // columns, and twenty titles in four columns is a directory, not a contents
+  // page.
+  .ex-wild-toc__runs {
+    columns: 2;
+    column-gap: var(--s7);
+  }
+
   // ONE rule for the whole run, not one per entry.
   //
   // The rule used to be a `border-left` on each entry's facts block, stretched
