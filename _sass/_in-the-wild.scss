@@ -111,6 +111,19 @@ $wild-rail-collapse: 1040px;
   }
 }
 
+// How to read the page, under the disclaimer and separate from it.
+//
+// Two blocks rather than one paragraph because they are two kinds of
+// statement: the disclaimer is the page's premise and is set at full body
+// weight, this is an instruction and is set quieter. The size step does the
+// separating, so no rule and no fill is needed, and the reader who only takes
+// in the first block has still taken in the one that matters.
+.ex-wild-howto {
+  margin-top: var(--s5);
+  font-size: 0.9375rem;
+  color: var(--muted);             // 5.50:1
+}
+
 // ---- Contents ----------------------------------------------------------------
 //
 // Rendered only from eight entries up (_pages/in-the-wild.md); below that every

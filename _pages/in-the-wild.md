@@ -19,26 +19,34 @@ hero: wild
 
 <div class="ex-shell ex-shell--wild">
   {%- comment -%}
-    The framing paragraph, and the only place the disclaimer appears — thirty
-    repetitions of "not reviewed" is noise. It has four jobs and each sentence
-    does one: what these are, why they are here, what we have NOT done, and how
-    to read the page. The last one is why the runs are named in the copy: an
-    order a reader cannot see is not an order, and the jump link is the only
-    navigation this page has below eight entries, where the index does not
-    render. `runs.last` rather than a hard-coded name — the deepest run is the
-    last by construction, so the sentence cannot go stale when a run is added.
+    Two blocks, because they are two different kinds of statement and a reader
+    who skips one should not lose the other.
+
+    First the disclaimer, and this is the only place it appears: thirty
+    repetitions of "not reviewed" is noise. It is the page's whole premise, so
+    it is set as body prose at full weight.
+
+    Then how to read the page, set smaller and quieter because it is an
+    instruction rather than a claim. The runs are named in it on purpose: an
+    order a reader cannot see is not an order, and this jump link is the only
+    navigation the page has below eight entries, where the index does not
+    render. Built from `runs.last` rather than a hard-coded name, because the
+    deepest run is the last by construction and the sentence must not go stale
+    when a run is added.
   {%- endcomment -%}
   <div class="ex-prose">
     <p>These are {{ entries.size }} arc42 documentations we cannot host, usually
     because their licence does not allow it.
     We link them because we consider them useful or interesting.
-    We have <strong>not</strong> checked their structure and content — that is
-    the difference between this page and the
+    We have <strong>not</strong> checked their structure and content.
+    That is the difference between this page and the
     <a href="{{ '/' | relative_url }}">examples</a>.
-    They run roughly easiest first: start at the top if arc42 is new to you, or
-    go straight to <a href="#{{ runs.last.id }}">{{ runs.last.title }}</a> if it
-    is not.
-    The note under each entry is our opinion, and is dated.
+    </p>
+
+    <p class="ex-wild-howto">Ordered roughly easiest first. Start at the top if
+    arc42 is new to you, otherwise skip to
+    <a href="#{{ runs.last.id }}">{{ runs.last.title }}</a>.
+    Every note is ours, and dated.
     </p>
   </div>
 

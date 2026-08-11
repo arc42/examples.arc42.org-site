@@ -178,6 +178,35 @@
   added:       2026-08
   group:       real-systems
 
+# After geOrchestra in the same run, and the thinner of the two on purpose: it
+# reads as the counterpoint. geOrchestra shows the template carried by its
+# prose, GA-Lotse shows it carried entirely by its decision records.
+- title:       GA-Lotse
+  url:         https://gitlab.opencode.de/ga-lotse/ga-lotse-documentation
+  author:      The GA-Lotse project
+  description: >-
+    A case management platform for German public health authorities, developed
+    with the Hessian health ministry and funded by the EU, built as a service
+    mesh into which individual business modules plug.
+  note: >-
+    Come for the decision records, not for the narrative. Most of the section
+    files run to a paragraph and a diagram, and the deployment view is one
+    sentence over one picture. The seven architecture decisions are the
+    opposite: each states the options that were weighed, the outcome, and the
+    consequences it accepted, including the ones that cost something. Read the
+    service mesh record first. It explains why the team built their own instead
+    of taking Istio or Linkerd, then writes down plainly that the choice buys
+    them more testing, more security review and more maintenance. Public bodies
+    rarely publish that sentence about themselves, which is most of why this
+    entry is here. It sits on openCode, the German public sector's own code
+    platform, and has been quiet since May 2025.
+  facets:      [Production system, Public sector, AsciiDoc, 7 decision records]
+  sections:    All but 6, 10 and 11
+  licence:     CC BY-SA 4.0
+  year:        2024–2025
+  added:       2026-08
+  group:       real-systems
+
 - title:       Software Architecture course, University of Oviedo
   url:         https://arquisoft.github.io/
   author:      Students of the Software Engineering degree, University of Oviedo
