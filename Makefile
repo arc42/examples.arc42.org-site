@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 
-.PHONY: help dev build stop site check check-links check-brand check-wild-groups check-external clean install update shell logs new-system
+.PHONY: help dev build stop site check check-links check-brand check-wild-groups check-wild-facets check-external clean install update shell logs new-system
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-14s\033[0m %s\n", $$1, $$2}'
@@ -18,13 +18,16 @@ stop: ## Stop and remove the running dev container
 site: build ## Generate the static site into _site/
 	docker compose run --rm jekyll bundle exec jekyll build
 
-check: check-brand check-wild-groups ## Run every check that does not need a build (brand deny-list, in-the-wild grouping)
+check: check-brand check-wild-groups check-wild-facets ## Run every check that does not need a build (brand deny-list, in-the-wild grouping and facets)
 
 check-brand: ## Enforce the ADR-0003 retired-hex deny-list and the one-hue rule
 	sh scripts/check-brand.sh
 
 check-wild-groups: ## Every in-the-wild entry must name a run that exists
 	sh scripts/check-wild-groups.sh
+
+check-wild-facets: ## No in-the-wild facet list is split by a comma or truncated at five
+	sh scripts/check-wild-facets.sh
 
 check-links: site ## Validate internal links, images, and HTML in the built _site (html-proofer)
 	docker compose run --rm jekyll bundle exec htmlproofer ./_site --disable-external --allow-hash-href

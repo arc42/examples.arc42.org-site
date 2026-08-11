@@ -67,9 +67,14 @@
 #                          shown as chips. Read the paragraph above before
 #                          adding one. Order them the way a reader triages:
 #                          what kind of thing it is, how complete it is, what
-#                          form it is in. Five is a hard ceiling — the template
-#                          truncates silently past it, because a sixth chip
+#                          form it is in. Five is a hard ceiling: the template
+#                          renders five and drops the rest, because a sixth chip
 #                          turns a triage aid into a specification sheet.
+#                          THIS IS A YAML FLOW SEQUENCE, so every comma starts a
+#                          new chip: [Sections 3, 5, 7] is three chips, two of
+#                          them reading "5" and "7". Section coverage goes in
+#                          `sections:` and never here. `make check` fails on
+#                          both, because the template says nothing about either.
 #   licence      optional  SPDX-ish short form ("CC BY-NC 4.0"). Shown in the
 #                          facts line beside the host, because on this page the
 #                          licence is usually the ANSWER to the question the
