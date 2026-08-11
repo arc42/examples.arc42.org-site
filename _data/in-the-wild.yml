@@ -37,6 +37,11 @@
 #                          worth reading, short enough not to be a review.
 #   added        required  YYYY-MM. Lets a reader discount an old note without
 #                          us re-checking every entry.
+#   group        required  Which run the entry belongs to — an `id` from
+#                          _data/in-the-wild-runs.yml, which is also where the
+#                          runs are ordered and described. An entry whose group
+#                          matches no run renders unheaded at the foot of the
+#                          page and fails `make check`.
 #   facets       optional  Up to FIVE short checkable facts about the document,
 #                          shown as chips. Read the paragraph above before
 #                          adding one. Order them the way a reader triages:
@@ -56,22 +61,25 @@
 #   year         optional  When the documentation was written, if knowable.
 #                          A range is fine when it was revised substantially.
 #
-# ORDER IS EDITORIAL, and this file is where it is decided: the page renders
-# these top to bottom exactly as they appear below. It used to sort by title,
-# which is the right default for a bibliography nobody curates and the wrong
-# one here — alphabetical put a fictional teaching example and a decade-deep
-# book case study side by side with nothing to tell a newcomer which to open
-# first.
+# ORDER IS EDITORIAL AND IT HAS TWO LEVELS. Which run an entry appears under
+# comes from its `group`; the runs themselves are ordered and named in
+# _data/in-the-wild-runs.yml. Within a run, entries render top to bottom
+# exactly as they appear below. Nothing is sorted anywhere.
 #
-# The order is roughly EASIEST FIRST: shortest and most self-contained at the
-# top, deepest and least immediately accessible at the bottom. It is NOT a
-# ranking, and nothing on this page is better than anything else on it — the
-# note under each entry is the only quality signal, and it is dated and signed
-# by being ours.
+# It used to sort by title, which is the right default for a bibliography
+# nobody curates and the wrong one here — alphabetical put a fictional teaching
+# example and a decade-deep book case study side by side with nothing to tell a
+# newcomer which to open first. It then ran as one unbroken easiest-first list,
+# which was the right sequence and completely imperceptible: past a screenful,
+# a careful order and a random one look identical. The runs are that same
+# sequence, chunked so that it can be read.
 #
-# The cost of dropping the sort is that adding an entry is now a decision
-# rather than an alphabetical insert. Say in the pull request why the new entry
-# sits where it does.
+# It is NOT a ranking, and nothing on this page is better than anything else on
+# it — the note under each entry is the only quality signal, and it is dated
+# and signed by being ours.
+#
+# The cost is that adding an entry is a decision rather than an alphabetical
+# insert. Say in the pull request which run it belongs to and why.
 #
 # Example entry, for copying:
 #
@@ -86,6 +94,7 @@
 #     language:    German
 #     year:        2019
 #     added:       2026-08
+#     group:       real-systems
 #
 # Entries are added by someone who has at least opened the thing. `make
 # check-external` can verify that a URL resolves, not that the documentation
@@ -115,10 +124,8 @@
   language:    English and Spanish
   year:        2024–2025
   added:       2026-08
+  group:       start-here
 
-# Second: the first REAL system on the page, and deliberately right after the
-# invented one — a reader who has just seen what a tidy arc42 walkthrough looks
-# like meets a version of the same template bent to fit a running product.
 - title:       geOrchestra Gateway — Architecture Documentation
   url:         https://docs.georchestra.org/gateway/en/latest/arc42/
   author:      The geOrchestra project
@@ -141,10 +148,8 @@
   facets:      [Production system, Gateway component only, C4 section structure, Markdown, Structurizr diagrams]
   licence:     GPL-3.0
   added:       2026-08
+  group:       real-systems
 
-# Third: the one entry that is not a document but a corpus, so it asks more of
-# a reader than the two above — you have to pick a team before you can read
-# anything. It sits after them and before DokChess for that reason.
 - title:       Software Architecture course, University of Oviedo
   url:         https://arquisoft.github.io/
   author:      Students of the Software Engineering degree, University of Oviedo
@@ -170,13 +175,8 @@
   language:    English and Spanish
   year:        2018–2026
   added:       2026-08
+  group:       corpora
 
-# LAST BY DECISION, and the one entry whose position is not the easiest-first
-# rule: it is the deepest example on the page and the only one whose primary
-# edition is not English, so it is the wrong thing to open first and the right
-# thing to arrive at. If the list grows past a screen, this ordering needs
-# revisiting — an entry nobody scrolls to is not being recommended.
-#
 # The URL is the SITE ROOT, not the /dokchess/arc42/ path that arc42.org still
 # links to: that path 301s to a broken `https://www.dokchess.de//`. Checked
 # 2026-08.
@@ -202,3 +202,4 @@
   language:    German, with an English translation
   year:        2025
   added:       2026-08
+  group:       deep

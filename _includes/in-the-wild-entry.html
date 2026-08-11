@@ -1,0 +1,56 @@
+{%- comment -%}
+  One entry of /in-the-wild/. Takes `entry`. The <ol> wrapper belongs to the
+  caller (_pages/in-the-wild.md), which renders one per run.
+
+  The host is shown in the facts line so a reader knows where a link goes.
+  That is why these links do not open in a new tab (WCAG 3.2.5): showing the
+  destination is the warning.
+{%- endcomment -%}
+{%- assign host = entry.url | split: '//' | last | split: '/' | first | remove_first: 'www.' -%}
+{%- assign anchor = entry.title | slugify -%}
+<li class="ex-wild__item" id="{{ anchor }}">
+  {%- comment -%} __main is the grid's left track; the facts list is the right one. {%- endcomment -%}
+  <div class="ex-wild__main">
+    {%- comment -%} Exactly one link per entry, on the title. {%- endcomment -%}
+    <h3 class="ex-wild__name">
+      <a href="{{ entry.url }}" rel="noopener noreferrer">{{ entry.title }}</a>
+    </h3>
+
+    <p class="ex-wild__by">{{ entry.author }}</p>
+
+    <p class="ex-wild__desc">{{ entry.description }}</p>
+
+    {%- comment -%}
+      A facet is a checkable fact about the DOCUMENT, never about the system —
+      the rule and the five-item ceiling are in _data/in-the-wild.yml.
+
+      Both lists name their entry. Twenty lists all labelled "About this
+      documentation" are twenty identical rows in a screen reader's element
+      list, which is the same as having no label at all.
+    {%- endcomment -%}
+    {%- if entry.facets and entry.facets.size > 0 -%}
+    <ul class="ex-chips ex-wild__facets" aria-label="About {{ entry.title }}">
+      {%- for f in entry.facets limit: 5 -%}
+      <li class="ex-chip">{{ f }}</li>
+      {%- endfor -%}
+    </ul>
+    {%- endif -%}
+
+    {%- if entry.note -%}
+    <p class="ex-wild__note">{{ entry.note }}</p>
+    {%- endif -%}
+  </div>
+
+  {%- comment -%}
+    Separators are borders, not characters: CSS-generated punctuation gets
+    announced, so do not put middots back. The sr-only labels are what name
+    values that arrive as bare strings out loud.
+  {%- endcomment -%}
+  <ul class="ex-wild__facts" aria-label="{{ entry.title }} — provenance">
+    {%- if entry.language %}<li><span class="ex-sr-only">Language: </span>{{ entry.language }}</li>{% endif -%}
+    {%- if entry.year %}<li><span class="ex-sr-only">Written: </span>{{ entry.year }}</li>{% endif -%}
+    {%- if entry.licence %}<li><span class="ex-sr-only">Licence: </span>{{ entry.licence }}</li>{% endif -%}
+    {%- if host %}<li><span class="ex-sr-only">Published at: </span>{{ host }}</li>{% endif -%}
+    {%- if entry.added %}<li>added {{ entry.added }}</li>{% endif -%}
+  </ul>
+</li>

@@ -1,0 +1,51 @@
+# ============================================================================
+# The runs of /in-the-wild/ — the editorial order, made visible.
+#
+# _data/in-the-wild.yml has always been ordered "roughly easiest first", and a
+# reader has never been able to perceive it: twenty entries in one list read as
+# arbitrary no matter how carefully they were sequenced. This file turns that
+# ordering into four or five named groups the page can actually print, which
+# is the difference between an order and a decision nobody sees.
+#
+# THIS FILE SETS THE ORDER OF THE RUNS. Entry order WITHIN a run is still the
+# order in _data/in-the-wild.yml. Both are editorial; neither is alphabetical.
+#
+# Every entry carries `group:` matching an `id` here. An entry whose group
+# matches nothing renders in an unheaded list at the foot of the page — it is
+# meant to look wrong, because it is. `make check` fails on it first.
+#
+# FIELDS
+#   id     required  Slug. Also the heading's anchor, so /in-the-wild/#corpora
+#                    is a permanent link. Renaming one breaks inbound links.
+#   title  required  Short. It is a heading, not a sentence — the qualifier
+#                    belongs in `blurb`.
+#   blurb  required  One sentence: what this run is, and who should open it.
+#                    This is OUR voice, same as an entry's `note`.
+#
+# Adding a run is cheap; adding a fifth or sixth is not. Four groups of five
+# is inside working memory, seven groups of three is a second list problem.
+# ============================================================================
+
+- id:    start-here
+  title: Start here
+  blurb: >-
+    Short, self-contained, and readable in one sitting. If you have never seen
+    a complete arc42 document, open one of these first.
+
+- id:    real-systems
+  title: Real systems, real compromises
+  blurb: >-
+    Documentation of software somebody has to keep running. Expect the
+    template to have been bent, and expect gaps where it met a deadline.
+
+- id:    corpora
+  title: Corpora
+  blurb: >-
+    Not one documentation but many. You have to pick a team before you can
+    read anything, and the sample size is the whole point.
+
+- id:    deep
+  title: Deep and finished
+  blurb: >-
+    Every section filled and argued. The longest reads on this page, and the
+    ones to arrive at rather than to start with.

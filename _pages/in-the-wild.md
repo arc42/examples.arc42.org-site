@@ -8,76 +8,104 @@ permalink: /in-the-wild/
 hero: wild
 ---
 {%- comment -%}
-  The external reading list. Entries and their order both come from
-  _data/in-the-wild.yml — do not sort here. Why this is a bibliography and
-  not a tile grid is in that file's header and in _sass/_in-the-wild.scss.
+  The external reading list. Entries come from _data/in-the-wild.yml; the runs
+  they are grouped into, and the order of those runs, come from
+  _data/in-the-wild-runs.yml. Both are editorial orders — do not sort here.
+  Why this is a bibliography and not a tile grid is in those files' headers
+  and in _sass/_in-the-wild.scss.
 {%- endcomment -%}
 {%- assign entries = site.data['in-the-wild'] -%}
+{%- assign runs = site.data['in-the-wild-runs'] -%}
 
 <div class="ex-shell ex-shell--wild">
   <div class="ex-prose">
-    <p>These are arc42 documentations we cannot host, often because their
-    licence does not allow it.
+    <p>These are {{ entries.size }} arc42 documentations we cannot host, often
+    because their licence does not allow it.
     We link them because we consider them useful or interesting.
-    We have checked their content or structure.
-    The notes under each is our personal opinion on the date it was added.
+    We have <strong>not</strong> checked their structure and content — that is
+    the difference between this page and the
+    <a href="{{ '/' | relative_url }}">examples</a>.
+    The note under each is our personal opinion on the date it was added.
     </p>
   </div>
 
   {%- if entries and entries.size > 0 -%}
-  <ol class="ex-wild">
-    {%- for entry in entries -%}
-    {%- comment -%}
-      The host is shown in the facts line so a reader knows where a link goes.
-      That is why these links do not open in a new tab (WCAG 3.2.5): showing
-      the destination is the warning.
-    {%- endcomment -%}
-    {%- assign host = entry.url | split: '//' | last | split: '/' | first | remove_first: 'www.' -%}
-    <li class="ex-wild__item">
-      {%- comment -%} __main is the grid's left track; the facts list is the right one. {%- endcomment -%}
-      <div class="ex-wild__main">
-        {%- comment -%} Exactly one link per entry, on the title. {%- endcomment -%}
-        <h2 class="ex-wild__name">
-          <a href="{{ entry.url }}" rel="noopener noreferrer">{{ entry.title }}</a>
-        </h2>
 
-        <p class="ex-wild__by">{{ entry.author }}</p>
+  {%- comment -%}
+    Contents, and only once the list has outgrown a couple of screens. Below
+    eight entries every run heading is already on screen and an index would
+    print each title twice for nothing.
 
-        <p class="ex-wild__desc">{{ entry.description }}</p>
-
-        {%- comment -%}
-          A facet is a checkable fact about the DOCUMENT, never about the
-          system — the rule and the five-item ceiling are in
-          _data/in-the-wild.yml.
-        {%- endcomment -%}
-        {%- if entry.facets and entry.facets.size > 0 -%}
-        <ul class="ex-chips ex-wild__facets" aria-label="About this documentation">
-          {%- for f in entry.facets limit: 5 -%}
-          <li class="ex-chip">{{ f }}</li>
+    This is the one place an entry carries a SECOND link. One-link-per-entry
+    exists to keep a tile's tab order honest; an index link is a different job,
+    and without it nothing on this page is addressable.
+  {%- endcomment -%}
+  {%- if entries.size >= 8 -%}
+  <nav class="ex-wild-toc" aria-label="Contents">
+    <p class="ex-wild-toc__label">On this page</p>
+    <ul class="ex-wild-toc__runs">
+      {%- for run in runs -%}
+      {%- assign in_run = entries | where: 'group', run.id -%}
+      {%- if in_run.size > 0 -%}
+      <li class="ex-wild-toc__run">
+        <p class="ex-wild-toc__runname"><a href="#{{ run.id }}">{{ run.title }}</a></p>
+        <ul class="ex-wild-toc__items">
+          {%- for entry in in_run -%}
+          <li><a href="#{{ entry.title | slugify }}">{{ entry.title }}</a></li>
           {%- endfor -%}
         </ul>
-        {%- endif -%}
+      </li>
+      {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  </nav>
+  {%- endif -%}
 
-        {%- if entry.note -%}
-        <p class="ex-wild__note">{{ entry.note }}</p>
-        {%- endif -%}
-      </div>
+  {%- comment -%}
+    `placed` records what the runs rendered, so the orphan pass below can find
+    entries whose `group` matches no run. Bars either side of the title stop
+    one title matching another that contains it.
+  {%- endcomment -%}
+  {%- assign placed = '' -%}
 
-      {%- comment -%}
-        Separators are borders, not characters: CSS-generated punctuation gets
-        announced, so do not put middots back. The sr-only labels are what name
-        values that arrive as bare strings out loud.
-      {%- endcomment -%}
-      <ul class="ex-wild__facts" aria-label="Provenance">
-        {%- if entry.language %}<li><span class="ex-sr-only">Language: </span>{{ entry.language }}</li>{% endif -%}
-        {%- if entry.year %}<li><span class="ex-sr-only">Written: </span>{{ entry.year }}</li>{% endif -%}
-        {%- if entry.licence %}<li><span class="ex-sr-only">Licence: </span>{{ entry.licence }}</li>{% endif -%}
-        {%- if host %}<li><span class="ex-sr-only">Published at: </span>{{ host }}</li>{% endif -%}
-        {%- if entry.added %}<li>added {{ entry.added }}</li>{% endif -%}
-      </ul>
-    </li>
+  {%- for run in runs -%}
+  {%- assign in_run = entries | where: 'group', run.id -%}
+  {%- if in_run.size > 0 -%}
+  <section class="ex-wild-run" aria-labelledby="{{ run.id }}">
+    <h2 class="ex-wild-run__name" id="{{ run.id }}">{{ run.title }}</h2>
+    <p class="ex-wild-run__blurb">{{ run.blurb }}</p>
+    <ol class="ex-wild">
+      {%- for entry in in_run -%}
+      {% include in-the-wild-entry.html entry=entry %}
+      {%- assign placed = placed | append: '|' | append: entry.title | append: '|' -%}
+      {%- endfor -%}
+    </ol>
+  </section>
+  {%- endif -%}
+  {%- endfor -%}
+
+  {%- comment -%}
+    Orphans: an entry whose `group` is missing or misspelt. It renders with no
+    heading above it, straight after the headed runs, because it is meant to
+    look wrong — silently dropping an entry a contributor added is the one
+    failure mode this grouping could introduce. `make check` catches it first.
+  {%- endcomment -%}
+  {%- assign orphan_count = 0 -%}
+  {%- for entry in entries -%}
+  {%- assign needle = '|' | append: entry.title | append: '|' -%}
+  {%- unless placed contains needle -%}{%- assign orphan_count = orphan_count | plus: 1 -%}{%- endunless -%}
+  {%- endfor -%}
+  {%- if orphan_count > 0 -%}
+  <ol class="ex-wild">
+    {%- for entry in entries -%}
+    {%- assign needle = '|' | append: entry.title | append: '|' -%}
+    {%- unless placed contains needle -%}
+    {% include in-the-wild-entry.html entry=entry %}
+    {%- endunless -%}
     {%- endfor -%}
   </ol>
+  {%- endif -%}
+
   {%- else -%}
   <div class="ex-prose">
     <div class="ex-note">

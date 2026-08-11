@@ -75,9 +75,135 @@ $wild-rail-collapse: 1040px;
   max-width: calc(var(--measure) + var(--s6) + #{$wild-rail} + var(--s5) * 2);
 }
 
+// ---- Runs --------------------------------------------------------------------
+//
+// The list is grouped into four named runs (_data/in-the-wild-runs.yml). That
+// file argues why; what the CSS has to get right is that a run must not read
+// as a bigger entry.
+//
+// It does that with SPACE and a HEADING, and pointedly not with a rule. There
+// is already a hairline between entries; a second, heavier one between runs
+// would put the two breaks on the same axis and leave only weight to tell them
+// apart. So the rhythm carries it — 48px between entries (--s5 of padding
+// either side of the shared border), 88px between runs (that padding plus
+// --s8) — and the only new mark on the page is a line of Caslon.
+//
+// Caslon because a run name is OUR voice, the same voice as an entry's note,
+// and this site has no pigment to distinguish it with. Entry titles stay sans:
+// they are the names of other people's documents.
+.ex-wild-run {
+  margin-top: var(--s8);
+
+  &__name {
+    margin: 0;
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    line-height: 1.2;
+    color: var(--ground-deep);     // 14.12:1 on --paper
+  }
+
+  // Tight to the heading it belongs to, and capped at the measure so it does
+  // not run out under the rail's column at ≥1040px.
+  &__blurb {
+    max-width: var(--measure);
+    margin: var(--s2) 0 0;
+    color: var(--muted);           // 5.50:1
+  }
+}
+
+// ---- Contents ----------------------------------------------------------------
+//
+// Rendered only from eight entries up (_pages/in-the-wild.md); below that every
+// run heading is already on screen. Hairlines above and below, no fill, no
+// radius — the same omissions the list itself is built from, because an index
+// that looked like a card would undo the argument in one element.
+.ex-wild-toc {
+  margin-top: var(--s7);
+  padding-block: var(--s5);
+  border-block: 1px solid var(--hairline);
+
+  &__label {
+    margin: 0 0 var(--s4);
+    font-size: 0.8125rem;
+    color: var(--muted);           // 5.50:1
+  }
+
+  &__runs {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  // A run and its titles are one block: `break-inside` keeps a heading from
+  // being stranded at the foot of a column without the entries it names.
+  //
+  // The cost is that the two columns can only balance if the runs are roughly
+  // the same size — eleven entries in one run and two in the next leaves the
+  // right column half empty, because an unbreakable twelve-row block cannot be
+  // split to even them up. That is worth keeping as-is: a run three times the
+  // size of its neighbours is the thing _data/in-the-wild-runs.yml already
+  // tells you to split, and here the index says so on screen.
+  &__run {
+    break-inside: avoid;
+    margin: 0 0 var(--s5);
+
+    &:last-child { margin-bottom: 0; }
+  }
+
+  &__runname {
+    margin: 0 0 var(--s2);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--muted);           // 5.50:1
+
+    a { color: inherit; }
+  }
+
+  &__items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.9375rem;
+
+    li + li { margin-top: var(--s1); }
+  }
+}
+
+// Two columns once a column is wide enough to hold a title on ONE line, and
+// not one pixel earlier: a second column bought by wrapping every other title
+// onto two lines makes the index longer AND harder to scan, which is both of
+// its jobs lost at once.
+//
+// MEASURED from the shipped woff2 at the 0.9375rem list size, not estimated.
+// The longest title in the data today is "geOrchestra Gateway — Architecture
+// Documentation" at 347.3px; "Software Architecture course, University of
+// Oviedo" is 330.9px. Budgeting 400px per column leaves room for a title about
+// a fifth longer than anything here before it wraps:
+//
+//   column       400px
+//   column-gap    48px   (--s7)
+//   column       400px
+//   padding       96px   (--s5 either side of .ex-shell)
+//   --------------------
+//   total        944px   ->  960px, the nearest round step above it
+//
+// At the shell's 1029.1px cap each column is 442.5px, so the columns get wider
+// than the budget, never narrower. Below 960px it is one column, which is the
+// right shape for a phone anyway.
+//
+// Not `column-width`: at 981px of content that resolves to three or four
+// columns, and twenty titles in four columns is a directory, not a contents
+// page.
+@media (min-width: 960px) {
+  .ex-wild-toc__runs {
+    columns: 2;
+    column-gap: var(--s7);
+  }
+}
+
 .ex-wild {
   list-style: none;
-  margin: var(--s7) 0 0;
+  margin: var(--s4) 0 0;
   padding: 0;
 
   &__item {
@@ -90,10 +216,6 @@ $wild-rail-collapse: 1040px;
     }
   }
 
-  // h3-sized although it is an <h2>. Level and size are different things: the
-  // entries really are sections of this page, but at h2's 1.5rem they would
-  // compete with the page title and the list would read as a stack of
-  // headlines rather than as a list.
   // The reading column. Capped at the measure in BOTH layouts, not just the
   // railed one: below the breakpoint there is no rail to hold it back, and a
   // 1039px-wide window would otherwise set the note across the full shell.
@@ -101,6 +223,9 @@ $wild-rail-collapse: 1040px;
     max-width: var(--measure);
   }
 
+  // An <h3> under its run's <h2>, and sized below it deliberately: the run
+  // name is what a reader navigates by, the entry title is what they read.
+  // At the run heading's 1.5rem the list would be a stack of headlines.
   &__name {
     font-size: 1.1875rem;
     line-height: 1.3;
