@@ -393,17 +393,23 @@
 // The condensed bar sticks; the hero does not (a 300px hero pinned to the top
 // of a twelve-section document is a scroll tax, not navigation).
 //
-// It sticks ONLY where it is one --bar-h row. Below the rail breakpoint the
-// brand and the nav wrap onto separate lines and the bar measures ~128px
-// (~201px at 320px) — but `--bar-h` stays 56px, and with it the
-// `scroll-padding-top` and `scroll-margin-top` derived from it. Every anchor
-// then landed 50–123px underneath an opaque band.
+// It sticks ONLY where it is one --bar-h row. Below 940px the brand and the
+// nav wrap onto separate lines and the bar measures ~128px (~201px at 320px) —
+// but `--bar-h` stays 56px, and with it the `scroll-padding-top` and
+// `scroll-margin-top` derived from it. Every anchor then landed 50–123px
+// underneath an opaque band.
 //
 // The fix is not a second --bar-h guess for a height that depends on how the
-// nav happens to wrap. Below 940px nothing else is sticky either — the rail is
-// a horizontal strip that scrolls away with the page — so the bar scrolls away
-// too. Anchors cannot be occluded by chrome that is not there, and a phone
-// gets back 15% of its viewport that a nav nobody reads with was holding.
+// nav happens to wrap: below 940px the bar scrolls away instead, and anchors
+// cannot be occluded by chrome that is not there. A phone also gets back 15%
+// of its viewport that a nav nobody reads with was holding.
+//
+// 940 IS THE MASTHEAD'S OWN NUMBER — the width at which the brand, the nav and
+// the search field stop fitting on one line. It used to coincide with the rail
+// breakpoint, and that coincidence is gone since the rail moved to 1040px
+// (2026-08-11). Between 940 and 1039px the bar is sticky while the section
+// rail is a horizontal strip, which is fine: the strip scrolls with the page
+// and the bar is one row tall, which is the only condition this rule needs.
 @media (min-width: 940px) {
   .ex-masthead--bar {
     position: sticky;

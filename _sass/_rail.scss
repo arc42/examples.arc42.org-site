@@ -5,17 +5,37 @@
 // column are justified by the measure, not by device convention).
 //
 // At this site's body size — 17px Atkinson Hyperlegible Next, where the "0"
-// advance makes 1ch ≈ 9.35px — the railed layout gives the prose column
+// advance is 648/1000 em and 1ch is therefore 11.016px — the railed layout
+// gives the prose column
 //
 //     content = viewport − 48px (shell padding) − rail − 48px (gap)
-//     rail    = clamp(210px, 19vw, 260px)
+//     rail    = clamp(210px, 19vw, 260px), which is 210px at every width
+//               below 1368px and so at every width in this table
 //
-//   viewport 1024px → 718px → 76.8ch   (at the top of the 65–75 band)
-//   viewport  940px → 634px → 67.8ch   (comfortably inside it)
-//   viewport  900px → 594px → 63.5ch   (BELOW the 65ch floor)
+//   viewport 1056px → 750px → 68.1ch   (the full --measure)
+//   viewport 1040px → 734px → 66.6ch   (inside the band, with room)
+//   viewport 1022px → 716px → 65.0ch   (EXACTLY the floor)
+//   viewport  940px → 634px → 57.6ch   (7ch BELOW the floor)
 //
-// So the rail gives way at 940px, not at a tablet-shaped round number: 900px
-// is where the prose breaks, and 940 is the nearest step with margin.
+// So the rail gives way at 1040px: 1022px is where the prose breaks, and 1040
+// is the nearest step that clears it with room to spare.
+//
+// THIS WAS 940px UNTIL 2026-08-11, AND IT WAS WRONG BY ONE LETTER. The comment
+// above used to put 1ch at 9.35px and to attribute that to the "0" advance.
+// 9.35px is the advance of "n" (550/1000 em); CSS defines ch as the advance of
+// "0". Every figure derived from it came out at 0.85 of the truth, so a layout
+// this file certified as "comfortably inside" the 65–75ch band was in fact 7ch
+// under its floor — the number written to protect the measure was the one
+// breaking it. Measured with fontTools against assets/fonts/*.woff2, not
+// estimated; _sass/_in-the-wild.scss has always used the correct figure.
+//
+// 1024px was the other candidate and is rejected twice: it clears the floor by
+// 0.18ch, which is not a margin, and it is a tablet width, which is the kind
+// of number this whole derivation exists to avoid. 1040px is also where
+// /in-the-wild/ collapses its own rail, so the site now has ONE rail
+// breakpoint instead of two that differed by 100px for no reason a reader
+// could discover. The two arrive there by different arithmetic (that page has
+// a 200px rail and a 32px gap); they agree on the answer.
 //
 // One list serves both layouts. Below the breakpoint it becomes a horizontal
 // scrolling strip rather than disappearing — on a phone a reader still needs
@@ -23,7 +43,21 @@
 // twelve-part document unnavigable exactly where navigation is hardest.
 // ============================================================================
 
-$rail-collapse: 940px;
+$rail-collapse: 1040px;
+
+// UNRAILED, the shell is the column plus its own padding: 72ch (--measure plus
+// the 4ch the railed column gets) and 48px of shell padding, 841.2px.
+//
+// Without this the column had no cap at all below the breakpoint — the cap
+// lives in the railed media query — and it ran the full shell. At 939px that
+// was 80.9ch, already past the 75ch ceiling; when the breakpoint moved to
+// 1040px it became 90.0ch at 1039px, measured. Capping the SHELL rather than
+// the column is the same fix /in-the-wild/ took: cap the column alone and the
+// strip's rule above it still spans the full width, ruling across the empty
+// space beside the text.
+.ex-shell--railed {
+  max-width: calc(var(--measure) + 4ch + var(--s5) * 2);
+}
 
 .ex-rail {
   &__systitle {
@@ -81,9 +115,11 @@ $rail-collapse: 940px;
   }
 }
 
-// ---- ≥940px: a sticky vertical rail ------------------------------------------
+// ---- ≥1040px: a sticky vertical rail ------------------------------------------
 @media (min-width: $rail-collapse) {
   .ex-shell--railed {
+    // Back to the full shell: the rail needs the width the cap above denies it.
+    max-width: var(--shell-max);
     display: grid;
     grid-template-columns: var(--rail-w) minmax(0, 1fr);
     gap: var(--s7);
@@ -117,7 +153,7 @@ $rail-collapse: 940px;
   }
 }
 
-// ---- <940px: a horizontal strip ----------------------------------------------
+// ---- <1040px: a horizontal strip ----------------------------------------------
 @media (max-width: #{$rail-collapse - 1px}) {
   .ex-rail {
     margin-bottom: var(--s6);

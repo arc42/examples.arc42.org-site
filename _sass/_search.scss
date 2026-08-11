@@ -265,9 +265,11 @@
     }
   }
 
-  // Below the rail breakpoint the masthead already wraps to two rows. The
-  // field takes the full second row rather than being squeezed beside four
-  // nav items, and the panel widens with it.
+  // At 940px the masthead wraps to two rows. The field takes the full second
+  // row rather than being squeezed beside four nav items, and the panel widens
+  // with it. This number is the masthead's, not the rail's: it is where the
+  // brand, the nav and this field stop fitting on one line, and it stopped
+  // coinciding with the rail breakpoint when that moved to 1040px.
   @media (max-width: 939px) {
     flex: 1 1 100%;
     order: 3;

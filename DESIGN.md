@@ -298,13 +298,21 @@ measure plus the 200px rail and its gap above (1029.1px). The reading column is
 68ch on both sides. The derivation is in `_sass/_in-the-wild.scss` at the
 declarations.
 
-The systems rail collapses at **940px**, and that number is wrong. At 11.016px a
-ch, the railed layout gives 1024px → 65.2ch, 940px → 57.6ch and 900px → 53.9ch,
-so 940px is already 7ch below the 65ch floor this section invokes; the floor is
-crossed at 1022px and the breakpoint belongs at 1024px. Correcting it moves a
-breakpoint on every system page, so it is a change of its own and is **not done
-yet**: `_sass/_rail.scss` still carries the old number and the `n` advance it
-was derived from.
+The systems rail collapses at **1040px**, and it collapsed at 940px until
+2026-08-11, which was wrong by one letter. `_sass/_rail.scss` put 1ch at 9.35px
+and attributed it to the `0` advance; 9.35px is the advance of `n`. At the real
+11.016px the railed layout gives 1056px → 68.1ch, 1040px → 66.6ch, 1022px →
+65.0ch and 940px → 57.6ch, so the old breakpoint sat 7ch below the floor the
+same comment invoked. 1022px is where the prose breaks and 1040px is the
+nearest step that clears it with room. 1024px was rejected: it clears by 0.18ch,
+and it is a tablet width.
+
+**Both rails on this site now collapse at 1040px** — the systems rail and the
+one on `/in-the-wild/` — by different arithmetic and to the same answer.
+
+940px survives as the **masthead's** own breakpoint, which is where the brand,
+the nav and the search field stop fitting on one line. It is no longer the same
+number as the rail, and `_sass/_masthead.scss` says so at the declaration.
 
 Below the rail breakpoint the rail becomes a horizontal scrolling strip rather
 than disappearing: a twelve-part document must stay navigable on a phone.
