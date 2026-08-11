@@ -2,27 +2,40 @@
   One entry of /in-the-wild/. Takes `entry`. The <ol> wrapper belongs to the
   caller (_pages/in-the-wild.md), which renders one per run.
 
-  The host is shown in the facts line so a reader knows where a link goes.
-  That is why these links do not open in a new tab (WCAG 3.2.5): showing the
-  destination is the warning.
+  BLOCK ORDER IS THE TRIAGE ORDER, and it is not the order the fields are
+  declared in: title, who wrote it and where it lives, the checkable chips,
+  the neutral description, then our opinion. A reader deciding whether to
+  spend an hour on an unvetted link needs identity and facts first; the note
+  is the longest block and the last, so skipping it costs nothing. It used to
+  sit between the description and the chips, which put the one thing nobody
+  else could have written in the way of the four things anybody can check.
 {%- endcomment -%}
 {%- assign host = entry.url | split: '//' | last | split: '/' | first | remove_first: 'www.' -%}
 {%- assign anchor = entry.title | slugify -%}
 <li class="ex-wild__item" id="{{ anchor }}">
-  {%- comment -%} __main is the grid's left track; the facts list is the right one. {%- endcomment -%}
   <div class="ex-wild__main">
     {%- comment -%} Exactly one link per entry, on the title. {%- endcomment -%}
     <h3 class="ex-wild__name">
       <a href="{{ entry.url }}" rel="noopener noreferrer">{{ entry.title }}</a>
     </h3>
 
-    <p class="ex-wild__by">{{ entry.author }}</p>
-
-    <p class="ex-wild__desc">{{ entry.description }}</p>
+    {%- comment -%}
+      The host sits HERE, one line under the link, and not in the rail where it
+      used to be. These links deliberately do not open in a new tab (WCAG
+      3.2.5) and showing the destination is what replaces the warning — which
+      only works if the destination is visible at the moment the reader decides
+      to click. In the rail it was 200px to the right on a desktop and some
+      500px below the link on a phone, i.e. after the decision, not before it.
+    {%- endcomment -%}
+    <p class="ex-wild__by">
+      {{ entry.author }}
+      <span class="ex-wild__host"><span class="ex-sr-only">Published at </span>{{ host }}</span>
+    </p>
 
     {%- comment -%}
       A facet is a checkable fact about the DOCUMENT, never about the system —
-      the rule and the five-item ceiling are in _data/in-the-wild.yml.
+      the rule and the five-item ceiling are in _data/in-the-wild.yml, as is
+      why section coverage is NOT one of these.
 
       Both lists name their entry. Twenty lists all labelled "About this
       documentation" are twenty identical rows in a screen reader's element
@@ -36,21 +49,50 @@
     </ul>
     {%- endif -%}
 
+    <p class="ex-wild__desc">{{ entry.description }}</p>
+
     {%- if entry.note -%}
     <p class="ex-wild__note">{{ entry.note }}</p>
+    {%- comment -%}
+      The date belongs to the NOTE, not to the rail: it is the note that goes
+      stale, and the intro paragraph already promises the opinion is dated.
+    {%- endcomment -%}
+    <p class="ex-wild__added">Added {{ entry.added }}</p>
     {%- endif -%}
   </div>
 
   {%- comment -%}
-    Separators are borders, not characters: CSS-generated punctuation gets
-    announced, so do not put middots back. The sr-only labels are what name
-    values that arrive as bare strings out loud.
+    A description list, because that is what it is: every row is a named value.
+    It used to be a <ul> of bare strings with the names supplied by .ex-sr-only,
+    so a screen reader heard "Licence: CC BY-NC 4.0" while everyone else read
+    "CC BY-NC 4.0" and had to infer it. The <dt> is the label for both.
+
+    ROW ORDER IS FIXED AND THE FIRST THREE ALWAYS RENDER. Sections is required,
+    an absent licence prints "not stated" (which the data file says is worth
+    writing out), and an absent language prints "English" (which the data file
+    says is what omitting it means). Only `year` can be missing, and it is last.
+    That is what makes the column scannable down the page: before this, the
+    licence sat in row 3 of one entry and row 1 of the next, and a reader could
+    not compare any value to the same value one entry below.
   {%- endcomment -%}
-  <ul class="ex-wild__facts" aria-label="{{ entry.title }} — provenance">
-    {%- if entry.language %}<li><span class="ex-sr-only">Language: </span>{{ entry.language }}</li>{% endif -%}
-    {%- if entry.year %}<li><span class="ex-sr-only">Written: </span>{{ entry.year }}</li>{% endif -%}
-    {%- if entry.licence %}<li><span class="ex-sr-only">Licence: </span>{{ entry.licence }}</li>{% endif -%}
-    {%- if host %}<li><span class="ex-sr-only">Published at: </span>{{ host }}</li>{% endif -%}
-    {%- if entry.added %}<li>added {{ entry.added }}</li>{% endif -%}
-  </ul>
+  <dl class="ex-wild__facts">
+    <div class="ex-wild__fact">
+      <dt>Sections</dt>
+      <dd>{{ entry.sections }}</dd>
+    </div>
+    <div class="ex-wild__fact">
+      <dt>Licence</dt>
+      <dd>{{ entry.licence | default: 'not stated' }}</dd>
+    </div>
+    <div class="ex-wild__fact">
+      <dt>Language</dt>
+      <dd>{{ entry.language | default: 'English' }}</dd>
+    </div>
+    {%- if entry.year -%}
+    <div class="ex-wild__fact">
+      <dt>Written</dt>
+      <dd>{{ entry.year }}</dd>
+    </div>
+    {%- endif -%}
+  </dl>
 </li>

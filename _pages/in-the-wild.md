@@ -18,14 +18,27 @@ hero: wild
 {%- assign runs = site.data['in-the-wild-runs'] -%}
 
 <div class="ex-shell ex-shell--wild">
+  {%- comment -%}
+    The framing paragraph, and the only place the disclaimer appears — thirty
+    repetitions of "not reviewed" is noise. It has four jobs and each sentence
+    does one: what these are, why they are here, what we have NOT done, and how
+    to read the page. The last one is why the runs are named in the copy: an
+    order a reader cannot see is not an order, and the jump link is the only
+    navigation this page has below eight entries, where the index does not
+    render. `runs.last` rather than a hard-coded name — the deepest run is the
+    last by construction, so the sentence cannot go stale when a run is added.
+  {%- endcomment -%}
   <div class="ex-prose">
-    <p>These are {{ entries.size }} arc42 documentations we cannot host, often
+    <p>These are {{ entries.size }} arc42 documentations we cannot host, usually
     because their licence does not allow it.
     We link them because we consider them useful or interesting.
     We have <strong>not</strong> checked their structure and content — that is
     the difference between this page and the
     <a href="{{ '/' | relative_url }}">examples</a>.
-    The note under each is our personal opinion on the date it was added.
+    They run roughly easiest first: start at the top if arc42 is new to you, or
+    go straight to <a href="#{{ runs.last.id }}">{{ runs.last.title }}</a> if it
+    is not.
+    The note under each entry is our opinion, and is dated.
     </p>
   </div>
 

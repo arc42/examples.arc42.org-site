@@ -243,37 +243,43 @@ $wild-rail-collapse: 1040px;
     }
   }
 
-  // The byline. Small and --muted, directly under the title: it is part of the
-  // citation, not part of the sentence, and at --ink it competed with the
-  // description for the eye immediately below it.
+  // The byline, and now the destination host beside it. Small and --muted,
+  // directly under the title: it is part of the citation, not part of the
+  // sentence, and at --ink it competed with the description for the eye.
+  //
+  // A hairline divides author from host, not a middot: CSS-generated
+  // punctuation gets announced, and a border never is. The pair wraps as a
+  // whole on a narrow screen rather than breaking mid-citation.
   &__by {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--s3);
     margin: var(--s1) 0 0;
     font-size: 0.875rem;
     color: var(--muted);           // 5.50:1
   }
 
+  // No `margin-left` to pair with the padding: the flex `gap` above already
+  // sets the distance, and doubling it here is how the old facts line grew a
+  // divider hanging off the start of a wrapped row.
+  &__host {
+    padding-left: var(--s3);
+    border-left: 1px solid var(--hairline);
+  }
+
   &__desc {
-    margin: var(--s3) 0 0;
-    color: var(--ink);             // 11.68:1
+    margin: var(--s4) 0 0;
+    color: var(--ink);             // 13.41:1
   }
 
   // Spacing only — .ex-chips (dashboard) supplies the layout and .ex-chip the
-  // look. Tighter to the description above (--s2) than to the note below
-  // (--s4), so the chips group with the sentence they qualify instead of
-  // floating between two paragraphs. Without that asymmetry the row reads as a
-  // third, unrelated block.
-  //
-  // The gap below is set on the NOTE and not as a bottom margin here: adjacent
-  // siblings collapse their margins, so a bottom margin smaller than the
-  // note's own --s3 would have had no effect at all and a larger one would
-  // have silently overridden it. The sibling selector states the intent and is
-  // the thing that actually runs.
+  // look. The chips now sit directly under the byline and above the
+  // description, so they group with the citation they qualify rather than
+  // floating between two paragraphs. --s3 up to the byline, --s4 down to the
+  // description: the asymmetry is what keeps them attached upwards.
   &__facets {
-    margin: var(--s2) 0 0;
-  }
-
-  &__facets + &__note {
-    margin-top: var(--s4);
+    margin: var(--s3) 0 0;
   }
 
   // Our editorial voice, and the one thing on the page that is an opinion.
@@ -288,29 +294,46 @@ $wild-rail-collapse: 1040px;
     color: var(--muted);           // 5.50:1
   }
 
-  // Language, year, licence, the DESTINATION HOST, and when we added it. The
-  // host is not decoration: these links deliberately do not open in a new tab
-  // (see _pages/in-the-wild.md), so showing where a link goes is what replaces
-  // the new-tab warning.
+  // Our editorial voice is dated, and this is the date. Sans and small against
+  // the note's Caslon, so it reads as a signature under the paragraph rather
+  // than as a sentence in it — and tight enough (--s2) that it cannot be
+  // mistaken for belonging to the entry below.
+  &__added {
+    margin: var(--s2) 0 0;
+    font-size: 0.8125rem;
+    color: var(--muted);           // 5.50:1
+  }
+
+  // Sections, licence, language, year — each a <dt> label and a <dd> value.
   //
-  // NARROW LAYOUT (below the breakpoint): one inline row, divided by a hairline
-  // rather than by the middot this used to carry. The middots were content —
-  // they lived in the markup and screen readers read them — and one fact per
-  // line with a rule between is the same information without punctuation
-  // anybody has to hear.
+  // NARROW LAYOUT (below the breakpoint): the pairs flow in one wrapping row
+  // with NO dividers between them. There used to be a hairline per item, and
+  // on a phone the row wrapped and left a divider hanging off the start of the
+  // second line, separating nothing. With every value now preceded by its own
+  // visible label the divider was never carrying the meaning anyway — the
+  // label is what tells the reader where one fact ends and the next begins.
   &__facts {
-    list-style: none;
     display: flex;
     flex-wrap: wrap;
+    gap: var(--s2) var(--s5);
     margin: var(--s4) 0 0;
     padding: 0;
     font-size: 0.875rem;
-    color: var(--muted);           // 5.50:1
+  }
 
-    li + li {
-      margin-left: var(--s3);
-      padding-left: var(--s3);
-      border-left: 1px solid var(--hairline);
+  &__fact {
+    display: flex;
+    align-items: baseline;
+    gap: var(--s2);
+    min-width: 0;
+
+    dt {
+      color: var(--muted);         // 5.50:1
+    }
+
+    dd {
+      margin: 0;
+      color: var(--ink);           // 13.41:1
     }
   }
 }
@@ -320,6 +343,38 @@ $wild-rail-collapse: 1040px;
 // in the left column at exactly the measure it had before; the catalogue data
 // moves out beside it.
 @media (min-width: $wild-rail-collapse) {
+  // ONE rule for the whole run, not one per entry.
+  //
+  // The rule used to be a `border-left` on each entry's facts block, stretched
+  // by the grid. That looked deliberate at four entries and disintegrated at
+  // twenty: the grid stretches to the row's CONTENT box, which excludes the
+  // item's --s5 padding, so the "rail" was N disconnected segments of 120–450px
+  // with 48px gaps, and each segment's length was set by that entry's note
+  // length. A line whose only signal is "this note was long" is worse than no
+  // line, because it looks like it means something.
+  //
+  // Absolutely positioned on the list instead, it runs unbroken from the first
+  // entry to the last. `right` is the width of the rail track, so the rule
+  // lands exactly on the grid's column boundary and moves with $wild-rail
+  // rather than needing its own number.
+  //
+  // Per run and not across the whole page: the runs are separated by space, and
+  // a rule bridging that space would tie together the two things the spacing
+  // exists to hold apart.
+  .ex-wild {
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: #{$wild-rail};
+      width: 1px;
+      background: var(--hairline);
+    }
+  }
+
   .ex-wild__item {
     display: grid;
     grid-template-columns: minmax(0, 1fr) #{$wild-rail};
@@ -327,25 +382,26 @@ $wild-rail-collapse: 1040px;
   }
 
   .ex-wild__facts {
-    // Stacked, one fact per line, so the rule below is a column and not a row.
+    // A column of labelled rows, which is the only shape in which a rail earns
+    // its width: a reader can run down "Sections" or "Licence" across twenty
+    // entries and compare them, which the old ragged inline list made
+    // impossible.
     flex-direction: column;
+    gap: var(--s3);
     margin-top: 0;
     padding-left: var(--s5);
+  }
 
-    // The hairline runs the FULL HEIGHT of the entry, not the height of the
-    // facts. That is the grid's default `stretch` doing the work, and it is
-    // the point of the whole layout: five short facts beside a six-line note
-    // would otherwise leave a 40px tick floating at the top of a 200px block,
-    // and the page would gain a rail without gaining any rhythm.
-    border-left: 1px solid var(--hairline);
+  // Label above value, not beside it. Beside it, "German, with an English
+  // translation" (232px measured) would wrap to three lines in a 200px track
+  // once a label had taken its share of the width.
+  .ex-wild__fact {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
 
-    li + li {
-      // The inline divider is a NARROW-layout device. Left in place it would
-      // draw a second, vertical rule between every stacked fact.
-      margin-left: 0;
-      padding-left: 0;
-      border-left: 0;
-      margin-top: var(--s2);
+    dt {
+      font-size: 0.75rem;
     }
   }
 }
