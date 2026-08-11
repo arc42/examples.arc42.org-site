@@ -421,11 +421,15 @@
         var doc = Engine.byUrl[match.ref];
         if (!doc) { return ""; }
         var where = whereLine(doc);
+        // A record may carry no body at all (`search_body: false`, for a page
+        // whose entries are indexed one by one). An empty <p> would still take
+        // its margin, so the hit would sit in a column of ragged gaps.
+        var body = excerpt(doc.content, result.tokens);
         return "<li>" +
           (where ? '<p class="ex-hit__where">' + escapeHtml(where) + "</p>" : "") +
           '<h2 class="ex-hit__title"><a href="' + escapeHtml(doc.url) + '">' +
           escapeHtml(doc.title) + "</a></h2>" +
-          '<p class="ex-hit__excerpt">' + excerpt(doc.content, result.tokens) + "</p>" +
+          (body ? '<p class="ex-hit__excerpt">' + body + "</p>" : "") +
           "</li>";
       }).join("");
 

@@ -3,8 +3,13 @@ layout: none
 sitemap: false
 ---
 {%- comment -%}
-  The search index. One entry per searchable page, built by Liquid at build
+  The search index. One record per searchable THING, built by Liquid at build
   time — no plugin, no Node step, nothing GitHub Pages cannot run.
+
+  A "thing" is not the same as a page. An example section is a page and is one
+  record; a /in-the-wild/ entry is a fifth of a page and is also one record,
+  because a reader searching "DokChess" wants that entry, not the top of a list
+  it happens to sit in. See the wild loop below.
 
   Body text is indexed, not just titles. On this site that is the whole point:
   a reader searches for "Drools", "template method" or "quality scenario", and
@@ -12,6 +17,15 @@ sitemap: false
   also why this site uses lunr for the masthead suggestions where arc42.de
   uses a lighter title-only scorer — its titles are meaningful on their own,
   and these are not.
+
+  FIELDS
+    type     "page", "example" or "wild". The masthead panel groups on it and
+             renders the groups in that order (assets/js/search.js: GROUPS).
+             A record with a type nothing renders is a record nobody sees.
+    system   Which example a section belongs to.
+    section  Its number, and null on a system's landing page — the landing page
+             is not section 50, that is just where `order` sorts it.
+    content  What gets matched. Empty is legal (see `search_body` below).
 
   `system` and `section` let a hit say WHERE it is: "MaMa-CRM · 3. Context and
   Scope" rather than a bare "Context and Scope", which is the same title in
@@ -32,9 +46,10 @@ sitemap: false
   {%- if sys and doc.title -%}
 {{ sep }}{
   "url": {{ doc.url | relative_url | jsonify }},
+  "type": "example",
   "title": {{ doc.title | jsonify }},
   "system": {{ sys.title | jsonify }},
-  "section": {{ doc.order | jsonify }},
+  "section": {%- if doc.url == sys_url %} null{% else %} {{ doc.order | jsonify }}{% endif %},
   "content": {{ doc.content | strip_html | strip_newlines | jsonify }}
 }
     {%- assign sep = ',' -%}
@@ -45,16 +60,56 @@ sitemap: false
   {%- comment -%}
     Real pages only: search.json itself, 404, robots.txt and the sitemap carry
     either no title or nothing a reader wants to land on.
+
+    `search_body: false` indexes the TITLE and nothing else. It exists for a
+    page whose body is already indexed record by record somewhere below — index
+    it twice and every query matching any one entry also returns the whole
+    page, ranked on a body several times longer than any single entry's. The
+    title still has to be here or the page becomes unreachable by its own name.
   {%- endcomment -%}
   {%- if page.title and page.url != '/404.html' and page.search != false -%}
 {{ sep }}{
   "url": {{ page.url | relative_url | jsonify }},
+  "type": "page",
   "title": {{ page.title | jsonify }},
   "system": null,
   "section": null,
-  "content": {{ page.content | strip_html | strip_newlines | jsonify }}
+  "content": {% if page.search_body == false %}""{% else %}{{ page.content | strip_html | strip_newlines | jsonify }}{% endif %}
 }
     {%- assign sep = ',' -%}
   {%- endif -%}
+{%- endfor -%}
+
+{%- comment -%}
+  /in-the-wild/, one record per entry rather than one for the page.
+
+  The anchor is `entry.title | slugify`, which is what _includes/in-the-wild-
+  entry.html puts on the <li>. THE TWO MUST AGREE and nothing checks that they
+  do: htmlproofer reads HTML, and this file is JSON, so a change to the anchor
+  scheme there breaks every link here silently. Change both or neither.
+
+  Everything a contributor wrote about an entry goes into `content`, including
+  our note — the note is where the words a reader actually searches for live
+  ("Structurizr", "decision records", "Mermaid"). The host is appended because
+  "dokchess" is a plausible query and appears in no other field.
+{%- endcomment -%}
+{%- for entry in site.data['in-the-wild'] -%}
+  {%- assign host = entry.url | split: '//' | last | split: '/' | first | remove_first: 'www.' -%}
+  {%- assign anchor = entry.title | slugify -%}
+  {%- capture wild_url -%}/in-the-wild/#{{ anchor }}{%- endcapture -%}
+  {%- capture wild_content -%}
+    {{ entry.author }} {{ entry.description }} {{ entry.note }}
+    {{ entry.facets | join: ' ' }} Sections {{ entry.sections }}
+    {{ entry.licence }} {{ entry.language | default: 'English' }} {{ entry.year }} {{ host }}
+  {%- endcapture -%}
+{{ sep }}{
+  "url": {{ wild_url | relative_url | jsonify }},
+  "type": "wild",
+  "title": {{ entry.title | jsonify }},
+  "system": null,
+  "section": null,
+  "content": {{ wild_content | normalize_whitespace | strip | jsonify }}
+}
+  {%- assign sep = ',' -%}
 {%- endfor -%}
 ]

@@ -6,6 +6,12 @@ permalink: /in-the-wild/
 # Hero band art (_sass/_masthead.scss). The H1 moves into the band and must
 # not be repeated in the body below.
 hero: wild
+
+# The title is indexed, the body is not: search.json emits one record per
+# ENTRY, anchored at that entry, so a reader searching "DokChess" lands on
+# DokChess rather than at the top of a list containing it. Indexing the page
+# as well would return the whole page for every query that matches any entry.
+search_body: false
 ---
 {%- comment -%}
   The external reading list. Entries come from _data/in-the-wild.yml; the runs
