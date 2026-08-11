@@ -36,15 +36,36 @@
   "use strict";
 
   var DEBOUNCE_MS = 120;
-  var PANEL_MAX = 8;      // suggestions in the masthead panel
   var EXCERPT_WORDS = 34;
   var EXCERPT_LEAD = 8;
+
+  // The panel's groups, in render order, keyed on the `type` search.json emits.
+  // Pages first for the same reason arc42.de puts Seiten first: someone typing
+  // in the masthead is usually navigating the site rather than reading it. A
+  // record whose type is missing from this list renders nowhere — add the group
+  // here in the same commit that adds the type there.
+  var GROUPS = [
+    { type: "page", label: "Pages" },
+    { type: "example", label: "Examples" },
+    { type: "wild", label: "In the wild" }
+  ];
+
+  // Per group, so one crowded group cannot fill the panel and hide the others;
+  // and overall, because a panel longer than this is a results page pretending
+  // to be a suggestion list. Both numbers are arc42.de's.
+  var PER_GROUP = 4;
+  var TOTAL_VISIBLE = 12;
 
   // lunr's tokenizer splits on whitespace and hyphens. Query terms are cut the
   // same way or "cross-cutting" typed into the box would never line up with
   // the two tokens the index holds.
   var SEPARATOR = /[\s\-]+/;
   var EDGES = /^[^0-9a-zÀ-ɏ]+|[^0-9a-zÀ-ɏ]+$/g;
+
+  // "Not part of a word", i.e. what a word may start after. Same character
+  // class as EDGES, which is what keeps the marking in markTerms() agreeing
+  // with the tokens the index was built from.
+  var WORD_EDGE = /[^0-9a-zÀ-ɏ]/;
 
   // Diacritic folding, applied SYMMETRICALLY to the index pipeline and to the
   // query. Folding one side only is worse than folding neither: the folded
@@ -174,6 +195,51 @@
     });
   }
 
+  // Marks the matched runs inside a title, for the panel. The tokens arrive
+  // folded ("georchestra"), the title does not ("geOrchestra"), so a regex over
+  // the raw string would never match: the offsets are found in the folded copy
+  // and applied to the original. That mapping holds only while folding is
+  // length-preserving — true for the precomposed accents these documents use,
+  // false for a ligature — so a length change means "leave it unmarked" rather
+  // than "mark the wrong letters".
+  //
+  // Only WORD-INITIAL occurrences are marked, because only those earned the
+  // hit: the index is queried with a trailing wildcard, so "ma" matches a token
+  // starting with "ma" and never the "ma" inside "systematic". Marking the
+  // latter would tell the reader something false about why the row is there.
+  function markTerms(text, tokens) {
+    var raw = String(text || "");
+    var folded = fold(raw);
+    if (!tokens.length || folded.length !== raw.length) { return escapeHtml(raw); }
+
+    var marked = [];
+    var found = false;
+    tokens.forEach(function (token) {
+      var at = folded.indexOf(token);
+      while (at !== -1) {
+        if (at === 0 || WORD_EDGE.test(folded.charAt(at - 1))) {
+          for (var i = at; i < at + token.length; i++) { marked[i] = true; }
+          found = true;
+        }
+        at = folded.indexOf(token, at + 1);
+      }
+    });
+    if (!found) { return escapeHtml(raw); }
+
+    var out = "";
+    var runStart = -1;
+    for (var i = 0; i <= raw.length; i++) {
+      var on = marked[i] === true;
+      if (on && runStart === -1) { runStart = i; }
+      else if (!on && runStart !== -1) {
+        out += "<mark>" + escapeHtml(raw.slice(runStart, i)) + "</mark>";
+        runStart = -1;
+      }
+      if (!on && i < raw.length) { out += escapeHtml(raw.charAt(i)); }
+    }
+    return out;
+  }
+
   function excerpt(content, tokens) {
     var words = String(content || "").split(/\s+/).filter(Boolean);
     if (!words.length) { return ""; }
@@ -191,10 +257,12 @@
     return (start > 0 ? "… " : "") + body + (end < words.length ? " …" : "");
   }
 
-  // "MaMa-CRM · section 9". The row's own title is the section title, which is
-  // the same string in every example — "Architecture Decisions" alone cannot
-  // tell a reader which system they just found. The bare number needs the word
-  // in front of it or it reads as a count.
+  // "MaMa-CRM · section 9", the standfirst over a hit on /search/. The hit's
+  // own title is the section title, which is the same string in every example
+  // — "Architecture Decisions" alone cannot tell a reader which system they
+  // just found. The bare number needs the word in front of it or it reads as a
+  // count. The masthead panel answers the same question with the URL path,
+  // which fits a one-line row where this does not.
   function whereLine(doc) {
     if (!doc.system) { return ""; }
     return doc.system + (doc.section ? " · section " + doc.section : "");
@@ -250,9 +318,26 @@
       }
     }
 
-    function render(result) {
-      var shown = result.matches.slice(0, PANEL_MAX);
-      if (!shown.length) {
+    // Buckets the matches by type, capped per group and overall, keeping the
+    // ranked order inside each bucket. Ranking decides WHICH rows survive the
+    // caps; the group order decides where the survivors sit.
+    function bucket(matches) {
+      var buckets = {};
+      var total = 0;
+      GROUPS.forEach(function (group) { buckets[group.type] = []; });
+      for (var i = 0; i < matches.length && total < TOTAL_VISIBLE; i++) {
+        var doc = Engine.byUrl[matches[i].ref];
+        var into = doc && buckets[doc.type];
+        if (!into || into.length >= PER_GROUP) { continue; }
+        into.push(doc);
+        total++;
+      }
+      return { groups: buckets, shown: total };
+    }
+
+    function render(result, raw) {
+      var capped = bucket(result.matches);
+      if (!capped.shown) {
         panel.innerHTML = '<p class="arc42-search__empty">No match.</p>';
         panel.hidden = false;
         input.setAttribute("aria-expanded", "true");
@@ -262,20 +347,54 @@
         return;
       }
 
-      var rowsHtml = shown.map(function (match, i) {
-        var doc = Engine.byUrl[match.ref];
-        var where = whereLine(doc);
-        return '<a class="arc42-search__row" role="option" aria-selected="false"' +
-          ' id="arc42-search-row-' + i + '" href="' + escapeHtml(doc.url) + '">' +
-          '<span class="arc42-search__row-title">' + escapeHtml(doc.title) + "</span>" +
-          (where ? '<span class="arc42-search__row-where">' + escapeHtml(where) + "</span>" : "") +
-          "</a>";
-      }).join("");
+      // The row's second column is the URL PATH, as on arc42.de. It is doing
+      // more work here than there: "Context and Scope" is the title of one
+      // section in every single example, and the path is the only thing on the
+      // row that says which example it belongs to.
+      //
+      // Without its fragment, though. An /in-the-wild/ record is anchored at
+      // its entry and that anchor is the slugified title, so printing it sets
+      // the same words twice on one row and truncates both.
+      var index = 0;
+      var html = '<div class="arc42-search__scroll" role="presentation">';
+      GROUPS.forEach(function (group) {
+        var docs = capped.groups[group.type];
+        if (!docs.length) { return; }
+        html += '<div class="arc42-search__group" role="group" aria-label="' +
+          escapeHtml(group.label) + '">' +
+          '<p class="arc42-search__group-label" aria-hidden="true">' +
+          escapeHtml(group.label) + "</p>";
+        docs.forEach(function (doc) {
+          html += '<a class="arc42-search__row" role="option" aria-selected="false"' +
+            ' id="arc42-search-row-' + index + '" href="' + escapeHtml(doc.url) + '">' +
+            '<span class="arc42-search__row-title">' + markTerms(doc.title, result.tokens) + "</span>" +
+            '<span class="arc42-search__row-path" aria-hidden="true">' +
+            escapeHtml(doc.url.split("#")[0]) + "</span></a>";
+          index++;
+        });
+        html += "</div>";
+      });
 
-      // Rows scroll; the footer below is outside .arc42-search__scroll so it
-      // stays put. Decorative (aria-hidden) — the aria-live status span below
-      // carries the counts for assistive tech.
-      panel.innerHTML = '<div class="arc42-search__scroll">' + rowsHtml + "</div>" +
+      // Everything the caps cut is still reachable, and reachable by keyboard:
+      // this row is inside the listbox, so Down past the last suggestion lands
+      // on it and Enter follows its href like any other row.
+      var hidden = result.matches.length - capped.shown;
+      if (hidden > 0) {
+        html += '<div class="arc42-search__group arc42-search__group--all" role="group" aria-label="More">' +
+          '<a class="arc42-search__row arc42-search__row--all" role="option" aria-selected="false"' +
+          ' id="arc42-search-row-' + index + '" href="' + escapeHtml(resultsUrl) +
+          "?q=" + encodeURIComponent(raw) + '">' +
+          '<span class="arc42-search__row-title">Show all <strong>' +
+          result.matches.length + "</strong> results for <strong>" +
+          escapeHtml(raw) + "</strong></span></a></div>";
+        index++;
+      }
+      html += "</div>";
+
+      // Rows scroll; the footer is outside .arc42-search__scroll so it stays
+      // put. Decorative (aria-hidden) — the aria-live status span below carries
+      // the counts for assistive tech.
+      panel.innerHTML = html +
         '<div class="arc42-search__footer" aria-hidden="true">' +
         '<span class="arc42-search__footer-hint">' +
         "<kbd>↵</kbd> open" +
@@ -292,7 +411,7 @@
 
       if (status) {
         status.textContent = result.matches.length + " result" +
-          (result.matches.length === 1 ? "" : "s") + ", " + shown.length + " shown.";
+          (result.matches.length === 1 ? "" : "s") + ", " + capped.shown + " shown.";
       }
     }
 
@@ -306,7 +425,7 @@
         });
         return;
       }
-      render(Engine.search(raw));
+      render(Engine.search(raw), raw);
     }
 
     function allResults() {

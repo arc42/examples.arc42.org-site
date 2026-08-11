@@ -9,8 +9,11 @@
 //   --tint       on --ground        12.44:1   (typed text in the bar)
 //   --tint-soft  on --ground         8.93:1   (placeholder, icon, kbd hint)
 //   --ink        on --paper         13.41:1   (suggestion titles)
-//   --muted      on --paper          5.50:1   (the "system · section" line)
-//   --ink        on --wash-hover     9.42:1   (highlighted suggestion)
+//   --muted      on --paper          5.50:1   (group labels, row paths, the
+//                                              "system · section" line)
+//   --ink        on --wash-hover     8.36:1   (highlighted suggestion)
+//   --wash-border on --paper         1.98:1   (the row marker, decorative)
+//   --ground-deep on --wash-hover    8.81:1   (the marker on the active row)
 // ============================================================================
 
 .arc42-search {
@@ -108,8 +111,13 @@
     z-index: 30;
     display: flex;
     flex-direction: column;
-    width: min(30rem, calc(100vw - var(--s5) * 2));
-    max-height: min(60vh, 26rem);
+    // 34rem, not 30: the row is two columns now, and at 30rem the 14rem path
+    // left ~12rem for the title, which ellipsised almost every section name.
+    width: min(34rem, calc(100vw - var(--s5) * 2));
+    // 32rem holds the twelve suggestions and their three group labels without
+    // scrolling on a laptop; below that the panel scrolled on every query that
+    // filled it, which is most of them.
+    max-height: min(60vh, 32rem);
     overflow: hidden;
     background: var(--paper);
     border: 1px solid var(--wash-border);
@@ -129,16 +137,49 @@
     overflow-y: auto;
   }
 
+  // Groups, one per record type, separated by a rule rather than by a hairline
+  // under every row: with a label over each group, a border on each row as well
+  // draws three lines in the space of two ideas.
+  &__group + &__group {
+    border-top: 1px solid var(--hairline);
+  }
+
+  &__group-label {
+    margin: 0;
+    padding: var(--s3) var(--s4) var(--s1);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);          // 5.50:1 on --paper
+  }
+
   &__row {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    padding: var(--s3) var(--s4);
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: baseline;
+    column-gap: var(--s4);
+    padding: var(--s2) var(--s4) var(--s2) var(--s5);
     text-decoration: none;
     color: var(--ink);
-    border-bottom: 1px solid var(--hairline);
 
-    &:last-child { border-bottom: 0; }
+    // The row marker. On arc42.de this bar is a different hue per result type
+    // and reads as a legend; this site has no hue to spend (ADR-0008), and the
+    // group label above already names the type. So it keeps the shape and
+    // spends it on the other job instead: it tracks the highlighted row, which
+    // is the one thing on this panel a keyboard user has to be able to find.
+    &::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: var(--s3);
+      width: 3px;
+      height: 1.1em;
+      transform: translateY(-50%);
+      background: var(--wash-border);
+      border-radius: 2px;
+    }
 
     // Keyboard highlight and pointer hover are the same state, so they look
     // the same. aria-selected is the source of truth; :hover just mirrors it.
@@ -146,21 +187,51 @@
     &:hover {
       background: var(--wash-hover);
       text-decoration: none;
+
+      &::before { background: var(--ground-deep); }
     }
   }
 
+  // One line, ellipsised. A suggestion row is scanned, not read: a title that
+  // wraps to three lines pushes the rest of the results off the panel.
   &__row-title {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     font-family: var(--serif);
     font-weight: 700;
     font-size: 0.9375rem;
     line-height: 1.3;
   }
 
-  &__row-where {
+  // Where the row leads. "Context and Scope" is the title of a section in every
+  // example on this site, so without the path the reader cannot tell two rows
+  // apart — see the comment at render() in assets/js/search.js.
+  &__row-path {
+    max-width: 14rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     font-size: 0.75rem;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
     color: var(--muted);          // 5.50:1 on --paper
+  }
+
+  // "Show all 23 results for …" — an action, not a hit, so it is set as one:
+  // no marker, no serif, and the counts carry the weight.
+  &__row--all {
+    grid-template-columns: minmax(0, 1fr);
+
+    &::before { display: none; }
+
+    .arc42-search__row-title {
+      font-family: var(--sans);
+      font-size: 0.8125rem;
+      font-weight: 400;
+      color: var(--muted);
+
+      strong { font-weight: 700; color: var(--ink); }
+    }
   }
 
   &__empty {
@@ -202,6 +273,15 @@
     order: 3;
 
     &__panel { left: 0; right: 0; width: auto; }
+  }
+
+  // The path column goes before it starts eating the title. Below 520px the
+  // panel is 100vw minus the masthead's 2 x --s5, i.e. under 472px, and the row
+  // spends 40px on padding, 16px on the gap and 224px on the path — which
+  // leaves the title under 12rem. The title is what is being scanned.
+  @media (max-width: 519px) {
+    &__row { grid-template-columns: minmax(0, 1fr); }
+    &__row-path { display: none; }
   }
 }
 
