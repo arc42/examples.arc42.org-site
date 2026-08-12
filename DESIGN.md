@@ -536,6 +536,12 @@ lowercase-kebab, without closing the vocabulary. An "all keywords" index page
 stays deferred, on the same precedent as the cross-system section views: it
 is worth building once recurrence makes it more than a table of contents.
 
+**UBA-SNS parked (2026-08-12).** The UBA-SNS example is temporarily off main
+— branch `uba-sns-review` holds its latest state — while the Umweltbundesamt
+takes a final look before publication. Counts in this file that say seven
+systems include it; the live corpus is six until the branch merges back, and
+no tile currently sets `contributed:`, so the byline renders nowhere.
+
 The consequence for this section is honest bookkeeping: the precondition for
 colour is now unmet by decision, not by omission. The `data-domain` hook stays
 in the markup at zero cost, but the tint stays off until someone reopens the
