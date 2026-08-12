@@ -79,7 +79,7 @@ order: 999
 # ---------------------------------------------------------------------------
 attribution: Who wrote the original documentation
 # Set `contributed: true` when the documentation is third-party work: it puts
-# "Contributed by <attribution>" on the dashboard tile. Omit it for
+# "Created by <attribution>" on the dashboard tile. Omit it for
 # site-authored examples. Not derivable from `imported`, which every system
 # carries.
 # contributed: true

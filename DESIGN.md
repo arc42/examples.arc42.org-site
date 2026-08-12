@@ -347,13 +347,16 @@ a shared one.
   is the one thing a dashboard is for. A tile is now domain, number, title,
   goal, three decisions, scale — and the six titles sit on one baseline.
 
-  **A contributor byline, on third-party tiles only** (2026-08-12). A system an
-  outside organisation contributed — `contributed: true` in its front matter, a
-  dedicated boolean because `imported:` is a date every system carries — closes
-  its tile with one muted line, "Contributed by Umweltbundesamt (UBA)", derived
-  from the `attribution` field the overview page already prints. Site-authored
-  tiles show nothing: the line thanks a contributor on the page most visitors
-  see, it does not caption every tile. It is plain text, never a link — one
+  **A creator byline, on third-party tiles only** (2026-08-12). A third-party
+  system — `contributed: true` in its front matter, a dedicated boolean
+  because `imported:` is a date every system carries — closes its tile with
+  one muted line, "Created by Umweltbundesamt (UBA)", derived from the
+  `attribution` field the overview page already prints. Site-authored tiles
+  show nothing: the line credits the creator on the page most visitors see,
+  it does not caption every tile. The verb is "Created", not "Contributed"
+  (2026-08-12): the corpus holds both an actively contributed documentation
+  (UBA, by Freigabe) and a licence-based import (docToolchain, MIT), and only
+  creation is true of both. It is plain text, never a link — one
   link per tile is the stretched-link invariant — set a step below the scale
   line at 0.8125rem `--muted`. The placement is the alignment argument: title,
   goal and decisions are what a reader compares across a row, and a

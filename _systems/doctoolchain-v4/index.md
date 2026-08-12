@@ -42,7 +42,7 @@ order: 70
 # originals and rendered diagrams live in _originals/.
 # ---------------------------------------------------------------------------
 attribution: Ralf D. Müller & the docToolchain contributors
-# contributed: third-party work — puts "Contributed by <attribution>" on the
+# contributed: third-party work — puts "Created by <attribution>" on the
 # dashboard tile.
 contributed: true
 licence: MIT
@@ -73,3 +73,12 @@ traceability chain arc42 recommends, worked end to end.
 The chapters were written for a tool that builds documentation, by the people
 who build it — down to a runtime scenario for error recovery and a quality
 tree with nineteen six-part scenarios.
+
+Both docToolchain and this documentation are **MIT-licensed** — one of the
+most permissive open source licences there is. Unlike the CC BY-SA licence
+most examples here carry, MIT does not require adaptations to stay under the
+same licence: you may copy, adapt and reuse these chapters, even as the
+skeleton of your own closed arc42 documentation, as long as the licence
+notice travels with what you take. The notice lives in the
+[docToolchain repository](https://github.com/docToolchain/docToolchain/blob/main-4.x/LICENSE)
+and is also linked from the Source-and-licence note below.

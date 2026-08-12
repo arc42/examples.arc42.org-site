@@ -113,12 +113,15 @@
   {%- endif -%}
 
   {%- comment -%}
-    CONTRIBUTOR BYLINE, third-party systems only (2026-08-12). A system an
-    outside organisation contributed closes its tile with one muted line —
-    "Contributed by Umweltbundesamt (UBA)" — derived from the `attribution`
-    field the overview page already prints in its pinned note. Site-authored
-    tiles show nothing: the byline exists to thank a contributor on the page
-    most visitors see, not to caption every tile.
+    CREATOR BYLINE, third-party systems only (2026-08-12). A third-party
+    system closes its tile with one muted line — "Created by Umweltbundesamt
+    (UBA)" — derived from the `attribution` field the overview page already
+    prints in its pinned note. Site-authored tiles show nothing: the byline
+    exists to credit the creator on the page most visitors see, not to
+    caption every tile. It says "Created by", not "Contributed by"
+    (2026-08-12): the corpus has both actively contributed documentation
+    (UBA, by Freigabe) and licence-based imports (docToolchain, MIT), and
+    only creation is true of both.
 
     The guard is `contributed: true`, a dedicated boolean. NOT `imported` —
     that is a date ("2026-08") carried by every system in the corpus, so it
@@ -131,6 +134,6 @@
     and in DESIGN.md.
   {%- endcomment -%}
   {%- if sys.contributed and sys.attribution -%}
-  <p class="ex-tile__byline">Contributed by {{ sys.attribution }}</p>
+  <p class="ex-tile__byline">Created by {{ sys.attribution }}</p>
   {%- endif -%}
 </li>
