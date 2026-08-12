@@ -1,5 +1,5 @@
 // ============================================================================
-// The dashboard — the tile grid and its filter.
+// The dashboard — the tile grid and the field it sits on.
 //
 // Tiles are NEUTRAL. The domain is carried as text, not colour. The hook for
 // changing that is `[data-domain]` on the tile: one attribute selector setting
@@ -7,9 +7,34 @@
 // with no template edit. See DESIGN.md "Open decision: colour on tiles".
 // ============================================================================
 
+// ---- The field ---------------------------------------------------------------
+// The band the dashboard sits on (2026-08-12). A tile's fill is --paper and so
+// is the page's — 1.00:1 — so the tile's border was the only thing making it
+// an object, and six outlines drawn on one continuous sheet read as a single
+// grey area. The field is the ground step that turns them into six sheets of
+// paper lying on a desk: --paper on --wash-calm is 1.15:1, a difference the
+// border no longer has to carry alone.
+//
+// Full-bleed, like the masthead and footer bands, not a box at the grid's own
+// width: a wash box wrapped around the tiles would be one more card, and this
+// family does not nest cards in cards. The shell inside trims its vertical
+// padding because the band's edges already separate it from the prose above
+// and the endnotes below — three stacked shells at full padding put 96px
+// between neighbours that the single-shell page never had.
+.ex-field {
+  background: var(--wash-calm);
+
+  > .ex-shell {
+    padding-top: var(--s6);
+    padding-bottom: var(--s7);
+  }
+}
+
 .ex-grid {
   list-style: none;
-  margin: var(--s6) 0 0;
+  // No own top margin since the field arrived (2026-08-12): the space above
+  // the grid belongs to .ex-field's shell, which owns the band's rhythm.
+  margin: 0;
   padding: 0;
   display: grid;
   gap: var(--s5);
@@ -23,10 +48,14 @@
   // column it sat in and pushed the page 8px sideways at 320.
   grid-template-columns: repeat(auto-fill, minmax(min(19rem, 100%), 1fr));
 
-  &__empty {
-    margin-top: var(--s6);
-    color: var(--muted);
-  }
+  // The cap --measure-wide was written for and never given to (2026-08-12).
+  // Without it the grid runs the full shell: 4 × 320px at 1440 AND at 1920, so
+  // six tiles landed 4 + 2 with half a row of nothing before the footer, and a
+  // 320px track wrapped three of the six domain eyebrows to two lines, which
+  // pushed those three titles off the baseline the other three sat on. At
+  // 1273.6px it is 3 × ~408px at both widths: 3 + 3, no orphan, no wrapped
+  // eyebrow, and the grid's left edge finally agrees with the prose above it.
+  max-width: var(--measure-wide);
 }
 
 .ex-tile {
@@ -36,7 +65,16 @@
   gap: var(--s3);
   padding: var(--s5);
   background: var(--paper);
-  border: 1px solid var(--wash-border);
+
+  // --wash-edge, not --wash-border (2026-08-12). The whole tile is a click
+  // target (stretched link), so this line is component-identifying and owes
+  // 3:1 under WCAG 1.4.11 against BOTH of its neighbours — the tile's own
+  // --paper inside (4.00:1) and the field's --wash-calm outside (3.48:1).
+  // That second number is why the edge tier sits at 60% and not 55%: 55%
+  // against the field is 3.04:1, a pass one rounding step wide. The divider
+  // above __scale stays a hairline on purpose: 4.00 against 1.25 reads as two
+  // tiers, which is the point.
+  border: 1px solid var(--wash-edge);
   border-radius: var(--radius);
 
   // Interactive hover-lift is the one sanctioned DYNAMIC shadow (DESIGN.md
@@ -112,13 +150,22 @@
     }
   }
 
-  &__tagline {
-    color: var(--ink);
-  }
+  // NO TAGLINE ON THE TILE (2026-08-12). `tagline` and `main_goal` were two
+  // paragraphs saying one thing on half the corpus — "Broken-link checker for
+  // generated HTML documentation" sat directly above "Find broken links and
+  // missing images in generated HTML". Removing the technology chips took away
+  // the tile's newest information and left its most redundant; this is the
+  // other half of that edit. The goal is the sentence that tells one example
+  // apart from another, so the goal is the one that stays. The tagline still
+  // heads the system's own page and is still in `data-haystack`.
+  //
+  // It also cost alignment: two paragraphs wrapping to different depths meant
+  // the decision list started at a different y in every tile, so nothing could
+  // be compared across a row — which is the one thing a dashboard is for.
 
   // The main goal carried a MAIN GOAL caption in the same grey uppercase as
   // every other row. It does not need one: it needs to look different from
-  // the sentence above it. Caslon against the sans tagline does that, costs
+  // the sentence above it. Caslon against the sans title does that, costs
   // no pigment, and gives the card a second serif anchor under the title.
   &__goal {
     font-family: var(--serif);
@@ -148,7 +195,23 @@
     line-height: 1.4;
     color: var(--ink);              // 13.41:1 on --paper
 
-    li::marker { color: var(--wash-border); }   // 1.98:1, decorative
+    // A FILLED DISC AT --muted (2026-08-12), and both halves of that were bugs.
+    //
+    // The shape was never chosen: this <ul> is nested inside ul.ex-grid, so the
+    // UA's second-level marker style applied and every bullet rendered as a
+    // hollow `circle`. The colour was --wash-border, 1.98:1 — so the marker was
+    // the least ink the browser can draw (a ring, not a dot) in the faintest
+    // tier on the tile. The comment beside it said "decorative", which is true
+    // of WCAG's obligations and false of the marker's job: the argument for
+    // having a real marker at all is that without one, three clauses stop
+    // looking like three items. A mark that cannot be seen cannot do that.
+    //
+    // --muted is 5.50:1 and is already the tile's meta tier — the domain eyebrow
+    // and the scale line are the same value — so the tile's furniture now reads
+    // as one tier instead of three. Still a real ::marker, so still out of the
+    // accessibility tree, where "list, 3 items" already says it.
+    list-style-type: disc;
+    li::marker { color: var(--muted); }   // 5.50:1 on --paper
 
     li + li { margin-top: var(--s1); }
   }
@@ -160,74 +223,49 @@
     font-size: 0.875rem;
     color: var(--muted);
   }
-}
 
-// ---- Chips -------------------------------------------------------------------
-// `.ex-` and not `.arc42-`: the Same-Name Rule says a family class name is a
-// published interface. The family spec for `arc42-tag` is "pill radius, site-hue
-// wash, ALWAYS LINKS". These are not links — they are keyword labels on a site
-// with no hue — so they take a different, site-local name rather than shipping
-// a second incompatible design under a family name.
-.ex-chips {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--s2);
-  padding: 0;
-  margin: 0;
-}
+  // The contributor byline (2026-08-12) — third-party systems only, rendered
+  // when the front matter says `contributed: true` (see the guard in
+  // _includes/system-tile.html). Plain text, never a link: one link per tile
+  // is the stretched-link invariant.
+  //
+  // It sits at the very END of the tile, inside the bottom tier the scale
+  // line opens, and one size step below the scale's 0.875rem. The placement
+  // is the alignment argument: title, goal and decisions are what a reader
+  // compares across a row, and a variable-height line inserted anywhere above
+  // the bottom tier would push all of them off the shared baseline on exactly
+  // the tiles that carry it. At the end it costs only its own height.
+  &__byline {
+    // A tile with a byline but no scale line still bottom-anchors it — the
+    // auto margin here takes over the job scale's auto margin usually does.
+    // When both render, the sibling rule below zeroes this one out so the
+    // free space is not split between two auto margins, and the tile's own
+    // --s3 column gap spaces the pair under scale's hairline.
+    margin-top: auto;
+    font-size: 0.8125rem;
+    color: var(--muted);            // 5.50:1 on --paper
+  }
 
-.ex-chip {
-  display: inline-block;
-  padding: 2px var(--s3);
-  background: var(--wash-calm);
-  color: var(--ink);            // 11.64:1 on --wash-calm
-  border: 1px solid var(--wash-border);
-  border-radius: var(--radius-pill);
-  font-size: 0.8125rem;
-  line-height: 1.5;
-
-  &--tech {
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    background: var(--paper);
+  &__scale + &__byline {
+    margin-top: 0;
   }
 }
 
-// ---- Filter ------------------------------------------------------------------
-// Rendered hidden and revealed by JS. Without JS every tile is already in the
-// DOM and visible; the filter is pure enhancement and never a prerequisite for
-// reaching an example.
-.ex-filter {
-  display: flex;
-  align-items: center;
-  gap: var(--s3);
-  flex-wrap: wrap;
-  margin-top: var(--s6);
+// The CHIPS lived here until 2026-08-12. They left the tile on 2026-08-11
+// (55-of-58 singleton values — see the tile comments above) and the system
+// facts block a day later, when the same count was run there: `technologies`
+// 15-of-17 singletons, `keywords` 3-of-3, `decisions` one-off clauses — and
+// the pills sat on the same page as the section grid's 24 bordered cells
+// that really are links, counterfeiting the page's one box-means-click
+// signal. The `.ex-chips` wrapper and the `--tech` mono variant died with
+// them. The one surviving chip is /in-the-wild/'s `kind` label, styled in
+// _in-the-wild.scss where its only user lives. See DESIGN.md, `.ex-chip`.
 
-  &__label {
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  &__input {
-    flex: 1 1 18rem;
-    max-width: 26rem;
-    min-height: 44px;
-    padding: var(--s2) var(--s3);
-    font: inherit;
-    font-size: 0.9375rem;
-    color: var(--ink);
-    background: var(--paper);
-    border: 1px solid var(--wash-border);
-    border-radius: var(--radius);
-  }
-
-  &__count {
-    font-size: 0.875rem;
-    color: var(--muted);
-  }
-}
+// The dashboard FILTER lived here until 2026-08-12, and left because the
+// masthead search is strictly stronger: the filter substring-matched a hidden
+// front-matter haystack, while search.json indexes the full body text of
+// every section — "Drools" and "template method" live in section 8 of an
+// example, never in its front matter. At six tiles on a screen and a half,
+// the eye narrows faster than typing does, and the filter's own header set
+// its ceiling at ~15 examples. If the corpus ever approaches that, the thing
+// to build is a row of domain facets, not a text box. See DESIGN.md.

@@ -25,7 +25,10 @@
   --muted:      #5e6975;   // de-emphasized meta — 5.50:1 on --paper,
                            //                      4.77:1 on --wash-calm
   --hairline:   rgba(20, 44, 82, 0.12);   // table borders, nav dividers
-  --hairline-2: rgba(20, 44, 82, 0.16);   // borders that must actually be seen
+  --hairline-2: rgba(20, 44, 82, 0.16);   // the heavier divider — 1.35:1 over
+                                          //   --paper, so still DECORATIVE.
+                                          //   A border that must actually be
+                                          //   seen is --wash-edge, below.
   --rule:       #c6ccd4;   // the one sanctioned thick left rule (blockquotes),
                            // deliberately grey, never a brand accent stripe
 
@@ -61,7 +64,7 @@
                                            //   decorative only; the ink
                                            //   carries the text
   // ---- Wash ladder ---------------------------------------------------------
-  // Exactly three steps plus two border steps (DESIGN.md §2.3). Applied as
+  // Exactly three steps plus three border steps (DESIGN.md §2.3). Applied as
   // color-mix(in oklab, var(--paper), var(--ground) <step>). The literals below
   // are the resolved sRGB values, recorded so their contrast can be measured.
   --wash-calm-pct:   8%;
@@ -71,9 +74,30 @@
   --wash-border-hover-pct: 50%;
 
   --wash-calm:   #ecedee;  // --ink on it 11.64:1 · --muted on it 4.77:1
+                           //   also the dashboard field — see _dashboard.scss
   --wash-active: #e1e1e1;  // --ink on it 10.44:1
   --wash-hover:  #cccaca;  // --ink on it  8.36:1
   --wash-border: #b8b6b5;  // --ink on it  6.76:1 (borders, not text)
+                           //   1.98:1 ON --paper — a hairline, NOT an edge
+
+  // THE EDGE TIER (2026-08-12). --wash-border was doing two incompatible jobs:
+  // decorative hairlines AND the outline of a component you have to be able to
+  // find. It measures 1.98:1 on --paper, so a tile was separated from an
+  // identically-coloured page by a line at two thirds of the 3:1 that WCAG
+  // 1.4.11 requires of a component boundary — six examples read as one grey
+  // field.
+  //
+  // 60%, reached in two steps the same day. First 55% (#8b8783, 3.50:1 on
+  // --paper), rejecting the existing 50% step because it resolves to #95918e
+  // at 3.07:1 — a pass one rounding step wide, which this site does not
+  // record. Then the dashboard gained its --wash-calm field, and 55% against
+  // THAT surface is 3.04:1: the same one-rounding-step pass, one surface
+  // later. 60% clears both of the edge's neighbours with room. Resolved and
+  // read back from a canvas in headless Chromium, which reproduces the 55%
+  // literal byte for byte by the same route.
+  --wash-edge-pct: 60%;
+  --wash-edge:   #827d78;  // 4.00:1 on --paper · 3.48:1 on --wash-calm
+                           //   component boundaries only
 
   // ---- Shared family tokens ------------------------------------------------
   // Identical hex on every site (meta.arc42.org BRAND.md). On THIS site all six

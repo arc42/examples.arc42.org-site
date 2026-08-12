@@ -47,6 +47,27 @@
 
   dd { margin: 0; }
 
+  // Strategic decisions as a plain list — the same treatment the dashboard
+  // tile argued its way to (_includes/system-tile.html): the values are
+  // clauses, not tokens, and until 2026-08-12 they wore chips on the same
+  // page as the section grid's 24 bordered cells that really are links. A
+  // real ::marker, not a ::before middot, for the tile's reason: generated
+  // punctuation gets announced, a UA marker is not, and "list, 3 items"
+  // already says what the bullet says. This block sits on --wash-calm, so
+  // the pairs are re-measured for this surface, not copied from the tile:
+  //   --ink   on --wash-calm  11.64:1  (inherited item text)
+  //   --muted on --wash-calm   4.77:1  (the marker — decorative; the text
+  //                                     carries the item)
+  &__decisions {
+    margin: 0;
+    padding-left: var(--s4);
+    list-style-type: disc;
+
+    li::marker { color: var(--muted); }   // 4.77:1 on --wash-calm
+
+    li + li { margin-top: var(--s1); }
+  }
+
   &--tight {
     padding: 0;
     background: none;
@@ -82,7 +103,18 @@
     height: 100%;
     padding: var(--s3) var(--s4);
     background: var(--paper);
-    border: 1px solid var(--wash-border);
+    // --wash-edge, not --wash-border (2026-08-12). The whole cell is a click
+    // target, which is exactly the situation that put the dashboard tile on
+    // the edge tier: a whole-surface click target's boundary owes 3:1 (WCAG
+    // 1.4.11), and --wash-border is 1.98:1. The grid sits on --paper and the
+    // cell's fill is --paper, so one measurement covers both neighbours:
+    // --wash-edge is 4.00:1 on --paper. (The tile's second number, 3.48:1,
+    // is against the dashboard's --wash-calm field; no such field exists
+    // here.) The hover state needs no matching adjustment — its border goes
+    // to --ground-deep (14.12:1 on --paper) with a --wash-calm fill under
+    // it, which stays as far above the new 4.00:1 rest state as it was
+    // above the old hairline.
+    border: 1px solid var(--wash-edge);
     border-radius: var(--radius);
     text-decoration: none;
     color: var(--ink);

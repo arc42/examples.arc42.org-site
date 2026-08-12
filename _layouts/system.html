@@ -32,13 +32,36 @@ layout: default
     {%- if page.scale -%}
     <dt>Size</dt><dd>{{ page.scale }}</dd>
     {%- endif -%}
+    {%- comment -%}
+      NO CHIPS IN THIS BLOCK (2026-08-12), on two counts. The counterfeit:
+      these pills were non-interactive, and they sat on the same page as the
+      section grid below — 24 bordered, rounded cells that really are links —
+      so the one shape this page teaches to mean "click me" was worn by things
+      that do nothing. The pill law: a value earns a pill only if it can recur
+      (DESIGN.md), and measured across the corpus `technologies` ran 15-of-17
+      singletons, `keywords` 3-of-3, and `decisions` are one-off clauses by
+      definition. Decisions render as the same plain list the dashboard tile
+      argued its way to (_includes/system-tile.html); technologies and
+      keywords are middot-separated plain text, the way /in-the-wild/ prints
+      its facts. The one surviving chip is that page's `kind` label — a
+      closed vocabulary, on a page where nothing box-shaped is a link.
+    {%- endcomment -%}
     {%- if page.decisions and page.decisions.size > 0 -%}
     <dt>Strategic decisions</dt>
-    <dd><ul class="ex-chips">{% for d in page.decisions %}<li class="ex-chip">{{ d }}</li>{% endfor %}</ul></dd>
+    <dd><ul class="ex-facts__decisions">{% for d in page.decisions %}<li>{{ d }}</li>{% endfor %}</ul></dd>
     {%- endif -%}
     {%- if page.technologies and page.technologies.size > 0 -%}
     <dt>Technologies</dt>
-    <dd><ul class="ex-chips">{% for t in page.technologies %}<li class="ex-chip ex-chip--tech">{{ t }}</li>{% endfor %}</ul></dd>
+    <dd>{{ page.technologies | join: ' · ' }}</dd>
+    {%- endif -%}
+    {%- comment -%}
+      Keywords are the loose axis: what the documentation demonstrates, in the
+      docs.arc42.org tip vocabulary where it fits. They never appear on the
+      dashboard tile.
+    {%- endcomment -%}
+    {%- if page.keywords and page.keywords.size > 0 -%}
+    <dt>Keywords</dt>
+    <dd>{{ page.keywords | join: ' · ' }}</dd>
     {%- endif -%}
   </dl>
 

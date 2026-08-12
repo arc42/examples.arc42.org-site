@@ -11,6 +11,18 @@
 
   > * + * { margin-top: var(--s4); }
 
+  // The home page's two off-ramps, moved below the grid on 2026-08-12. They are
+  // set at --muted rather than --ink (5.50:1, so still body-legible) because
+  // they are the page's footnotes now, not its introduction: a reader who has
+  // scrolled past six examples and still wants something else is the only
+  // reader they are for. No rule above them: the field band's bottom edge is
+  // already the divider, and two breaks on one axis is the fault the
+  // in-the-wild runs were designed around.
+  &--endnotes {
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+
   // Imported documentation cites raw URLs, and a raw URL is one unbreakable
   // word. One of them pushed a system page 29px sideways at 320.
   a { overflow-wrap: anywhere; }

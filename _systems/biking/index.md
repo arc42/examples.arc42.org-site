@@ -22,6 +22,12 @@ technologies:
   - Spring Boot
   - AngularJS
 
+keywords:
+  - adr
+  - building-block
+  - concept
+  - glossary
+
 scale: Single maintainer · personal project · in production since 2014
 
 order: 30

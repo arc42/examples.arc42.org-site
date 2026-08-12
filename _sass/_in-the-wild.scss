@@ -208,6 +208,35 @@ $wild-rail-collapse: 1040px;
   }
 }
 
+// ---- The kind chip -----------------------------------------------------------
+// `.ex-chip`, and since 2026-08-12 this page is its only user, so the rule
+// lives here (it was in _dashboard.scss, where its first users lived). The
+// dashboard chips left on 2026-08-11 (55-of-58 singleton values) and the
+// system facts block's a day later (technologies 15-of-17 singletons,
+// keywords 3-of-3, decisions one-off clauses — and they sat one scroll above
+// 24 bordered cells that really are links). This one passes both halves of
+// the pill law: `kind` is a closed three-value vocabulary that recurs by
+// construction, and on this page nothing box-shaped is a link, so the shape
+// deceives nobody. The `--tech` mono variant died with the facts chips.
+//
+// `.ex-` and not `.arc42-`: the Same-Name Rule says a family class name is a
+// published interface. The family spec for `arc42-tag` is "pill radius,
+// site-hue wash, ALWAYS LINKS"; this is a hueless non-link, so it takes a
+// site-local name rather than shipping a second incompatible design under a
+// family one.
+.ex-chip {
+  display: inline-block;
+  padding: 2px var(--s3);
+  background: var(--wash-calm);
+  color: var(--ink);            // 11.64:1 on --wash-calm
+  border: 1px solid var(--wash-border);   // decorative: the chip is not
+                                          // interactive, and the word inside
+                                          // carries the meaning
+  border-radius: var(--radius-pill);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
 .ex-wild {
   list-style: none;
   margin: var(--s4) 0 0;

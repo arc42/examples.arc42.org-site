@@ -43,6 +43,16 @@ sitemap: false
     No system landing page means the directory is a template or is broken; it
     is not something a reader can be sent to.
   {%- endcomment -%}
+  {%- comment -%}
+    A LANDING record carries the tile's front matter as well as its body
+    (2026-08-12). The dashboard filter used to match tagline, domain, goal,
+    decisions and technologies through a hidden `data-haystack`; the filter is
+    gone — this index reaches strictly deeper, and at six examples the eye
+    narrows faster than typing — so the fields it matched live here now, or
+    "Drools" stops finding MaMa-CRM by search too. `keywords` is the optional
+    loose axis alongside them: what the documentation demonstrates, in the
+    docs.arc42.org tip vocabulary where it fits (_systems/_TEMPLATE/index.md).
+  {%- endcomment -%}
   {%- if sys and doc.title -%}
 {{ sep }}{
   "url": {{ doc.url | relative_url | jsonify }},
@@ -50,7 +60,14 @@ sitemap: false
   "title": {{ doc.title | jsonify }},
   "system": {{ sys.title | jsonify }},
   "section": {%- if doc.url == sys_url %} null{% else %} {{ doc.order | jsonify }}{% endif %},
-  "content": {{ doc.content | strip_html | strip_newlines | jsonify }}
+  "content": {% if doc.url == sys_url -%}
+    {%- capture landing_matter -%}
+      {{ doc.tagline }} {{ doc.domain }} {{ doc.main_goal }}
+      {{ doc.decisions | join: ' ' }} {{ doc.technologies | join: ' ' }}
+      {{ doc.keywords | join: ' ' }} {{ doc.content | strip_html }}
+    {%- endcapture -%}
+    {{- landing_matter | normalize_whitespace | strip | jsonify }}
+  {%- else %}{{ doc.content | strip_html | strip_newlines | jsonify }}{% endif %}
 }
     {%- assign sep = ',' -%}
   {%- endif -%}

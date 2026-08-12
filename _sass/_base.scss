@@ -30,6 +30,17 @@ html {
   &:focus {
     left: 0;
   }
+
+  // The ring has to be the ON-BAND one (2026-08-12). This element sits OUTSIDE
+  // .ex-masthead in the DOM, so `.ex-masthead :focus-visible` never matched it
+  // and it fell back to --focus-ring (--ground-deep) — which it then rendered
+  // at top:0, left:0 on top of the --ground band. Ring against band: 1.16:1,
+  // and the panel's own --ground fill against that band is 1.00:1, so the
+  // first Tab stop on every page of the site had no perceptible edge at all.
+  // Fails WCAG 2.4.11 and 1.4.11; --focus-ring-on-band is 8.15:1 on --ground.
+  &:focus-visible {
+    outline-color: var(--focus-ring-on-band);
+  }
 }
 
 // Visible to a screen reader, not to the eye. Used for the search field's
@@ -103,6 +114,20 @@ a {
   max-width: calc(var(--measure) + var(--s5) * 2);
 }
 
+// The home page stacks three shells — intro · field · endnotes — because the
+// field band must sit outside any shell to run full-bleed (2026-08-12). Each
+// shell's default padding assumes it is alone on the page; stacked, the
+// facing edges double up to 96–112px. These trim the edges that face the
+// band. The field's own inner shell is trimmed in _sass/_dashboard.scss,
+// where the band lives.
+.ex-shell--intro {
+  padding-bottom: var(--s6);
+}
+
+.ex-shell--endnotes {
+  padding-top: var(--s6);
+}
+
 .ex-main {
   min-height: 50vh;
 }
@@ -124,15 +149,6 @@ a {
   }
 }
 
-.ex-link-button {
-  background: none;
-  border: 0;
-  padding: 0;
-  color: var(--link);
-  font: inherit;
-  text-decoration: underline;
-  cursor: pointer;
-}
 
 // ---- The pinned note --------------------------------------------------------
 // The family's tactile signature and its ONE sanctioned static shadow

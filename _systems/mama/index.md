@@ -22,6 +22,12 @@ technologies:
   - Oracle
   - Drools
 
+keywords:
+  - quality-scenario
+  - runtime-view
+  - concept
+  - thorough
+
 scale: 7–10 developers · 2–4 week iterations · ~15 months
 
 order: 20

@@ -23,6 +23,13 @@ technologies:
   - RTOS
   - ARM
 
+keywords:
+  - building-block
+  - runtime-view
+  - quality-scenario
+  - risk
+  - thorough
+
 scale: Hardware/software product · in police cars · successor to an earlier TPU generation
 
 order: 50

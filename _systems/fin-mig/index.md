@@ -22,6 +22,12 @@ technologies:
   - Oracle
   - VSAM
 
+keywords:
+  - building-block
+  - lean
+  - risk
+  - glossary
+
 scale: ~20 million persons · 50+ million accounts · 24-hour migration window · ran once, ca. 2002/2003
 
 order: 40

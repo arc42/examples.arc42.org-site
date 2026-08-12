@@ -15,6 +15,12 @@ permalink: /systems/TEMPLATE/
 # ---------------------------------------------------------------------------
 
 title: Name of the System
+
+# Heads the system's OWN page, and is matched by the dashboard filter. It is no
+# longer printed on the tile (2026-08-12) — the tile prints `main_goal`, and a
+# tagline that paraphrases the goal was the tile's last piece of redundancy. So
+# write these two as a pair: if the tagline is the goal with different words,
+# the tagline is doing nothing. Under 60 characters.
 tagline: One line, under 60 characters, saying what it is.
 
 # Free text, but reuse a value another example already uses where it fits —
@@ -41,12 +47,23 @@ decisions:
 # At most three, ONE TOKEN EACH: "PostgreSQL", not "PostgreSQL 14 for storage",
 # and never a parenthesis or a slash — "MQTT", not "MQTT (via ActiveMQ)". These
 # no longer appear on the dashboard tile (2026-08-11) — only on the system's own
-# page — but they are still matched by the dashboard filter, so keep them to the
-# tokens a reader would actually type.
+# page — but the site search matches them, so keep them to the tokens a reader
+# would actually type.
 technologies:
   - Language
   - Framework
   - Datastore
+
+# OPTIONAL, and a DIFFERENT AXIS from `domain`: the domain says what the
+# SYSTEM is, keywords say what the DOCUMENTATION demonstrates. Loose, like
+# blog tags — not a fixed vocabulary — but reuse the docs.arc42.org tip
+# keywords where they fit (adr, runtime-view, quality-scenario, deployment-
+# view, glossary, …) so the two sites stay searchable in the same words.
+# Rendered on the system's own page and matched by the site search; NEVER on
+# the dashboard tile.
+# keywords:
+#   - adr
+#   - runtime-view
 
 # Optional. Gives a reader a sense of scale — the thing a documentation
 # usually never says out loud.
@@ -61,6 +78,11 @@ order: 999
 # people's writing, and the site says so on every overview page.
 # ---------------------------------------------------------------------------
 attribution: Who wrote the original documentation
+# Set `contributed: true` when the documentation is third-party work: it puts
+# "Contributed by <attribution>" on the dashboard tile. Omit it for
+# site-authored examples. Not derivable from `imported`, which every system
+# carries.
+# contributed: true
 licence: CC BY-SA 4.0
 licence_url: https://creativecommons.org/licenses/by-sa/4.0/
 source_url: https://github.com/example/original

@@ -22,6 +22,12 @@ technologies:
   - Java
   - Gradle
 
+keywords:
+  - adr
+  - quality-scenario
+  - deployment-view
+  - lean
+
 scale: Small open-source tool · single maintainer · on GitHub since 2014
 
 order: 10

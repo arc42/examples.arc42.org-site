@@ -25,10 +25,14 @@
   link per tile in the accessibility tree and in the tab order — a tile with
   a link on the title AND the wrapper announces every example twice.
 {%- endcomment -%}
+{%- comment -%}
+  `data-haystack` and `data-ex-item` left with the dashboard filter
+  (2026-08-12). The front matter the haystack carried is indexed by
+  search.json's landing records instead, so ⌘K matches everything the filter
+  matched, plus the body text the filter never saw.
+{%- endcomment -%}
 <li class="ex-tile"
-    data-ex-item
-    data-domain="{{ sys.domain | default: 'Uncategorised' | slugify }}"
-    data-haystack="{{ sys.title }} {{ sys.tagline }} {{ sys.domain }} {{ sys.main_goal }} {{ sys.decisions | join: ' ' }} {{ sys.technologies | join: ' ' }}">
+    data-domain="{{ sys.domain | default: 'Uncategorised' | slugify }}">
 
   {%- comment -%}
     The catalogue number. Decorative and aria-hidden: it names a position in
@@ -56,7 +60,11 @@
     <a class="ex-tile__link" href="{{ sys.url | relative_url }}">{{ sys.title }}</a>
   </h2>
 
-  <p class="ex-tile__tagline">{{ sys.tagline }}</p>
+  {%- comment -%}
+    The tagline is NOT rendered here (2026-08-12) — see the argument at
+    `.ex-tile__tagline`'s old home in _sass/_dashboard.scss. It still heads
+    the system's own page, and search.json indexes it on the landing record.
+  {%- endcomment -%}
 
   {%- if sys.main_goal -%}
   <p class="ex-tile__goal">{{ sys.main_goal }}</p>
@@ -82,8 +90,8 @@
     the tagline mostly said already ("Groovy, with minimal external
     dependencies" above a `Groovy` pill). The stack of examples is read for
     which one to open, not for a technology census. Technologies still render
-    in full on the system's own page, and they stay in `data-haystack` below,
-    so filtering for "Drools" still finds mama from the dashboard.
+    in full on the system's own page, and search.json carries them on the
+    landing record, so a ⌘K for "Drools" still finds mama.
 
     THREE, NOT FOUR (2026-08-11). Same argument one notch further: the fourth
     decision was always the weakest one on every tile, and dropping it is what
@@ -102,5 +110,27 @@
 
   {%- if sys.scale -%}
   <p class="ex-tile__scale">{{ sys.scale }}</p>
+  {%- endif -%}
+
+  {%- comment -%}
+    CONTRIBUTOR BYLINE, third-party systems only (2026-08-12). A system an
+    outside organisation contributed closes its tile with one muted line —
+    "Contributed by Umweltbundesamt (UBA)" — derived from the `attribution`
+    field the overview page already prints in its pinned note. Site-authored
+    tiles show nothing: the byline exists to thank a contributor on the page
+    most visitors see, not to caption every tile.
+
+    The guard is `contributed: true`, a dedicated boolean. NOT `imported` —
+    that is a date ("2026-08") carried by every system in the corpus, so it
+    is truthy on all seven and cannot tell a contribution from an import.
+
+    Plain text, not a link: exactly one link per tile (the stretched link on
+    the title) is a hard invariant of this component. It renders LAST so its
+    variable height lands after everything a reader compares across a row —
+    the placement argument is at `.ex-tile__byline` in _sass/_dashboard.scss
+    and in DESIGN.md.
+  {%- endcomment -%}
+  {%- if sys.contributed and sys.attribution -%}
+  <p class="ex-tile__byline">Contributed by {{ sys.attribution }}</p>
   {%- endif -%}
 </li>

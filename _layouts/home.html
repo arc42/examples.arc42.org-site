@@ -7,6 +7,19 @@ layout: default
   Tiles are built ONLY from each system's index.md front matter, and the list
   is `site.systems` filtered to landing pages — so a new system directory
   appears here the moment it exists, with nothing added to this file.
+
+  THREE SHELLS, NOT ONE (2026-08-12): intro on paper, the grid on the
+  full-bleed --wash-calm field, endnotes on paper again. The field has to sit
+  outside any shell to run edge to edge, which is why this page stacks shells
+  where every other page has one. Their trimmed vertical padding is set in
+  _sass/_base.scss and _sass/_dashboard.scss at the declarations.
+
+  THE FILTER IS GONE (2026-08-12). It substring-matched a hidden front-matter
+  haystack; the masthead search (⌘K) indexes the full body text of every
+  section and reaches strictly deeper — the filter's own ceiling comment said
+  ~15 examples, and at six the eye is faster. The front matter the filter used
+  to match moved into search.json's landing records, so nothing stopped being
+  findable. Rationale in DESIGN.md, mechanism in search.json.
 {%- endcomment -%}
 {%- assign systems = site.systems
       | where_exp: 'd', 'd.url contains "/systems/"'
@@ -14,43 +27,49 @@ layout: default
       | where_exp: 'd', 'd.tagline'
       | sort: 'order' -%}
 
-<div class="ex-shell">
-
-  {%- comment -%}
-    The measure applies here too. Rendered bare into .ex-shell this ran to
-    117–130 characters a line at 1440 and above — the one page on the site
-    that broke the family's 65–75ch constant, and the first one anybody sees.
-  {%- endcomment -%}
+{%- comment -%}
+  The measure applies here too. Rendered bare into .ex-shell this ran to
+  117–130 characters a line at 1440 and above — the one page on the site
+  that broke the family's 65–75ch constant, and the first one anybody sees.
+{%- endcomment -%}
+<div class="ex-shell ex-shell--intro">
   <div class="ex-prose">
     {{ content }}
   </div>
+</div>
 
-  {%- if systems.size > 0 -%}
-  <div class="ex-filter" data-ex-filter hidden>
-    <label class="ex-filter__label" for="ex-filter-input">Filter</label>
-    <input class="ex-filter__input" id="ex-filter-input" type="search"
-           placeholder="domain, technology, decision&hellip;"
-           autocomplete="off" spellcheck="false">
-    <p class="ex-filter__count" role="status" aria-live="polite"></p>
+{%- if systems.size > 0 -%}
+<section class="ex-field" aria-label="Examples">
+  <div class="ex-shell">
+    <ul class="ex-grid">
+      {%- for sys in systems -%}
+        {% include system-tile.html sys=sys index=forloop.index %}
+      {%- endfor -%}
+    </ul>
   </div>
+</section>
 
-  <ul class="ex-grid" data-ex-grid>
-    {%- for sys in systems -%}
-      {% include system-tile.html sys=sys index=forloop.index %}
-    {%- endfor -%}
-  </ul>
-
-  <p class="ex-grid__empty" data-ex-empty hidden>
-    No example matches that filter.
-    <button type="button" class="ex-link-button" data-ex-clear>Show all {{ systems.size }}</button>
-  </p>
-  {%- else -%}
+{%- comment -%}
+  The endnotes slot (2026-08-12). Everything that sends a reader off this
+  page — docs.arc42.org for section-sized illustrations, /in-the-wild/ for
+  what we cannot host — belongs AFTER the examples, not between the hero and
+  the first one. Measured before the move: the grid began 672px down at
+  1440x900 and 1060px down at 390x844, so no tile was fully above the fold at
+  any width. It is front matter on index.md rather than markup here, because
+  it is content and content lives in the page file.
+{%- endcomment -%}
+{%- if page.endnotes -%}
+<div class="ex-shell ex-shell--endnotes">
+  <div class="ex-prose ex-prose--endnotes">
+    {{ page.endnotes | markdownify }}
+  </div>
+</div>
+{%- endif -%}
+{%- else -%}
+<div class="ex-shell">
   <div class="ex-note">
     <p><strong>No examples yet.</strong> Run <code>make new-system SLUG=my-system</code>
     to scaffold one, or see <a href="{{ '/contribute/' | relative_url }}">Contribute</a>.</p>
   </div>
-  {%- endif -%}
-
 </div>
-
-<script src="{{ '/assets/js/filter.js' | relative_url }}" defer></script>
+{%- endif -%}

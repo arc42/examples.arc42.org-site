@@ -23,6 +23,12 @@ technologies:
   - Jekyll
   - Turso
 
+keywords:
+  - adr
+  - runtime-view
+  - deployment-view
+  - risk
+
 scale: 9 arc42 family sites monitored · single maintainer · in production since 2023
 
 order: 30

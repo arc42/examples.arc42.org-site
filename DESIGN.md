@@ -49,7 +49,15 @@ This site is also the family's strongest **Visible-Token Rule** proof point:
 all six shared tokens have a named, visible job here, in one place, on screen
 at once.
 
-**The home page carries no spine** (2026-08-07). The hero band there is a row
+**The home page carries no spine** (2026-08-07, re-examined and upheld
+2026-08-12 — the critique that day raised the cost out loud: the site's one
+identifying mark is missing from the page most visitors ever see, and below the
+hero the home page is ~1850px of achromatic ledger. Both were weighed and the
+original argument won. Two alternatives were considered and rejected with it:
+the spine under the hero as well, which is the doubling the 2026-08-07 decision
+removed, and the spine below the grid as a closing rule, which makes the device
+a page ornament instead of a mark and puts it where nothing needs marking).
+The hero band there is a row
 of fourteen coloured specimens, and six colour blocks immediately under it read
 as a second statement of the same idea rather than as the site's mark. Colour
 and spine divide the site between them: the hero carries the variety on the one
@@ -138,6 +146,12 @@ frieze wants roughly 420 × 2100 device pixels, which is close enough to the
 shipped 2560 × 465 that a second asset would save nothing and add a second
 export to keep in step with the brief.
 
+The same export appears a third time as an inline figure on `/about/`
+(2026-08-12), where the herbarium metaphor is explained in words. There it is
+content rather than chrome: nothing sits over it, so it needs no scrim, and
+the prose figure styles in `_sass/_content.scss` govern it like any other
+image.
+
 The H1 is deliberately **tall and narrow** — three short lines capped at `15ch`,
 at up to 2.5rem — and sits at the top of the band rather than centred in it.
 Both follow from the scrim: the heading's *width* is the width of ground that
@@ -154,8 +168,76 @@ the logo renders 28px of cap height, Atkinson's cap height is 0.67em, so
 not repeated below the wordmark that already says it.
 
 Brand left, then **search and nav pushed to the right end** of the bar by an
-auto margin on the lockup. The nav is last in the DOM as well as last on
+auto margin on the lockup. The search `<form>` is last in the DOM and last on
 screen, so the tab order still runs the way the eye does.
+
+## What the home page owes the fold
+
+The band is the site's best asset and it is staying at full height. What could
+not stay is what sat between it and the examples. Measured before 2026-08-12:
+the grid began **672px** down at 1440×900 and **1060px** down at 390×844, so
+**no tile was fully above the fold at any width** — a page whose entire job is
+handing over six examples opened with a claim, then two paragraphs that sent the
+reader to two other sites.
+
+So the page is now ordered by what a visitor came for. Above the grid: one
+sentence saying what the things below it are. Below the grid: everything that
+points away from this page — `docs.arc42.org` for section-sized illustrations,
+`/in-the-wild/` for what we may not host. They live in an `endnotes:` front
+matter block on `index.md` and render through `markdownify` into a slot in
+`_layouts/home.html`, because they are content and content belongs in the page
+file, not the template. They are set at `--muted` and one step down in size:
+they are footnotes now, and the only reader they are for is one who has already
+scrolled past six examples and still wants something else.
+
+The grid top moved 672px → **528px** at 1440×900 and 1060px → **804px** at
+390×844, and the document got 275px shorter, without touching the hero. Three
+tiles then stood ~94% visible on a 1440×900 first screen.
+
+Removing the filter and trimming the stacked shells (2026-08-12, see *The
+filter is gone* and *The field*) moved it again: **512px** at 1440×900 and
+**728px** at 390×844, on a 4164px document. The first row's tiles end at
+909px against the 900px fold — three tiles 98% visible, nine pixels short.
+Those nine are not coming out of the frieze either.
+
+## The field
+
+The dashboard sits on a full-bleed `--wash-calm` band (2026-08-12): paper
+intro, wash field, paper endnotes. A tile's fill is `--paper` and so is the
+page's — 1.00:1 — so the tile's border was the only thing making it an object,
+and six outlines drawn on one continuous sheet read as a single grey area,
+which is why the grid squinted into nothing after the hero's burst of colour.
+Paper on the field is 1.15:1: not a recorded contrast claim, a figure-ground
+step — six sheets of paper lying on a desk.
+
+Full-bleed and not a box at the grid's width, because a wash box wrapped
+around the tiles is one more card, and this family does not nest cards in
+cards. The band forced the home layout from one shell to three (the field must
+sit outside any shell to run edge to edge); the stacked shells trim their
+facing edges — declarations in `_sass/_base.scss` and `_sass/_dashboard.scss`
+— or every seam would carry 96px of doubled padding.
+
+The field is what moved the edge tier from 55% to 60%: see *Surfaces*.
+
+## The filter is gone
+
+The dashboard filter (label, search input, live count, empty state,
+`filter.js`) was removed on 2026-08-12, answered by one question: what did it
+do that ⌘K does not? It substring-matched a hidden front-matter haystack;
+`search.json` indexes the **full body text of every section**, where the words
+a reader actually types — "Drools", "template method" — live. The filter's
+reach was a strict subset of the search's, it carried a standing trap (it
+matched `technologies`, which appear nowhere on the tile, so a hit could look
+like a false positive), and its own header comment set its ceiling at ~15
+examples. At six, the eye narrows a visible grid faster than typing does.
+
+Two things replaced it, neither optional: the tile front matter it used to
+match moved into `search.json`'s landing records, so nothing stopped being
+findable; and the intro sentence now states the collection's size from a
+computed count (`index.md`) — at rest, the old page never said six examples
+existed until you typed. If the corpus ever approaches the old ceiling, the
+thing to build is a row of domain facets — which needs the closed vocabulary
+below — not a text box.
 
 ## In the wild — a bibliography, not a second dashboard
 
@@ -242,23 +324,67 @@ a shared one.
 - **`.ex-tile`** — dashboard tile. Neutral paper, hairline border, flat at rest,
   hover-lift (the one sanctioned dynamic shadow). Stretched link: one real `<a>`
   expanded by a pseudo-element, so exactly one link per tile reaches the tab
-  order and the accessibility tree. **No pills at all** (2026-08-11):
-  `decisions` is a plain list of at most three clauses, and `technologies` —
-  the last chip row to survive on the dashboard — no longer renders on the tile
-  at all. A tile already carries domain, title, tagline, goal, decisions and
-  scale; the chips were a fourth texture, the loudest one, repeating what the
-  decisions had usually just said in words. They render in full on the system's
-  own page, and stay in `data-haystack`, so the filter still matches them.
-- **`.ex-chip`** — keyword label. Deliberately *not* `arc42-tag`: the family
-  spec for that is "site-hue wash, always links", and these are neither. **A
-  value earns a pill only if it can recur.** The dashboard carried 58 of them
-  across six tiles and 55 of the values appeared exactly once, which is a
-  bulleted list with a border drawn round every bullet: all 24 `decisions`
-  values are clauses averaging 6.4 words, and each rendered on a line of its
-  own at 1440px as well as on a phone. Decisions lost the pill and kept the
-  content; technologies kept the pill and then lost the dashboard, where they
-  now appear only in the filter's haystack. The chip survives on the system
-  page and on `.ex-wild`, both of which show one short list and not six.
+  order and the accessibility tree. Its boundary is `--wash-edge` (4.00:1 on
+  its own paper, 3.48:1 on the field), not a hairline: the border and the
+  field step are together the entire difference between an object and a sheet
+  of paper.
+
+  **No pills at all** (2026-08-11): `decisions` is a plain list of at most three
+  clauses, and `technologies` — the last chip row to survive on the dashboard —
+  no longer renders on the tile. The chips were a fourth texture, the loudest
+  one, repeating what the decisions had usually just said in words. They render
+  in full on the system's own page and are indexed on the landing record in
+  `search.json`.
+
+  **And no tagline** (2026-08-12). Removing the chips took away the tile's
+  newest information and left its most redundant: `tagline` and `main_goal` were
+  two paragraphs saying one thing on half the corpus — "Broken-link checker for
+  generated HTML documentation" directly above "Find broken links and missing
+  images in generated HTML". The goal is the sentence that tells one example
+  apart from another, so the goal is the one that stayed. The second paragraph
+  also cost the row its alignment: two blocks wrapping to different depths put
+  the decision list at a different `y` in every tile, and comparing across a row
+  is the one thing a dashboard is for. A tile is now domain, number, title,
+  goal, three decisions, scale — and the six titles sit on one baseline.
+
+  **A contributor byline, on third-party tiles only** (2026-08-12). A system an
+  outside organisation contributed — `contributed: true` in its front matter, a
+  dedicated boolean because `imported:` is a date every system carries — closes
+  its tile with one muted line, "Contributed by Umweltbundesamt (UBA)", derived
+  from the `attribution` field the overview page already prints. Site-authored
+  tiles show nothing: the line thanks a contributor on the page most visitors
+  see, it does not caption every tile. It is plain text, never a link — one
+  link per tile is the stretched-link invariant — set a step below the scale
+  line at 0.8125rem `--muted`. The placement is the alignment argument: title,
+  goal and decisions are what a reader compares across a row, and a
+  variable-height line anywhere above the bottom tier would push all of them
+  off the shared baseline on exactly the tiles that carry it. So it renders
+  last, under the scale line's hairline, where it costs only its own height.
+
+  The grid itself is capped at `--measure-wide` (2026-08-12). It had no
+  `max-width` at all, so it ran the full shell: 4 × 320px at 1440 *and* at 1920,
+  six tiles landing 4 + 2 with half an empty row before the footer, and a track
+  narrow enough to wrap three of the six domain eyebrows onto two lines. The
+  cap was already written for this element in `_sass/_tokens.scss` and had never
+  been applied to it.
+- **`.ex-chip`** — the kind label on `/in-the-wild/`, and since 2026-08-12 the
+  only chip on the site, styled in `_sass/_in-the-wild.scss` where its only
+  user lives. Deliberately *not* `arc42-tag`: the family spec for that is
+  "site-hue wash, always links", and this is neither. **A value earns a pill
+  only if it can recur.** The dashboard carried 58 chips across six tiles with
+  55 singleton values and lost them all (2026-08-11); the system facts block
+  kept its three chip rows a day longer and lost them on two counts. The
+  count this rule asks for: `technologies` measured 15-of-17 singletons,
+  `keywords` 3-of-3, and `decisions` are one-off clauses by definition. And a
+  second fault the dashboard never had: the facts chips were non-interactive
+  bordered rounded boxes one scroll above the section grid's 24 bordered
+  rounded cells that really are links, so the one shape that page teaches to
+  mean "click me" was worn by things that do nothing. The facts block now
+  prints decisions as the same plain list the tile uses and technologies and
+  keywords as middot-separated plain text, the way `/in-the-wild/` prints its
+  facts. The surviving chip passes both halves of the law: `kind` is a closed
+  three-value vocabulary that recurs by construction, and nothing box-shaped
+  on its page is a link. The `--tech` mono variant died with the facts chips.
 - **`.ex-wild`** — the external reading list. Defined as much by what it
   omits as by what it has: no border, no fill, no radius, no hover-lift, no
   stretched link, no catalogue number, and **exactly one chip** — `kind`, from a
@@ -282,10 +408,41 @@ Three tinted surfaces plus the code wash, each with one job — the family cap:
 
 | Token | Job |
 |---|---|
-| `--wash-calm` | chips, facts block, pinned note, code |
+| `--wash-calm` | the kind chip, facts block, pinned note, code — and the dashboard field |
 | `--wash-active` | the current row in the rail |
 | `--wash-hover` | every interactive hover fill |
-| `--wash-border` | the border tier that must be seen |
+| `--wash-border` | hairlines and `::marker`s — decorative, 1.98:1 |
+| `--wash-edge` | component boundaries — **4.00:1** on paper, **3.48:1** on the field; the tier that must be seen |
+
+**The edge tier is new (2026-08-12) and it exists because the old table was
+wrong.** `--wash-border` was described here as "the border tier that must be
+seen" and measures **1.98:1** on `--paper` — two thirds of the 3:1 WCAG 1.4.11
+asks of anything that identifies a component. It was drawing decorative
+hairlines and `::marker`s *and* the outline of the dashboard tile, whose fill is
+`--paper` on a `--paper` page: **1.00:1**, so that one line was the only thing
+making a tile a tile. Six examples read as a single grey field, and the filter
+input's border — the filter has since left, see above — failed outright with
+no decorative argument available.
+
+`--wash-edge` is 60% of the ladder, `#827d78`, measured — resolved and read
+back from a canvas in headless Chromium, which reproduces the recorded 55%
+literal byte for byte by the same route. It was 55% for part of one day: the
+50% step was rejected because it resolves to `#95918e` at 3.07:1, a pass one
+rounding step wide, and this site does not record ratios it would not defend —
+and then the dashboard gained its `--wash-calm` field, against which the 55%
+step is 3.04:1, the same one-rounding-step pass one surface later. At 60% the
+edge clears both of its neighbours with room: 4.00:1 on paper, 3.48:1 on the
+field, against ~1.25:1 for the divider inside the tile — two tiers apart
+enough to read as two.
+
+The tier holds every whole-surface click target's boundary, and that is now
+two components: the dashboard tile, and (2026-08-12, later than the tile and
+by the tile's own argument) the section grid's twelve cells, which had been
+left at `--wash-border` — the same 1.98:1 fault on the site's other
+whole-cell target. The grid sits on paper with paper-filled cells, so its one
+measured pair is 4.00:1; its hover state needed no matching change, because
+the hover border is `--ground-deep` (14.12:1 on paper) over a `--wash-calm`
+fill, still tiers above the new rest state.
 
 ## Measure and breakpoints
 
@@ -353,6 +510,37 @@ So the vocabulary has to close **before** the hook is switched on, not with it:
 terms that can recur, at most 18 characters (the eyebrow track is ~174px after
 the catalogue number's 3rem clearance), no "/" in a value, and a
 `check-system-fields.sh` beside the existing wild-fields check to hold it.
+
+**Decided against closing it, for now (2026-08-12).** The taxonomy question
+was put directly — close `domain` into a fixed vocabulary, or go loose the way
+docs.arc42.org tags its tips — and the answer was keywords. `domain` stays
+free text on the eyebrow, and the corpus gains an optional `keywords:` axis
+instead (`_systems/_TEMPLATE/index.md`): loose like blog tags, reusing the
+docs.arc42.org tip vocabulary where it fits, so the two sites stay searchable
+in the same words. The two are different axes and must not be conflated — the
+domain says what the *system* is, keywords say what the *documentation
+demonstrates*. Keywords render as plain text on the system's own page, are
+indexed by the site search, and never appear on the tile.
+
+**Keywords adopted corpus-wide (2026-08-12, follow-up).** The optional
+`keywords:` axis is no longer optional in practice: all seven systems now
+carry 3–5 values from one deliberately small shared vocabulary — ten terms,
+every one taken verbatim from docs.arc42.org's tip keyword index, every one
+used by at least two systems (median recurrence 3). The axis means what the
+template says it means — what the *documentation* demonstrates, never what
+the system is — and its first use, which had conflated it with `domain`, was
+repaired to match. The owed `check-system-fields.sh` now exists beside the
+wild-fields check and is wired into `make check`: it holds the five tile
+fields present, the silent `limit: 3` on decisions honest, and every keyword
+lowercase-kebab, without closing the vocabulary. An "all keywords" index page
+stays deferred, on the same precedent as the cross-system section views: it
+is worth building once recurrence makes it more than a table of contents.
+
+The consequence for this section is honest bookkeeping: the precondition for
+colour is now unmet by decision, not by omission. The `data-domain` hook stays
+in the markup at zero cost, but the tint stays off until someone reopens the
+vocabulary question — and the site's colour story below the hero is the wash
+ladder (see *The field*), not hues.
 
 ## Deferred: cross-system section views
 
