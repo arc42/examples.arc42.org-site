@@ -1,0 +1,137 @@
+:jbake-title: Risks and Technical Debts
+:jbake-type: page_toc
+:jbake-status: published
+:jbake-menu: arc42
+:jbake-order: 11
+:filename: /chapters/11_technical_risks.adoc
+ifndef::imagesdir[:imagesdir: ../../images]
+
+:toc:
+
+
+
+[[section-technical-risks]]
+== Risks and Technical Debts
+
+Risks for v4 differ significantly from v3. Some v3 risks are resolved (Gradle coupling, jBake maintenance), while new risks arise from the migration.
+This chapter separates *Risks* (uncertain future events) from *Technical Debt* (known compromises already in the code). Risks carry stable IDs (`R-NNN`) referenced from the ADR Consequences in <<section-design-decisions>>.
+
+=== 11.1 Risks
+
+Probability and Impact are rated Low / Medium / High. Priority is derived from the two (High×High ⇒ HIGH, etc.) and matches the original assessment. Rows are ordered by Priority, highest first. Each Mitigation references a Chapter 8 concept or a quality scenario.
+
+[options="header",cols="1,2,1,1,1,3"]
+|===
+|R-ID |Risk |Probability |Impact |Priority |Mitigation
+
+|R-001
+|*Custom site generator maturity.* Replacing jBake with the custom Groovy SSG (`MicrositeBaker`) is a significant effort. Feature parity must cover content types, metadata, pagination, tags, menu generation, search, and theming. Risk of incomplete implementation or regressions (QS-13, QS-14, QS-8).
+|High
+|High
+|HIGH
+|Ch8 *Test* concept — integration tests for `generateSite`; QS-8/QS-13 acceptance scenarios gate releases (ADR-4).
+
+|R-002
+|*v3 migration path.* Users upgrading from v3 lose Gradle-based workflows. Projects using `./gradlew` directly, custom Gradle tasks, or Gradle plugins will break (QS-14, QS-3).
+|High
+|High
+|HIGH
+|Ch8 *Error Handling* concept — deprecation warnings via `DtcException` guidance; migration guide (ADR-3).
+
+|R-003
+|*Script loading and classpath conflicts.* Without Gradle's dependency resolution, scripts depending on external libraries (POI, jsoup, HttpClient) need a reliable classpath; class conflicts between scripts are possible (QS-1, QS-4).
+|Medium
+|High
+|MEDIUM
+|`lib/` directory with pinned JARs (ADR-7); Ch8 *Test* concept verifies script loading.
+
+|R-004
+|*Residual inconsistent error handling.* The `DtcException` carrier now exists (`scripts/lib/DtcException.groovy`, ADR-8) and seven tasks are migrated (`generateHTML`, `generatePDF`, `publishToConfluence`, `copyThemes`, `lintAsciiDoc`, `generateCICD`, `downloadTemplate`), but the remaining task scripts still mix thrown exceptions and `System.exit`/`println` until the rollout completes (QS-4, QS-3, QS-17).
+|Medium
+|Low
+|LOW
+|Ch8 *Error Handling* concept (ADR-8) — `DtcException` hierarchy implemented + unit-tested; incremental rollout across the remaining scripts. QS-17.
+
+|R-006
+|*publishToConfluence port regression.* Porting the 823-LOC `Asciidoc2ConfluenceTask` to a standalone script (ADR-12) re-implements the most complex task (page tree, attachments, new-editor handling, rate limiting) and risks behavioural regressions in Confluence publishing.
+|Medium
+|Medium
+|MEDIUM
+|Service-level tests around the new script before the core module is dropped (ADR-12).
+
+|R-007
+|*Diagram-privacy control not implemented.* ADR-9's `diagramServer` key, local-Kroki default, and per-run external-URL warning (QS-16) do not exist in code; `DiagramToolHints` points users at public `kroki.io` without a warning. Quality Goal #1 (no implicit cloud processing) is met today only because the default render path happens to be local.
+|Medium
+|Medium
+|MEDIUM
+|Implement ADR-9 (`diagramServer` switch + QS-16 warning); until then, document the local-default behaviour. Closes T-004.
+
+|R-005
+|*Release-time dependency resolution.* AsciiDoctor is embedded (ADR-6, revised); **177 JARs (~126 MB)** ship in `lib/` (ADR-7). The release process must resolve transitive dependencies and a tampered/vulnerable JAR (T-006) would reach every user (QS-4).
+|Low
+|Medium
+|LOW
+|Ch8 *Security* concept — Trivy CVE scan of `lib/*.jar` (ADR-11); pinned, reproducible resolution (ADR-7).
+
+|R-008
+|*Incomplete secret redaction in output.* `DtcError.redact()` masks secret-shaped values at script-level error output (ADR-8), and `DtcRestClient` now redacts its own HTTP error output (`Secrets.redact()` — tokens, `Bearer`/`Basic`, URL user-info). Residual: `redact()` is not yet wired into every `println config`/error path across all scripts. A credential could still leak into a public CI / PR build log via an unwired path.
+|Low
+|Medium
+|LOW
+|Ch8 *Security* concept — `DtcError.redact()` and `DtcRestClient`'s `Secrets.redact()` implemented + unit-tested; remaining work is wiring redaction into the other `println` paths. Advances T-002.
+|===
+
+=== 11.2 Technical Debt
+
+Each item names the specific Chapter 5 building block it burdens.
+
+[options="header",cols="2,1,3"]
+|===
+|Technical Debt |Affected Building Block (Ch5) |Description
+
+|Confluence API dual client
+|Atlassian Integration scripts (`publishToConfluence.groovy`, `ConfluenceClientV1`/`ConfluenceClientV2`)
+|Two parallel client implementations (V1 Server, V2 Cloud) must be maintained. Atlassian is deprecating v1 for Cloud. Decision deferred to ADR-TBD-1.
+
+|No Jira Cloud client
+|Atlassian Integration scripts (`exportJiraIssues.groovy`, `JiraServerClient`)
+|Only `JiraServerClient` exists; Jira Cloud is not natively supported. Burdens QS-2. Decision deferred to ADR-TBD-2.
+
+|Windows-only export features
+|External Tool Export scripts (`exportEA.groovy`, `exportPPT.groovy`, `exportVisio.groovy`)
+|EA, PowerPoint, and Visio export remain Windows-only (VBScript COM automation). No fallback on Linux/macOS, burdening cross-platform portability (QS-2).
+
+|`lib/` footprint (~126 MB)
+|Wrapper Layer / `lib/` (ADR-7)
+|Embedding AsciidoctorJ + JRuby (ADR-6, revised) makes `lib/` 177 JARs / ~126 MB — larger than v3's ~50 MB. Making POI and AsciidoctorJ/JRuby optional or lazily loaded would cut typical-run footprint substantially (QS-6).
+
+|No v4 Windows wrapper path
+|Wrapper Layer (`dtcw.ps1`, `dtcw.bat`)
+|The v4 `GroovyMain` execution path exists only in the Bash `dtcw`; `dtcw.ps1`/`dtcw.bat` carry no v4 path. Windows v4 works only via WSL2 today (see Chapter 1 goal scope). Burdens cross-platform portability (QS-2, Goal #3).
+
+|Hand-synchronised Bausteinsicht model and inline PlantUML
+|Building Block View (Ch5) — Level-1 container view (`05_building_block_view.adoc`, `models/level1-container.jsonc`)
+|The Level-1 view exists twice: as a Bausteinsicht JSONC model (source of truth) and as inline C4-PlantUML (rendered artifact). Because Bausteinsicht has no PlantUML exporter (ADR-15), the two are kept in sync by hand and can drift. Explicitly accepted as low-cost (one view, changed rarely); retires when a text-based export path is wired (ADR-15).
+|===
+
+=== Resolved v3 Risks
+
+[options="header",cols="1,2"]
+|===
+|Former Risk |How v4 Resolves It
+
+|Incomplete core module migration
+|Resolved. The `core/` module is dissolved back into scripts (ADR-3 supersedes ADR-2). There is no longer a split between compiled core and script plugins.
+
+|Dual config file confusion
+|Clarified. `Config.groovy` is the template. `docToolchainConfig.groovy` is the config. Not a dual-config problem — only appeared that way because docToolchain is installed in its own repo.
+
+|jBake unmaintained / Apple Silicon
+|Resolved by ADR-4. Custom Groovy SSG replaces jBake. No OrientDB, no JNI issues.
+
+|Gradle startup overhead
+|Resolved by ADR-3. No Gradle at all. Startup under 3 seconds.
+
+|Heavy dependency footprint (60-80 JARs)
+|*Not resolved — reversed.* The plan to externalize AsciiDoctor (ADR-6) was dropped; v4 embeds AsciidoctorJ + JRuby, so `lib/` is 177 JARs / ~126 MB — larger than v3. Reclassified as technical debt above, not a resolved risk.
+|===

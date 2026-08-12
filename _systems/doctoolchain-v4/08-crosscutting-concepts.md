@@ -1,0 +1,179 @@
+---
+title: Cross-cutting Concepts
+order: 8
+---
+
+This chapter leads with the five mandated baseline crosscutting concepts (Threat Model, Security, Test, Observability, Error Handling), then documents the docToolchain-specific concepts (Configuration Management, Script Execution Model, LLM Integration, Content Transformation Pipeline, Custom Site Generator).
+
+## Threat Model (STRIDE)
+
+docToolchain is a local CLI document generator. It reads local files, runs Groovy scripts and Groovy config, calls external REST APIs (Confluence, Jira), optionally calls LLM providers (via the daCLI ecosystem), optionally renders diagrams through a Kroki-compatible server (local Docker by default, ADR-9), and downloads Java, AsciiDoctor, templates, and themes over the network on first use.
+The following STRIDE analysis enumerates the concrete threats this attack surface creates. Each threat carries a stable ID (`T-NNN`) referenced by the mitigations in the Security concept below and by the risks in the Risks and Technical Debt section.
+
+| T-ID | STRIDE Category | Threat | Affected Building Block (Ch5) |
+|---|---|---|---|
+| T-001 | Tampering / Spoofing | A man-in-the-middle or spoofed mirror serves a tampered AsciiDoctor install, template, theme, or JDK during `dtcw` auto-bootstrapping. The user runs attacker-controlled code without noticing. | Wrapper Layer (`dtcw`) |
+| T-002 | Information Disclosure | API tokens and credentials leak into console output, build logs, or generated CI snippets — for example a stack trace that echoes `confluence.credentials`, or a token printed by a verbose script. | Groovy Scripts (`publishToConfluence.groovy`, `exportJiraIssues.groovy`) |
+| T-003 | Tampering / Elevation of Privilege | A malicious `include::` directive or crafted file path performs path traversal on export, writing outside the intended `outputPath` (zip-slip / `../` escape) or reading files outside the project. | Groovy Scripts (`generateSite.groovy`, `collectIncludes.groovy`) |
+| T-004 | Information Disclosure / Tampering (SSRF) | A configured `diagramServer`, `confluence.api`, or `jira.api` URL points at an internal address. docToolchain is coerced into requesting internal-only endpoints (SSRF), or diagram source text is exfiltrated to a third-party Kroki host. | Groovy Scripts + Wrapper (diagram rendering, REST clients) |
+| T-005 | Elevation of Privilege | Untrusted `docToolchainConfig.groovy` or a downloaded Groovy script executes arbitrary code. Groovy config is executable code, not data — opening a hostile project and running `dtcw` runs whatever the config author wrote. | Wrapper Layer + Groovy Scripts (`ConfigSlurper` evaluation) |
+| T-006 | Tampering / Elevation of Privilege | A tampered or vulnerable dependency JAR in `lib/` (ADR-7) executes with full user privileges. A poisoned transitive dependency resolved at release time ships to every user. | Groovy Scripts (`lib/*.jar` classpath) |
+
+## Security
+
+Each mitigation below references the `T-IDs` it closes. Mitigations marked "already in code" exist today; the rest are decided concepts to be enforced as the v4 scripts mature.
+
+| Mitigation | Description | Closes |
+|---|---|---|
+| HTTPS for all downloads and APIs | `dtcw` and the REST clients use HTTPS for JDK/AsciiDoctor/template/theme downloads and for Confluence/Jira calls. Pinned versions (ADR-6) reduce the window for a swapped artifact. | T-001, T-004 |
+| Secrets via environment, never config | *Partly in code.* Credentials should be supplied through environment variables or external config rather than committed into `docToolchainConfig.groovy`. Secret-shaped values (`credential`, `token`, `secret`, `Bearer`/`Basic`, `apikey`) are masked by `DtcError.redact()` (`scripts/lib/DtcException.groovy`), and the ADR-8 handler prints guidance instead of stack traces for user-recoverable errors — both **in code and unit-tested**, applied at script-level error output (e.g. `generateHTML`). `DtcRestClient` likewise redacts its own HTTP error output (`Secrets.redact()` — tokens, `Bearer`/`Basic`, URL user-info), unit-tested. **Residual (R-008):** `redact()` is not yet wired into every `println config`/error path across all scripts. This matters mainly for the CI / public-build context below, not for the local-trust default. | T-002 |
+| Zip-slip / path-traversal guard | *In code.* `downloadTemplate` and the custom site generator guard against zip-slip when unpacking archives (canonical-path containment check), and export paths are resolved against and constrained to `outputPath`. **Caveat:** `include::` resolution is *not* confined to the project tree — AsciiDoctor runs under `SafeMode.UNSAFE` with `allow-uri-read` (`generateHTML.groovy`), by design, so a document can include files outside the tree or over HTTP. That is consistent with the local-trust model (the project's own `docToolchainConfig.groovy` already executes arbitrary Groovy, T-005) and is an **accepted risk** for local rendering — see the trust-model note below. | T-003 |
+| Local-default diagram rendering | *Planned — not yet in code.* The intended control (default `diagramServer = 'docker'` keeping diagram source on the machine, plus a per-run warning whenever an external URL is configured — ADR-9, QS-16) does **not exist yet** (R-007). Today diagrams render via the embedded `asciidoctor-diagram`, and `DiagramToolHints.groovy` actively points users at the public `kroki.io` *without* a warning. Goal #1 (no implicit cloud processing) holds today only because the default path is local — not because the control is enforced. | T-004 |
+| Treat config and scripts as trusted code | Documentation states plainly that `docToolchainConfig.groovy` and project scripts are executed, not parsed — users must trust a project before running `dtcw` in it, exactly as with any build tool. CodeNarc static analysis (ADR-11) and gitleaks pre-commit hooks reduce the chance of introducing unsafe patterns. | T-005 |
+| Dependency CVE scanning | Trivy scans `lib/*.jar` for known CVEs on every PR and weekly (ADR-11), with results in the GitHub Security tab. Release-time dependency resolution is reproducible and pinned (ADR-7). | T-006 |
+
+### Trust model and accepted risks
+
+docToolchain's primary use case is *a developer rendering their own trusted documentation locally*. In that model the user already runs their own code: `docToolchainConfig.groovy` is Groovy that executes (T-005), so `SafeMode.UNSAFE`, `allow-uri-read`, arbitrary `include::`, and config-supplied URLs grant an attacker nothing beyond what running one's own project already grants. These are therefore **accepted risks by design**, not defects: download checksum/signature pinning, SSRF via config URLs, `SafeMode.UNSAFE` as the default, and code execution via config/scripts. They are recorded here for honesty; no mitigation is planned for the local case.
+
+The one context where this model breaks is **CI / public-PR builds**: build logs can be public, and a pull request can introduce a malicious `include::https://…[]` or a credential-shaped value. There the gaps above become real-ish. The honest posture is **CI hardening, not "the tool is insecure"**: redact secret-shaped config keys before any `println config` / error output (R-008), and consider a non-`UNSAFE` safe mode for rendering untrusted PRs. The mitigations marked *planned* in the table above (T-002, T-004) are the ones that close this CI gap.
+
+## Test
+
+Testing follows a pyramid, broad at the base:
+
+* **Unit (Spock)** — the largest layer. Spock specifications in `core/` cover the Atlassian client/converter logic, configuration handling, and HTML transformation. These trace to the business rules they enforce (e.g. idempotent Confluence publishing — QS-4 — is unit-tested via MD5 hash comparison).
+* **Wrapper (BATS)** — `test/*.bats` exercise `dtcw` across local/Docker/SDKMAN environments (QS-2, QS-6). They trace to the cross-platform and installability use cases.
+* **Integration** — end-to-end `./dtcw local generateHTML` / `generatePDF` / `generateSite` runs verify the full pipeline against real AsciiDoctor (QS-8). Environment-dependent tests skip gracefully (QS-7).
+
+CodeNarc static analysis (ADR-11) sits alongside the pyramid as a non-execution gate. Property-based tests are deferred until the v4 Groovy scripts carry business logic (ADR-11).
+
+## Observability
+
+docToolchain is a short-lived CLI process, so observability is console- and artifact-based rather than service telemetry:
+
+* **Console output** — progress and warnings stream to stdout/stderr. The privacy warning (QS-16) and actionable error guidance (ADR-8) are the primary user-facing signals.
+* **Build artifacts** — generated HTML/PDF/microsite under `build/`, plus the HTML sanity-check report, are the durable evidence of a run.
+* **Exit codes** — differentiated exit codes (0 success, 1 user-fixable, 2 config, 3 API/network, 99 bug) make runs observable to CI/CD without log scraping (ADR-8, QS-5).
+* **LLM trace / cost (planned)** — for LLM-assisted workflows via the ecosystem, an optional `llm-trace` and per-run token/cost summary are envisioned so LLM interactions are auditable. Not yet implemented.
+
+## Error Handling
+
+Error handling is governed by ADR-8 (Actionable Error Guidance). Every user-recoverable error is thrown as a `DtcException` (or `DtcConfigException` / `DtcApiException`) carrying a mandatory `guidance` field — what the user should *do*, not what went wrong. A top-level handler maps each exception type to a differentiated exit code and prints only the guidance message; stack traces appear only for genuine bugs (exit code 99).
+
+This is a recovery-first, fail-fast strategy: there is no silent `println`-and-continue. Network and API failures surface as `DtcApiException` with a remediation step (e.g. "check `confluence.credentials`"). See ADR-8 for the exception hierarchy, exit-code table, and the runtime error scenario in the Runtime View section.
+
+## Configuration Management
+
+Unchanged from v3 in principle, simplified in implementation.
+
+| Layer | Source | Precedence |
+|---|---|---|
+| Project configuration | `docToolchainConfig.groovy` — Groovy DSL parsed by `ConfigSlurper`. Contains all task-specific settings. (`Config.groovy` is the template, not a separate config file.) | Primary. Project-specific settings. |
+| CLI overrides | Environment variables (`DTC_CONFIG_FILE`, `DTC_HEADLESS`) and script arguments. | Highest. Per-invocation customization. |
+
+`gradle.properties` is removed with Gradle. Build-time settings that were in `gradle.properties` (e.g., JVM memory, version) move to `dtcw` defaults or `docToolchainConfig.groovy`.
+
+**LLM-first principle (QS-15):** The config file contains **only deviations from defaults**. All defaults are defined in code and documented in a machine-readable reference. This enables LLMs to read a config, understand what the user has customized, and make targeted changes — without hallucinating or duplicating default values. A minimal config for a project that only generates HTML might be just:
+
+```groovy
+inputFiles = [
+    [file: 'arc42/arc42.adoc', formats: ['html','pdf']],
+]
+```
+
+Everything else (outputPath, inputPath, imageDirs, etc.) comes from sensible defaults in the scripts.
+
+## Script Execution Model
+
+v4 replaces Gradle's task model with direct script invocation:
+
+1. User runs `./dtcw <taskName>` (e.g., `./dtcw generateHTML`)
+2. `dtcw` constructs the classpath from the `lib/` directory (or resolves via Grape)
+3. `dtcw` invokes `java -cp <classpath> groovy.ui.GroovyMain scripts/<taskName>.groovy`
+4. The script loads configuration, executes its logic, writes output, and exits
+5. No daemon persists between invocations
+
+Tasks are independent. There are no implicit dependencies. Users call them in the order they need: `./dtcw generateHTML` then `./dtcw publishToConfluence`. This matches real-world usage patterns.
+
+## Authentication Mechanisms
+
+The concrete authentication details behind the Security concept above (mitigation for T-002). Unchanged from v3:
+
+* **Basic Auth**: Username + API token, encoded as Base64 for `Authorization` header.
+* **Bearer Token**: OAuth or personal access token.
+* Credentials should be supplied via environment variables or external config rather than committed into config files.
+* _Planned (R-008):_ properties containing `credential`, `token`, or `secret` are to be masked in output. **No redaction is implemented yet** — do not rely on masking today, especially in CI logs.
+* User-Agent header identifies docToolchain version for API calls.
+
+## Headless / CI Mode
+
+Unchanged from v3:
+
+* `dtcw` detects headless mode via `DTC_HEADLESS` environment variable or absence of a TTY.
+* All interactive prompts suppressed; defaults auto-accepted.
+* Critical for GitHub Actions, Jenkins, and other CI/CD platforms.
+
+## LLM Integration Architecture
+
+New in v4. docToolchain supports LLMs through an ecosystem of companion tools:
+
+**daCLI (MCP Server)** provides 10 tools for structured document access:
+
+* `get_structure(max_depth)` — Hierarchical table of contents
+* `get_section(path)` — Read section content by path
+* `search(query)` — Full-text search with relevance scoring
+* `update_section(path, content, expected_hash)` — Modify with optimistic locking
+* `insert_content(path, position, content)` — Insert before/after/append
+* `get_elements(type, section)` — Extract code blocks, tables, diagrams
+* `get_metadata()` — Project-wide statistics
+* `get_dependencies()` — Include tree
+* `get_sections_at_level(level)` — Sections by depth
+* `validate_structure()` — Structural integrity checks
+
+**Semantic Anchors** are well-defined terms, methodologies, and frameworks that serve as precise reference points when communicating with LLMs.
+Rather than lengthy instructions, a single anchor like "arc42", "SOLID Principles", or "Socratic Method" activates a rich body of interconnected knowledge in the LLM.
+Quality criteria for anchors: Precise, Rich, Consistent, Attributable. (See <https://llm-coding.github.io/Semantic-Anchors/>)
+
+**Semantic Contracts** bundle multiple anchors into reusable working agreements, defined in `CLAUDE.md` files:
+
+* "Specification = Use Cases with Activity Diagrams + Gherkin acceptance criteria"
+* "Architecture Documentation = arc42 + C4 diagrams + ADRs with Pugh Matrix"
+* "Writing Style = Plain English according to Strunk & White"
+
+These contracts ensure that LLMs apply consistent conventions across a project without repeating detailed instructions in every prompt.
+
+**LLM-Prompts** provide reusable interaction patterns:
+
+* arc42 Chapter Generator — step-by-step architecture documentation
+* Architecture Decision Record — structured decisions with Pugh Matrix
+* Quality Scenarios Builder — testable quality requirements
+* Risk Assessment, Stakeholder Analysis, Context Diagram Generator, etc.
+
+**Bausteinsicht** provides architecture-as-code:
+
+* JSONC models that LLMs read/write natively
+* Bidirectional draw.io sync — model changes update diagrams and vice versa
+* CLI with `--format json` for programmatic access
+
+## Content Transformation Pipeline
+
+Unchanged from v3 for Confluence publishing:
+
+1. AsciiDoctor generates HTML5 from AsciiDoc sources
+2. jsoup parses HTML into DOM tree
+3. HtmlTransformer rewrites DOM for Confluence compatibility
+4. LinkTransformer rewrites cross-references
+5. CodeBlockTransformer formats code blocks as Confluence macros
+
+## Custom Site Generator: MicrositeBaker (replacing jBake)
+
+New in v4. The site generator (`MicrositeBaker`, `scripts/lib/MicrositeBaker.groovy`, driven by `generateSite.groovy`) is a Groovy class implementing:
+
+1. **Content scanning**: Recursively scan `src/docs/` for `.adoc` files
+2. **Metadata extraction**: Parse jBake-compatible headers (`:jbake-title:`, `:jbake-type:`, `:jbake-menu:`, `:jbake-order:`)
+3. **In-memory model**: Build content model (pages, menu structure, tags) — no database
+4. **AsciiDoc rendering**: Call AsciiDoctor CLI (external tool, ADR-6) for each page
+5. **Template application**: Apply Groovy SimpleTemplate templates (reused from v3's `src/site/templates/`)
+6. **Static output**: Write HTML + assets to `build/microsite/output/`
+7. **Modern theme**: Clean, responsive design with dark mode and search (Phase 1)

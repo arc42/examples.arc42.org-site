@@ -1,0 +1,146 @@
+:jbake-title: Architecture Decisions
+:jbake-type: page_toc
+:jbake-status: published
+:jbake-menu: arc42
+:jbake-order: 9
+:filename: /chapters/09_architecture_decisions.adoc
+ifndef::imagesdir[:imagesdir: ../../images]
+
+:toc:
+
+
+
+[[section-design-decisions]]
+== Architecture Decisions
+
+All architecture decisions are evaluated against the quality scenarios defined in <<section-quality-scenarios>>.
+docToolchain v4 represents a fundamental shift: from a Gradle-based build tool to an LLM-native docs-as-code platform.
+v3 is the current production version.
+
+The ADRs themselves live in the register at `src/docs/arc42/adrs/` and are included below.
+Statuses follow Nygard values (Proposed / Accepted / Superseded / Deprecated). `Accepted (inferred)` marks decisions whose rationale was reconstructed from the codebase (carried forward from v3).
+
+[options="header",cols="1,3,1"]
+|===
+|ADR |Title |Status
+
+|ADR-1
+|Use Groovy as Primary Scripting Language
+|Accepted (inferred)
+
+|ADR-2
+|Separate Core Logic from Gradle
+|Superseded by ADR-3
+
+|ADR-3
+|Remove Gradle — Direct Groovy Script Execution
+|Accepted (for v4)
+
+|ADR-4
+|Replace jBake for Static Site Generation
+|Accepted (for v4)
+
+|ADR-5
+|LLM-Native Architecture
+|Accepted (for v4)
+
+|ADR-6
+|AsciiDoctor as External Tool with Versioned Auto-Installation
+|Accepted (for v4) — revised (AsciidoctorJ embedded)
+
+|ADR-7
+|`lib/` Directory for Remaining Java Dependencies
+|Accepted (for v4)
+
+|ADR-8
+|Actionable Error Guidance
+|Accepted (for v4) — carrier pending (R-004)
+
+|ADR-9
+|Server-Based Diagram Rendering via Kroki-Compatible API
+|Accepted (for v4) — not yet implemented (R-007)
+
+|ADR-10
+|Risk-Based Quality Assurance (Vibe-Coding Risk Radar)
+|Accepted
+
+|ADR-11
+|Tier 2 Mitigation Implementation
+|Accepted
+
+|ADR-12
+|Tasks Are Self-Contained Groovy Scripts — No Compiled Core Module at Runtime
+|Accepted (port pending)
+
+|ADR-13
+|`dtcw4` → `dtcw` Wrapper Delegation
+|Accepted (inferred)
+
+|ADR-14
+|Task Discovery via `// @task` Marker
+|Accepted (inferred)
+
+|ADR-15
+|Structural Diagrams as Architecture-as-Code (Bausteinsicht model, PlantUML render)
+|Accepted (for v4) — export wiring deferred
+
+|ADR-16
+|Project-Local Tasks — Custom Tasks and Monkey-Patching
+|Accepted (for v4)
+
+|ADR-17
+|`dtc.scriptsHome` — Resolve `lib/` Helpers from the Installation
+|Accepted (for v4)
+
+|ADR-18
+|v4 Task Dispatch Moves into a Groovy Launcher
+|Accepted (for v4)
+
+|ADR-TBD-1
+|Confluence API Version Strategy
+|Proposed
+
+|ADR-TBD-2
+|Jira Cloud vs. Server Client Architecture
+|Proposed
+|===
+
+include::../adrs/adr-01-groovy-scripting-language.adoc[]
+
+include::../adrs/adr-02-separate-core-logic.adoc[]
+
+include::../adrs/adr-03-remove-gradle.adoc[]
+
+include::../adrs/adr-04-replace-jbake.adoc[]
+
+include::../adrs/adr-05-llm-native-architecture.adoc[]
+
+include::../adrs/adr-06-asciidoctor-external.adoc[]
+
+include::../adrs/adr-07-lib-directory.adoc[]
+
+include::../adrs/adr-08-actionable-error-guidance.adoc[]
+
+include::../adrs/adr-09-kroki-diagram-server.adoc[]
+
+include::../adrs/adr-10-risk-based-qa.adoc[]
+
+include::../adrs/adr-11-tier2-mitigations.adoc[]
+
+include::../adrs/adr-12-tasks-as-groovy-scripts.adoc[]
+
+include::../adrs/adr-13-dtcw-delegation.adoc[]
+
+include::../adrs/adr-14-task-discovery.adoc[]
+
+include::../adrs/adr-15-architecture-as-code-diagrams.adoc[]
+
+include::../adrs/adr-16-project-local-tasks.adoc[]
+
+include::../adrs/adr-17-script-home-lib-resolution.adoc[]
+
+include::../adrs/adr-18-groovy-task-launcher.adoc[]
+
+include::../adrs/adr-tbd-1-confluence-api.adoc[]
+
+include::../adrs/adr-tbd-2-jira-client.adoc[]

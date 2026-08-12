@@ -1,0 +1,36 @@
+---
+title: Architecture Constraints
+order: 2
+---
+
+## Technical Constraints
+
+| Constraint | Explanation |
+|---|---|
+| Groovy (JVM) | Primary implementation language (ADR-1). All scripts, the site generator, and integration logic are written in Groovy. This requires a JVM runtime — currently Java 17, but v4 should support Java 21+. |
+| No build framework | Gradle is removed (ADR-3). No build system sits between `dtcw` and the Groovy scripts. This means dependency management, classpath construction, and task invocation are handled by `dtcw` and the scripts themselves. |
+| AsciiDoc format | All documentation sources must be in AsciiDoc. This is a fundamental design decision. Markdown sources can be converted as a preprocessing step. |
+| PlantUML + Graphviz | Diagram rendering requires PlantUML (via `asciidoctor-diagram` gem) and optionally Graphviz. Installed alongside AsciiDoctor as external tools (ADR-6). |
+| Cross-platform including Apple Silicon | Must run on Linux, macOS (x86_64 and ARM64/Apple Silicon), and Windows. No native/JNI dependencies that break on ARM64 (this is why jBake/OrientDB is replaced — ADR-4). |
+| Backward-compatible configuration | `docToolchainConfig.groovy` from v3 projects must work in v4 without changes (QS-14). `Config.groovy` is the template, `docToolchainConfig.groovy` is the user's config — this is not a dual-config problem; it only appears that way because docToolchain is installed as a tool inside its own repo. |
+
+## Organizational Constraints
+
+| Constraint | Explanation |
+|---|---|
+| MIT License | Open-source license. All dependencies must be compatible. No proprietary libraries in the core distribution. |
+| Community-driven development | Contributions come from volunteers. The architecture must be approachable — script-first, no compilation step, fast feedback loop. |
+| GitHub as development platform | Source code, issues, pull requests, CI/CD, and releases hosted on GitHub. CI/CD uses GitHub Actions. |
+| Docs-as-code philosophy | Documentation is treated as source code: version-controlled, peer-reviewed, built automatically. |
+| Ecosystem coherence | docToolchain is part of an ecosystem: daCLI (MCP server), Bausteinsicht (architecture-as-code), LLM-Prompts (interaction patterns). Architectural decisions must consider cross-project impact. |
+
+## Conventions
+
+| Convention | Explanation |
+|---|---|
+| Architecture Decision Records | Significant decisions are documented as ADRs with Pugh Matrix evaluation against quality goals. |
+| Groovy as scripting language | ADR-1. Exception: Visual Basic for Windows COM automation. |
+| Semantic Versioning | v3 is current production. v4 is the next major version with breaking changes (Gradle removal). |
+| Groovy SimpleTemplate | Template engine for microsite generation (ADR-4). Existing templates from v3 are reused. |
+| Semantic Anchors and Contracts | Anchors are precise reference terms ("arc42", "SOLID", "Docs-as-Code") that activate rich knowledge in LLMs. Contracts (in `CLAUDE.md`) bundle anchors into reusable working agreements for consistent LLM collaboration. |
+| Scripts as primary code artifacts | No compiled modules. Groovy scripts are executed directly. Change-to-test cycle under 5 seconds (QS-11). |

@@ -1,0 +1,53 @@
+---
+title: Quality Requirements
+order: 10
+---
+
+The quality goals from the Introduction and Goals section drive every architecture decision in docToolchain v4.
+This section refines those goals into a structured quality tree and concrete, measurable scenarios that serve as acceptance criteria for the architecture.
+
+Quality scenarios QS-1 through QS-8 were derived from v3 codebase analysis.
+Quality scenarios QS-9 through QS-19 were derived from the v4 architecture requirements.
+
+## Quality Requirements Overview
+
+The quality tree organizes requirements by ISO 25010 categories.
+Each leaf maps to one or more quality scenarios below.
+Each leaf is annotated as either concretising one of the five Chapter 1.2 top quality goals (`[goal N]`) or as a `[derived]` quality requirement that elaborates beyond the top goals — this is correct arc42, not a defect.
+
+![Quality tree mindmap: ISO 25010 categories with leaves annotated as goal 1-5 or derived](../images/quality-tree.png)
+
+## Quality Scenarios
+
+The following scenarios are the **evaluation framework** for all architecture decisions (Section 09).
+Each ADR must state which quality scenarios it supports or compromises.
+Each scenario is written in the six-part quality-attribute-scenario form (Source, Stimulus, Artifact, Environment, Response, Response Measure) and annotated with the Chapter 1.2 top goal it concretises, or marked `derived`.
+
+### Carried forward from v3
+
+| ID | Goal | Source | Stimulus | Artifact | Environment | Response | Response Measure |
+|---|---|---|---|---|---|---|---|
+| QS-1 | derived (extensibility) | Contributor | Wants to add a new export feature (e.g., export to Notion). | `scripts/` directory | Development | They create one Groovy script and register it; no build-system knowledge required. | No compilation step needed; the new task appears in `./dtcw tasks` output. |
+| QS-2 | goal 3 (cross-platform) | User | Runs `./dtcw docker generateHTML` on a project previously built with `./dtcw local generateHTML`. | Generated HTML | Docker vs. local | Docker execution produces the same HTML output as local execution. | Output files byte-identical (excluding timestamps in HTML meta tags). |
+| QS-3 | goal 5 (ease of adoption) | New developer | Clones a project containing `dtcw` and AsciiDoc sources and runs `./dtcw local generateHTML`. | `dtcw` + AsciiDoc sources | Fresh workstation | They get rendered documentation, including automatic Java and docToolchain installation. | Time from first command to viewing HTML under 5 minutes. |
+| QS-4 | derived (reliability) | Author / CI | Triggers Confluence publishing twice for unchanged documentation. | Confluence pages | Network, Confluence reachable | The second run detects unchanged content (MD5 hash) and skips the update. | No new page versions created; attachments and labels preserved. |
+| QS-5 | derived (headless CI) | CI/CD pipeline | Runs `./dtcw local generateHTML` in a container without a TTY. | `dtcw` wrapper | Headless CI (no TTY) | `dtcw` detects headless mode (`DTC_HEADLESS=true`) and suppresses prompts; build completes unattended. | Exit code 0 on success, non-zero on failure; no process hangs awaiting input. |
+| QS-6 | goal 5 (ease of adoption) | User | Runs `./dtcw local generateHTML` on a machine without a JDK. | `dtcw` wrapper | Workstation without JDK | `dtcw` detects the missing JDK, downloads and installs it locally, then proceeds. | No manual Java install; installed JDK reused on later runs. |
+| QS-7 | derived (stable test suite) | Developer / CI | Executes the test suite. | Spock / BATS test suites | Local or CI | All tests pass; environment-dependent tests skip gracefully. | Zero test failures; execution under 15 seconds. |
+| QS-8 | goal 2 (performance) | User | Runs `./dtcw local generateHTML` on ~50 AsciiDoc pages with PlantUML diagrams. | Document generation pipeline | Local, docToolchain installed | HTML output is generated. | Generation completes in under 20 seconds. |
+
+### New for v4
+
+| ID | Goal | Source | Stimulus | Artifact | Environment | Response | Response Measure |
+|---|---|---|---|---|---|---|---|
+| QS-9 | goal 2 (performance) | User | Runs `./dtcw local generateHTML` a second time (docToolchain already installed). | `dtcw` + Groovy scripts | Local, warm install | Task starts immediately, with no build-framework init, dependency resolution, daemon negotiation, or build-graph computation. | Startup under 3 seconds; end-to-end for 50 pages under 10 seconds. |
+| QS-10 | goal 3 (cross-platform) | User | Runs `./dtcw local generateSite` on Apple Silicon (M1/M2/M3/M4). | Custom site generator (`MicrositeBaker`) | macOS ARM64 | Site generation completes without errors or platform-specific workarounds. | No JNI/native-library issues; same output as on x86_64. |
+| QS-11 | derived (script-first) | Contributor | Wants to fix a bug in the Confluence publishing logic. | Groovy scripts | Development | They edit a Groovy script directly and re-run; no compilation, no JAR rebuild. | Change-to-test cycle under 5 seconds; no `./gradlew core:jar` step. |
+| QS-12 | derived (LLM friendliness) | LLM agent (via daCLI) | Needs to read, navigate, and modify generated documentation. | daCLI MCP server (10 tools) | MCP over stdio | daCLI provides structured access; docs follow Semantic Anchor conventions. | Any section located with at most 3 tool calls; token usage under 10% of full-file reading. |
+| QS-13 | derived (modern UI) | Reader | Opens a docToolchain-generated microsite in a browser. | Generated microsite | Modern browser | The site shows responsive layout, dark mode, fast full-text search, and clear navigation. | Visual quality comparable to Starlight/Nextra/Diataxis; page load under 1 second. |
+| QS-14 | derived (v3 compatibility) | Upgrading user | Moves from v3 to v4 without changing `docToolchainConfig.groovy`. | `docToolchainConfig.groovy` | Existing v3 project | v4 `dtcw` reads the existing config and runs all previously configured tasks. | Zero config changes for basic usage; deprecated features warn but do not fail. |
+| QS-15 | derived (LLM-managed config) | User via LLM | Asks an LLM to configure Confluence publishing. | `docToolchainConfig.groovy` | LLM editing session | The LLM adds only the necessary deviating settings; the config stays minimal. | Config contains only explicit deviations from defaults; LLM reads, explains, and edits it correctly without hallucinating defaults. |
+| QS-16 | goal 1 (no implicit cloud processing) | User | Runs `./dtcw generateHTML` with diagrams while `diagramServer` is set to `https://kroki.io/`. | Diagram rendering (asciidoctor-diagram) | External service configured | docToolchain prints a clear warning ("Diagramm-Quelltexte werden an kroki.io gesendet. Für lokale Verarbeitung setze `diagramServer = 'docker'`.") requiring informed consent. | Zero external API calls unless an external `diagramServer` URL is explicitly set; default is `docker` (local); external URLs warn on every run. |
+| QS-17 | goal 4 (actionable error guidance) | User | Hits a fixable failure (locked file, missing config, wrong credentials, unreachable API, missing tool). | `DtcException` + top-level handler | Any environment | docToolchain prints what to do next — which file to close, which config to set, which command to run — not a diagnosis. | Every user-recoverable error carries a remediation step; zero stack traces except for bugs (exit code 99). |
+| QS-18 | derived (minimal repo footprint) | User | Adds docToolchain to an existing project repository. | Project repository | Any | Only `dtcw` and `docToolchainConfig.groovy` are committed; JARs, scripts, templates, and the Java runtime install under `$HOME/.doctoolchain/`. | Exactly 2 files added (plus optional `dtcw.ps1`/`dtcw.bat`); `build/` git-ignored; no Gradle wrapper, no `build.gradle`. |
+| QS-19 | derived (clean uninstallation) | User | Decides to remove docToolchain from their system. | `$HOME/.doctoolchain/` installation | Any | Deleting `$HOME/.doctoolchain/` removes binaries, JARs, Java runtime, and caches; no shell profiles or services were touched. | Zero side effects after `rm -rf $HOME/.doctoolchain/`; no orphaned PATH entries, env vars, or modified shell configs. |
