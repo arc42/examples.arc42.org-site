@@ -3,22 +3,22 @@ title: Solution Strategy
 order: 4
 ---
 
-Die Veröffentlichung des Datenbestandes von SNS erfolgt auf Basis von Linked Open Data (https://www.w3.org/standards/semanticweb/data). Linked Data steht für eine Vernetzung von einzelnen Datenelementen, auf die unmittelbar zugegriffen werden kann. Dies basiert auf Webadressen (HTTP-URIs) für jedes Datenelement und auf dem universellen Datenmodell des Resource Description Frameworks (RDF). Dementsprechend ist jeder SNS-Datensatz durch eine dedizierte URL identifizierbar und kann dadurch frei referenziert werden. Die Bereitstellung der Daten über vom W3C standardisierte RDF-Formate und Serialisierungen garantiert dabei die maschinenlesbare Verarbeitung.
+The publication of SNS data holdings is based on Linked Open Data (https://www.w3.org/standards/semanticweb/data). Linked Data means linking individual data elements that can be accessed directly. This is based on web addresses (HTTP URIs) for each data element and on the universal data model of the Resource Description Framework (RDF). Accordingly, every SNS record is identifiable through a dedicated URL and can therefore be freely referenced. Providing the data through RDF formats and serializations standardized by the W3C guarantees machine-readable processing.
 
-Die vom SNS-System bereitgestellten Daten entstammen zwei autonomen Fachanwendungen:
+The data provided by the SNS system originates from two autonomous specialist applications:
 
-* **Umweltthesaurus UMTHES**: Umweltterminologie miteinander verknüpfter fachsprachlicher und alltagssprachlicher Benennungen. Von den Benennungen fungieren ca. 12.000 als Begriffe für die Verschlagwortung von Dokumenten. Die übrigen Benennungen (ca. 23.000 deutsche und ca. 17.000 englische) sind den Begriffen (Schlagwörtern) bedeutungsgleich gesetzt. Alle Begriffe sind in eine Netzstruktur eingebunden, wobei allgemeinere Oberbegriffe mit spezielleren Unterbegriffen verknüpft sind (z.B. Baum <> Nadelbaum). Darüber hinaus gibt es aber auch eine Verbindung zwischen thematisch verwandten Begriffen (z.B. Baum <> Baumschutz).
-* **Umweltchronik**: Zusammenstellung von ca. 4.000 historischen und aktuellen Umweltereignissen. Seit 2017 wird die Umweltchronik nicht mehr regelmäßig gepflegt.
+* **environmental thesaurus UMTHES**: Environmental terminology of interlinked technical and everyday designations. Of these designations, about 12,000 function as concepts for the automatic keyword assignment of documents. The remaining designations (about 23,000 German and about 17,000 English) are set as synonymous with the concepts (keywords). All concepts are embedded in a network structure, in which more general broader concepts are linked to more specific narrower concepts (e.g. tree <> conifer). Beyond that, there is also a connection between thematically related concepts (e.g. tree <> tree protection).
+* **Environmental Chronicle**: Collection of about 4,000 historical and current environmental events. Since 2017, the Environmental Chronicle has no longer been maintained on a regular basis.
 
-## Beispiel
+## Example
 
-Ein Beispiel für die Vernetzung der Daten aus den einzelnen Fachanwendungen:
+An example of the linking of data from the individual specialist applications:
 
-* Umweltthesaurus UMTHES:
-  * Begriff: "Seeschifffahrt", URL: https://sns.uba.de/umthes/de/concepts/_00022275.html
-  * Begriff: "Schutzgebiet", URL: https://sns.uba.de/umthes/de/concepts/_00021997.html
-  * Begriff: "Wattenmeer", URL: https://sns.uba.de/umthes/de/concepts/_00027422.html
-* Umweltchronik:
-  * Ereignis: "Wattenmeer international unter Schutz gestellt", URL: https://sns.uba.de/chronik/de/concepts/t1d97d0d_102035cd5d4_-362b.html
+* Environmental thesaurus UMTHES:
+  * Concept: "Seeschifffahrt", URL: https://sns.uba.de/umthes/de/concepts/_00022275.html
+  * Concept: "Schutzgebiet", URL: https://sns.uba.de/umthes/de/concepts/_00021997.html
+  * Concept: "Wattenmeer", URL: https://sns.uba.de/umthes/de/concepts/_00027422.html
+* Environmental Chronicle:
+  * Event: "Wattenmeer international unter Schutz gestellt", URL: https://sns.uba.de/chronik/de/concepts/t1d97d0d_102035cd5d4_-362b.html
 
-![Beispiel für Datenvernetzung](../images/solution-example.jpg)
+![Example of data linking](../images/solution-example.jpg)

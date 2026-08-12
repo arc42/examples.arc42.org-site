@@ -3,12 +3,12 @@ title: Quality Requirements
 order: 10
 ---
 
-Siehe die Qualitätsziele in [Abschnitt 1.2 (Einführung und Ziele)](../01-introduction-and-goals/#qualitätsziele).
+See the quality goals in [Section 1.2 (Introduction and Goals)](../01-introduction-and-goals/#quality-goals).
 
-## Qualitätsbaum
+## Quality Tree
 
 *(tbd)*
 
-## Qualitätsszenarien
+## Quality Scenarios
 
 *(tbd)*

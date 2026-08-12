@@ -3,11 +3,11 @@ title: Context and Scope
 order: 3
 ---
 
-![Kontextdiagramm](../images/context.jpg)
+![Context diagram](../images/context.jpg)
 
-| Akteur | Beschreibung | Schnittstelle |
+| Actor | Description | Interface |
 |---|---|---|
-| Besucher (Browser) | Der Besucher des öffentlichen Web-Portals https://sns.uba.de. Hierbei handelt es sich um anonyme Besucher, die sich für Umweltinformationen interessieren. | HTTPS |
-| Schnittstellenbenutzer | Drittsystem, das Schnittstellen/Dienste von SNS integriert und strukturiert Informationen abruft. Die Dienste und Schnittstellen können anonym ohne Registrierung verwendet werden. | HTTPS |
-| Administrator (Browser) | Der Administrator des SNS-Systems. Es handelt sich hierbei um eine Rolle mit erweiterten Zugriffsrechten. Administratoren können unter anderem:<br>- Benutzer anlegen (z.B. für die redaktionelle Pflege)<br>- die Systemkonfiguration verwalten (z.B. verfügbare Sprache)<br>- Daten importieren und exportieren | HTTPS |
-| Pflege (Browser) | Benutzer, der SNS-Datenbestand redaktionell pflegt (i.d.R. UBA-Mitarbeiter). SNS ermöglicht die Zusammenarbeit bei der Pflege und der Veröffentlichung des Datenbestandes darüber hinaus durch ein feingranulares Rollensystem. | HTTPS |
+| Visitor (browser) | The visitor of the public web portal https://sns.uba.de. These are anonymous visitors interested in environmental information. | HTTPS |
+| Interface user | Third-party system that integrates SNS interfaces/services and retrieves structured information. The services and interfaces can be used anonymously, without registration. | HTTPS |
+| Administrator (browser) | The administrator of the SNS system. This is a role with extended access rights. Administrators can, among other things:<br>- create users (e.g. for editorial work)<br>- manage system configuration (e.g. available languages)<br>- import and export data | HTTPS |
+| Maintenance (browser) | User who performs editorial maintenance of the SNS data holdings (typically German Environment Agency (Umweltbundesamt, UBA) staff). SNS also enables collaboration in maintaining and publishing the data holdings through a fine-grained role system. | HTTPS |

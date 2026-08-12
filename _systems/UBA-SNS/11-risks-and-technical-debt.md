@@ -5,16 +5,16 @@ order: 11
 
 ## Rails vs. iQvoc
 
-iQvoc ist ein quelloffenes Thesaurus-Framework, basierend auf den Web-Standards SKOS und RDF. Die technische Grundlage von iQvoc bildet das Ruby on Rails-Framework (https://rubyonrails.org/). Der Quellcode von iQvoc sowie der funktionalen Erweiterungen ist frei auf der Plattform GitHub verfügbar (https://github.com/innoq/iqvoc).
+iQvoc is an open source thesaurus framework based on the web standards SKOS and RDF. The technical foundation of iQvoc is the Ruby on Rails framework (https://rubyonrails.org/). The source code of iQvoc and its functional extensions is freely available on the GitHub platform (https://github.com/innoq/iqvoc).
 
-Bei der Implementierung des Frameworks wurden generelle Best-Practices und Prinzipien der Entwicklung von Ruby on Rails-Anwendungen angewendet. iQvoc hingegen ist keine klassische Ruby on Rails-Anwendung, sondern bildet eine Abstraktionsschicht über dem Applikations-Framework zur Entwicklung von Thesauri auf SKOS und Linked Data Prinzipien.
+General best practices and principles for developing Ruby on Rails applications were applied when implementing the framework. iQvoc itself, however, is not a classic Ruby on Rails application, but forms an abstraction layer above the application framework for developing thesauri based on SKOS and linked data principles.
 
-Zusätzliche Funktionen wurden abstrakt und wiederverwendbar in Form von Rails-Engines (https://guides.rubyonrails.org/engines.html) implementiert und in das SNS-System integriert. Diese Art der Entwicklung erfordert Einarbeitung in fortgeschrittene Techniken bei der Entwicklung mit dem Ruby on Rails Applikations-Framework.
+Additional functions were implemented abstractly and reusably in the form of Rails engines (https://guides.rubyonrails.org/engines.html) and integrated into the SNS system. This type of development requires familiarization with advanced techniques for developing with the Ruby on Rails application framework.
 
 ## Single-Sign-On (SSO)
 
-Derzeit existiert kein zentrales Single-Sign-On System zur zentralen Nutzerauthentifizierung, d.h. jedes Teilsystem (UMTHES, Chronik) implementiert seine eigene Benutzerverwaltung. Eine zentrale Nutzerverwaltung war bisher nicht im Fokus des Projekts, da bisher ohnehin verschiedene konkrete Benutzer für die Pflege der Anwendungen verantwortlich waren.
+Currently there is no central single sign-on system for central user authentication, meaning each subsystem (UMTHES, Chronicle) implements its own user management. Central user management has not been a focus of the project so far, since different specific users have in any case been responsible for maintaining the applications up to now.
 
-## Bootstrap 4 Styleguide
+## Bootstrap 4 Style Guide
 
-Die visuelle Gestaltung von SNS basiert auf dem separat entwickelten UBA-Bootstrap Theme. Dieses liegt mittlerweile in einer neueren Version vor, die auf dem Frontend-Framework Bootstrap v5 basiert. SNS verwendet noch eine ältere Version dieses Styleguides (Bootstrap 4). Die Migration auf die neue Version steht noch aus.
+The visual design of SNS is based on the separately developed German Environment Agency (Umweltbundesamt, UBA) Bootstrap theme. This is now available in a newer version based on the frontend framework Bootstrap v5. SNS still uses an older version of this style guide (Bootstrap 4). Migration to the new version is still pending.

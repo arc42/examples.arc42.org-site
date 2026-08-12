@@ -3,33 +3,33 @@ title: Deployment View
 order: 7
 ---
 
-Diese Sicht beschreibt die Umgebung, auf denen das SNS-System betrieben wird.
+This view describes the environment in which the SNS system is operated.
 
-## Produktionsumgebung
+## Production Environment
 
-Die Betriebsinfrastruktur wird seit Anfang 2024 vom Umwelt-Info Projekt (https://gitlab.opencode.de/umwelt-info/infrastruktur/testbetrieb) bereitgestellt und basiert auf eine einzige virtuelle Maschine im eigenen Rechenzentrum. Die virtuelle Maschine wird komplett automatisiert mit OpenStack aufgesetzt. Cloud-Dienste sind nicht involviert.
+The operational infrastructure has been provided by the Umwelt-Info project (https://gitlab.opencode.de/umwelt-info/infrastruktur/testbetrieb) since early 2024 and is based on a single virtual machine in the agency's own data center. The virtual machine is set up fully automated with OpenStack. Cloud services are not involved.
 
-## Infrastruktur Ebene 1
+## Infrastructure Level 1
 
-![Infrastruktur Umwelt-Info](../images/deployment-view-umweltinfo.png)
+![Umwelt-Info infrastructure](../images/deployment-view-umweltinfo.png)
 
-## Infrastrukturkomponenten
+## Infrastructure Components
 
-### Applikationsserver
+### Application Server
 
-* **Betriebssystem**: Ubuntu 24.04 LTS
-* **Caddy Reverse-Proxy**: letzte stabile Version für Ubuntu 24.04
-* **Docker**: letzte aktuelle Version
-* **Gitlab (OpenCode) Container Registry**: Technische Infrastruktur für das Deployment. Dient zum Empfang/Quelle von Docker-Containern, die die jeweilige Fachanwendung enthalten.
+* **Operating system**: Ubuntu 24.04 LTS
+* **Caddy reverse proxy**: latest stable version for Ubuntu 24.04
+* **Docker**: latest current version
+* **Gitlab (OpenCode) container registry**: Technical infrastructure for deployment. Serves as the receiving point/source for Docker containers that contain the respective specialist application.
 
-### Datenbankserver
+### Database Server
 
 * **PostgreSQL**
 
-### Fachanwendungen
+### Specialist Applications
 
-Die Fachanwendungen UMTHES, Chronik und Portal werden von der Entwicklung in Form von Docker-Containern geliefert und auf dem Container-Plattform betrieben. Die Container enthalten alle benötigten Komponenten (z.B. Ruby Interpreter) und liefern die jeweilige Anwendung über einen exponierten Port an den Applikationsserver aus.
+The specialist applications UMTHES, Chronicle, and Portal are delivered by development in the form of Docker containers and run on the container platform. The containers contain all required components (e.g. the Ruby interpreter) and expose the respective application to the application server through an exposed port.
 
-Details zur Installation bzw. dem Betrieb von Docker sind in der offiziellen Dokumentation zu finden: https://docs.docker.com/
+Details on installing and operating Docker can be found in the official documentation: https://docs.docker.com/
 
-Die spezifischen Docker-Container für UMTHES, Chronik und Portal sind Teil des Quelltexts (Dockerfile, docker-compose.yml) der jeweiligen Fachanwendung (siehe [Bausteinsicht](../05-building-block-view/)).
+The specific Docker containers for UMTHES, Chronicle, and Portal are part of the source code (Dockerfile, docker-compose.yml) of the respective specialist application (see [Building Block View](../05-building-block-view/)).

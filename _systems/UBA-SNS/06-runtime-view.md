@@ -3,25 +3,25 @@ title: Runtime View
 order: 6
 ---
 
-Diese Sicht thematisiert dynamische Aspekte von SNS und visualisiert, wie die einzelnen Teile zusammenspielen.
+This view addresses the dynamic aspects of SNS and shows how the individual parts work together.
 
-Um die nachfolgenden Szenarien besser verstehen zu können, hier eine kurze Erläuterung der in SKOS (Simple Knowledge Organisation System) und damit in iQvoc benutzten Begrifflichkeiten:
+To help understand the following scenarios, here is a brief explanation of the terminology used in SKOS (Simple Knowledge Organization System) and therefore in iQvoc:
 
-* **Konzept**: zentrales Element von SKOS. Konzepte repräsentieren die Idee hinter einem Begriff.
-* **Label**: werden dem im 1. Schritt festgelegten Konzept zugewiesen. Es gibt zwei Arten von Label: `prefLabel` (bevorzugte Label) und `altLabel` (alternative Label). `prefLabel` fungieren als Vorzugsbenennung von Konzepten, `altLabel` als zusätzliche alternative Benennung(en). Sehr vereinfacht dargestellt, entsprechen somit `prefLabel` den Deskriptoren und `altLabel` den Nicht-Deskriptoren aus Thesauri.
+* **Concept**: central element of SKOS. Concepts represent the idea behind a term.
+* **Label**: assigned to the concept established in step 1. There are two types of labels: `prefLabel` (preferred label) and `altLabel` (alternative label). `prefLabel` serves as the preferred designation of a concept, `altLabel` as additional alternative designation(s). Put simply, `prefLabel` corresponds to the descriptor and `altLabel` to the non-descriptor from thesauri.
 
 ## Similar Terms
 
-### Vorbedingungen
+### Preconditions
 
-* Es ist keine Vorbedingung (z.B. Anmeldung) notwendig.
+* No precondition (e.g. login) is necessary.
 
-### Ablauf
+### Process
 
-Ablauf von SimilarTerms am Beispiel der Eingabe "baum" aus [https://github.com/innoq/iqvoc_umt/issues/437](https://github.com/innoq/iqvoc_umt/issues/437)
+Process of SimilarTerms using the example input "baum" from [https://github.com/innoq/iqvoc_umt/issues/437](https://github.com/innoq/iqvoc_umt/issues/437)
 
-1. Suche in der aktuellen Sprache alle Label (egal ob pref/alt), die die Schreibweise "baum" beinhalten:
-   * Sucheingabe: `terms = "baum"`, `lang = de`
+1. Search in the current language for all labels (whether pref or alt) that contain the spelling "baum":
+   * Search input: `terms = "baum"`, `lang = de`
 
 ```text
 labels = [
@@ -29,7 +29,7 @@ labels = [
 ]
 ```
 
-2. Sammle die verbundenen Konzepte der vorherigen Labelsuche:
+2. Collect the connected concepts from the previous label search:
 
 ```text
 concepts = [
@@ -37,12 +37,12 @@ concepts = [
 ]
 ```
 
-3. Erstelle eine vorläufige Ergebnismenge mit den Labeln des gefundenen Konzepts inkl. Gewichtung:
-   * Gewichtungsfaktoren:
+3. Create a preliminary result set with the labels of the found concept, including weighting:
+   * Weighting factors:
      * `'Labeling::SKOSXL::PrefLabel'` => 5
      * `'Labeling::SKOSXL::AltLabel'` => 2
      * `'Labeling::SKOSXL::HiddenLabel'` => 1
-   * Zwischenergebnis wird im Laufe des Prozesses erweitert
+   * The intermediate result is expanded over the course of the process
 
 ```text
 Zwischenergebnis = {
@@ -57,12 +57,12 @@ Zwischenergebnis = {
 }
 ```
 
-4. Narrower/Related Analyse (`find_related_and_narrower_concepts`):
-   * Sammle Spezifischere und Verwandte Konzepte zu Konzept "Baum" in neuer Datenstruktur
-   * Ablauf:
-     * füge Spezifischere Begriffe/Narrower hinzu
-     * füge Verwandte Begriffe/Related hinzu
-     * füge Zusammengesetzt-In-Zusammensetzungen hinzu (nur wenn a. & b. keine Ergebnisse liefern)
+4. Narrower/Related analysis (`find_related_and_narrower_concepts`):
+   * Collect narrower and related concepts for the concept "Baum" in a new data structure
+   * Process:
+     * add narrower terms
+     * add related terms
+     * add compound-in compositions (only if a. and b. produce no results)
 
 ```text
 related/narrower = [
@@ -97,9 +97,9 @@ related/narrower = [
 ]
 ```
 
-5. Füge Begriffe aus Schritt 4 den Zwischenergebnissen hinzu:
-   * Gewichtung = 1
-   * Gewichtung erhöht sich jeweils um 1, wenn ein Konzept mit zwei unterschiedlichen Label vorhanden ist
+5. Add terms from step 4 to the intermediate results:
+   * Weighting = 1
+   * Weighting increases by 1 each time a concept is present with two different labels
 
 ```text
 Zwischenergebnis = {
@@ -142,77 +142,77 @@ Zwischenergebnis = {
 }
 ```
 
-6. Sortiere Zwischenergebnisse nach Gewichtung und gebe Ergebnis aus. Dies führt dann zu der Ergebnismenge von 36 Ähnlichen Begriffen.
+6. Sort the intermediate results by weighting and output the result. This results in a result set of 36 similar terms.
 
-## Verschlagwortung mit AutoClassify (Plain Text)
+## Automatic Keyword Assignment with AutoClassify (Plain Text)
 
-### Vorbedingungen
+### Preconditions
 
-* Es ist keine Vorbedingung (z.B. Anmeldung) notwendig.
+* No precondition (e.g. login) is necessary.
 
-### Ablauf
+### Process
 
-Das AutoClassify-Verfahren gliedert sich in fünf Hauptphasen:
+The AutoClassify process is divided into five main phases:
 
-1. **Dokumentvorbereitung**: Eingabevalidierung, Textkombination und -normalisierung
-2. **Linguistische Analyse**: Tokenisierung, Phrasenerkennung und sprachspezifische Verarbeitung
-3. **Thesaurus-Abgleich**: Hash-basierte Suche und Datenbankabfragen
-4. **Erweiterte Begriffsverarbeitung**: Homographenauflösung und Compound-Form-Erkennung
-5. **Konzeptzuordnung und Gewichtung**: Label-zu-Konzept-Mapping und Rangierung
+1. **Document preparation**: input validation, text combination and normalization
+2. **Linguistic analysis**: tokenization, phrase recognition, and language-specific processing
+3. **Thesaurus matching**: hash-based search and database queries
+4. **Advanced term processing**: homograph resolution and compound form recognition
+5. **Concept assignment and weighting**: label-to-concept mapping and ranking
 
-### Technischer Verarbeitungsablauf
+### Technical Processing Flow
 
-Als Beispiel wird der Titel des Artikels "Schwammstadt: Der Städtebau der Zukunft - Grün in die Stadt"[^1] verwendet.
+As an example, the title of the article "Schwammstadt: Der Städtebau der Zukunft - Grün in die Stadt"[^1] is used.
 
-[^1]: https://www.gruen-in-die-stadt.de/schwammstadt/, letzter Zugriff: 20.07.2025
+[^1]: https://www.gruen-in-die-stadt.de/schwammstadt/, last accessed: 20.07.2025
 
-1. Verschlagwortungsanfrage des Benutzers wird durch den Reverse Proxy auf das SNS-Subsystem UMTHES in den Plain Controller weitergeleitet/dispatched.
-2. Instanziierung einer neuen `Document::Plain` mit `title` und `content` der Verschlagwortungsanfrage.
-3. Verschlagwortung wird durch den Aufruf der `classify!`-Methode gestartet:
-   * bisherige Verschlagwortungsergebnisse für das Dokument werden entfernt (`classifications.destroy_all`)
-   * `concepts`-Methode startet die Analyse, ruft `determine_concepts` auf, was wiederum `determine_labels` startet
-   * Der zu verschlagwortende Text wird durch `DocumentParser::German` in Sätze aufgeteilt (`PragmaticSegmenter`)
-   * Deutsche Sprachnormalisierung durch `DocumentParser::German.normalize_sentence`:
-     * Entfernung von Stoppwörtern: `['oder']`
-     * Eliminierung irrelevanter Abkürzungen: `['ca.', 'etc.', 'usw.', 'bzw.', 'vgl.', 'evtl.', 'P.S.', 'z. B.', 'd. h.', 's. o.', 'u.a.', 'z. T.', 'z. Zt.', 'i. A.', 'i. V.', 'i. d. R.', 'Min.', 'min.', 'Mio.', 'Mrd.', 'Nr.', 'Dr.', 'Prof.', 'Fa.', 'ff.']`
-   * Tokenisierung durch `DocumentParser::Base` entlang von Trennzeichen `[' ', "\t", ',', ':', ';', '"', "'", '(', ')']`
-   * Token-Normalisierung durch `TokenNormalizer.do_it` (deutsche Sonderzeichen bleiben erhalten)
-   * Instanziierung einer neuen `WordMatcher`-Instanz mit dem Satz-Array
-   * Der `WordMatcher` wird zum Auffinden von Labels verwendet (`def labels` in `WordMatcher`). Hierzu wird über die zuvor gebildeten Einzelsätze iteriert:
-     * `phrase_recognition_variants`: Zum Auffinden von Mehrwortbegriffen werden Varianten aufsteigender Größe von Phrasen gebildet (z.B. "schwammstadt der", "der städtebau", "städtebau der", "der zukunft", "schwammstadt der städtebau", "der städtebau der zukunft")
-     * `add_non_dotted_variants`: Zur Sonderbehandlung von Phrasen mit Punkten werden zusätzliche Varianten ohne Punkt hinzugefügt (z.B. "CO₂-Äquiv." → "CO₂-Äquiv." und "CO₂-Äquiv")
-     * `find_existing_inflectionals`: die zuvor gesammelten Phrasen werden verwendet, um Varianten in der Datenbank zu finden und zurückzugeben (z.B. Gefunden werden "schwammstadt", "stadt", "städtebau" als existierende Inflektionsformen)
-     * `remove_duplicate_word_partials`: stellt sicher, dass speziellere Varianten von Phrasen gegenüber allgemeineren bevorzugt werden (z.B. `["monetäre bewertung von umweltschäden", "monetäre bewertung"]` => `["monetäre bewertung von umweltschäden"]`)
-     * `label_index`: Die Hashes (wegen sparsamerer Suche) der bereinigten Varianten werden verwendet, um Labels zu den Inflektionsformen zu finden:
+1. The user's keyword assignment request is forwarded/dispatched by the reverse proxy to the SNS subsystem UMTHES into the Plain Controller.
+2. Instantiation of a new `Document::Plain` with the `title` and `content` of the keyword assignment request.
+3. Keyword assignment is started by calling the `classify!` method:
+   * previous keyword assignment results for the document are removed (`classifications.destroy_all`)
+   * the `concepts` method starts the analysis, calls `determine_concepts`, which in turn starts `determine_labels`
+   * the text to be keyword-assigned is split into sentences by `DocumentParser::German` (`PragmaticSegmenter`)
+   * German language normalization by `DocumentParser::German.normalize_sentence`:
+     * removal of stop words: `['oder']`
+     * elimination of irrelevant abbreviations: `['ca.', 'etc.', 'usw.', 'bzw.', 'vgl.', 'evtl.', 'P.S.', 'z. B.', 'd. h.', 's. o.', 'u.a.', 'z. T.', 'z. Zt.', 'i. A.', 'i. V.', 'i. d. R.', 'Min.', 'min.', 'Mio.', 'Mrd.', 'Nr.', 'Dr.', 'Prof.', 'Fa.', 'ff.']`
+   * tokenization by `DocumentParser::Base` along delimiters `[' ', "\t", ',', ':', ';', '"', "'", '(', ')']`
+   * token normalization by `TokenNormalizer.do_it` (German special characters are preserved)
+   * instantiation of a new `WordMatcher` instance with the sentence array
+   * the `WordMatcher` is used to find labels (`def labels` in `WordMatcher`). For this, the previously formed individual sentences are iterated over:
+     * `phrase_recognition_variants`: to find multi-word terms, phrase variants of increasing size are formed (e.g. "schwammstadt der", "der städtebau", "städtebau der", "der zukunft", "schwammstadt der städtebau", "der städtebau der zukunft")
+     * `add_non_dotted_variants`: for special handling of phrases with periods, additional variants without a period are added (e.g. "CO₂-Äquiv." → "CO₂-Äquiv." and "CO₂-Äquiv")
+     * `find_existing_inflectionals`: the previously collected phrases are used to find and return variants in the database (e.g. "schwammstadt", "stadt", "städtebau" are found as existing inflectional forms)
+     * `remove_duplicate_word_partials`: ensures that more specific variants of phrases are preferred over more general ones (e.g. `["monetäre bewertung von umweltschäden", "monetäre bewertung"]` => `["monetäre bewertung von umweltschäden"]`)
+     * `label_index`: the hashes (for a more efficient search) of the cleaned variants are used to find labels for the inflectional forms:
        * "schwammstadt" → Hash `ae9fc10c8688d3889701b94d504fd56a` → Label-ID 107562
        * "städtebau" → Hash `cfbe280de98e35e5e7a6601f21aba0c4` → Label-ID 171360
        * "stadt" → Hash `37b9e141bf7fa3a8f592e2f56fb5de18` → Label-ID 194652
-     * `homographs(label_seqs)`: Kombiniert Label-IDs zu Homographen/Qualifizierern (z.B. Label-ID 95326 "Berlin [Stadt]" hat sowohl Homograph 132357 "Berlin" als auch Qualifier 194652 "Stadt", die beide im Text vorkommen. Dadurch wird das mehrdeutige Label "Berlin" durch "Berlin[Stadt]" ersetzt)
-     * `compound_forms(label_seqs)`: Kombiniert Label-IDs zu zusammengesetzten Labels, sofern die Option aktiviert ist
-     * `remove_autoclassify_disabled_label_seq(label_seqs)`: Entfernt Label, für die AutoClassify explizit deaktiviert wurde
-     * Die gefundenen Label je Satz werden gesammelt und für das gesamte Dokument zurückgegeben
-   * Über die Label-Ergebnismenge wird in `determine_concepts` iteriert:
-     * Label von nicht veröffentlichten Konzepten werden aussortiert (`!concept.published?`)
-     * Label von abgelaufenen Konzepten werden aussortiert (`concept.expired?`)
-     * Label von deaktivierten Konzepten werden aussortiert (`!concept.auto_classify?`) - nur wenn `exclude_disabled_concepts` aktiviert ist
-     * Label von Kollektionen werden explizit ausgeschlossen (`.where.not(labelings: { owner_type: Iqvoc::Collection.base_class_name })`)
-     * Verbliebene Label werden verwendet, um Konzepte im Wortgut zu finden mit Gewichtung nach Benennungstyp:
+     * `homographs(label_seqs)`: combines label IDs into homographs/qualifiers (e.g. label ID 95326 "Berlin [Stadt]" has both homograph 132357 "Berlin" and qualifier 194652 "Stadt", both of which occur in the text. This replaces the ambiguous label "Berlin" with "Berlin[Stadt]")
+     * `compound_forms(label_seqs)`: combines label IDs into compound labels, if the option is enabled
+     * `remove_autoclassify_disabled_label_seq(label_seqs)`: removes labels for which AutoClassify was explicitly disabled
+     * the labels found per sentence are collected and returned for the entire document
+   * the label result set is iterated over in `determine_concepts`:
+     * labels of unpublished concepts are filtered out (`!concept.published?`)
+     * labels of expired concepts are filtered out (`concept.expired?`)
+     * labels of disabled concepts are filtered out (`!concept.auto_classify?`), only if `exclude_disabled_concepts` is enabled
+     * labels of collections are explicitly excluded (`.where.not(labelings: { owner_type: Iqvoc::Collection.base_class_name })`)
+     * remaining labels are used to find concepts in the text corpus, with weighting by designation type:
        * `'Labeling::Skosxl::PrefLabel'` => 1.0
        * `'Labeling::Skosxl::AltLabel'` => 0.8
        * `'Labeling::Skosxl::HiddenLabel'` => 0.3
-     * **Titel-Bonus**: Konzepte aus dem Dokumenttitel erhalten fünffache Gewichtung (`determine_title_concepts`)
-     * **Beziehungsanalyse**: Beziehungen der gefundenen Konzepte werden verwendet, um die Gewichtung zu konkretisieren mit konfigurierbaren Faktoren:
-       * Broader-Relation: 1.5x
-       * Narrower-Relation: 2.0x
-       * Related-Relation: 1.3x
-     * `Classification`-Objekte werden erstellt und nach Gewichtung sortiert
-     * `create_classification_trace` speichert die vollständige Verarbeitungsspur als JSON (z.B. `@trace` für "Schwammstadt"-Titel):
+     * **Title bonus**: concepts from the document title receive fivefold weighting (`determine_title_concepts`)
+     * **Relationship analysis**: relationships of the found concepts are used to refine the weighting, with configurable factors:
+       * Broader relation: 1.5x
+       * Narrower relation: 2.0x
+       * Related relation: 1.3x
+     * `Classification` objects are created and sorted by weighting
+     * `create_classification_trace` stores the complete processing trace as JSON (e.g. `@trace` for the "Schwammstadt" title):
        * `token_index`: `{"schwammstadt der städtebau...": ["-", "in", "die", "der", "grün", "stadt", "zukunft", "städtebau", "schwammstadt"]}`
        * `label_index`: `{"schwammstadt der städtebau...": [194652, 171360, 107562]}`
        * `homograph_index`: `{"schwammstadt der städtebau...": []}`
        * `result_index`: `{"schwammstadt der städtebau...": [194652, 171360, 107562]}`
-4. Im Wortgut gefundene Konzepte werden über den Plain-Controller des UMTHES über den Reverse Proxy an den anfragenden Benutzer zurückgeliefert.
+4. Concepts found in the text corpus are returned to the requesting user via the Plain Controller of UMTHES through the reverse proxy.
 
-### Darstellung
+### Illustration
 
-![Ablauf AutoClassify](../images/runtime_autoclassify.jpg)
+![AutoClassify process](../images/runtime_autoclassify.jpg)

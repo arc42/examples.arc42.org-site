@@ -3,145 +3,145 @@ title: Crosscutting Concepts
 order: 8
 ---
 
-Dieser Abschnitt beschreibt querschnittliche Regelungen und Prinzipien, die mehr als einen Baustein betreffen und für das Gesamtsystem relevant sind.
+This section describes crosscutting rules and principles that concern more than one building block and are relevant for the overall system.
 
-## Dienste
+## Services
 
-Mit den Webdiensten von SNS steht Anbietern von Umweltinformationen (z.B. Umweltportale) eine semantische Unterstützung für ihre Anwendungen zur Verfügung. Alle Dienste verfügen über eine grafische Benutzeroberfläche sowie eine API für die Integration in Fachanwendungen.
+The web services of SNS provide semantic support for the applications of providers of environmental information (for example, environmental portals). All services have a graphical user interface as well as an API for integration into specialist applications.
 
-Zu den Diensten gehören:
+The services include:
 
-* **Suche**: Durchsuchen des Datenbestands mit Suchwörtern
-* **SimilarTerms**: Ausgabe Ähnlicher Begriffe zu einer Sucheingabe
-* **AutoClassify**: Verschlagwortung von Dokumenten mit Hilfe des SNS-Wortguts
-* **Anniversary**: Ausgabe von Ereignissen "heute vor X Jahren"
+* **Search**: search the data holdings using search terms
+* **SimilarTerms**: output of similar concepts for a search input
+* **AutoClassify**: automatic keyword assignment for documents using the SNS vocabulary
+* **Anniversary**: output of events "today, X years ago"
 
-Die technischen Schnittstellenbeschreibungen sind öffentlich einsehbar und unter folgendem Link erreichbar: https://sns.uba.de/de/api
+The technical interface descriptions are publicly available at the following link: https://sns.uba.de/de/api
 
-### Suche
+### Search
 
-Die Suche ermöglicht das Auffinden von passenden Fachwörtern bzw. Umweltereignissen anhand von Suchwörtern und Suchräumen. Im UMTHES stehen darüber hinaus Informationen über alternative Benennungen des gefundenen Fachworts sowie dessen Beziehungen zu anderen Fachwörtern des SNS-Wortbestands zur Verfügung. Auch Definitionen zur Bestimmung der Bedeutung der Fachwörter sind in den meisten Fällen als Zusatzinformation vorhanden.
+Search makes it possible to find matching technical terms or environmental events using search terms and search spaces. In UMTHES, information about alternative labels for the found technical term as well as its relationships to other technical terms in the SNS vocabulary is also available. Definitions for determining the meaning of the technical terms are also available as additional information in most cases.
 
-Der Dienst ist unter folgenden URLs erreichbar:
+The service is available at the following URLs:
 
 * https://sns.uba.de/umthes/de/search.html
 * https://sns.uba.de/chronik/de/search.html
 
-Bekannte Integrationen:
+Known integrations:
 
 * InGrid: https://dev.informationgrid.eu/umweltchronik
 
 ### SimilarTerms
 
-Hierbei handelt es sich um einen Dienst zur Ermittlung von semantisch "ähnlichen" Wörtern zum eingegebenen Suchwort. So liefert SimilarTerms für die Suche nach "Biosprit" u.a. die Ähnlichen Begriffe "Biokraftstoff", "Ökosprit" und "Kraftstoff aus Biomasse".
+This is a service for finding semantically "similar" words for an entered search term. For example, for a search for "Biosprit", SimilarTerms returns the similar concepts "Biokraftstoff", "Ökosprit", and "Kraftstoff aus Biomasse", among others.
 
-Der Dienst ist unter folgender URL erreichbar: https://sns.uba.de/umthes/de/similar.html
+The service is available at the following URL: https://sns.uba.de/umthes/de/similar.html
 
-![SimilarTerms Dienst](../images/sns-services-similar.png)
+![SimilarTerms service](../images/sns-services-similar.png)
 
-#### Anwendungsfall
+#### Use Case
 
-Der SimilarTerms-Dienst kann auch eingesetzt werden, um die Suche in Fachanwendungen zu verbessern. So könnte bei einer Suche mit der Zeichenkette "Biosprit" z.B. die o.g. Begriffe "Biokraftstoff" und "Ökosprit" mitberücksichtigt werden. Dies würde das Suchergebnis aufwerten.
+The SimilarTerms service can also be used to improve search in specialist applications. For example, a search with the string "Biosprit" could also take into account the concepts "Biokraftstoff" and "Ökosprit" mentioned above. This would enhance the search result.
 
 ### AutoClassify
 
-Bei AutoClassify handelt es sich um einen Dienst zur automatischen Verschlagwortung von Dokumenten. Der Dienst zerlegt einen Eingabetext in seine Bestandteile, durchsucht an Hand dieser das Wortgut des UMTHES und gibt dann passende Begriffe (Schlagwörter) inklusive Scoring als Antwort zurück.
+AutoClassify is a service for the automatic keyword assignment of documents. The service breaks an input text down into its components, uses these to search the UMTHES vocabulary, and then returns matching concepts (keywords) including a score as a response.
 
-AutoClassify unterstützt die Analyse von eingegebenem Freitext, es ist aber auch möglich nur eine URL-Adresse einzugeben. Bei Analyse einer URL versucht AutoClassify den Haupttextkörper der Webseite zu extrahieren (d.h. ohne Seitennavigationen, Werbung etc.) und führt anschließend die Textanalyse durch.
+AutoClassify supports the analysis of entered free text, but it is also possible to enter just a URL. When analyzing a URL, AutoClassify attempts to extract the main text body of the web page (that is, without page navigation, advertising, and so on) and then performs the text analysis.
 
-Der Dienst ist unter folgender URL erreichbar: https://sns.uba.de/umthes/de/classification.html
+The service is available at the following URL: https://sns.uba.de/umthes/de/classification.html
 
-![AutoClassify Dienst](../images/sns-services-autoclassify.png)
+![AutoClassify service](../images/sns-services-autoclassify.png)
 
 ### Anniversary
 
-Dieser Dienst gibt Umweltereignisse aus, die sich an einem frei wählbaren Datum vor "x-Jahren" ereignet haben (ohne Eingabedatum wird das aktuelle Datum verwendet).
+This service outputs environmental events that occurred "x years ago" on a freely selectable date (if no date is entered, the current date is used).
 
-Der Dienst ist unter folgender URL erreichbar: https://sns.uba.de/chronik/de/anniversary.html
+The service is available at the following URL: https://sns.uba.de/chronik/de/anniversary.html
 
-![Anniversary Dienst](../images/sns-services-anniversary.png)
+![Anniversary service](../images/sns-services-anniversary.png)
 
 ## iQvoc
 
-iQvoc ist ein von INNOQ entwickeltes Open-Source-Werkzeug für das Management von Vokabularen (Klassifikationen, Thesauri, …), das einfache Bedienbarkeit mit Semantic-Web-Standards vereint.
+iQvoc is an open source tool developed by INNOQ for managing vocabularies (classifications, thesauri, and so on) that combines ease of use with Semantic Web standards.
 
-iQvoc unterstützt umfassende Funktionen, die alle Aspekte dieses Managements abdecken:
+iQvoc supports a wide range of functions that cover all aspects of this management:
 
-* Import/Export bestehender Vokabulare im SKOS-Format
-* Mehrsprachige Darstellung und Navigation in jedem gängigen Web-Browser
-* Redaktionsfunktionen für registrierte Anwender im Web
-* Einsatz des Vokabulars im Linked-Data-Netz
+* Import/export of existing vocabularies in SKOS format
+* Multilingual display and navigation in any common web browser
+* Editorial functions for registered users on the web
+* Use of the vocabulary in the Linked Data network
 
-iQvoc setzt auf aktuelle Technologien und modulare Architektur und kann einfach erweitert werden. iQvoc ist als Open Source verfügbar nach der Apache 2.0-Lizenz.
+iQvoc relies on current technologies and a modular architecture and can be easily extended. iQvoc is available as open source under the Apache 2.0 license.
 
-**Import/Export bestehender Vokabulare im SKOS-Format**
+**Import/export of existing vocabularies in SKOS format**
 
-Das Simple Knowledge Organisation System (SKOS) ist ein verbreitetes RDF-Schema zur Abbildung von Vokabularen, wie Glossaren, Klassifikationen, Taxonomien und Thesauri, das von den meisten spezialisierten Anwendungen unterstützt wird. iQvoc unterstützt SKOS vollständig, einschließlich Collections und Mapping Properties. Es liegt auch eine Erweiterung von iQvoc für die SKOS Extension for Labels (SKOS-XL) vor.
+The Simple Knowledge Organization System (SKOS) is a widely used RDF schema for representing vocabularies such as glossaries, classifications, taxonomies, and thesauri, and is supported by most specialized applications. iQvoc fully supports SKOS, including collections and mapping properties. An extension of iQvoc for the SKOS Extension for Labels (SKOS-XL) is also available.
 
-**Mehrsprachige Darstellung und Navigation im Web Browser**
+**Multilingual display and navigation in the web browser**
 
-iQvoc unterstützt sowohl mehrsprachige Vokabulare als auch eine mehrsprachige Benutzeroberfläche. Beide können beliebig kombiniert werden. Im Vokabular gilt Mehrsprachigkeit für alle Textanteile, also Bezeichnungen (Labels), Definitionen und alle Formen von Anmerkungen (Notes).
+iQvoc supports both multilingual vocabularies and a multilingual user interface. The two can be combined as needed. In the vocabulary, multilingualism applies to all text elements, that is, labels, definitions, and all forms of notes.
 
-Die Navigation ist intuitiv durch direkte Links und ausklappbare hierarchische Darstellungen. Dies funktioniert in allen gängigen Browsern. Das Erscheinungsbild kann durch die moderne, modulare HTML-Architektur einfach und weitreichend angepasst werden.
+Navigation is intuitive through direct links and expandable hierarchical displays. This works in all common browsers. The appearance can be easily and extensively customized thanks to the modern, modular HTML architecture.
 
-**Redaktionsfunktionen für registrierte Anwender im Web**
+**Editorial functions for registered users on the web**
 
-iQvoc ist das perfekte Werkzeug für eine räumlich verteilte Redaktion. Alle arbeiten auf derselben Datenbasis im Web. Die Redaktion umfasst die Rollen Editor, Publisher, Administrator und Gast. Der Workflow beginnt mit dem Auschecken (oder der Neuanlage) einzelner Begriffe. Alle Änderungen sind zunächst nach außen verborgen und gegen konkurrierende Bearbeitung gesperrt. Die Bearbeitung kann aber an andere Redaktionsmitglieder übergeben werden. Eine formale Konsistenzprüfung unterstützt die Qualität. Der Publisher kann freigeben, verwerfen oder zur Bearbeitung zurückgeben. Ein Dashboard zeigt der Redaktion jederzeit den aktuellen Bearbeitungsstand.
+iQvoc is the perfect tool for a geographically distributed editorial team. Everyone works on the same data basis on the web. The editorial team includes the roles editor, publisher, administrator, and guest. The workflow begins with checking out (or newly creating) individual concepts. All changes are initially hidden from the outside and locked against concurrent editing. Editing can, however, be handed over to other editorial team members. A formal consistency check supports quality. The publisher can approve, discard, or return changes for further editing. A dashboard shows the editorial team the current editing status at any time.
 
-**Einsatz des Vokabulars im Linked-Data-Netz**
+**Use of the vocabulary in the Linked Data network**
 
-iQvoc unterstützt Linked-Data-Technik, insbesondere auch Content Negotiation. Dieselbe Concept URI gibt in Abhängigkeit vom geforderten Mime Type HTML, RDF/XML, NTriples oder Turtle Syntax zurück. In Verbindung mit einem Triple Store wird auch ein SPARQL Endpoint verfügbar.
+iQvoc supports Linked Data technology, including content negotiation. Depending on the requested MIME type, the same concept URI returns HTML, RDF/XML, NTriples, or Turtle syntax. In combination with a triple store, a SPARQL endpoint also becomes available.
 
-### Rollensystem
+### Role System
 
-Das Rollensystem von iQvoc umfasst Gäste, Leser, Editoren, Match-Editoren, Veröffentlicher und Administratoren:
+The role system of iQvoc includes guests, readers, editors, match editors, publishers, and administrators:
 
-| Rolle | Beschreibung |
+| Role | Description |
 |---|---|
-| Gast | API nutzen, Inhalt lesen |
-| Leser / Registrierter Nutzer ohne Rechte | Unveröffentlichte Inhalte sehen |
-| Editor | Datenpflege, neue Versionen, zum Review vorlegen |
-| Veröffentlicher | Änderungen veröffentlichen, Änderungen vorschlagen |
-| Administrator | Konzepte entsperren, Benutzeradministration, Datenimport und -export, Systemkonfiguration |
+| Guest | Use the API, read content |
+| Reader / registered user without permissions | View unpublished content |
+| Editor | Data maintenance, new versions, submit for review |
+| Publisher | Publish changes, propose changes |
+| Administrator | Unlock concepts, user administration, data import and export, system configuration |
 
-Ein normaler Besucher der Seite ist Gast. Nach dem Einloggen kann er ein Leser werden, der nur lesen darf und keinerlei sonstige weitere Berechtigungen hat. Ein Editor ist verantwortlich für die Datenpflege des Wortgutes und kann somit das Wortgut bearbeiten. Ein Match-Editor kann nur Konzepte bearbeiten, während der Veröffentlicher für die Kontrolle und Veröffentlichung der gemachten Änderungen verantwortlich ist. Der Administrator ist für die Konfiguration und Verwaltung des Systems verantwortlich, hat aber auch alle Rechte der anderen Rollen.
+A normal visitor to the site is a guest. After logging in, they can become a reader, who may only read and has no other permissions. An editor is responsible for maintaining the vocabulary and can therefore edit it. A match editor can only edit concepts, while the publisher is responsible for checking and publishing the changes made. The administrator is responsible for configuring and managing the system, but also has all the rights of the other roles.
 
-Der Bearbeitungsworkflow startet mit dem Erstellen oder Auschecken individueller Begriffe. Alle Änderungen sind hierbei unsichtbar für die Öffentlichkeit und nur für die Editoren, Veröffentlicher und Administratoren sichtbar. Beim Bearbeiten wird außerdem der Begriff dem Editor zugeordnet und für alle anderen gesperrt, so dass es keinerlei Bearbeitungskonflikte geben kann. Die Bearbeitung kann aber auch an einen anderen Editor abgegeben werden. Ein Konsistenzcheck stellt dabei die Qualität des Datensatzes sicher. Veröffentlicher können Änderungen veröffentlichen sowie verwerfen oder sie zur weiteren Bearbeitung empfehlen. Zusätzlich kann das Editorenteam auf einem Dashboard alle in Bearbeitung befindlichen Begriffe überblicken. Knapp zusammengefasst lässt sich der Workflow folgendermaßen visualisieren:
+The editing workflow starts with creating or checking out individual concepts. All changes are invisible to the public at this stage and are visible only to editors, publishers, and administrators. When editing, the concept is also assigned to the editor and locked for everyone else, so that no editing conflicts can occur. Editing can, however, also be handed over to another editor. A consistency check ensures the quality of the data record. Publishers can publish changes as well as discard them or recommend them for further editing. In addition, the editorial team can get an overview of all concepts currently being edited on a dashboard. In brief summary, the workflow can be visualized as follows:
 
-![iQvoc Redaktions-Workflow](../images/iqvoc-workflow.png)
+![iQvoc editorial workflow](../images/iqvoc-workflow.png)
 
-### Erweiterungen
+### Extensions
 
-Die komplette iQvoc/UMT-Architektur basiert auf "Rails Engines", die es erlauben, eine Anwendung aus mehreren Teilanwendungen zusammenzustecken. Eine Rails Engine kann man sich als Miniaturanwendung vorstellen, die zusätzliche Funktionalität für die Hauptanwendung zur Verfügung stellt. Damit ist sie auch einem Plugin ähnlich. Mehr Details zu den Rails Engines finden sich in der Rails-Dokumentation.
+The complete iQvoc/UMT architecture is based on "Rails Engines", which make it possible to assemble an application from several sub-applications. A Rails Engine can be thought of as a miniature application that provides additional functionality for the main application. In this respect, it is also similar to a plugin. More details on Rails Engines can be found in the Rails documentation.
 
-Zur Zeit existieren diverse, i.d.R. öffentlich verfügbare Erweiterungen der Funktionen von iQvoc. Diese sind in Form von Rails-Engines implementiert. Zu den Erweiterungen zählen:
+There are currently various extensions to the functions of iQvoc, generally publicly available. These are implemented in the form of Rails Engines. The extensions include:
 
-| Name | Beschreibung | URL |
+| Name | Description | URL |
 |---|---|---|
-| iqvoc_skosxl | Erweitert iQvoc um eine eigenständige Label-Entität und implementiert den SKOS-XL Standard des W3C. Label sind hierdurch eindeutig identifizierbar und es können dadurch auch Beziehungen zwischen verschiedenen Label abgebildet werden (z.B. Übersetzungsbeziehungen). | [https://github.com/innoq/iqvoc_skosxl](https://github.com/innoq/iqvoc_skosxl) |
-| iqvoc_compound_forms | Erweitert iqvoc_skosxl um die Teil-Ganze-Beziehung auf Label-Basis (z.B. Label "Abbau von natürlichen Ressourcen" besteht aus dem Label "Abbau" und dem Label "Natürliche Ressource"). Die entsprechende Erweiterung ist auch von Bedeutung bei der automatischen Verschlagwortung durch Autoclassify. | [https://github.com/innoq/iqvoc_compound_forms](https://github.com/innoq/iqvoc_compound_forms) |
-| iqvoc_inflectionals | Ermöglicht die Festlegung von alternativen Schreibweisen und Konjugationen von Label (z.B. bei Baum: Bäume, (des) Baumes). Durch die Erweiterung wird auch die Generierung von deutschen und englischen Schreibweisen auf Grundlage von Endungscodes unterstützt. | [https://github.com/innoq/iqvoc_inflectionsl](https://github.com/innoq/iqvoc_inflectionsl) |
-| iqvoc_similar_terms | In dieser Erweiterung ist der Dienst zur Rückgabe von ähnlichen Begriffen zu einem Suchbegriff implementiert. | [https://github.com/innoq/iqvoc_similiar_terms](https://github.com/innoq/iqvoc_similiar_terms) |
-| iqvoc_autoclassify | In dieser Erweiterung ist der Verschlagwortungsdienst des UMTHES implementiert. Die Erweiterung liefert passend zu einem Eingabetext (Text, URL) eine Liste von Begriffen aus dem UMTHES-Wortgut inklusive Scoring. | [https://github.com/innoq/iqvoc_autoclassify](https://github.com/innoq/iqvoc_autoclassify) |
+| iqvoc_skosxl | Extends iQvoc with an independent label entity and implements the W3C SKOS-XL standard. This makes labels uniquely identifiable and also makes it possible to represent relationships between different labels (for example, translation relationships). | [https://github.com/innoq/iqvoc_skosxl](https://github.com/innoq/iqvoc_skosxl) |
+| iqvoc_compound_forms | Extends iqvoc_skosxl with the part-whole relationship on a label basis (for example, the label "Abbau von natürlichen Ressourcen" consists of the label "Abbau" and the label "Natürliche Ressource"). This extension is also significant for automatic keyword assignment by AutoClassify. | [https://github.com/innoq/iqvoc_compound_forms](https://github.com/innoq/iqvoc_compound_forms) |
+| iqvoc_inflectionals | Makes it possible to define alternative spellings and inflections of labels (for example, for Baum: Bäume, (des) Baumes). This extension also supports the generation of German and English spellings based on ending codes. | [https://github.com/innoq/iqvoc_inflectionsl](https://github.com/innoq/iqvoc_inflectionsl) |
+| iqvoc_similar_terms | This extension implements the service for returning similar concepts for a search term. | [https://github.com/innoq/iqvoc_similiar_terms](https://github.com/innoq/iqvoc_similiar_terms) |
+| iqvoc_autoclassify | This extension implements the keyword assignment service of UMTHES. The extension returns a list of concepts from the UMTHES vocabulary, including a score, matching an input text (text, URL). | [https://github.com/innoq/iqvoc_autoclassify](https://github.com/innoq/iqvoc_autoclassify) |
 
-Neben den Rails-Engine-Erweiterungen gibt es noch 2 RDF-Erweiterungen, die essentiell für iQvoc sind:
+In addition to the Rails Engine extensions, there are two RDF extensions that are essential for iQvoc:
 
-| Name | Beschreibung | URL |
+| Name | Description | URL |
 |---|---|---|
-| iq_triplestorage | Erlaubt die Interaktion mit RDF-Triple- und Quadstores in Ruby. | [https://github.com/innoq/iq_triplestorage](https://github.com/innoq/iq_triplestorage) |
-| iq_rdf | Ermöglicht das Rendern von RDF mit dem Ruby on Rails Framework | [https://github.com/innoq/iq_rdf/](https://github.com/innoq/iq_rdf/) |
+| iq_triplestorage | Allows interaction with RDF triple and quad stores in Ruby. | [https://github.com/innoq/iq_triplestorage](https://github.com/innoq/iq_triplestorage) |
+| iq_rdf | Makes it possible to render RDF with the Ruby on Rails framework | [https://github.com/innoq/iq_rdf/](https://github.com/innoq/iq_rdf/) |
 
-### Entwicklung
+### Development
 
 #### Repositories
 
-Die schon genannten Erweiterungen stehen anders als der Source-Code der Fachanwendungen unter OSS und werden daher auch von anderen Entwicklern genutzt. Deshalb darf in den Erweiterungen kein anwendungsspezifischer Code (z.B. für den UMTHES) liegen, sondern die Klasse muss dann in der jeweiligen Fachanwendung erweitert werden. Gleichzeitig sollte aber allgemeine Funktionalität nicht in den Fachanwendungen implementiert werden, sondern über die OSS-Repositories der Allgemeinheit zur Verfügung gestellt werden.
+Unlike the source code of the specialist applications, the extensions already mentioned are available under OSS and are therefore also used by other developers. For this reason, the extensions must not contain application-specific code (for example, for UMTHES); instead, the class must be extended in the respective specialist application. At the same time, general functionality should not be implemented in the specialist applications, but should be made available to the general public through the OSS repositories.
 
-Exemplarisch wird das anhand der `concept.rb` dargestellt. Die elementarste `iqvoc/app/models/concept/base.rb` befindet sich in iQvoc, wird aber dort direkt von der SKOS-Concept-Klasse erweitert. iQvoc-SKOS-XL erweitert dann die Konzept-Klasse wiederum, um die für SKOS-XL nötigen Änderungen einzupflegen, bevor das Konzept dann im UMTHES final definiert wird. Alternativ kann man jedoch auch eine Klasse komplett neu schreiben, wie es der UMTHES bei der `iqvoc_umt/app/models/umt_ability.rb` macht anstatt die `iqvoc/app/models/ability.rb` zu erweitern. Dann muss jedoch auch der iQvoc-Configeintrag angepasst werden, auf die im nächsten Abschnitt genauer eingegangen wird.
+This is illustrated by way of example using `concept.rb`. The most basic `iqvoc/app/models/concept/base.rb` is located in iQvoc, but is extended there directly by the SKOS concept class. iQvoc-SKOS-XL then extends the concept class in turn to incorporate the changes needed for SKOS-XL, before the concept is finally defined in UMTHES. Alternatively, however, a class can also be written completely from scratch, as UMTHES does with `iqvoc_umt/app/models/umt_ability.rb` instead of extending `iqvoc/app/models/ability.rb`. In that case, however, the iQvoc config entry must also be adjusted, which is covered in more detail in the next section.
 
-#### Einstellungen
+#### Settings
 
-Da iQvoc ein generisches, aus Erweiterungen zusammenbaubares Thesaurus-Framework ist, unterscheidet sich die Entwicklung von klassischen Ruby on Rails-Anwendungen. Prinzipiell kann jede iQvoc-Klasse individuell erweitert/überschrieben werden. Die Konfiguration von iQvoc dazu findet sich unter `config/initializers/iqvoc.rb`. Dort müssen die erweiterten Klassen eingetragen werden, damit sie auch von iQvoc genutzt werden. Die möglichen Einstellungen finden sich in `iqvoc/lib/iqvoc.rb` bzw. den dort referenzierten Klassen wie `iqvoc/lib/iqvoc/configuration/core.rb`. Im UMTHES werden die spezifischen Einstellungen in der `iqvoc_umt/config/initializers/iqvoc.rb` gesetzt.
+Because iQvoc is a generic thesaurus framework that can be assembled from extensions, development differs from classic Ruby on Rails applications. In principle, every iQvoc class can be individually extended or overridden. The configuration for this is found under `config/initializers/iqvoc.rb`. The extended classes must be entered there so that they are also used by iQvoc. The possible settings can be found in `iqvoc/lib/iqvoc.rb` or in the classes referenced there, such as `iqvoc/lib/iqvoc/configuration/core.rb`. In UMTHES, the specific settings are set in `iqvoc_umt/config/initializers/iqvoc.rb`.
 
 ```ruby
 Iqvoc.config do |cfg|
@@ -155,17 +155,17 @@ Iqvoc.config do |cfg|
 end
 ```
 
-Hier werden initial die Sprachen definiert, in denen das System und seine Entitäten verfügbar sind. Diese Einstellungen können über die Web-Oberfläche unter System überschrieben werden. Änderungen werden in der Datenbanktabelle `configuration_settings` gespeichert, die Vorrang vor der Konfigurationsdatei hat.
+Here, the languages in which the system and its entities are available are initially defined. These settings can be overridden through the web interface under System. Changes are stored in the database table `configuration_settings`, which takes precedence over the configuration file.
 
-Falls man eine Standard-iQvoc-Datei erweitern muss, wie z.B. im Falle der `Concept::UMT::Base`, um eine Validierung hinzuzufügen, kann man entweder die Datei aus iQvoc kopieren oder erweitern, muss die Datei aber auch in der `iqvoc.rb` mit `Iqvoc::Concept.base_class_name = 'Concept::UMT::Base'` eintragen. Anstelle der konkreten Klasse nutzt man deshalb im Code also `Iqvoc::Concept.base_class` um Methoden auf den Konzepten aufzurufen, um bei einer Erweiterung nicht alle Klassennamen ändern zu müssen. Das funktioniert analog auch für alle anderen Klassen, bspw. für die Label- oder Ability-Klasse.
+If a standard iQvoc file needs to be extended, as in the case of `Concept::UMT::Base`, for example to add a validation, the file can either be copied from iQvoc or extended, but it must also be entered in `iqvoc.rb` with `Iqvoc::Concept.base_class_name = 'Concept::UMT::Base'`. Instead of the concrete class, the code therefore uses `Iqvoc::Concept.base_class` to call methods on the concepts, so that not all class names need to be changed when extending. This works analogously for all other classes, for example for the label or ability class.
 
-Weiterhin kann man über `Iqvoc::Entity.view_sections` (bspw. Concept/XLLabel) die angezeigten Tabs in den jeweiligen Entitätsansichten dort definieren. `Iqvoc.searchable_class_names` definiert die in der Suche benutzbaren Entitäten. Da dadurch manchmal unklar werden kann, wo eine Information gerendert wird, wird in der im Development Mode gestarteten Umgebung der Pfad zu der View-Datei in den Seitenquelltext gerendert:
+Furthermore, `Iqvoc::Entity.view_sections` (for example, Concept/XLLabel) can be used to define the tabs displayed in the respective entity views. `Iqvoc.searchable_class_names` defines the entities usable in search. Because this can sometimes make it unclear where a piece of information is rendered, the path to the view file is rendered into the page source in an environment started in development mode:
 
 ```erb
 <!-- Partial: /Users/dev/.rbenv/versions/2.5.5/lib/ruby/gems/2.5.0/bundler/gems/sns_theme-5087ffabdcf0/app/views/layouts/_navigation.html.erb -->
 ```
 
-Generell werden die gerenderten Partials dynamisch in den jeweiligen Modelklassen definiert, beispielhaft anhand `app/models/concept/base.rb` aus iQvoc demonstriert:
+In general, the rendered partials are defined dynamically in the respective model classes, demonstrated here by way of example using `app/models/concept/base.rb` from iQvoc:
 
 ```ruby
 # app/models/concept/base.rb
@@ -186,76 +186,76 @@ def self.dashboard_path
 end
 ```
 
-Diese Methoden können dann in einer Erweiterungsklasse einfach überschrieben werden.
+These methods can then simply be overridden in an extension class.
 
-## Styleguide
+## Style Guide
 
-SNS besteht aus drei völlig autonomen Anwendungen. Das visuelle Erscheinungsbild der Anwendungen ist weitestgehend identisch, sodass für Benutzer der Wechsel zwischen den Anwendungen nicht als visueller Bruch anmutet. Erreicht wird dies durch einen einheitlichen Styleguide, welcher isoliert entwickelt wird und von jeder Anwendung verwendet wird.
+SNS consists of three completely autonomous applications. The visual appearance of the applications is largely identical, so that switching between the applications does not feel like a visual break to users. This is achieved through a unified style guide, which is developed in isolation and used by every application.
 
-Der Quellcode des UBA-Styleguides den SNS verwendet ist hier verfügbar: [https://github.com/innoq/uba-bootstrap-theme](https://github.com/innoq/uba-bootstrap-theme)
+The source code of the UBA style guide used by SNS is available here: [https://github.com/innoq/uba-bootstrap-theme](https://github.com/innoq/uba-bootstrap-theme)
 
-Technisch basiert der Styleguide auf Bootstrap 5. Der Styleguide wird von jeder Anwendung als NPM-Dependency in der Datei `package.json` referenziert. Die jeweilige Anwendung zieht die zentralen Assets (Stylesheets, Javascript, Bilder und Schriften) zur Build-Zeit während des Deployments an. Es ist also möglich, dass die Anwendungen auf verschiedenen Versionen des zentralen Styleguides basieren. Zusätzlich zu den zentralen Assets definieren die Anwendungen auch spezifische Stylesheets und Javascript-Funktionen.
+Technically, the style guide is based on Bootstrap 5. The style guide is referenced by every application as an NPM dependency in the `package.json` file. The respective application pulls in the central assets (stylesheets, JavaScript, images, and fonts) at build time during deployment. It is therefore possible for the applications to be based on different versions of the central style guide. In addition to the central assets, the applications also define specific stylesheets and JavaScript functions.
 
-Bei Aktualisierung der verwendeten Bootstrap-Version muss als erstes der zentrale Styleguide aktualisiert werden. Anschließend muss ggf. das HTML-Markup aller iQvoc-Anwendungen auf die neue Version angepasst werden.
+When updating the Bootstrap version used, the central style guide must be updated first. Afterward, the HTML markup of all iQvoc applications may need to be adjusted to the new version.
 
-## Semantik Web Grundlagen
+## Semantic Web Basics
 
 ### Semantic Web
 
-Das Internet ist heutzutage allgegenwärtig und aus dem Alltag nicht mehr wegzudenken. Das World Wide Web (WWW) hat ganze Industriezweige verändert sowie neue Geschäftsmodelle erschaffen. Damit wird das Web zum Symbol für die Entwicklung von der Industrie- zur Informationsgesellschaft.
+The internet is ubiquitous today and can no longer be imagined away from everyday life. The World Wide Web (WWW) has transformed entire industries and created new business models. This makes the web a symbol of the development from an industrial society to an information society.
 
-Das Internet ist zum größten Teil für den Menschen geschaffen. Inhalte von Internetseiten können von Maschinen zwar erfasst werden (z.B. durch Suchmaschinen), eine echte Erfassung des Kontextes sowie des Verständnis der Bedeutung ist für Maschinen aber nur bedingt möglich. Ein sowohl für Menschen als auch für Maschinen verständliches Netz, in dem Waren und Dienste vermittelt und Fragen verstanden sowie automatisch beantwortet werden können, wird als nächste Evolutionsstufe des Internets bezeichnet.
+The internet is, for the most part, created for humans. The content of web pages can indeed be captured by machines (for example, by search engines), but genuinely capturing context and understanding meaning is only possible to a limited extent for machines. A network understandable to both humans and machines, in which goods and services can be brokered and questions understood and automatically answered, is referred to as the next stage in the evolution of the internet.
 
-Hierzu existieren zwei Ansätze. Der erste Ansatz basiert auf Methoden der künstlichen Intelligenz, die darauf abzielen, die kognitive Wahrnehmung des Menschen auf Maschinen zu übertragen.
+Two approaches exist for this. The first approach is based on methods of artificial intelligence that aim to transfer human cognitive perception to machines.
 
-Ein orthogonaler Ansatz ist der des Semantic Web. Ziel ist hierbei, Inhalte für eine optimierte Verarbeitung durch Maschinen bereitzustellen. Dies impliziert eine formale Auszeichnung von Wissen. Das Semantic Web verlangt die Verlagerung des verteilten Netzes von der Präsentationsebene zur Datenebene. Demnach müssen Inhalte zukünftig auf Datenebene miteinander verbunden werden, um eine optimierte Informationsverarbeitung zu gewährleisten.
+An orthogonal approach is that of the Semantic Web. Here, the goal is to provide content for optimized processing by machines. This implies a formal annotation of knowledge. The Semantic Web requires shifting the distributed network from the presentation layer to the data layer. Accordingly, content must in the future be linked with each other at the data layer to ensure optimized information processing.
 
-Das Semantic Web ist ein sehr großes Themenfeld und reicht von Themen wie Linked Open Data bis hin zu Fragestellungen der Künstlichen Intelligenz.
+The Semantic Web is a very large field of topics and ranges from subjects such as Linked Open Data to questions of artificial intelligence.
 
 ### Linked Open Data (LOD)
 
-Linked Open Data ist eine Community-Bestrebung zur Veröffentlichung von großen Datensätzen. Linked Open Data definiert Regeln und Best Practices, um Daten auf Grundlage von Web-Standards zu veröffentlichen und mit Hilfe semantischer Technologien in Beziehung zu setzen. Der Begriff "offen" hat in diesem Zusammenhang zwei Bedeutungen: Daten sollen zum einen frei zugänglich sein und zum anderen ausschließlich über offene Standards veröffentlicht werden. Linked Open Data geht auf das Jahr 2006 zurück. Tim Berners-Lee veröffentlichte in diesem Jahr den Artikel *Design Issues: Linked Data*. Aus diesem Artikel ergeben sich folgende Grundprinzipien:
+Linked Open Data is a community effort to publish large data sets. Linked Open Data defines rules and best practices for publishing data on the basis of web standards and relating it to other data using semantic technologies. The term "open" has two meanings in this context: on one hand, data should be freely accessible, and on the other hand, it should be published exclusively through open standards. Linked Open Data dates back to 2006. In that year, Tim Berners-Lee published the article *Design Issues: Linked Data*. The following basic principles emerge from this article:
 
-1. Verwende URIs, um Dinge zu identifizieren
-2. Verwende HTTP URIs, um auf diese Dinge zugreifen zu können
-3. URIs sollten auf nützliche Informationen verweisen, welche mit den Standards RDF und SPARQL bereitgestellt werden
-4. Verwende Verweise auf andere URIs, sodass weiteres Wissen erreichbar wird
+1. Use URIs to identify things
+2. Use HTTP URIs so that these things can be accessed
+3. URIs should point to useful information, provided using the RDF and SPARQL standards
+4. Use references to other URIs, so that further knowledge becomes reachable
 
-Linked Open Data ist auf die Nutzung offener Standards ausgelegt und baut auf der technischen Architektur des Internets auf. Das erste Prinzip besagt, dass ausschließlich URIs zur Identifikation von Ressourcen genutzt werden. Hiermit werden neben Web-Ressourcen und echten Objekten wie Personen auch abstrakte Dinge wie Beziehungen und Beschreibungen von und zwischen Objekten verstanden.
+Linked Open Data is designed for the use of open standards and builds on the technical architecture of the internet. The first principle states that only URIs are used to identify resources. This is understood to include, in addition to web resources and real objects such as people, abstract things such as relationships and descriptions of and between objects.
 
-Das zweite Prinzip beschreibt die Auflösung von URIs über das Hypertext Transfer Protokoll (HTTP). Hierdurch können Konzepte über physische Grenzen hinweg referenziert werden. Neben Menschen kommen auch Maschinen wie Web-Crawler als Adressat in Frage. Hierfür beinhaltet die HTTP-Spezifikation mit Content Negotiation eine technische Umsetzung. Ein Webserver kann je nach anfragendem Client mit einer für Menschen optimierten HTML- bzw. einer maschinenlesbaren RDF-Repräsentation antworten.
+The second principle describes the resolution of URIs via the Hypertext Transfer Protocol (HTTP). This allows concepts to be referenced across physical boundaries. In addition to humans, machines such as web crawlers can also be addressees. For this, the HTTP specification includes a technical implementation with content negotiation. Depending on the requesting client, a web server can respond with an HTML representation optimized for humans or a machine-readable RDF representation.
 
-Das dritte Prinzip definiert die Nutzung standardisierter Datenformate. Während HTML das bevorzugte Datenformat für von Menschen lesbare Dokumente ist, beschreibt dieses Prinzip die Nutzung von RDF. RDF erlaubt die formale Auszeichnung von jeglichen Inhalten und unterstützt die automatische Verarbeitung durch Maschinen.
+The third principle defines the use of standardized data formats. While HTML is the preferred data format for documents readable by humans, this principle describes the use of RDF. RDF allows the formal annotation of any content and supports automatic processing by machines.
 
-Das vierte Prinzip beschreibt die Nutzung von Hyperlinks zur Verbindung von Daten. Im Linked Data Kontext werden diese Hyperlinks RDF-Links genannt. Diese RDF-Links haben im Vergleich zu klassischen Hyperlinks neben dem Verweis auch eine getypte, semantische Bedeutung. Ein RDF-Link zwischen einer Person und einer Zeichenkette kann beispielsweise beschreiben, dass es sich bei der folgenden Zeichenkette um eine Email-Adresse handelt.
+The fourth principle describes the use of hyperlinks to connect data. In the Linked Data context, these hyperlinks are called RDF links. Compared to classic hyperlinks, these RDF links have, in addition to the reference, a typed, semantic meaning. For example, an RDF link between a person and a string can describe that the following string is an email address.
 
 ### Resource Description Framework (RDF)
 
 #### Model
 
-Das Resource Description Framework (RDF) ist ein graphen-orientiertes Datenmodell zur Beschreibung beliebiger Dinge in Form von Ressourcen. RDF bietet eine formale Sprache für den Wissens- bzw. Informationsaustausch. Dinge bzw. Ressourcen werden per Uniform Resource Identifier (URI) identifiziert und mit Hilfe von Eigenschaften und konkreten Ausprägungen beschrieben. Jede RDF-Aussage ist in Form eines Tripels modelliert und besteht aus Subjekt, Prädikat und Objekt.
+The Resource Description Framework (RDF) is a graph-oriented data model for describing arbitrary things in the form of resources. RDF provides a formal language for exchanging knowledge and information. Things or resources are identified by a Uniform Resource Identifier (URI) and described using properties and concrete values. Every RDF statement is modeled in the form of a triple and consists of a subject, predicate, and object.
 
-![RDF-Modell](../images/rdf-model.png)
+![RDF model](../images/rdf-model.png)
 
-Subjekt, Prädikat und Objekt werden durch URIs referenziert. Das Objekt kann wahlweise auch durch ein String-Literal mit optionalem Datentyp repräsentiert werden. Das Prädikat beschreibt die semantische Beziehung zwischen Subjekt und Objekt.
+Subject, predicate, and object are referenced by URIs. The object can optionally also be represented by a string literal with an optional data type. The predicate describes the semantic relationship between subject and object.
 
-RDF verfolgt einen datengetriebenen Ansatz, d.h. es sind keine Klassen notwendig, um Instanzen zu bilden. Dieser Ansatz macht RDF sehr flexibel. RDF besteht aus dem RDF-Modell und der konkreten Syntax zur Serialisierung. Das RDF-Modell beinhaltet die Menge aller Tripel, bestehend aus Subjekten, Prädikaten und Objekten und spannt den Graphen auf. Mit RDF lässt sich aber keine Semantik ausdrücken, da lediglich Beziehungen zwischen Dingen hergestellt werden. Die semantische Beschreibung von Objekten und Beziehungen erfolgt über Ontologien. Ontologien nehmen bei der Verwendung die Rolle eines Vokabulars ein. Ein Vokabular bezeichnet im RDF-Kontext eine Menge von Bezeichnern für Individuen, Beziehungen und Klassen.
+RDF follows a data-driven approach, meaning no classes are needed to form instances. This approach makes RDF very flexible. RDF consists of the RDF model and the concrete syntax for serialization. The RDF model comprises the set of all triples, consisting of subjects, predicates, and objects, and spans the graph. However, RDF alone cannot express semantics, since it only establishes relationships between things. The semantic description of objects and relationships is done through ontologies. In use, ontologies take on the role of a vocabulary. In the RDF context, a vocabulary refers to a set of identifiers for individuals, relationships, and classes.
 
-#### Serialisierung
+#### Serialization
 
-RDF-Graphen lassen sich in mehrere Datenformate serialisieren. Der folgende Abschnitt thematisiert gängige RDF-Serialisierungen wie RDF/XML und die Terse RDF Query Language (Turtle).
+RDF graphs can be serialized into several data formats. The following section addresses common RDF serializations such as RDF/XML and the Terse RDF Query Language (Turtle).
 
-Die konkrete Syntax soll anhand des folgenden Beispiels erläutert werden.
+The concrete syntax will be explained using the following example.
 
-![RDF-Serialisierung Beispiel](../images/rdf-serialialisierung-example.png)
+![RDF serialization example](../images/rdf-serialialisierung-example.png)
 
-Das Beispiel zeigt die Modellierung der Person Max Mustermann durch Nutzung des Friend of a Friend (FOAF)-Vokabulars. Neben Vor- und Nachname wird ebenfalls eine Email-Adresse modelliert. Die Ovale dieser graphischen Notation beschreiben andere Ressourcen. Rechtecke visualisieren String-Literale.
+The example shows the modeling of the person Max Mustermann using the Friend of a Friend (FOAF) vocabulary. In addition to first and last name, an email address is also modeled. The ovals in this graphical notation describe other resources. Rectangles visualize string literals.
 
 ##### RDF/XML
 
-Eine weit verbreitete Art der RDF-Serialisierung ist RDF/XML. Dieses Serialisierungsformat nutzt die Extensible Markup Language (XML) als Meta-Sprache. Die Kodierung von Tripeln erfolgt hierarchisch. Durch die Flexibilität der XML-Meta-Sprache können RDF-Graphen auf verschiedene Weisen in RDF/XML serialisiert werden. Ein Vorteil dieser Serialisierung ist die weite Verbreitung und Akzeptanz von XML. Es existieren für nahezu jede Programmiersprache entsprechende Bibliotheken zur XML-Verarbeitung. Im Gegensatz zu moderneren Serialisierungsformaten ist RDF/XML für den Menschen schwerer lesbar.
+A widely used type of RDF serialization is RDF/XML. This serialization format uses the Extensible Markup Language (XML) as a meta-language. The encoding of triples is hierarchical. Due to the flexibility of the XML meta-language, RDF graphs can be serialized into RDF/XML in various ways. An advantage of this serialization is the wide distribution and acceptance of XML. Corresponding libraries for XML processing exist for nearly every programming language. In contrast to more modern serialization formats, RDF/XML is harder for humans to read.
 
-Das oben genannte Beispiel würde in RDF/XML folgendermaßen serialisiert:
+The example given above would be serialized in RDF/XML as follows:
 
 ```xml
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns="http://www.example.org/max/contact.rdf#">
@@ -267,15 +267,15 @@ Das oben genannte Beispiel würde in RDF/XML folgendermaßen serialisiert:
 </rdf:RDF>
 ```
 
-Innerhalb des Wurzel-Knotens werden Namensräume durch Präfixe ersetzt. Präfixe erlauben eine kompaktere Syntax und tragen zur Lesbarkeit bei. Alle Tripel die eine FOAF-Klasse als Subjekt nutzen, werden hierarchisch in einem FOAF-Person-Element gruppiert.
+Within the root node, namespaces are replaced by prefixes. Prefixes allow a more compact syntax and contribute to readability. All triples that use a FOAF class as the subject are grouped hierarchically within a FOAF Person element.
 
 ##### Terse RDF Query Language (Turtle)
 
-Turtle ist eine alternative RDF-Syntax, die den Schwerpunkt auf Lesbarkeit legt. Turtle geht auf eine Vereinfachung der durch Tim Berners-Lee 1998 vorgeschlagenen Notation 3 (N3) zurück.
+Turtle is an alternative RDF syntax that emphasizes readability. Turtle originates from a simplification of Notation3 (N3), proposed by Tim Berners-Lee in 1998.
 
-N3 schreibt Tripel ebenfalls in beliebiger Reihenfolge hintereinander und enthält Operatoren für komplexere Ausdrücke wie Pfade und Regeln. Die Formate N-Triples und Turtle haben sich aus N3 entwickelt. N-Triples verzichten auf die zuvor erwähnten komplexeren Ausdrücke der N3-Syntax und beschränken sich auf die Beschreibung von RDF-Graphen. Die N-Triple-Serialisierung wurde im Anschluss um eine Kurzschreibweise erweitert und führte zur heute weit verbreiteten Turtle-Syntax.
+N3 also writes triples one after another in any order and contains operators for more complex expressions such as paths and rules. The N-Triples and Turtle formats developed from N3. N-Triples dispense with the more complex expressions of the N3 syntax mentioned above and are limited to describing RDF graphs. The N-Triples serialization was subsequently extended with a shorthand notation, leading to the Turtle syntax that is widely used today.
 
-Das oben genannte Beispiel stellt sich in Turtle folgendermaßen dar:
+The example given above is represented in Turtle as follows:
 
 ```turtle
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
@@ -288,93 +288,93 @@ Das oben genannte Beispiel stellt sich in Turtle folgendermaßen dar:
   foaf:mbox <mailto:max.mustermann@example.org> .
 ```
 
-In Zeile 1-3 werden analog zur XML-Serialisierung Präfixe für eine kompaktere Schreibweise definiert. Der Punkt beendet die Sequenz eines RDF-Tripels. Die Turtle-Serialisierung beinhaltet einige Kurzschreibweisen. So kürzt ein `a` anstelle eines Prädikates das oft genutzte `rdf:type` ab. Durch das Semikolon beziehen sich die folgenden Prädikat/Objekt-Kombinationen auf das gleiche Subjekt. Die Prädikat/Objekt-Kombinationen aus Zeile 6-8 beziehen sich somit alle auf das Subjekt `:maxmustermann` aus Zeile 5.
+In lines 1-3, prefixes for a more compact notation are defined, analogous to the XML serialization. The period ends the sequence of an RDF triple. The Turtle serialization includes several shorthand notations. For example, an `a` used instead of a predicate abbreviates the commonly used `rdf:type`. The semicolon means that the following predicate/object combinations refer to the same subject. The predicate/object combinations in lines 6-8 therefore all refer to the subject `:maxmustermann` from line 5.
 
 ### Simple Knowledge Organization System (SKOS)
 
-Das Simple Knowledge Organization System (SKOS) ist ein W3C-Standard für die Wissensrepräsentation. SKOS bietet eine auf RDFS und OWL basierende formale Sprache für die Definition von Vokabularen, Taxonomien und Thesauri.
+The Simple Knowledge Organization System (SKOS) is a W3C standard for knowledge representation. SKOS provides a formal language, based on RDFS and OWL, for defining vocabularies, taxonomies, and thesauri.
 
-Während die Wissensrepräsentation innerhalb von Knowledge Organization System (KOS) seit geraumer Zeit praktiziert wird, ist die Verarbeitung sowie der Austausch innerhalb von Computernetzwerken noch nicht alltäglich. Zu diesem Zweck wurde SKOS entwickelt. SKOS basiert auf den Grundideen des Semantic Webs und sollte fortan die Modellierung von wiederverwendbaren Wissensrepräsentationen über das Internet unterstützen. Ein weiteres Kriterium bei der Entwicklung von SKOS war die einfache Transformation aus einem anderen Thesaurus-Standard.
+While knowledge representation within a Knowledge Organization System (KOS) has been practiced for some time, processing and exchange within computer networks are not yet commonplace. SKOS was developed for this purpose. SKOS is based on the fundamental ideas of the Semantic Web and was intended, from then on, to support the modeling of reusable knowledge representations over the internet. Another criterion in the development of SKOS was easy transformation from another thesaurus standard.
 
-Die SKOS-Spezifikation definiert semantische Beziehungen zur Definition von Hierarchien, Assoziationen und Verknüpfungen. Die Abbildung visualisiert die semantischen Beziehungen der Spezifikation:
+The SKOS specification defines semantic relationships for defining hierarchies, associations, and links. The figure visualizes the semantic relationships of the specification:
 
-![SKOS Semantische Beziehungen](../images/skos-semantic-relation.png)
+![SKOS semantic relationships](../images/skos-semantic-relation.png)
 
-Gerichtete Pfeile symbolisieren die `rdfs:subPropertyOf`-Beziehung. Auf oberster Ebene sind `skos:broaderTransitive`, `skos:narrowerTransitive`, `skos:mappingRelation` und `skos:related` als Sub-Typen von `skos:semanticRelation` definiert. Die Beziehung zwischen `skos:broaderTransitive` und `skos:narrowerTransitive` steht für `owl:inverseOf` aus der OWL-Spezifikation. Die Beziehung beschreibt die gegenteilige semantische Bedeutung zwischen den Elementen. Das Wissen über die Bedeutung solcher Beziehungen kann für die Bildung von Inferenzen genutzt werden.
+Directed arrows symbolize the `rdfs:subPropertyOf` relationship. At the top level, `skos:broaderTransitive`, `skos:narrowerTransitive`, `skos:mappingRelation`, and `skos:related` are defined as subtypes of `skos:semanticRelation`. The relationship between `skos:broaderTransitive` and `skos:narrowerTransitive` represents `owl:inverseOf` from the OWL specification. This relationship describes the opposite semantic meaning between the elements. Knowledge of the meaning of such relationships can be used to form inferences.
 
-Für diese Ausarbeitung sind die semantischen Beziehungen `skos:broaderTransitive` und `skos:narrowerTransitive` sowie deren jeweils direkt zugeordneter Sub-Typ relevant. Mit `skos:narrower` werden spezielle Typen von Entitäten modelliert (z.B. Laptop `skos:narrower` Computer). Die `skos:broader`-Beziehung beschreibt die gegenteilige Beziehung (Computer `skos:broader` Laptop).
+For this document, the semantic relationships `skos:broaderTransitive` and `skos:narrowerTransitive`, as well as their respective directly assigned subtype, are relevant. `skos:narrower` is used to model specific types of entities (for example, laptop `skos:narrower` computer). The `skos:broader` relationship describes the opposite relationship (computer `skos:broader` laptop).
 
-## Anforderungen an einen Betriebsdienstleister
+## Requirements for an Operations Provider
 
-### Architektur und Skalierung
+### Architecture and Scaling
 
-Die SNS-Anwendungen sollten auf einer eigenen virtuellen oder physischen Maschine deployed und betrieben werden. Die drei Anwendungen laufen alle als Docker-Container auf einer Container-Plattform. Die Datenhaltung muss logisch getrennt in einer eigenen Datenbank realisiert werden (die Datenbanken können auf einem gemeinsamen Datenbank-Host betrieben werden).
+The SNS applications should be deployed and operated on a dedicated virtual or physical machine. All three applications run as Docker containers on a container platform. Data storage must be implemented in a logically separate, dedicated database (the databases can be operated on a shared database host).
 
-Vor den Anwendungen agiert ein Web-Server als Reverse-Proxy, der die Verteilung auf die jeweilige Anwendung übernimmt. Jede Anwendung wird von einer variablen Anzahl an Passenger-Worker-Prozessen betrieben (Passenger ist ein Ruby-Applikationsserver).
+A web server acts as a reverse proxy in front of the applications, handling the distribution to the respective application. Each application is run by a variable number of Passenger worker processes (Passenger is a Ruby application server).
 
-![SNS Architektur](../images/sns-architektur.png)
+![SNS architecture](../images/sns-architektur.png)
 
 #### Software
 
-* **Betriebssystem**: Als Server-Betriebssystem empfehlen wir die jeweils aktuelle Version von Ubuntu in der LTS-Version (Long Term Support).
-* **Ruby**: Ruby (MRI) in der jeweils aktuellen Version (mindestens 3.0)
-* **Datenbank**: Das SNS-System benötigt unterschiedliche Datenbankmanagementsysteme. Der Umweltthesaurus und die Umweltchronik basieren auf PostgreSQL.
+* **Operating system**: As the server operating system, we recommend the current version of Ubuntu in the LTS (Long Term Support) release.
+* **Ruby**: Ruby (MRI) in the current version (at least 3.0)
+* **Database**: The SNS system requires different database management systems. The environmental thesaurus and the Environmental Chronicle are based on PostgreSQL.
 
 #### Hardware
 
-Die Hardware-Anforderungen gelten pro Maschine/VM:
+The hardware requirements apply per machine/VM:
 
-* **CPU**: 8 Kerne, 64-Bit
-* **RAM**: mindestens 16 GB RAM
-* **Festplattenspeicher**: mindestens 80 GB, vorzugsweise SSDs
+* **CPU**: 8 cores, 64-bit
+* **RAM**: at least 16 GB RAM
+* **Disk storage**: at least 80 GB, preferably SSDs
 
 #### Monitoring
 
-Alle Instanzen sollten durch den Dienstleister automatisiert überwacht werden. Das umfasst Standardmesswerte wie bspw. CPU-, RAM- und I/O-Auslastung als auch das Aufrechterhalten von applikationskritischen Prozessen. Hierzu gehören:
+All instances should be automatically monitored by the provider. This includes standard metrics such as CPU, RAM, and I/O utilization, as well as maintaining application-critical processes. These include:
 
-* Webserver
-* Applikationsserver
-* Datenbankserver
+* Web server
+* Application server
+* Database server
 
 #### Backup
 
-Es muss ein tägliches automatisches Backup der System- und Applikationsdatenbanken erfolgen. Den Entwicklern muss die Möglichkeit gegeben werden, Backup-Prozesse (Manuelles Auslösen, Wiederherstellen etc.) selbständig oder auf Ticket-Basis zu verwalten und anzufordern.
+A daily automatic backup of the system and application databases must be performed. Developers must be given the ability to independently manage and request backup processes (manual triggering, restoring, and so on), or to do so on a ticket basis.
 
-#### Deployment und Wartung
+#### Deployment and Maintenance
 
-Für das Deployment von Anwendungssourcen sowie Wartungsaufgaben ist den Entwicklern ein vollwertiger SSH-Zugang über einen separaten Benutzer bereitzustellen, root-Rechte sind dazu nicht nötig. Die Entwickler müssen die Möglichkeit haben, selbständig:
+For the deployment of application sources as well as maintenance tasks, developers must be provided with full SSH access through a separate user; root privileges are not required for this. Developers must have the ability to independently:
 
-* den Webserver und Docker-Container neu zu starten
-* Jobs im Kontext des Anwendungsverzeichnisses auszuführen
-* sich als jew. Anwendungsuser gegen die Datenbankkonsole zu verbinden
+* restart the web server and Docker containers
+* run jobs in the context of the application directory
+* connect to the database console as the respective application user
 
-Der Datenbankbenutzer benötigt neben den normalen Lese-, Schreib- und Löschoperationen außerdem Berechtigungen, Schemaänderungen durchzuführen.
+In addition to normal read, write, and delete operations, the database user also requires permissions to perform schema changes.
 
-### Anforderungen an Dienstleister Wartung/Weiterentwicklung
+### Requirements for the Maintenance/Further Development Provider
 
-Ein vom UBA auszuwählender, neuer SNS-Dienstleister bekommt sowohl den aktuellen Source-Code von SNS als auch eine Dokumentation von SNS zur Verfügung gestellt. Möglicherweise sind auch Einführungsworkshop(s) möglich/nötig.
+A new SNS provider, to be selected by UBA, is provided with both the current source code of SNS and SNS documentation. Introductory workshop(s) may also be possible or necessary.
 
-#### Technologien
+#### Technologies
 
 ##### Must-have
 
-* Langjährige Erfahrung in Software-Entwicklung und -Wartung
-* Git und GitHub
-* SQL, PostgreSQL und ActiveRecord
+* Many years of experience in software development and maintenance
+* Git and GitHub
+* SQL, PostgreSQL, and ActiveRecord
 * Ruby on Rails
-* Web-Technologien, insbesondere HTML und CSS
+* Web technologies, in particular HTML and CSS
 * JavaScript
-* Rails-Hosting/Deployment
+* Rails hosting/deployment
 
 ##### Should-have
 
 * RDF
-* Semantic Web Standards
+* Semantic Web standards
 * SKOS (https://www.w3.org/TR/skos-primer/)
 * Rails Engines
 * Linked Data
 
 ##### Nice-to-have
 
-* Thesaurus/Vokabular Management Systeme
+* Thesaurus/vocabulary management systems
 * iQvoc (http://iqvoc.net/)

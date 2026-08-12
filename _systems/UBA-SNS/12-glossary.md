@@ -3,13 +3,13 @@ title: Glossary
 order: 12
 ---
 
-| Begriff | Definition |
+| Term | Definition |
 |---|---|
-| AutoClassify | SNS-Dienst zur Verschlagwortung von Dokumenten |
-| Chronik (Umweltchronik) | Zusammenstellung von aktuellen und historischen für die Umwelt bedeutenden Ereignissen |
-| Linked (Open) Data | Ansatz, Daten frei verfügbar und in einem maschinenlesbaren Format automatisiert verarbeitbar zu machen |
+| AutoClassify | SNS service for automatic keyword assignment of documents |
+| Environmental Chronicle | Compilation of current and historical events significant for the environment |
+| Linked (Open) Data | Approach to making data freely available and automatically processable in a machine-readable format |
 | iQvoc | Open Source Vocabulary System for the Semantic Web |
-| SimilarTerms | SNS-Dienst zur Rückgabe von ähnlichen Begriffen zu einem Suchbegriff |
+| SimilarTerms | SNS service for returning similar terms for a search term |
 | SKOS | Simple Knowledge Organization System |
-| SNS | Semantic Network Service (deutsch: Semantischer Netzwerkservice) |
-| UMTHES (Umweltthesaurus) | Umweltterminologie miteinander verknüpfter fachsprachlicher und alltagssprachlicher Benennungen |
+| SNS | Semantic Network Service (German: Semantischer Netzwerkservice) |
+| UMTHES (environmental thesaurus) | Environmental terminology made up of interlinked technical-language and everyday-language terms |

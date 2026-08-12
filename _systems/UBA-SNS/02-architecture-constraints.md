@@ -3,21 +3,21 @@ title: Architecture Constraints
 order: 2
 ---
 
-## Technische Randbedingungen
+## Technical constraints
 
-| Randbedingung | Beschreibung |
+| Constraint | Description |
 |---|---|
-| Fremdsoftware | Fremdsoftware wie Bibliotheken und Infrastrukturkomponenten (z.B. Datenbankmanagementsysteme) sollten frei verfügbar und kostenlos zu beziehen sein. |
+| Third-party software | Third-party software such as libraries and infrastructure components (e.g. database management systems) should be freely available and obtainable at no cost. |
 
-## Organisatorische Randbedingungen
+## Organizational constraints
 
-| Randbedingung | Beschreibung |
+| Constraint | Description |
 |---|---|
-| Versionsverwaltung | Quellcode wird außerhalb der UBA-Infrastruktur in GIT-Repositories bei GitHub verwaltet. Dies vereinfacht die Kollaboration mit externen Nutzenden. Änderungen am Quellcode sind ausschließlich über die Git-Repositories vorzunehmen. |
+| Version control | Source code is managed outside the German Environment Agency (Umweltbundesamt, UBA) infrastructure, in Git repositories on GitHub. This simplifies collaboration with external users. Changes to the source code are made exclusively through the Git repositories. |
 
-## Konventionen
+## Conventions
 
-| Randbedingung | Beschreibung |
+| Constraint | Description |
 |---|---|
-| Architekturdokumentation | - Form, Gliederung und Terminologie richten sich nach dem deutschen arc42-Template (https://arc42.de/template)<br>- Confluence als führendes System, um eine leichte Bearbeitung/Aktualisierung zu gewährleisten.<br>- Diagramme der Dokumentation in UML-Notation. Fokus liegt auf Verständlichkeit und nicht auf syntaktischer Korrektheit. |
-| Sprache | - Die Architekturdokumentation wird in Deutsch gepflegt und aktualisiert.<br>- Die Dokumentation des Quellcodes erfolgt in Englisch. |
+| Architecture documentation | - Form, structure, and terminology follow the German arc42 template (https://arc42.de/template)<br>- Confluence as the leading system, to ensure easy editing/updating.<br>- Diagrams in the documentation use UML notation. The focus is on comprehensibility, not syntactic correctness. |
+| Language | - The architecture documentation is maintained and updated in German.<br>- The source code documentation is written in English. |

@@ -3,41 +3,63 @@ layout: system
 
 permalink: /systems/UBA-SNS/
 
-title: UBA-SNS (Semantischer Netzwerkservice)
-tagline: Open-Data-Plattform des Umweltbundesamtes für Umweltthesaurus und -chronik.
+title: UBA-SNS (Semantic Network Service)
+tagline: Environmental thesaurus and chronicle as Linked Open Data.
 
-domain: Environmental Information / Semantic Web
+domain: Environmental information
 
 main_goal: >-
-  Den Zugang zu Umweltinformationen über offene Standards (RDF, SKOS, Linked Open Data) in menschen- und maschinenlesbarer Form ermöglichen und wiederverwendbare Webdienste für Fachanwendungen bereitstellen.
+  Open access to environmental information through W3C standards, in human and
+  machine readable form, with reusable web services for specialist
+  applications.
 
 decisions:
-  - Linked Open Data (HTTP-URIs und W3C RDF/SKOS Standards)
-  - Modulare Rails-Engines-Architektur (iQvoc Framework)
-  - Docker-Containerisierung hinter Caddy Reverse-Proxy
-  - PostgreSQL als relationales Datenbankmanagementsystem
+  - Linked Open Data, with HTTP URIs and the W3C RDF and SKOS standards
+  - Modular Rails engine architecture on the open source iQvoc framework
+  - Docker containers behind a Caddy reverse proxy
 
 technologies:
   - Ruby on Rails
-  - iQvoc / SKOS / RDF
+  - iQvoc
   - PostgreSQL
-  - Caddy
-  - Docker
-  - Bootstrap 5
 
-scale: ~12.000 Deskriptoren · ~40.000 Nicht-Deskriptoren · ~4.000 Chronik-Einträge · Open-Data-Dienst des UBA
+keywords:
+  - linked-open-data
+  - skos
+  - semantic-web
 
-order: 70
+scale: ~12,000 descriptors · ~40,000 non-descriptors · ~4,000 chronicle entries · in production at sns.uba.de
 
-attribution: Umweltbundesamt (UBA) & INNOQ
+order: 60
+
+# ---------------------------------------------------------------------------
+# Provenance. The application and its documentation belong to the German
+# Environment Agency (Umweltbundesamt, UBA). Permission to republish the
+# documentation here (Freigabe) was granted by the UBA and received on
+# 2026-08-12. SNS was developed by INNOQ on behalf of the UBA; the UBA runs
+# it, curates its content and remains the owner, which both the attribution
+# line and the overview text below state on the page.
+# ---------------------------------------------------------------------------
+attribution: Umweltbundesamt (UBA)
 licence: CC BY-SA 4.0
 licence_url: https://creativecommons.org/licenses/by-sa/4.0/
 source_url: https://sns.uba.de
 imported: 2026-08
 ---
 
-Der **Semantische Netzwerkservice (SNS)** macht den UmweltThesaurus (UMTHES) und die Umweltchronik des Umweltbundesamtes (UBA) öffentlich als Linked Open Data zugänglich.
+The **Semantic Network Service (SNS)** makes the environmental thesaurus
+UMTHES and the Environmental Chronicle publicly available as Linked Open Data.
+The application belongs to the **German Environment Agency (Umweltbundesamt,
+UBA)**, which runs the service at [sns.uba.de](https://sns.uba.de) and curates
+its content; development was carried out by INNOQ on behalf of the UBA.
 
-Neben der interaktiven Suche und Navigation im Web-Browser stellt SNS wiederverwendbare Dienste und APIs für Anwendungen der Umweltinformatik bereit, darunter die automatische Verschlagwortung von Dokumenten (**AutoClassify**) und die Ermittlung semantisch ähnlicher Begriffe (**SimilarTerms**).
+![Logo of the German Environment Agency (Umweltbundesamt)](images/uba-logo.png)
 
-Die Architektur basiert auf dem Open-Source-Framework **iQvoc** (Ruby on Rails Engine-Architektur), standardisierten W3C-Formaten (RDF, SKOS, SKOS-XL) und einer containerisierten Infrastruktur mit PostgreSQL und Caddy.
+Beyond interactive search and navigation in the browser, SNS offers reusable
+services and APIs for environmental informatics, among them automatic keyword
+assignment for documents (**AutoClassify**) and the retrieval of semantically
+similar concepts (**SimilarTerms**).
+
+The architecture builds on the open source framework **iQvoc**, a Ruby on
+Rails engine architecture, on the standardized W3C formats RDF, SKOS and
+SKOS-XL, and on a containerized infrastructure with PostgreSQL and Caddy.
