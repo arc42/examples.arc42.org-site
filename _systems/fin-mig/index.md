@@ -16,11 +16,9 @@ decisions:
   - Pipes and filters, with a database as the pipe
   - Parallel rule processing over independent segments
   - Migration rules in Java, not in a rule engine
-  - Error sensors in every processing step
 
 technologies:
   - Java
-  - J2EE
   - Oracle
   - VSAM
 

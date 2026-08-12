@@ -16,13 +16,11 @@ decisions:
   - Persistence generated from a UML model
   - DSLs for CSV and fixed-record formats
   - Rule engine for campaign process control
-  - Images on the filesystem, not the database
 
 technologies:
   - Java
   - Oracle
   - Drools
-  - ANTLR
 
 scale: 7–10 developers · 2–4 week iterations · ~15 months
 

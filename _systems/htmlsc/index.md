@@ -16,13 +16,11 @@ decisions:
   - Groovy, with minimal external dependencies
   - Shipped as a Gradle plugin
   - Template method for checkers and reporters
-  - jsoup for HTML parsing
 
 technologies:
   - Groovy
   - Java
   - Gradle
-  - jsoup
 
 scale: Small open-source tool · single maintainer · on GitHub since 2014
 

@@ -25,7 +25,7 @@ domain: Business domain
 main_goal: The most important goal the architecture had to achieve.
 
 # The handful of decisions that shaped everything else (arc42 section 4). At
-# most four; the tile truncates beyond that.
+# most three; the tile truncates beyond that.
 #
 # A SHORT CLAUSE, not a keyword. This said "keywords only" until 2026-08-11 and
 # all 24 values in the corpus ignored it, correctly: "Pipes and filters, with a
@@ -38,11 +38,11 @@ decisions:
   - Another one
   - A third
 
-# At most four, ONE TOKEN EACH: "PostgreSQL", not "PostgreSQL 14 for storage",
+# At most three, ONE TOKEN EACH: "PostgreSQL", not "PostgreSQL 14 for storage",
 # and never a parenthesis or a slash — "MQTT", not "MQTT (via ActiveMQ)". These
-# are the only chips left on the tile, and a chip is worth its pill only if the
-# value can recur on another tile. Six of these ran to two lines on every card
-# and turned a scannable row into a paragraph of boxes.
+# no longer appear on the dashboard tile (2026-08-11) — only on the system's own
+# page — but they are still matched by the dashboard filter, so keep them to the
+# tokens a reader would actually type.
 technologies:
   - Language
   - Framework

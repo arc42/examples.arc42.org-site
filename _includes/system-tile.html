@@ -16,9 +16,9 @@
   DECISIONS, TECHNOLOGIES — in the same small grey uppercase, so one texture
   repeated four times down the card and each caption carried as much visual
   weight as the content beside it. The tile read as a form. The captions are
-  gone from the page and kept for screen readers on the lists that need them:
-  a mono chip already says "technology" and a word chip already says
-  "decision" to anyone looking at it, but neither says it to anyone listening.
+  gone from the page and kept for screen readers on the list that needs one:
+  a bulleted clause under a tagline reads as "decision" to anyone looking at
+  it, and says nothing at all to anyone listening.
 
   The whole tile is clickable via the stretched-link pattern: a single real
   <a> around the title, expanded by a pseudo-element. This keeps exactly one
@@ -73,32 +73,31 @@
 
     They keep their aria-label. Without the chip shape nothing else says
     "decision", and the caption was removed from the page on purpose.
-  {%- endcomment -%}
-  {%- if sys.decisions.size > 0 or sys.technologies.size > 0 -%}
-  <div class="ex-tile__keywords">
-    {%- if sys.decisions and sys.decisions.size > 0 -%}
-    <ul class="ex-tile__decisions" aria-label="Strategic decisions">
-      {%- for d in sys.decisions limit: 4 -%}
-      <li>{{ d }}</li>
-      {%- endfor -%}
-    </ul>
-    {%- endif -%}
 
-    {%- comment -%}
-      Four, not six, and one token each: no parentheses, no slashes. Six ran to
-      two lines on every tile and turned a scannable row into a paragraph of
-      boxes. The limit is silent, and nothing checks the data yet — that is the
-      `check-system-fields.sh` still owed alongside closing the `domain`
-      vocabulary.
-    {%- endcomment -%}
-    {%- if sys.technologies and sys.technologies.size > 0 -%}
-    <ul class="ex-chips" aria-label="Technologies">
-      {%- for t in sys.technologies limit: 4 -%}
-      <li class="ex-chip ex-chip--tech">{{ t }}</li>
-      {%- endfor -%}
-    </ul>
-    {%- endif -%}
-  </div>
+    NO PILL ROW AT ALL (2026-08-11, later the same day). `technologies` used to
+    render here as a row of mono chips under the decisions. It was the last
+    pill row on the dashboard and it is gone: a tile already carries domain,
+    title, tagline, goal, three decisions and scale, and the chips added a
+    fourth texture — the visually loudest one — to say what the decisions and
+    the tagline mostly said already ("Groovy, with minimal external
+    dependencies" above a `Groovy` pill). The stack of examples is read for
+    which one to open, not for a technology census. Technologies still render
+    in full on the system's own page, and they stay in `data-haystack` below,
+    so filtering for "Drools" still finds mama from the dashboard.
+
+    THREE, NOT FOUR (2026-08-11). Same argument one notch further: the fourth
+    decision was always the weakest one on every tile, and dropping it is what
+    lets the remaining three be read rather than skimmed. The limit here is a
+    guard — the data files themselves carry three — and it is silent, which is
+    still the `check-system-fields.sh` owed alongside closing the `domain`
+    vocabulary.
+  {%- endcomment -%}
+  {%- if sys.decisions and sys.decisions.size > 0 -%}
+  <ul class="ex-tile__decisions" aria-label="Strategic decisions">
+    {%- for d in sys.decisions limit: 3 -%}
+    <li>{{ d }}</li>
+    {%- endfor -%}
+  </ul>
   {%- endif -%}
 
   {%- if sys.scale -%}

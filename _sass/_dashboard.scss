@@ -127,25 +127,19 @@
     color: var(--ink);
   }
 
-  // Decisions and technologies are one keyword block now, not two captioned
-  // rows. The two shapes tell them apart on screen — a list of sentences above
-  // a row of mono tokens; the lists carry aria-label so they are still told
-  // apart out loud.
-  &__keywords {
-    display: flex;
-    flex-direction: column;
-    gap: var(--s3);
-  }
-
-  // The four decisions that shaped the architecture. Plain list, --ink, no
-  // border and no fill: see the argument in _includes/system-tile.html.
+  // The three decisions that shaped the architecture — the tile's only list
+  // since the technology chips left it (2026-08-11). Plain list, --ink, no
+  // border and no fill: see the argument in _includes/system-tile.html. The
+  // `__keywords` flex wrapper that used to hold this list above the chip row
+  // went with them; the tile's own column gap is the same --s3, so nothing
+  // moved.
   //
   // A REAL list marker, not a ::before middot. At the tile's ~320px column
-  // every one of these wraps to two lines, and with no marker the four items
-  // stop looking like four items — but generated punctuation gets announced,
+  // every one of these wraps to two lines, and with no marker the three items
+  // stop looking like three items — but generated punctuation gets announced,
   // which is why _includes/in-the-wild-entry.html divides its byline with a
   // border instead. A browser's own list marker is the way out: it draws the
-  // bullet and stays out of the accessibility tree, where "list, 4 items"
+  // bullet and stays out of the accessibility tree, where "list, 3 items"
   // already says everything the bullet says.
   &__decisions {
     margin: 0;

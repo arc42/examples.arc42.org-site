@@ -15,14 +15,12 @@ main_goal: >-
 
 decisions:
   - Independent external prober, not an in-process watcher
-  - Plausible.io for cookie-free usage stats
   - Turso for durable snapshots and heartbeats
   - Go backend behind a static Jekyll shell
 
 technologies:
   - Go
   - Jekyll
-  - Fly.io
   - Turso
 
 scale: 9 arc42 family sites monitored · single maintainer · in production since 2023

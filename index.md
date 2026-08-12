@@ -10,6 +10,6 @@ different scales, different technologies.
 Looking for short, section-sized illustrations instead? Those live with the
 template documentation at [docs.arc42.org](https://docs.arc42.org).
 
-Some arc42 documentation cannot live here — other people's systems, on other
-people's sites, under licences that do not let us republish them. Those are
-listed under [In the Wild]({{ '/in-the-wild/' | relative_url }}).
+You find even more examples of arc42 documentation 
+(that cannot live here for various reasons, e.g. licences).
+under [In the Wild]({{ '/in-the-wild/' | relative_url }}).

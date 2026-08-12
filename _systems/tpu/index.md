@@ -17,13 +17,11 @@ decisions:
   - Legally relevant functions isolated in an exchangeable MeasuringUnit
   - Embedded real-time OS for measuring, Linux for video
   - Integer (fixed-point) arithmetic throughout
-  - Fixed 200 ms display delay via a five-frame buffer
 
 technologies:
   - C++
   - RTOS
   - ARM
-  - GPS
 
 scale: Hardware/software product · in police cars · successor to an earlier TPU generation
 

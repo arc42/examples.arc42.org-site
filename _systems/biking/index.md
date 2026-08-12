@@ -14,7 +14,6 @@ main_goal: >-
 
 decisions:
   - Spring Boot single "fat jar" deployment
-  - Constructor injection only
   - AngularJS single-page app bundled in the same artifact
   - MQTT (via ActiveMQ) for near real-time tracking
 
@@ -22,7 +21,6 @@ technologies:
   - Java
   - Spring Boot
   - AngularJS
-  - MQTT
 
 scale: Single maintainer · personal project · in production since 2014
 

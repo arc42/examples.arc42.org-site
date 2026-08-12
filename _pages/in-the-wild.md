@@ -24,24 +24,9 @@ search_body: false
 {%- assign runs = site.data['in-the-wild-runs'] -%}
 
 <div class="ex-shell ex-shell--wild">
-  {%- comment -%}
-    Two blocks, because they are two different kinds of statement and a reader
-    who skips one should not lose the other.
-
-    First the disclaimer, and this is the only place it appears: thirty
-    repetitions of "not reviewed" is noise. It is the page's whole premise, so
-    it is set as body prose at full weight.
-
-    Then how to read the page, set smaller and quieter because it is an
-    instruction rather than a claim. The runs are named in it on purpose: an
-    order a reader cannot see is not an order, and this jump link is the only
-    navigation the page has below eight entries, where the index does not
-    render. Built from `runs.last` rather than a hard-coded name, because the
-    deepest run is the last by construction and the sentence must not go stale
-    when a run is added.
-  {%- endcomment -%}
+  
   <div class="ex-prose">
-    <p>These are {{ entries.size }} arc42 documentations we cannot host, usually
+    <p>These are arc42 documentations we cannot host, usually
     because their licence does not allow it.
     We link them because we consider them useful or interesting.
     We have <strong>not</strong> checked their structure and content.

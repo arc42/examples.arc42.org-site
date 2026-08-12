@@ -172,8 +172,8 @@ says a word. Nothing else on the site depends on the word, but a rename back to
 something inert would cost that.
 
 **It has no tiles, and that is the design.** A dashboard tile is not a card, it
-is the summary of a completed audit: `domain`, `main_goal`, four `decisions`,
-six `technologies`, `scale`. Every one of those fields can only be filled in by
+is the summary of a completed audit: `domain`, `main_goal`, three `decisions`,
+three `technologies`, `scale`. Every one of those fields can only be filled in by
 someone who has read all twelve sections. For a link nobody here has audited, a
 tile would be either half-empty or fabricated — so the data file deliberately
 has no field to put in one.
@@ -242,8 +242,13 @@ a shared one.
 - **`.ex-tile`** — dashboard tile. Neutral paper, hairline border, flat at rest,
   hover-lift (the one sanctioned dynamic shadow). Stretched link: one real `<a>`
   expanded by a pseudo-element, so exactly one link per tile reaches the tab
-  order and the accessibility tree. **One pill row only** (2026-08-11):
-  `technologies`, at most four, one token each. `decisions` is a plain list.
+  order and the accessibility tree. **No pills at all** (2026-08-11):
+  `decisions` is a plain list of at most three clauses, and `technologies` —
+  the last chip row to survive on the dashboard — no longer renders on the tile
+  at all. A tile already carries domain, title, tagline, goal, decisions and
+  scale; the chips were a fourth texture, the loudest one, repeating what the
+  decisions had usually just said in words. They render in full on the system's
+  own page, and stay in `data-haystack`, so the filter still matches them.
 - **`.ex-chip`** — keyword label. Deliberately *not* `arc42-tag`: the family
   spec for that is "site-hue wash, always links", and these are neither. **A
   value earns a pill only if it can recur.** The dashboard carried 58 of them
@@ -251,7 +256,9 @@ a shared one.
   bulleted list with a border drawn round every bullet: all 24 `decisions`
   values are clauses averaging 6.4 words, and each rendered on a line of its
   own at 1440px as well as on a phone. Decisions lost the pill and kept the
-  content; technologies kept the pill and lost two of their six.
+  content; technologies kept the pill and then lost the dashboard, where they
+  now appear only in the filter's haystack. The chip survives on the system
+  page and on `.ex-wild`, both of which show one short list and not six.
 - **`.ex-wild`** — the external reading list. Defined as much by what it
   omits as by what it has: no border, no fill, no radius, no hover-lift, no
   stretched link, no catalogue number, and **exactly one chip** — `kind`, from a
