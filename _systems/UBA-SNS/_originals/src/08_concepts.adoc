@@ -1,0 +1,14 @@
+ifndef::imagesdir[:imagesdir: ../images]
+
+[[section-concepts]]
+== Querschnittliche Konzepte
+
+Dieser Abschnitt beschreibt querschnittliche Regelungen und Prinzipien, die mehr als einen Baustein betreffen und für
+das Gesamtsystem relevant sind.
+
+include::08_concepts_services.adoc[]
+include::08_concepts_iqvoc.adoc[]
+include::08_concepts_styleguide.adoc[]
+include::08_concepts_semantic-web-basics.adoc[]
+include::08_concepts_provider-requirements.adoc[]
+
