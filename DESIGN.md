@@ -397,13 +397,35 @@ a shared one.
   plain text under the byline. Eighteen pills across five entries were the most
   clickable-looking things on a page where only the title is a link, and at one
   weight they gave a reader nothing to rank. See the section above.
+- **`.ex-review`** — an arc42 review note (2026-08-14): a subjective remark by
+  a named arc42 maintainer, pinned into a section's prose at the passage it
+  discusses, the way a comment lands in an architecture-documentation review.
+  The corpus imports documentation **as-is**, so the one voice on a section
+  page that is ours must never be mistakable for the content it interrupts —
+  the note wears the pinned-annotation treatment (`--wash-calm`, hairline,
+  offset shadow), two devices apart from the blockquote-with-rule the imported
+  originals use for their own asides, and opens with a head row: the **review
+  pin** glyph (`_includes/review-pin.html`, the ball-head pin the shadow
+  metaphor implies, `aria-hidden`), the uppercase kind label, and the
+  reviewer's name. The label carries the meaning; the glyph is decorative —
+  a visual mark is never the only signal. Authored inline in the converted
+  section `.md` via `{% include review-note.html %}` (capture + `content=`),
+  while `_originals/` stays the untouched as-is proof. The framing — these are
+  our subjective opinions, the original is unchanged — appears **once per
+  system** on the overview (`reviewed: true` in index.md renders a second
+  pinned annotation carrying the same glyph), per the in-the-wild precedent
+  that a disclaimer repeated per instance is noise. `check-review.sh` in
+  `make check` holds flag and notes in step both ways and every note signed.
+  Styles: `_sass/_review.scss`, ratios recorded at the declarations.
 - **`.ex-spine`**, **`.ex-rail`**, **`.ex-stepper`**, **`.ex-sectiongrid`**,
   **`.ex-facts`**, **`.ex-pinned`**.
 
 The **pinned-note shadow** (`3px 3px 0 0 var(--ground-deep)`, zero blur, zero
-spread) has exactly one job here: the source-and-licence note on a system
-overview. That is an annotation pinned onto the page, which is what the family
-reserves it for.
+spread) has exactly one genre here: annotations pinned onto the page, which is
+what the family reserves it for. Until 2026-08-14 that meant one element, the
+source-and-licence note on a system overview; it now also marks the arc42
+review notes and their overview disclaimer — the same genre, our voice pinned
+onto somebody else's document, never headings and never cards at rest.
 
 ## Surfaces
 

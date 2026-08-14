@@ -1,0 +1,86 @@
+// ============================================================================
+// arc42 review notes — our subjective commentary, pinned onto as-is content.
+//
+// The component's whole job is separation of voices: everything around it in
+// .ex-prose is the original author's writing, reproduced unchanged, and this
+// block is the arc42 maintainers interrupting. It therefore wears the
+// family's annotation treatment — the pinned-note surface and its sanctioned
+// static shadow (DESIGN.md, "Site-local components") — because a review note
+// IS an annotation pinned onto the page, the same genre as the overview's
+// source-and-licence note. Nothing in imported content looks like this: the
+// originals' own asides render as blockquotes with the grey left rule, two
+// devices apart from a wash card with an offset shadow.
+//
+// Measured pairs, all on --wash-calm (ratios recorded at _tokens.scss):
+//   --ink   11.64:1   (note body, author name)
+//   --muted  4.77:1   (the "arc42 review note" kind label)
+// The pin glyph is --ground-deep and decorative (aria-hidden): the kind label
+// beside it carries the meaning, so a visual mark is never the only signal.
+// ============================================================================
+
+.ex-review {
+  margin: var(--s6) 0;
+  padding: var(--s4) var(--s5) var(--s5);
+  background: var(--wash-calm);
+  border: 1px solid var(--wash-border);
+  border-radius: var(--radius);
+  box-shadow: 3px 3px 0 0 var(--ground-deep);
+
+  &__head {
+    display: flex;
+    align-items: center;
+    gap: var(--s2);
+    margin: 0 0 var(--s3);
+  }
+
+  .ex-pin {
+    flex: 0 0 auto;
+    color: var(--ground-deep);
+  }
+
+  &__kind {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);         // 4.77:1 on --wash-calm
+  }
+
+  &__sep { color: var(--muted); }
+
+  &__author {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--ink);           // 11.64:1 on --wash-calm
+  }
+
+  // One step below the surrounding prose, like the pinned note's own text —
+  // a remark, not a section of the document.
+  &__body {
+    font-size: 0.9375rem;
+    color: var(--ink);           // 11.64:1 on --wash-calm
+
+    > :first-child { margin-top: 0; }
+    > :last-child { margin-bottom: 0; }
+  }
+}
+
+// The disclaimer on a system overview (rendered when index.md sets
+// `reviewed: true`) is the same genre as the source-and-licence note and
+// reuses .ex-pinned wholesale; this modifier only seats the shared pin glyph
+// in its title, at the same --ground-deep the heading ink already uses.
+.ex-pinned--review {
+  .ex-pin {
+    color: var(--ground-deep);
+    margin-right: var(--s1);
+    vertical-align: -0.1em;
+  }
+}
+
+// Two pinned annotations may now stack on an overview (review disclaimer,
+// then source-and-licence). --s8 is the gap between the page and its
+// annotations; between two annotations it would read as two separate ends of
+// the page, so the second sits close enough to read as the same margin.
+.ex-pinned + .ex-pinned {
+  margin-top: var(--s5);
+}

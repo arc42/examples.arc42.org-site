@@ -73,6 +73,13 @@ scale: ~50 kLOC · 6 developers · in production since 2019
 # an example can be slotted in later without renumbering every other one.
 order: 999
 
+# Set `reviewed: true` when (and only when) this system's sections carry
+# arc42 review notes ({% include review-note.html %}): it renders the
+# once-per-system disclaimer on the overview page saying the notes are our
+# subjective commentary. scripts/check-review.sh fails the build if the flag
+# and the notes disagree in either direction.
+# reviewed: true
+
 # ---------------------------------------------------------------------------
 # Provenance. NOT OPTIONAL — these are other people's systems and other
 # people's writing, and the site says so on every overview page.

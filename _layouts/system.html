@@ -96,6 +96,31 @@ layout: default
   {%- endif -%}
 
   {%- comment -%}
+    The review disclaimer, rendered only when index.md sets `reviewed: true` —
+    i.e. only when this system's sections actually carry arc42 review notes
+    (scripts/check-review.sh holds flag and usage in step). It says ONCE what
+    every note is: subjective commentary by us, not the author's words, with
+    the original reproduced unchanged. Once per system, not per note — the
+    in-the-wild page set that precedent: thirty repetitions of a disclaimer
+    is noise. The pin glyph here is the same include the notes render, and
+    that sameness is what ties a note deep in section 7 back to this
+    paragraph.
+  {%- endcomment -%}
+  {%- if page.reviewed -%}
+  <aside class="ex-pinned ex-pinned--review" aria-labelledby="ex-reviewnotes">
+    <h2 class="ex-pinned__title" id="ex-reviewnotes">{% include review-pin.html %} arc42 review notes</h2>
+    <p class="ex-pinned__note">
+      Some sections of this documentation carry <strong>review notes</strong> —
+      remarks by the arc42 maintainers, written the way we would comment in an
+      architecture-documentation review. Every note is marked with the pin
+      symbol above and signed with the reviewer's name, and every note is our
+      subjective opinion, not the author's words. The original content is
+      reproduced unchanged.
+    </p>
+  </aside>
+  {%- endif -%}
+
+  {%- comment -%}
     Attribution is not optional and not a footnote. These are other people's
     systems and other people's writing; the pinned note is the family's
     annotation treatment (DESIGN.md §2.3) and this is exactly an annotation

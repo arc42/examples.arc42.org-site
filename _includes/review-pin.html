@@ -1,0 +1,15 @@
+{%- comment -%}
+  The review pin — the one graphical symbol shared by every review note and by
+  the disclaimer on the system overview. The sameness is the point: the symbol
+  is what ties a note in section 7 back to the sentence on the overview that
+  says what these notes are. Draw it nowhere else and draw nothing else here.
+
+  A ball-head pin at 45°, i.e. the pinned-note shadow's metaphor made literal.
+  Decorative: the visible text label beside it carries the meaning (a purely
+  visual distinction must never be the only signal), so it is aria-hidden and
+  WCAG 1.4.11 does not apply. currentColor, so the context sets the ink.
+{%- endcomment -%}
+<svg class="ex-pin" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true" focusable="false">
+  <circle cx="10.75" cy="5.25" r="3.5" fill="currentColor"/>
+  <path d="M7.75 8.25 2.75 13.25" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,26 @@
+{%- comment -%}
+  An arc42 review note — a subjective remark by an arc42 maintainer, pinned
+  onto an example at the passage it discusses. The original content around it
+  is reproduced as-is; this block is the one voice on the page that is ours,
+  which is why it must never look like the content it interrupts.
+
+  Usage, inside a section .md file:
+
+    {% capture note %}
+    Markdown here. Multiple paragraphs are fine.
+    {% endcapture %}
+    {% include review-note.html author="Gernot Starke" content=note %}
+
+  `author` is required — every note is signed. A system that carries notes
+  must set `reviewed: true` in its index.md, which renders the disclaimer on
+  the overview page; scripts/check-review.sh holds the two in step.
+{%- endcomment -%}
+<aside class="ex-review" role="note" aria-label="arc42 review note by {{ include.author }}">
+  <p class="ex-review__head">
+    {%- include review-pin.html -%}
+    <span class="ex-review__kind">arc42 review note</span>
+    <span class="ex-review__sep" aria-hidden="true">&middot;</span>
+    <span class="ex-review__author">{{ include.author }}</span>
+  </p>
+  <div class="ex-review__body">{{ include.content | markdownify }}</div>
+</aside>
