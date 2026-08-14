@@ -75,6 +75,17 @@ layout: default
     The section jump grid. Twelve cells, arc42's own shape — and the reason
     the landing page needs no left rail: this IS the rail, laid flat.
   {%- endcomment -%}
+  {%- comment -%}
+    A system with no section files is an ANNOUNCED example — `upcoming: true`
+    in its front matter (see _includes/system-tile.html). The twelve-cell grid
+    was rendered unconditionally until 2026-08-14, which on such a page put an
+    empty <ol> under the heading "The documentation": a heading promising
+    twelve links, followed by nothing, and no sentence anywhere saying why.
+    The guard is on `sys_sections.size` rather than on `upcoming` so that a
+    half-scaffolded directory degrades the same way instead of shipping a
+    silent hole.
+  {%- endcomment -%}
+  {%- if sys_sections.size > 0 -%}
   <h2 class="ex-h2" id="sections">The documentation</h2>
   <ol class="ex-sectiongrid">
     {%- for s in sys_sections -%}
@@ -87,12 +98,20 @@ layout: default
     {%- endfor -%}
   </ol>
 
-  {%- if sys_sections.size > 0 -%}
   <p class="ex-startreading">
     <a class="ex-button" href="{{ sys_sections.first.url | relative_url }}">
       Start reading &rarr;
     </a>
   </p>
+  {%- else -%}
+  <h2 class="ex-h2" id="sections">The documentation</h2>
+  <div class="ex-note">
+    <p><strong>Not published yet.</strong> This example is announced, not
+    written: none of the twelve arc42 sections are here.
+    {%- if page.source_url %} Watch
+    <a href="{{ page.source_url }}">{{ page.source_url | remove: 'https://' | remove: 'http://' | remove_last: '/' }}</a>
+    for the release{% endif %}, and this page will fill in behind it.</p>
+  </div>
   {%- endif -%}
 
   {%- comment -%}

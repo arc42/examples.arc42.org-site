@@ -249,6 +249,92 @@
   &__scale + &__byline {
     margin-top: 0;
   }
+
+  // ---- The "coming soon" stamp ---------------------------------------------
+  // Rendered only inside .ex-tile--upcoming (guard in
+  // _includes/system-tile.html). A band across the tile, rotated, in the
+  // ground graphite with white on it: 12.44:1, the strongest pairing the
+  // palette has, because this is the one thing on the tile that must survive
+  // being read at a glance and at an angle.
+  //
+  // NO NEW HUE. The obvious colour for "not ready" is amber, and amber is
+  // spoken for — DESIGN.md gives it to the pinned-annotation voice, and a
+  // second meaning on the same pigment is how a palette stops meaning
+  // anything. The ground is already the site's "this is chrome, not content"
+  // signal (masthead, footer), which is exactly what a stamp is.
+  //
+  // It DOES cover a line of the goal sentence, and that is the point of a
+  // stamp rather than a caption: the tile is not offering that sentence to be
+  // read yet. The full goal is on the system's own page, one click away, and
+  // the text under the band is still in the accessibility tree in full.
+  //
+  // `rotate`/`translate` as their own properties, not a `transform` shorthand:
+  // the tile animates `transform` on hover, and a transform here would be
+  // overwritten by the lift the moment a pointer touched the tile.
+  &__stamp {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    rotate: -8deg;
+
+    // Wider than the tile so the band runs off both edges once rotated; the
+    // modifier's overflow: hidden trims it back to the rounded corners.
+    width: 150%;
+    margin: 0;
+    padding: var(--s2) 0;
+    text-align: center;
+
+    background: var(--ground);
+    color: var(--tint);             // 12.44:1 on --ground
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+
+    // The stretched link's ::after covers the whole tile; the band sits above
+    // it visually and lets every click through, so the tile stays one target.
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+// ---- Upcoming ----------------------------------------------------------------
+// An example that is announced before it is written. The tile is real and
+// clickable — its page says what is coming and links to the project — but it
+// is quieted so a reader scanning the grid can tell in one pass which tiles
+// have something to read behind them.
+//
+// QUIETED BY GROUND STEP, NOT BY `opacity` (2026-08-14). The instinct is
+// `opacity: .6` on the whole tile, and it fails the site's own contrast floor:
+// --ink at 60% over --paper lands near 4.3:1 and the --muted eyebrow near
+// 2.9:1, so the two rows a reader most needs — what it is, and who is building
+// it — would be the two that stop passing. Stepping the tile's FILL toward the
+// field instead keeps every foreground token exactly as computed elsewhere in
+// this file: --ink 12.3:1 and --muted 5.1:1 on the mixed fill, both still AA.
+// The tile reads as recessed because it is recessed, not because its text is
+// half erased.
+.ex-tile--upcoming {
+  // Between --paper and the --wash-calm field it sits on: quieter than a real
+  // tile, still clearly a sheet rather than a hole in the field.
+  background: color-mix(in oklab, var(--paper), var(--wash-calm) 60%);
+
+  // Dashed, not thinner or lighter: the border is component-identifying and
+  // owes 3:1 (see .ex-tile's border comment), so it cannot be faded. Changing
+  // its STYLE says "outline, not yet filled in" and costs no contrast at all.
+  border-style: dashed;
+
+  // Trims the rotated band to the tile's rounded corners.
+  overflow: hidden;
+
+  // The catalogue number is a position in the corpus. An example that is not
+  // written yet has a place in the order but nothing catalogued, and the
+  // numeral competes with the band for the same corner of the eye.
+  .ex-tile__mark { display: none; }
+
+  // The goal keeps its serif and its ink; only the space it gets changes, so
+  // the band has room to cross without landing on the title.
+  .ex-tile__goal { min-height: 4.5rem; }
 }
 
 // The CHIPS lived here until 2026-08-12. They left the tile on 2026-08-11

@@ -23,6 +23,14 @@
 #    needs an escape or a slash is describing the system, which is `domain`'s
 #    job, not this field's.
 #
+# 4. AN UPCOMING SYSTEM OWES NEITHER. `upcoming: true` announces an example
+#    before it is written (_includes/system-tile.html). `decisions` and
+#    `keywords` both describe a documentation nobody has read — because there
+#    is none — so requiring them here would only produce invented ones, which
+#    is worse than a quieter tile. Rules 1 and 3 still apply the moment either
+#    field appears, and the four tile fields are owed either way. Supplying
+#    one of the two but not the other is a half-migration, so it is reported.
+#
 # Parsed with awk rather than a YAML library so it has no dependency beyond a
 # POSIX shell, matching scripts/check-wild-fields.sh.
 #
@@ -65,6 +73,11 @@ check_one() {
     /^main_goal:/ { has_goal = 1 }
     /^scale:/     { has_scale = 1 }
 
+    # An ANNOUNCED example (see rule 4 in the header). The four tile fields
+    # above are still owed — an upcoming tile that says nothing about what is
+    # coming is just a gap in the grid.
+    /^upcoming:[[:space:]]*true[[:space:]]*$/ { upcoming = 1 }
+
     # Flow style, kept legal the way check-wild-fields.sh keeps it legal.
     /^(decisions|keywords):[[:space:]]*\[/ {
       key = $0; sub(/:.*$/, "", key)
@@ -100,16 +113,23 @@ check_one() {
       if (!has_domain) print name "|no domain:. The tile eyebrow and the dashboard filter read it"
       if (!has_goal)   print name "|no main_goal:. The tile prints it in place of the tagline"
       if (!has_scale)  print name "|no scale:. The tile closes with it"
-      if (!has["decisions"])
-        print name "|no decisions:. The tile renders them as its list"
-      else if (count["decisions"] == 0)
-        print name "|decisions: is present but empty"
-      else if (count["decisions"] > 3)
-        print name "|" count["decisions"] " decisions: the tile renders three and drops the rest silently"
-      if (!has["keywords"])
-        print name "|no keywords:. Say what the documentation demonstrates (adr, runtime-view, ...)"
-      else if (count["keywords"] == 0)
-        print name "|keywords: is present but empty"
+      # Announced, not written: both fields describe a documentation that does
+      # not exist yet, so neither is owed. Note the plain "..." below — a
+      # comment inside this awk program may not contain an apostrophe, which
+      # would close the shell quote wrapping the whole script.
+      announced = (upcoming && !has["decisions"] && !has["keywords"])
+      if (!announced) {
+        if (!has["decisions"])
+          print name "|no decisions:. The tile renders them as its list"
+        else if (count["decisions"] == 0)
+          print name "|decisions: is present but empty"
+        else if (count["decisions"] > 3)
+          print name "|" count["decisions"] " decisions: the tile renders three and drops the rest silently"
+        if (!has["keywords"])
+          print name "|no keywords:. Say what the documentation demonstrates (adr, runtime-view, ...)"
+        else if (count["keywords"] == 0)
+          print name "|keywords: is present but empty"
+      }
     }
   ' "$file"
 }

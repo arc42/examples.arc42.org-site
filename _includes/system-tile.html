@@ -31,7 +31,25 @@
   search.json's landing records instead, so ⌘K matches everything the filter
   matched, plus the body text the filter never saw.
 {%- endcomment -%}
-<li class="ex-tile"
+{%- comment -%}
+  UPCOMING TILES (2026-08-14). A system whose index.md carries `upcoming: true`
+  is announced before it is written: the tile is quieted and stamped, and its
+  page says what is coming instead of listing twelve sections that do not
+  exist yet.
+
+  It is a real tile in the real grid, not a placeholder card appended after
+  the others, because `order` already decides where an example sits and a
+  separate rail for "soon" would be a second dashboard — the mistake
+  /in-the-wild/ exists to avoid making twice.
+
+  The stamp is REAL TEXT in the flow of the tile, not a ::before with
+  `content: "Coming soon"`. Generated content is not reliably announced, and
+  "coming soon" is the single most important thing about this tile: a reader
+  who cannot see the diagonal band must still be told, before the goal
+  sentence, that there is nothing to read yet. It sits directly after the
+  title so it reads as "RGCAT — coming soon".
+{%- endcomment -%}
+<li class="ex-tile{% if sys.upcoming %} ex-tile--upcoming{% endif %}"
     data-domain="{{ sys.domain | default: 'Uncategorised' | slugify }}">
 
   {%- comment -%}
@@ -59,6 +77,10 @@
   <h2 class="ex-tile__title">
     <a class="ex-tile__link" href="{{ sys.url | relative_url }}">{{ sys.title }}</a>
   </h2>
+
+  {%- if sys.upcoming -%}
+  <p class="ex-tile__stamp">Coming soon</p>
+  {%- endif -%}
 
   {%- comment -%}
     The tagline is NOT rendered here (2026-08-12) — see the argument at
