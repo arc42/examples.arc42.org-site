@@ -31,12 +31,54 @@ An example is a photograph of an architecture at a moment, kept for what it
 teaches, and every overview page records who wrote it, under which licence, and
 where the original lives.</p>
 
-<h2>Colour</h2>
+<h2>Review Comments</h2>
 
-<p>Each site in the arc42 family is recognized by one colour. This one is not:
-it is recognized by the six-segment <em>spine</em> under the masthead, in the
-shared family colours. A site collecting examples from every domain has no one
-colour to claim, and the arc42 hue registry had none left to give.</p>
+<p>Some examples carry <strong>arc42 review notes</strong>: remarks by the
+arc42 maintainers, written the way we would comment in an
+architecture-documentation review — saying what a documentation does well,
+and what we would do differently. A note is an amber-marked card pinned into
+the text at the passage it discusses, signed with the reviewer's name. The
+overview page of a reviewed system announces the notes with a disclaimer and
+lists every finding — see
+<a href="/systems/htmlsc/">HtmlSanityCheck</a> for a live one. The rules are
+strict and recorded in
+<a href="https://github.com/arc42/meta.arc42.org/blob/main/adr/0009-review-notes-on-hosted-content.md">ADR-0009</a>:
+the original content is never altered, every note is signed, and every note
+is our subjective opinion, not the author's words.</p>
+
+<p>Adding a note is a maintainer's act, in three steps:</p>
+
+<ol>
+  <li>
+    <p><strong>Write the finding</strong> in the system's review report,
+    <code>_data/reviews/&lt;slug&gt;.yml</code> — one file holds the whole
+    review of one system, one entry per note:</p>
+<pre><code>- id: quality-goal-priorities   # stable slug, becomes the note's anchor
+  section: 1                    # the arc42 section the note appears in
+  title: Priority inflation in the quality goals
+  author: Gernot Starke
+  body: |
+    The remark, in markdown. Multiple paragraphs are fine.</code></pre>
+  </li>
+  <li>
+    <p><strong>Drop the marker</strong> in the section file, directly after
+    the passage the note discusses — the only line a review ever adds to a
+    content file:</p>
+<pre><code>{% raw %}{% include review-note.html id="quality-goal-priorities" %}{% endraw %}</code></pre>
+  </li>
+  <li>
+    <p><strong>Run <code>make check</code>.</strong> It verifies that every
+    marker has exactly one report entry and vice versa, and that every note
+    is complete and signed. The disclaimer and the findings list on the
+    overview appear automatically once the report exists — there is nothing
+    else to edit, and no flag to keep in step.</p>
+  </li>
+</ol>
+
+<p>The same workflow is written for repository work in
+<a href="https://github.com/arc42/examples.arc42.org-site/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>,
+and the repository ships a <code>review-note</code> skill so that
+agent-assisted sessions follow the same rules.</p>
 
 <h2>The herbarium</h2>
 
