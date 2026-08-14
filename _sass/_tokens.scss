@@ -105,6 +105,10 @@
   // That makes examples.arc42.org the family's strongest Visible-Token Rule
   // proof point — the one place where every shared token is on screen at once.
   --arc42-amber:      #ffc95c;  // spine segment 3 · focus ring on the band
+                                //   · the review-note accent (_sass/_review.scss):
+                                //     pin-head fill and top strip, decorative —
+                                //     1.5:1 on --paper, 1.3:1 on --wash-calm,
+                                //     9.4:1 against its --ground-deep ring
   --arc42-amber-ink:  #4a3a0a;
   --arc42-coral:      #ff5c7c;  // spine segment 5. NEVER white/body text on it
   --arc42-coral-deep: #c22b47;  // spine segment 2 · errors, if a form ever ships

@@ -412,8 +412,17 @@ a shared one.
   with a head row: the **review
   pin** glyph (`_includes/review-pin.html`, the ball-head pin the shadow
   metaphor implies, `aria-hidden`), the uppercase kind label, and the
-  reviewer's name. The label carries the meaning; the glyph is decorative —
-  a visual mark is never the only signal. Authored inline in the converted
+  reviewer's name. The note also carries the site's one content-page dose of
+  colour (2026-08-14): the pin's ball-head and a 4px strip along the card's
+  top edge are `--arc42-amber` — the family's sticky-note colour, which is
+  what the pinned-annotation metaphor says this card is. That is amber's
+  registered second surface job (declared with measurements at
+  `_sass/_tokens.scss`); the disclaimer wears the same strip, the
+  source-and-licence note pointedly does not — the accent belongs to the
+  review voice, not to pinned annotations in general. All of it decorative:
+  amber is 1.3:1 on the wash, so the hairline, shadow and labelled head row
+  carry the boundary, and the label carries the meaning — a visual mark is
+  never the only signal. Authored inline in the converted
   section `.md` via `{% include review-note.html %}` (capture + `content=`),
   while `_originals/` stays the untouched as-is proof. The framing — these are
   our subjective opinions, the original is unchanged — appears **once per

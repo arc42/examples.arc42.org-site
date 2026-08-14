@@ -38,6 +38,16 @@
   padding: var(--s4) var(--s5) var(--s5);
   background: var(--wash-calm);
   border: 1px solid var(--wash-border);
+  // THE AMBER STRIP (2026-08-14). The note's one dose of colour, along the
+  // top edge like the adhesive band of a sticky note — which is what the
+  // pinned-annotation metaphor says this card is. --arc42-amber is the
+  // family's sticky-note colour and takes its registered second surface job
+  // here (_sass/_tokens.scss); the pin glyph's ball-head is the same token,
+  // so strip, pin and disclaimer all say "review" in one voice. Decorative,
+  // and it must stay so: amber measures 1.3:1 on --wash-calm and 1.5:1 on
+  // --paper, so the hairline, the offset shadow and the labelled head row
+  // carry the boundary and the meaning — the strip only warms them.
+  border-top: 4px solid var(--arc42-amber);
   border-radius: var(--radius);
   box-shadow: 3px 3px 0 0 var(--ground-deep);
 
@@ -89,10 +99,17 @@
 // reuses .ex-pinned wholesale; this modifier only seats the shared pin glyph
 // in its title, at the same --ground-deep the heading ink already uses.
 .ex-pinned--review {
+  // The same amber strip the notes wear (see .ex-review above): the
+  // disclaimer is the sentence the strip and the pin point back to, so it
+  // speaks in the same accent. The overview's OTHER pinned note — source
+  // and licence — stays unstriped; the accent belongs to the review voice,
+  // not to pinned annotations in general.
+  border-top: 4px solid var(--arc42-amber);
+
   .ex-pin {
     color: var(--ground-deep);
     margin-right: var(--s1);
-    vertical-align: -0.1em;
+    vertical-align: -0.2em;
   }
 }
 
