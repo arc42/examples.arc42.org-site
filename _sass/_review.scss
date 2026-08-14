@@ -50,6 +50,10 @@
   border-top: 4px solid var(--arc42-amber);
   border-radius: var(--radius);
   box-shadow: 3px 3px 0 0 var(--ground-deep);
+  // Deep links from the overview's findings list land on this anchor, which
+  // must clear the sticky masthead the same way prose headings do
+  // (_sass/_content.scss).
+  scroll-margin-top: calc(var(--bar-h) + var(--spine-h) + var(--s4));
 
   @media (min-width: 1250px) {
     margin-right: calc(-1 * var(--s7));
@@ -79,6 +83,16 @@
 
   &__author {
     font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--ink);           // 11.64:1 on --wash-calm
+  }
+
+  // The finding's headline (ADR-0009): the line the overview's findings
+  // list repeats, so a reader arriving through that list lands on the words
+  // they clicked. Deep links land here, and the anchor must clear the
+  // sticky masthead the same way prose headings do (_sass/_content.scss).
+  &__title {
+    margin: 0 0 var(--s2);
     font-weight: 700;
     color: var(--ink);           // 11.64:1 on --wash-calm
   }
@@ -119,4 +133,41 @@
 // the page, so the second sits close enough to read as the same margin.
 .ex-pinned + .ex-pinned {
   margin-top: var(--s5);
+}
+
+// The findings list on the disclaimer (ADR-0009): one line per note —
+// location, headline, reviewer — linked to the note's anchor. Locations and
+// headlines only; the full text renders solely at the passage. Measured on
+// --wash-calm: --ink 11.64:1 (the link), --muted 4.77:1 (the reviewer,
+// meta beside a link that carries the row).
+.ex-review-index {
+  list-style: none;
+  margin: var(--s4) 0 0;
+  padding: 0;
+  font-size: 0.9375rem;
+
+  li {
+    padding: var(--s2) 0;
+
+    + li { border-top: 1px solid var(--hairline); }
+  }
+
+  a { color: var(--ink); }       // 11.64:1 on --wash-calm
+
+  &__loc {
+    font-variant-numeric: tabular-nums;
+
+    &::after {
+      content: " · ";
+      color: var(--muted);
+    }
+  }
+
+  &__title { font-weight: 700; }
+
+  &__author {
+    margin-left: var(--s2);
+    color: var(--muted);         // 4.77:1 on --wash-calm
+    font-size: 0.875rem;
+  }
 }

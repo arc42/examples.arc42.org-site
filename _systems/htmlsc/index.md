@@ -32,10 +32,6 @@ scale: Small open-source tool · single maintainer · on GitHub since 2014
 
 order: 10
 
-# This documentation carries arc42 review notes (see _includes/review-note.html);
-# the flag renders the disclaimer on this overview page.
-reviewed: true
-
 # Provenance. Confirmed by Gernot Starke, 2026-08-07: he is the author of
 # this documentation and it is CC BY-SA 4.0. That covers the PROSE reproduced
 # here, which is the thing this block is about — HtmlSanityCheck the software

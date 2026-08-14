@@ -110,16 +110,7 @@ HtmlSC shall provide the following checks in HTML files:
 | 3        | Performance  |Check of 100kB html file performed under 10 secs (excluding Gradle startup)|
 | | | |
 
-{% capture note %}
-Prioritised quality goals, each with a concrete scenario, is exactly what
-section 1.2 asks for — many real-world documentations stop at a bare list of
-quality words. Two remarks: three of the six rows share priority 1, which
-blunts the prioritisation (if everything is top priority, nothing is), and
-the goal named *Safety* is really a statement about not altering the checked
-files — naming it per a quality model such as ISO 25010 (*integrity*) would
-make the table comparable across systems.
-{% endcapture %}
-{% include review-note.html author="Gernot Starke" content=note %}
+{% include review-note.html id="quality-goal-priorities" %}
 
 [^doubt]: Especially when checking external links, the correctness of links depends on external factors, like network availability, latency or server configuration, where HtmlSC cannot always identify the root cause of potential problems.
 

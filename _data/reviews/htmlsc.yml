@@ -1,0 +1,34 @@
+# ============================================================================
+# The arc42 review of HtmlSanityCheck — every review note on this system, in
+# one file (ADR-0009, meta.arc42.org). This file is the MAINTAINERS' voice;
+# the system's own directory stays the author's work, which is why the review
+# deliberately lives outside it. A note renders where its marker sits:
+#
+#   {% include review-note.html id="<id>" %}
+#
+# placed in the section file at the passage the note discusses. Every entry
+# here needs exactly one marker and vice versa — scripts/check-review.sh
+# holds the bijection, and the overview page derives its disclaimer and
+# findings list from this file's existence. No flag to keep in step.
+#
+# Fields, all required:
+#   id       stable lowercase-kebab slug; becomes the anchor #review-<id>
+#   section  arc42 section number (the `order` of the page the marker is in)
+#   title    the finding's headline, as in a review report — shown in the
+#            note card and in the overview's findings list
+#   author   the reviewer's name; every note is signed (ADR-0009)
+#   body     the remark, markdown, block scalar (|) for multiple paragraphs
+# ============================================================================
+
+- id: quality-goal-priorities
+  section: 1
+  title: Priority inflation in the quality goals
+  author: Gernot Starke
+  body: |
+    Prioritised quality goals, each with a concrete scenario, is exactly what
+    section 1.2 asks for — many real-world documentations stop at a bare list
+    of quality words. Two remarks: three of the six rows share priority 1,
+    which blunts the prioritisation (if everything is top priority, nothing
+    is), and the goal named *Safety* is really a statement about not altering
+    the checked files — naming it per a quality model such as ISO 25010
+    (*integrity*) would make the table comparable across systems.

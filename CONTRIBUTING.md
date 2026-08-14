@@ -86,3 +86,46 @@ underscore in any directory or file you want published — Jekyll skips those.
 - [ ] Source material in `_originals/` (underscore intact)
 - [ ] `make check` and `make check-links` pass
 - [ ] No file outside `_systems/<slug>/` changed
+
+## Review notes (maintainers only)
+
+Some systems carry **arc42 review notes**: signed, subjective remarks by the
+arc42 maintainers, pinned onto the documentation at the passage they discuss
+— the way a comment lands in an architecture-documentation review. The
+contract is [ADR-0009](https://github.com/arc42/meta.arc42.org/blob/main/adr/0009-review-notes-on-hosted-content.md):
+the original is never altered, every note is signed, and the subjectivity is
+disclosed once per system on its overview page.
+
+These are **not part of contributing an example** — contributed directories
+are reproduced as-is, and notes written by a documentation's own author would
+be blurbs, the same reason `note:` is reserved on `/in-the-wild/`.
+
+The workflow, when you review a system and want to comment on a passage:
+
+1. **Write the finding** in the system's review report,
+   `_data/reviews/<slug>.yml` (create the file from the header comment in
+   `_data/reviews/htmlsc.yml` if it is the system's first note):
+
+   ```yaml
+   - id: quality-goal-priorities        # stable slug → anchor #review-<id>
+     section: 1                         # the section the marker sits in
+     title: Priority inflation in the quality goals
+     author: Gernot Starke
+     body: |
+       The remark, in markdown. Multiple paragraphs are fine.
+   ```
+
+2. **Drop the marker** in the section file, directly after the passage the
+   note discusses:
+
+   ```liquid
+   {% include review-note.html id="quality-goal-priorities" %}
+   ```
+
+3. **`make check`.** `check-review.sh` verifies every marker has exactly one
+   entry and vice versa, and that every entry is complete and signed. The
+   overview's disclaimer and findings list appear automatically once the
+   report exists — there is no flag to set.
+
+That is the whole mechanism: one file holds the review, one line per note
+sits in the text, and everything else is derived.

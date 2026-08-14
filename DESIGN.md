@@ -422,14 +422,22 @@ a shared one.
   review voice, not to pinned annotations in general. All of it decorative:
   amber is 1.3:1 on the wash, so the hairline, shadow and labelled head row
   carry the boundary, and the label carries the meaning — a visual mark is
-  never the only signal. Authored inline in the converted
-  section `.md` via `{% include review-note.html %}` (capture + `content=`),
-  while `_originals/` stays the untouched as-is proof. The framing — these are
+  never the only signal. Authoring is **sidecar** (ADR-0009, 2026-08-14,
+  superseding the first day's inline-capture model): note texts live in one
+  review report per system, `_data/reviews/<slug>.yml` — deliberately
+  outside the author's directory, because the review is the maintainers'
+  voice, not part of the contributed work — and the section `.md` carries a
+  one-line marker, `{% include review-note.html id="…" %}`, at the commented
+  passage, while `_originals/` stays the untouched as-is proof. Each note has
+  a `title` (the finding's headline) and an anchor. The framing — these are
   our subjective opinions, the original is unchanged — appears **once per
-  system** on the overview (`reviewed: true` in index.md renders a second
-  pinned annotation carrying the same glyph), per the in-the-wild precedent
-  that a disclaimer repeated per instance is noise. `check-review.sh` in
-  `make check` holds flag and notes in step both ways and every note signed.
+  system** on the overview, per the in-the-wild precedent that a disclaimer
+  repeated per instance is noise; it is **derived from the report file's
+  existence**, not flagged, so a stale flag cannot exist. Beneath it, the
+  **findings list**: one line per note — location, headline, reviewer —
+  linked to the note's anchor; the full text renders solely at the passage,
+  never twice. `check-review.sh` in `make check` holds the marker⇔entry
+  bijection both ways, entry completeness, signatures, and orphaned reports.
   Styles: `_sass/_review.scss`, ratios recorded at the declarations.
 - **`.ex-spine`**, **`.ex-rail`**, **`.ex-stepper`**, **`.ex-sectiongrid`**,
   **`.ex-facts`**, **`.ex-pinned`**.

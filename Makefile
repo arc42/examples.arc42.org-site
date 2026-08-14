@@ -32,7 +32,7 @@ check-wild-fields: ## Every in-the-wild entry has a known kind and an intact fac
 check-system-fields: ## Every system's index.md has the tile fields, ≤3 decisions, and well-formed keywords
 	sh scripts/check-system-fields.sh
 
-check-review: ## Review notes and the reviewed: flag agree, and every note is signed
+check-review: ## Every review-note marker pairs with one _data/reviews entry, and every note is signed
 	sh scripts/check-review.sh
 
 check-links: site ## Validate internal links, images, and HTML in the built _site (html-proofer)
