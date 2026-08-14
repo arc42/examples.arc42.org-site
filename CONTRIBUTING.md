@@ -129,3 +129,10 @@ The workflow, when you review a system and want to comment on a passage:
 
 That is the whole mechanism: one file holds the review, one line per note
 sits in the text, and everything else is derived.
+
+**Agent-assisted:** the repository ships a `review-note` skill
+(`.claude/skills/review-note/`) for Claude Code. Ask in plain language
+("add a review note on biking's deployment view: …") or invoke
+`/review-note`; the agent performs the three steps above under the skill's
+rules and runs the check. The reviewer named as `author` still reviews the
+wording — the signature is a person's judgement, not the agent's.

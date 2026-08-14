@@ -76,9 +76,28 @@ is our subjective opinion, not the author's words.</p>
 </ol>
 
 <p>The same workflow is written for repository work in
-<a href="https://github.com/arc42/examples.arc42.org-site/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>,
-and the repository ships a <code>review-note</code> skill so that
-agent-assisted sessions follow the same rules.</p>
+<a href="https://github.com/arc42/examples.arc42.org-site/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>.</p>
+
+<h3>Or let an agent do the mechanics</h3>
+
+<p>The repository ships a <strong><code>review-note</code> skill</strong> for
+<a href="https://claude.com/claude-code">Claude Code</a>, in
+<code>.claude/skills/review-note/</code>. Open a session in the repository
+and say what you want in plain language —</p>
+
+<blockquote><p>add a review note on biking's deployment view, section 7:
+the single-artifact deployment is exemplary, but the diagram omits the
+MQTT broker</p></blockquote>
+
+<p>— or invoke it directly as <code>/review-note</code>. The skill loads the
+rules of this page into the session: the agent writes the report entry,
+places the marker at the passage, runs <code>make check</code>, and shows
+you the result. It also carries the judgement the check script cannot
+enforce — note prose belongs in the report file and never in the content,
+every note is signed with a real reviewer's name (yours: the agent drafts,
+you review the wording before it is committed), and the notes' visual
+design is settled and out of scope. Agents earn no exemption from the
+check; they just stop you from forgetting a step.</p>
 
 <h2>The herbarium</h2>
 
