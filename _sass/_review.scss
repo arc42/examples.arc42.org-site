@@ -19,12 +19,31 @@
 // ============================================================================
 
 .ex-review {
-  margin: var(--s6) 0;
+  // OFF THE GRID, DELIBERATELY (2026-08-14). Aligned flush with the prose
+  // column, the note read as one more text box in the document's own flow —
+  // the opposite of its job. So it breaks the alignment the way a reviewer's
+  // comment breaks a manuscript's: stepped in from the left at every width
+  // (clamped so a phone column keeps its reading width), and from 1250px up
+  // on a railed page it also overhangs the column's right edge into the
+  // empty paper beside the measure — an annotation stuck onto the page, not
+  // a paragraph of it. The overhang budget is measured, not hoped: the
+  // railed grid cell is min(1400px, vw) − 2·24 shell padding − rail
+  // (clamp 210–260px) − 48 gap, and the column caps at --measure + 4ch
+  // ≈ 793px, which leaves ≥70px of true spare inside the cell from 1250px
+  // up — the 48px overhang never leaves the cell, so nothing can scroll.
+  // On the measure-wide .ex-shell--prose (a system overview) the shell is
+  // centered, so at ≥1250px the overhang lands on empty page background
+  // there too.
+  margin: var(--s6) 0 var(--s6) clamp(var(--s5), 6vw, var(--s7));
   padding: var(--s4) var(--s5) var(--s5);
   background: var(--wash-calm);
   border: 1px solid var(--wash-border);
   border-radius: var(--radius);
   box-shadow: 3px 3px 0 0 var(--ground-deep);
+
+  @media (min-width: 1250px) {
+    margin-right: calc(-1 * var(--s7));
+  }
 
   &__head {
     display: flex;

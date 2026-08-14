@@ -404,7 +404,12 @@ a shared one.
   page that is ours must never be mistakable for the content it interrupts —
   the note wears the pinned-annotation treatment (`--wash-calm`, hairline,
   offset shadow), two devices apart from the blockquote-with-rule the imported
-  originals use for their own asides, and opens with a head row: the **review
+  originals use for their own asides. It also sits **off the prose grid**:
+  stepped in from the left at every width, and from 1250px up overhanging the
+  column's right edge into the empty paper beside the measure (budget measured
+  at the declaration in `_sass/_review.scss`) — aligned flush, it read as one
+  more text box in the document's own flow, the opposite of its job. It opens
+  with a head row: the **review
   pin** glyph (`_includes/review-pin.html`, the ball-head pin the shadow
   metaphor implies, `aria-hidden`), the uppercase kind label, and the
   reviewer's name. The label carries the meaning; the glyph is decorative —
