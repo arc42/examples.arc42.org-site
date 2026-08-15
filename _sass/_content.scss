@@ -65,17 +65,37 @@
   // arc42 documentation is full of wide tables (building blocks, risks,
   // decisions). They scroll inside their own container rather than making the
   // page scroll sideways.
-  .ex-tablewrap,
-  > table {
-    display: block;
-    max-width: var(--measure-wide);
-    overflow-x: auto;
-  }
-
   table {
     width: 100%;
     font-size: 0.9375rem;
     border: 1px solid var(--wash-border);
+  }
+
+  // The scroll container. A direct-child <table> is made its own container
+  // (display: block), which splits it in two: the border-carrying block box,
+  // and the anonymous table box laid out inside it. Those two must always be
+  // the same width, and `width: 100%` broke that on exactly one side: a
+  // table whose content is NARROWER than the column kept a full-measure
+  // border around shrink-wrapped cells — the Contribute table shipped an
+  // empty bordered flap on its right the day its content got shorter than
+  // the measure (2026-08-15). `fit-content` closes the gap in all three
+  // regimes: narrower than the column it hugs the cells; wider, it stretches
+  // to the column exactly as 100% did; and past even the max-width cap the
+  // box stops and the anonymous table scrolls inside it. The cap takes
+  // min() because fit-content would otherwise honour a min-content wider
+  // than the column and push the page sideways — 100% keeps the box inside
+  // its column, --measure-wide keeps the documented ceiling should the
+  // column ever widen. This rule sits AFTER the plain `table` rule above:
+  // both selectors tie at one class + one type, the cascade falls to order,
+  // and the `width: 100%` above must lose here while still serving real
+  // table boxes (e.g. inside an .ex-tablewrap), where cells genuinely
+  // stretch with it.
+  .ex-tablewrap,
+  > table {
+    display: block;
+    width: fit-content;
+    max-width: min(100%, var(--measure-wide));
+    overflow-x: auto;
   }
 
   th, td {
