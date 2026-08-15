@@ -271,9 +271,12 @@
   // `rotate`/`translate` as their own properties, not a `transform` shorthand:
   // the tile animates `transform` on hover, and a transform here would be
   // overwritten by the lift the moment a pointer touched the tile.
+  // 58%, not 50%: the clamped goal ends a little above the tile's midpoint and
+  // the bottom tier (scale + byline) is anchored to the floor, so the widest
+  // clear strip sits just below centre.
   &__stamp {
     position: absolute;
-    top: 50%;
+    top: 58%;
     left: 50%;
     translate: -50% -50%;
     rotate: -8deg;
@@ -332,9 +335,21 @@
   // numeral competes with the band for the same corner of the eye.
   .ex-tile__mark { display: none; }
 
-  // The goal keeps its serif and its ink; only the space it gets changes, so
-  // the band has room to cross without landing on the title.
-  .ex-tile__goal { min-height: 4.5rem; }
+  // The goal keeps its serif and its ink, but it is CLAMPED to three lines.
+  // Unclamped it ran the full sentence straight under the band, and the band
+  // cut a line in half — the tile shipped "compare one pipeline vari" with a
+  // sliced "and" below it, which reads as a broken render rather than a
+  // stamp. Three lines end above the band and the rest is one click away on
+  // the system's own page, where the goal is printed in full in the facts
+  // table. The clamp is also what makes the band's position predictable:
+  // capped goal above, bottom-anchored scale below, band in the space left.
+  .ex-tile__goal {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    overflow: hidden;
+  }
 }
 
 // The CHIPS lived here until 2026-08-12. They left the tile on 2026-08-11

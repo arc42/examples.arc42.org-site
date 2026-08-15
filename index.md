@@ -29,12 +29,24 @@ endnotes: >-
   seventh example lands. Same landing-page condition as _layouts/home.html
   uses to build the grid; the two must agree or the sentence miscounts the
   tiles directly below it.
+
+  IT COUNTS TILES, MINUS THE ANNOUNCED ONES (2026-08-14). The sentence calls
+  every example below it "a complete architecture documentation", and an
+  `upcoming: true` tile is the one thing on this page that is not: it has no
+  sections at all. Counting it made the page's first claim false — so the
+  landing set is split, the number promises only what is written, and the
+  announced ones get their own clause instead of being folded in silently.
+  Both halves stay computed; neither goes stale.
 {%- endcomment -%}
-{%- assign example_count = site.systems
+{%- assign landings = site.systems
       | where_exp: 'd', 'd.url contains "/systems/"'
       | where_exp: 'd', 'd.title'
-      | where_exp: 'd', 'd.tagline'
-      | size -%}
-Each of the {{ example_count }} examples below is a **complete architecture
-documentation** of a real system, written along the same twelve-part arc42
-structure. Different domains, different scales, different technologies.
+      | where_exp: 'd', 'd.tagline' -%}
+{%- assign upcoming = landings | where: 'upcoming', true -%}
+{%- assign example_count = landings.size | minus: upcoming.size -%}
+Each of the {{ example_count }} completed examples below is a **complete
+architecture documentation** of a real system, written along the same
+twelve-part arc42 structure. Different domains, different scales, different
+technologies.{% if upcoming.size == 1 %} One more is announced and on its
+way.{% elsif upcoming.size > 1 %} {{ upcoming.size }} more are announced and on
+their way.{% endif %}

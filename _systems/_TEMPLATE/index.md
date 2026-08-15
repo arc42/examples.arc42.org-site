@@ -73,6 +73,25 @@ scale: ~50 kLOC · 6 developers · in production since 2019
 # an example can be slotted in later without renumbering every other one.
 order: 999
 
+# OPTIONAL, and rare: announce an example before it is written. Set
+# `upcoming: true` and the tile is quieted — recessed fill, dashed border, no
+# catalogue number — and stamped with a diagonal "Coming soon" band; the
+# system's page prints a "not published yet" note where the twelve-section
+# grid normally goes; and the dashboard's opening sentence counts it
+# separately, because it calls everything it counts complete.
+#
+# The four tile fields above are still owed: an announced tile that says
+# nothing about what is coming is just a gap in the grid. `decisions` and
+# `keywords` are NOT — both describe a documentation nobody has read, and
+# scripts/check-system-fields.sh exempts an upcoming system from both rather
+# than inviting you to invent them. Supply neither or supply both.
+#
+# Use it only when the documentation is genuinely on its way and there is a
+# public URL to point at in `source_url`. To publish: delete this line, add
+# the twelve section files, fill in decisions and keywords. Nothing else
+# changes.
+# upcoming: true
+
 # Review notes need NO field here. If the arc42 maintainers review this
 # system, their notes live in _data/reviews/<slug>.yml — deliberately
 # outside this directory, because the review is their voice, not part of

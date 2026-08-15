@@ -219,6 +219,52 @@ facing edges — declarations in `_sass/_base.scss` and `_sass/_dashboard.scss`
 
 The field is what moved the edge tier from 55% to 60%: see *Surfaces*.
 
+## Announced examples
+
+An example may go on the dashboard before it is written: `upcoming: true` in
+its `index.md` (2026-08-14, first used by RGCAT). The tile is real, in the
+real grid, at its own `order` — not a placeholder card appended after the
+others, because a separate rail for "soon" would be a second dashboard, which
+is the mistake `/in-the-wild/` exists to avoid making twice.
+
+It is marked three ways, and the reason there are three is that each one alone
+is deniable:
+
+- **Recessed fill and a dashed border.** The fill mixes `--paper` 60% toward
+  the field; the border keeps its weight and colour and changes only its
+  *style*. Both are deliberate alternatives to `opacity`, which was the first
+  instinct and fails the site's own floor: `--ink` at 60% over `--paper` lands
+  near 4.3:1 and the `--muted` eyebrow near 2.9:1, so the two rows a reader
+  most needs — what it is, and who is building it — would be the two that stop
+  passing. Stepping the surface keeps every foreground token exactly as
+  computed elsewhere: 12.3:1 and 5.1:1, both still AA. The tile reads as
+  recessed because it is recessed, not because its text is half erased.
+- **A diagonal `COMING SOON` band**, `--ground` with `--tint` on it (12.44:1),
+  rotated −8°, clipped to the tile. **No new hue**: the obvious colour for
+  "not ready" is amber, and amber is spoken for by the pinned-annotation voice
+  — a second meaning on the same pigment is how a palette stops meaning
+  anything. The ground is already this family's "chrome, not content" signal,
+  which is what a stamp is. It is real text in the flow, not generated
+  content: a reader who cannot see the band must still be told, and it sits
+  after the title so it reads as "RGCAT — coming soon".
+- **The goal clamped to three lines.** Unclamped, the band cut a line in half
+  and the tile shipped a sliced word, which reads as a broken render rather
+  than a stamp. The clamp is also what makes the band's position predictable:
+  capped goal above, bottom-anchored scale below, band in the space left.
+
+Two consequences elsewhere, both load-bearing. The catalogue numeral is
+hidden — an unwritten example has a place in the order but nothing catalogued.
+And the intro sentence counts announced tiles **separately** (`index.md`),
+because it calls everything it counts "a complete architecture documentation"
+and an announced tile has no sections at all; folding it into the number made
+the page's first claim false.
+
+`decisions` and `keywords` are not owed, and `scripts/check-system-fields.sh`
+exempts an upcoming system from both rather than inviting invented ones — but
+it still reports supplying one without the other. The four tile fields are
+owed either way: an announced tile that says nothing about what is coming is
+just a gap in the grid.
+
 ## The filter is gone
 
 The dashboard filter (label, search input, live count, empty state,

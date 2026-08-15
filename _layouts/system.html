@@ -108,8 +108,13 @@ layout: default
   <div class="ex-note">
     <p><strong>Not published yet.</strong> This example is announced, not
     written: none of the twelve arc42 sections are here.
+    {%- comment -%}
+      Host only — split on '//' then on '/' — so the note reads "Watch
+      rgcat-toolkit.github.io" rather than echoing a full URL with its
+      scheme and trailing slash mid-sentence.
+    {%- endcomment -%}
     {%- if page.source_url %} Watch
-    <a href="{{ page.source_url }}">{{ page.source_url | remove: 'https://' | remove: 'http://' | remove_last: '/' }}</a>
+    <a href="{{ page.source_url }}">{{ page.source_url | split: '//' | last | split: '/' | first }}</a>
     for the release{% endif %}, and this page will fill in behind it.</p>
   </div>
   {%- endif -%}
