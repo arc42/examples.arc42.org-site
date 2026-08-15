@@ -352,6 +352,36 @@ $wild-rail-collapse: 1040px;
     font-size: 1.0625rem;
     line-height: 1.45;
     color: var(--muted);           // 5.50:1
+
+    // A <div> since 2026-08-15, because the note is markdownified and kramdown
+    // wraps it in a <p> of its own. The face and colour above inherit down to
+    // that <p>; its MARGINS do not, and left alone they would stack on top of
+    // this block's --s3 above and push --s2 into the signature below. Zeroing
+    // only the first and last keeps the gap between paragraphs when a note
+    // deliberately uses a blank line to make two.
+    > p {
+      margin: var(--s2) 0 0;
+
+      &:first-child { margin-top: 0; }
+      &:last-child  { margin-bottom: 0; }
+    }
+
+    // Inline code, which markdownify made reachable and which the notes were
+    // already written for: the Oviedo entry has named a cohort in backticks
+    // since it was added, and printed the backticks until 2026-08-15.
+    //
+    // Repeated from .ex-prose rather than shared, because the two are not the
+    // same rule. .ex-prose sets code inside imported documentation, where it
+    // may be a fully-qualified name that has to break mid-word; here it is a
+    // short identifier inside one of our sentences. If .ex-prose changes for a
+    // reason that belongs to imported code, this must not follow it.
+    code {
+      font-family: var(--mono);
+      font-size: 0.875em;
+      background: var(--wash-calm);
+      padding: 1px 4px;
+      border-radius: 3px;
+    }
   }
 
   // Our editorial voice is dated, and this is the date. Sans and small against
@@ -362,6 +392,50 @@ $wild-rail-collapse: 1040px;
     margin: var(--s2) 0 0;
     font-size: 0.8125rem;
     color: var(--muted);           // 5.50:1
+  }
+
+  // WHERE THE PROJECT LIVES (2026-08-15). Up to three labelled links, after
+  // the note's signature so that nothing here can be read as part of our
+  // opinion: the note ends, we sign it, and only then do we point elsewhere.
+  //
+  // THE LINK TEXT IS THE BARE HOST, which is what lets these obey the page's
+  // see-it-before-you-click rule (WCAG 3.2.5, derived at .ex-wild__host). The
+  // <dt> carries the meaning, so the pair reads "Developer: swcode.io".
+  //
+  // TOLD APART FROM THE RAIL BY THE UNDERLINE. Below the breakpoint __facts
+  // renders as a wrapping row of label/value pairs directly beneath this one,
+  // and two identically shaped rows would read as a single block of seven
+  // pairs. The separation is not spacing, which wrapping would eat anyway: it
+  // is that every value here is a link and therefore carries the site's
+  // persistent underline, and no value in the rail is or does. --s5 above is
+  // what keeps them from touching, not what tells them apart.
+  &__also {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s2) var(--s5);
+    margin: var(--s5) 0 0;
+    padding: 0;
+    font-size: 0.875rem;
+  }
+
+  &__alsoitem {
+    display: flex;
+    align-items: baseline;
+    gap: var(--s2);
+    min-width: 0;
+
+    dt {
+      color: var(--muted);         // 5.50:1
+    }
+
+    // No colour or decoration set here on purpose. The global link treatment
+    // (ink-dark, persistent underline) is doing the work above, and a local
+    // override would be the one thing that breaks the distinction.
+    dd {
+      margin: 0;
+      min-width: 0;
+      overflow-wrap: anywhere;     // a long host must not widen the column
+    }
   }
 
   // Sections, licence, language, year — each a <dt> label and a <dd> value.

@@ -44,17 +44,29 @@
     </p>
 
     {%- comment -%}
-      Exactly one link per entry, on the title, and no `rel`. It carried
-      `noopener noreferrer` until 2026-08-11. `noopener` does nothing without
-      target="_blank", which these links deliberately do not have. `noreferrer`
-      did do something: it stripped the Referer header, so a project we send
-      readers to could not see that the referral came from here. Sending it is
-      the courtesy, and the default strict-origin-when-cross-origin sends the
-      origin and nothing more.
+      THE TITLE LINK IS THE DOCUMENTATION, always, and it is the reason the
+      entry exists. Until 2026-08-15 it was also the only link an entry could
+      carry. It is not any more: a note may link inline, and `links:` prints a
+      short labelled block at the foot. What did NOT change is that this one
+      points at the document itself. An entry whose title link goes to a
+      project's home page instead has quietly become an advertisement.
 
-      DO NOT add target="_blank" to make a rel meaningful again. Opening in the
-      same tab is the decision (WCAG 3.2.5, argued at the host line below); the
-      rel was the leftover.
+      Every link on this page, here and below, obeys the same two rules.
+
+      NO `rel`. It carried `noopener noreferrer` until 2026-08-11. `noopener`
+      does nothing without target="_blank", which these links deliberately do
+      not have. `noreferrer` did do something: it stripped the Referer header,
+      so a project we send readers to could not see that the referral came from
+      here. Sending it is the courtesy, and the default
+      strict-origin-when-cross-origin sends the origin and nothing more.
+
+      NO target="_blank", and DO NOT add one to make a rel meaningful again.
+      Opening in the same tab is the decision (WCAG 3.2.5, argued at the host
+      line below); the rel was the leftover. The corollary is that a reader
+      must be able to see where a link goes BEFORE clicking it, which is why
+      the host is printed under the title, why the block at the foot uses the
+      bare host as its link text, and why the schema requires the text of an
+      inline link in a note to name its destination.
     {%- endcomment -%}
     <h3 class="ex-wild__name">
       <a href="{{ entry.url }}">{{ entry.title }}</a>
@@ -95,13 +107,67 @@
 
     <p class="ex-wild__desc">{{ entry.description }}</p>
 
+    {%- comment -%}
+      MARKDOWNIFIED since 2026-08-15, and therefore a <div>: kramdown emits its
+      own <p>, and a <p> inside a <p> is invalid HTML that browsers silently
+      close early, which would drop the note's own styling halfway through.
+
+      The note is the one field a reader is asked to trust, and sometimes the
+      sentence that earns that trust needs a link inside it. The first case was
+      "openCode, the German public sector Platform for Digital Sovereignty",
+      where the useful part is the aside that it is NOT opencode.ai. A labelled
+      row at the foot cannot say that; a sentence can.
+
+      The cost is that an inline link prints no host, and this page's answer to
+      WCAG 3.2.5 is that the destination is visible before the click. The
+      schema therefore requires the LINK TEXT to name the destination. That is
+      a rule nothing here can enforce, so it lives in the schema header of
+      _data/in-the-wild.yml where an author will read it.
+
+      search.json strips the markup back out rather than indexing the source,
+      or a search for "https" would match every entry with a link in it.
+    {%- endcomment -%}
     {%- if entry.note -%}
-    <p class="ex-wild__note">{{ entry.note }}</p>
+    <div class="ex-wild__note">{{ entry.note | markdownify }}</div>
     {%- comment -%}
       The date belongs to the NOTE, not to the rail: it is the note that goes
       stale, and the intro paragraph already promises the opinion is dated.
     {%- endcomment -%}
     <p class="ex-wild__added">Added {{ entry.added }}</p>
+    {%- endif -%}
+
+    {%- comment -%}
+      WHERE THE PROJECT LIVES (2026-08-15). Up to three labelled links at the
+      foot of the entry, for the destinations a reader wants AFTER deciding the
+      documentation is worth their time: the product's own site, its source
+      repository, the maintainer who keeps it alive.
+
+      WHY IT IS NOT IN THE RAIL. The rail is four rows of facts about the
+      DOCUMENT, three of which render on every entry in a fixed order, and that
+      invariance is the only reason a value there can be compared to the same
+      value one entry below. An optional block of variable length destroys it.
+
+      WHY A <dl> AND NOT A LINE OF LINKS. The link text is the bare host, which
+      is what satisfies the see-it-before-you-click rule above. On its own
+      "swcode.io" is a poor accessible name, so the <dt> supplies it and the
+      pair reads "Developer: swcode.io". This is exactly the fix already
+      applied to the rail below, for exactly the same reason.
+
+      THE LABEL VOCABULARY IS CLOSED and the ceiling is three, both enforced by
+      scripts/check-wild-fields.sh rather than truncated in silence here. The
+      facets ceiling IS silent, and that script's own header explains why that
+      was a mistake worth not repeating.
+    {%- endcomment -%}
+    {%- if entry.links and entry.links.size > 0 -%}
+    <dl class="ex-wild__also">
+      {%- for link in entry.links limit: 3 -%}
+      {%- assign link_host = link.url | split: '//' | last | split: '/' | first | remove_first: 'www.' -%}
+      <div class="ex-wild__alsoitem">
+        <dt>{{ link.label }}</dt>
+        <dd><a href="{{ link.url }}">{{ link_host }}</a></dd>
+      </div>
+      {%- endfor -%}
+    </dl>
     {%- endif -%}
   </div>
 

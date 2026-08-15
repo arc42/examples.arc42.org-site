@@ -1,6 +1,6 @@
 #!/bin/sh
 # ============================================================================
-# Two things about every entry in _data/in-the-wild.yml that the template
+# Three things about every entry in _data/in-the-wild.yml that the template
 # cannot enforce and will not complain about.
 #
 # 1. `kind` MUST BE PRESENT AND FROM THE VOCABULARY BELOW. It is the one chip on
@@ -24,6 +24,16 @@
 #    damage it does: four items out of a mistyped line, and the real facet after
 #    them dropped without a word.
 #
+# 3. `links` MUST BE LABELLED FROM THE VOCABULARY BELOW, CAPPED AT THREE, AND
+#    EVERY ROW MUST HAVE A URL (2026-08-15). Same argument as `kind`: the block
+#    only works because a reader can compare "Source" on one entry to "Source"
+#    on the next, and "Repository" or "Code" renders just as happily. The cap is
+#    checked HERE and not truncated in the template, which is the lesson of the
+#    silent facets ceiling one paragraph up: a fourth link that vanishes without
+#    a word is worse than one that fails the build. A row with a label and no
+#    url renders an empty <dd>, which is a dangling label and looks like a bug
+#    in the site rather than a gap in the data.
+#
 # Parsed with awk rather than a YAML library so it has no dependency beyond a
 # POSIX shell, matching scripts/check-wild-groups.sh.
 #
@@ -45,15 +55,30 @@ KINDS="Production system
 Invented subject
 Student coursework"
 
-# awk -v cannot carry a newline, so the vocabulary crosses as one pipe-joined
-# string. $KINDS keeps its newlines for the error message at the bottom.
+# The `links:` label vocabulary. Widened on the same terms as KINDS above: a
+# term earns its place by telling a reader something no existing term does.
+#
+# "Developer" is deliberately not "Vendor" or "Author". `author:` is already a
+# field and names who wrote the DOCUMENTATION; this names who builds and
+# maintains the SOFTWARE, which for an open-source product is where the project
+# actually lives. "Documentation home" is for the case where the docs have a
+# published site of their own and the title link points into a repository.
+LINK_LABELS="Project site
+Source
+Developer
+Documentation home"
+
+# awk -v cannot carry a newline, so the vocabularies cross as one pipe-joined
+# string each. $KINDS and $LINK_LABELS keep their newlines for the error
+# messages at the bottom.
 KINDS_FLAT=$(printf '%s' "$KINDS" | tr '\n' '|')
+LINK_LABELS_FLAT=$(printf '%s' "$LINK_LABELS" | tr '\n' '|')
 
 # One report line per problem, "<title>|<what>". The current title is tracked so
 # a problem can be named by entry rather than by line number. Commented lines
 # are skipped by the anchors: the file header's example entry is indented behind
 # a `#`, so neither `^- title:` nor `^ +facets:` can match it.
-PROBLEMS=$(awk -v kinds="$KINDS_FLAT" '
+PROBLEMS=$(awk -v kinds="$KINDS_FLAT" -v linklabels="$LINK_LABELS_FLAT" '
   function trim(s) { sub(/^[[:space:]]+/, "", s); sub(/[[:space:]]+$/, "", s); return s }
 
   function value(line,   v) {
@@ -79,18 +104,51 @@ PROBLEMS=$(awk -v kinds="$KINDS_FLAT" '
     if (kind == "") print title "|no kind:. Every entry needs one, from the list below"
     else if (index(vocab, "|" kind "|") == 0) print title "|kind \"" kind "\" is not in the vocabulary"
     if (count > 5) print title "|" count " facets: the template renders five and drops the rest silently"
+    if (linkcount > 3) print title "|" linkcount " links: three is the ceiling, and the template renders three"
+    if (linkcount != linkurls) print title "|" linkcount " link label(s) but " linkurls " url(s): every row needs both"
   }
 
-  BEGIN { vocab = "|" kinds "|" }
+  BEGIN { vocab = "|" kinds "|"; linkvocab = "|" linklabels "|" }
 
   /^-[[:space:]]*title:/ {
     flush()
     sub(/^-[[:space:]]*title:[[:space:]]*/, "")
     title = trim($0); kind = ""; block = 0; count = 0
+    linkblock = 0; linkcount = 0; linkurls = 0
     next
   }
 
-  /^[[:space:]]+kind:/ { kind = value($0); block = 0; next }
+  /^[[:space:]]+kind:/ { kind = value($0); block = 0; linkblock = 0; next }
+
+  # ---- links: -------------------------------------------------------------
+  # Block style only, which is the form the schema documents. A `links:` key
+  # with anything after it on the same line is flow style and is not read here,
+  # so it is refused rather than silently half-checked.
+  /^[[:space:]]+links:[[:space:]]*$/ { linkblock = 1; block = 0; linkcount = 0; linkurls = 0; next }
+  /^[[:space:]]+links:[[:space:]]*\[/ {
+    print title "|links: is written in flow style. Use a block list of label/url pairs"
+    next
+  }
+
+  # These two must be tested BEFORE the generic key rule below, because `url:`
+  # and a `- label:` row both match it and would end the block on their own row.
+  linkblock && /^[[:space:]]+-[[:space:]]*label:/ {
+    line = $0
+    sub(/^[[:space:]]+-[[:space:]]*label:[[:space:]]*/, "", line)
+    sub(/[[:space:]]+#.*$/, "", line)
+    label = trim(line)
+    linkcount++
+    if (label == "") print title "|a links: row has an empty label"
+    else if (index(linkvocab, "|" label "|") == 0) print title "|link label \"" label "\" is not in the vocabulary"
+    next
+  }
+  linkblock && /^[[:space:]]+url:[[:space:]]*http/ { linkurls++; next }
+  linkblock && /^[[:space:]]+url:/ {
+    print title "|a links: url is not an http(s) address"
+    linkurls++
+    next
+  }
+  linkblock && /^[[:space:]]+[a-z_]+:/ { linkblock = 0 }
 
   # Flow style, the form the schema documents: facets: [a, b, c]
   /^[[:space:]]+facets:[[:space:]]*\[/ {
@@ -128,6 +186,13 @@ if [ -n "$PROBLEMS" ]; then
   echo "" >&2
   echo "kind: is the entry's one chip and must be exactly one of:" >&2
   echo "$KINDS" | sed 's/^/  /' >&2
+  echo "" >&2
+  echo "links: is at most three label/url pairs, and every label must be one of:" >&2
+  echo "$LINK_LABELS" | sed 's/^/  /' >&2
+  echo "" >&2
+  echo "  links:" >&2
+  echo "    - label: Project site" >&2
+  echo "      url:   https://urbo.digital/" >&2
   echo "" >&2
   echo "facets: is one line of plain text about the FORM of the document, and a" >&2
   echo "YAML flow sequence, so every comma starts a new item. Write section" >&2

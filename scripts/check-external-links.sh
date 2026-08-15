@@ -31,13 +31,36 @@ if [ ! -f "$DATA" ]; then
   exit 1
 fi
 
-# `url:` at the start of a list item or as a plain key, comments stripped. The
-# leading-hash test drops the commented-out example entry in the file header,
-# which is documentation and not a live link.
-URLS=$(grep -E '^[[:space:]]*-?[[:space:]]*url:[[:space:]]*http' "$DATA" \
+# THREE PLACES A URL CAN HIDE IN THIS FILE, and all three rot the same way.
+#
+#   1. `url:` on an entry, the documentation itself.
+#   2. `url:` nested under `links:`, the where-it-lives block. Same anchor
+#      matches it: the leading `-?` was already there for flow-style lists, so
+#      these came under the check for free when `links:` was added.
+#   3. `[text](https://...)` inline in a markdownified `note`. NOT a `url:`
+#      key, so nothing found it until 2026-08-15. A dead link inside a
+#      sentence is worse than a dead one in the rail, because the sentence
+#      goes on asserting whatever it said about the destination.
+#
+# The leading-hash test drops the commented-out example entry in the file
+# header, which is documentation and not a live link.
+KEY_URLS=$(grep -E '^[[:space:]]*-?[[:space:]]*url:[[:space:]]*http' "$DATA" \
        | sed -E 's/^[[:space:]]*-?[[:space:]]*url:[[:space:]]*//' \
        | sed -E 's/[[:space:]]+#.*$//' \
        | tr -d '\r' || true)
+
+# Markdown link targets. `-o` so several links on one line are all found, and
+# the trailing `)` is what bounds the URL rather than whitespace, because a
+# markdown target has no space before its closing paren. Commented lines are
+# excluded first: the schema header shows the syntax, and an example URL in
+# documentation must not fail the build.
+MD_URLS=$(grep -v '^[[:space:]]*#' "$DATA" \
+       | grep -oE '\]\(https?://[^)[:space:]]+\)' \
+       | sed -E 's/^\]\(//; s/\)$//' \
+       | tr -d '\r' || true)
+
+# Same URL in both a `links:` row and a note is a duplicate, not two checks.
+URLS=$(printf '%s\n%s\n' "$KEY_URLS" "$MD_URLS" | grep -v '^$' | sort -u || true)
 
 if [ -z "$URLS" ]; then
   echo "check-external: no URLs in $DATA — nothing to check."

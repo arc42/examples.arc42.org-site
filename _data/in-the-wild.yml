@@ -49,8 +49,34 @@
 #   url          required  Where it lives. Checked by `make check-external`.
 #   author       required  Who wrote it.
 #   description  required  ONE neutral sentence: what the system is. No praise.
-#   note         required  OUR paragraph: what is worth looking at, or what is
-#                          thin. Written by us, not by the author — a
+#   note         required  MARKDOWN since 2026-08-15. OUR paragraph: what is
+#                          worth looking at, or what is thin.
+#
+#                          THE LINK TEXT MUST NAME ITS DESTINATION. Every other
+#                          link on this page prints its host, because these
+#                          links open in the same tab and seeing where one goes
+#                          is what stands in for the warning (WCAG 3.2.5, and
+#                          the argument is in _includes/in-the-wild-entry.html).
+#                          An inline link prints no host, so the sentence has to
+#                          do it: "openCode, the German public sector Platform
+#                          for Digital Sovereignty" is fine, "here" and "this
+#                          page" are not.
+#
+#                          USE IT SPARINGLY. A note carrying four links has
+#                          stopped being an opinion and become a set of
+#                          directions; that is what `links:` below is for. The
+#                          case it exists for is the aside a labelled row
+#                          cannot make, such as openCode not being opencode.ai.
+#
+#                          Raw HTML passes through (`<small>` works). Nothing
+#                          sanitises this field, so it is a maintainer-only
+#                          file by definition. A BLANK LINE inside the folded
+#                          `>-` block now makes a real second paragraph, and an
+#                          over-indented line still folds badly, only now four
+#                          extra spaces render as a monospace code block rather
+#                          than as an odd line break.
+#
+#                          Written by us, not by the author — a
 #                          contributor supplies title/url/author/description
 #                          and we write this. Author-supplied notes turn into
 #                          blurbs. Up to about 150 words. This used to say "two
@@ -124,6 +150,43 @@
 #                          The only rail row that may be missing, which is why
 #                          it is last: the three above it always render, so the
 #                          column reads straight down.
+#   links        optional  WHERE THE PROJECT LIVES (2026-08-15). Up to THREE
+#                          label/url pairs, printed as a small labelled block at
+#                          the foot of the entry, under the note's signature.
+#                          The link text is the bare host, so the reader sees
+#                          the destination before clicking it.
+#
+#                          links:
+#                            - label: Project site
+#                              url:   https://urbo.digital/
+#
+#                          THE LABELS ARE A CLOSED VOCABULARY, same argument as
+#                          `kind`: the block is only worth having because
+#                          "Source" on one entry can be compared to "Source" on
+#                          the next, and "Repository" renders just as happily.
+#
+#                            Project site        the software's own home
+#                            Source              the repository
+#                            Developer           who builds and maintains it
+#                            Documentation home  a published docs site, when the
+#                                                title link goes into a repo
+#
+#                          NOT WHO PAID FOR IT, and not who commissioned it.
+#                          Funders, ministries and programmes are provenance;
+#                          they belong in `note` where they can be explained.
+#                          The test is whether a reader would go there to use or
+#                          read the software.
+#
+#                          SKIP A ROW THAT ONLY REPEATS THE TITLE LINK'S HOST.
+#                          A `Source` row pointing at the repository the title
+#                          link already points into prints the same host twice,
+#                          three lines apart, and buys nothing.
+#
+#                          Three is a HARD ceiling and `make check` fails a
+#                          fourth rather than dropping it. `facets` truncates in
+#                          silence and that is a mistake this does not copy.
+#                          Every row needs both a label and a url, checked, or
+#                          the block renders a dangling label.
 #
 # ORDER IS EDITORIAL AND IT HAS TWO LEVELS. Which run an entry appears under
 # comes from its `group`; the runs themselves are ordered and named in
@@ -161,6 +224,9 @@
 #     year:        2019
 #     added:       2026-08
 #     group:       real-systems
+#     links:
+#       - label:   Project site
+#         url:     https://beispiel-firma.de/
 #
 # Entries are added by someone who has at least opened the thing. `make
 # check-external` can verify that a URL resolves, not that the documentation
@@ -199,7 +265,8 @@
   author:      The geOrchestra project
   description: >-
     The authentication gateway of geOrchestra, an open-source spatial data
-    infrastructure run largely by public bodies — a Spring Cloud Gateway
+    infrastructure run largely by public bodies:
+      A Spring Cloud Gateway
     specialisation that fronts every other service in the platform and handles
     login, authorisation and routing for all of them.
   note: >-
@@ -207,12 +274,9 @@
     with it, which is the first thing worth noticing: it is maintained as code,
     not as a deliverable. Every diagram is generated from a checked-in
     Structurizr model with a build script beside it, so the pictures cannot
-    quietly drift away from the prose. Read it also for what it changes: there
-    is no solution strategy section and no architecture decisions section at
-    all, and the building block view is replaced by C4's container and
-    component views. Be clear about the scope before you start — this documents
-    one component of geOrchestra, not the platform, and the longest sections by
-    some way are quality requirements and risks.
+    quietly drift away from the prose.
+    The scope: One component of geOrchestra, not the platform, and the longest sections
+    are quality requirements and risks.
   kind:        Production system
   facets:      [Gateway component only, C4 section structure, Markdown, Structurizr diagrams]
   sections:    All but 4 and 9
@@ -220,28 +284,20 @@
   added:       2026-08
   group:       real-systems
 
-# After geOrchestra in the same run, and the thinner of the two on purpose: it
-# reads as the counterpoint. geOrchestra shows the template carried by its
-# prose, GA-Lotse shows it carried entirely by its decision records.
+
 - title:       GA-Lotse
   url:         https://gitlab.opencode.de/ga-lotse/ga-lotse-documentation
   author:      The GA-Lotse project
   description: >-
-    A case management platform for German public health authorities, developed
-    with the Hessian health ministry and funded by the EU, built as a service
-    mesh into which individual business modules plug.
+    The single application Hesse's public health offices use for their statutory casework, e.g.
+    school entry examinations, measles vaccination checks, hygiene inspections of facilities and travel medicine,
+    with an online route through which citizens reach the office directly.
   note: >-
-    Come for the decision records, not for the narrative. Most of the section
-    files run to a paragraph and a diagram, and the deployment view is one
-    sentence over one picture. The seven architecture decisions are the
-    opposite: each states the options that were weighed, the outcome, and the
-    consequences it accepted, including the ones that cost something. Read the
-    service mesh record first. It explains why the team built their own instead
-    of taking Istio or Linkerd, then writes down plainly that the choice buys
-    them more testing, more security review and more maintenance. Public bodies
-    rarely publish that sentence about themselves, which is most of why this
-    entry is here. It sits on openCode, the German public sector's own code
-    platform, and has been quiet since May 2025.
+    The service mesh record explains why the team built their own instead
+    of taking Istio or Linkerd. then writes down plainly that the choice buys
+    them more testing, more security review and more maintenance.
+    The original documentation sits on [openCode, the German public sector Platform for Digital Sovereignty](https://opencode.de/en).
+    <small>(Don't confuse with the [opencode.ai coding agent](https://opencode.ai/) of same name)</small>
   kind:        Production system
   facets:      [Public sector, AsciiDoc, 7 decision records]
   sections:    All but 6, 10 and 11
@@ -249,6 +305,37 @@
   year:        2024–2025
   added:       2026-08
   group:       real-systems
+
+- title:       Urbo — Smart City Platform
+  url:         https://gitlab.opencode.de/stadt-soest/city-app/soest-city-app/-/blob/main/docs/architecture/arc42.md
+  author:      SWCode, for Stadt Soest
+  description: >-
+    The Urbo smart city platform as it runs for the city of Soest:
+    A Kotlin modular monolith with an Angular citizen app and a CMS, into which a city
+    switches on modules for news, waste collection, parking, construction sites
+    and citizen participation.
+  note: >-
+    Urbo is built and maintained by SWCode, a software house in Soest, and
+    published by the city on
+    [openCode, the German public sector's Platform for Digital
+    Sovereignty](https://opencode.de/en).
+    <small>(Not to be confused with the
+    [opencode.ai coding agent](https://opencode.ai/) of the same
+    name.)</small>
+    It began as the SoestApp, part of a federally funded smart city model
+    project, and now runs for Bamberg and Wesel as well.
+  kind:        Production system
+  facets:      [Public sector, Markdown, Mermaid diagrams, 11 decision records, Single file]
+  sections:    All 12
+  licence:     EUPL-1.2
+  year:        2024–2026
+  added:       2026-08
+  group:       real-systems
+  links:
+    - label:   Project site
+      url:     https://urbo.digital/
+    - label:   Developer
+      url:     https://swcode.io/
 
 - title:       Software Architecture course, University of Oviedo
   url:         https://arquisoft.github.io/
@@ -261,16 +348,17 @@
   note: >-
     Read this one as coursework and it will not disappoint you. It is written
     by undergraduates in the second semester of their third year, under
-    deadline, about systems that live for one term — nothing here has been
+    deadline, about systems that live for one term. Nothing here has been
     maintained, operated, or argued over by anyone who had to live with the
-    consequences. What no other link on this page can offer is the sample size.
+    consequences.
+
+    What no other link on this page can offer is the sample size:
     Twenty-five teams document the same brief in the same template in the same
     semester, which turns the template itself into the subject: the sections
     everybody fills in usefully and the ones everybody pads are visible at a
     glance, and that is a genuinely useful thing to see before you write your
-    own. Start from the course page, pick a year, then pick a team — the
-    2025-26 cohort is `yovi`, and yovi_en3a is a representative one, arc42 8.2
-    in AsciiDoc with a Testing section added as 12.
+    own. Start from the course page, pick a year, then pick a team. The
+    2025-26 cohort is `yovi`, and yovi_en3a is a representative one.
   kind:        Student coursework
   facets:      [~25 new documentations a year, AsciiDoc, Spanish and English cohorts]
   sections:    Varies by team
@@ -287,18 +375,10 @@
   author:      Stefan Zörner
   description: >-
     A chess engine in Java, written so that its architecture could be
-    documented — the running case study from Zörner's book on architecture
-    documentation, published in full as a browsable arc42 site.
+    documented:
+      Published in full as a browsable arc42 site.
   note: >-
-    This is what a finished arc42 documentation looks like, and it is the
-    reason to have a list like this at all: every one of the twelve sections is
-    filled, and the substantial ones are broken into pages of their own rather
-    than padded — the building block view alone runs to eight, down to move
-    search and position evaluation. Section 4 is the one to read if you only
-    read one, because it argues the playing strategy before it draws anything.
-    The subject is small and invented for teaching, so do not come here for
-    scale or for the mess of a real deployment; come for the depth and the
-    finish.
+    This is what a finished (and polished) arc42 documentation looks like.
   kind:        Invented subject
   facets:      [Java]
   sections:    All 12

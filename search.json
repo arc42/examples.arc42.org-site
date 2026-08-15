@@ -109,15 +109,30 @@ sitemap: false
   our note — the note is where the words a reader actually searches for live
   ("Structurizr", "decision records", "Mermaid"). The host is appended because
   "dokchess" is a plausible query and appears in no other field.
+
+  THE NOTE IS MARKDOWN since 2026-08-15, so it is rendered and then stripped
+  rather than indexed as written. Indexed raw, a note containing
+  `[openCode](https://opencode.de/en)` would match a search for "https" and for
+  "opencode.de", and would show both inside the result excerpt. markdownify
+  turns it into HTML and strip_html takes the markup back off, which leaves the
+  words a reader can see on the page and nothing else. Do the same to any field
+  that becomes markdown later.
+
+  `links` is indexed by LABEL AND HOST, for the same reason the title's host is
+  appended above: "urbo.digital" and "swcode.io" are plausible queries, and
+  after the strip they appear nowhere else in the record.
 {%- endcomment -%}
 {%- for entry in site.data['in-the-wild'] -%}
   {%- assign host = entry.url | split: '//' | last | split: '/' | first | remove_first: 'www.' -%}
   {%- assign anchor = entry.title | slugify -%}
   {%- capture wild_url -%}/in-the-wild/#{{ anchor }}{%- endcapture -%}
   {%- capture wild_content -%}
-    {{ entry.author }} {{ entry.description }} {{ entry.note }}
+    {{ entry.author }} {{ entry.description }} {{ entry.note | markdownify | strip_html }}
     {{ entry.kind }} {{ entry.facets | join: ' ' }} Sections {{ entry.sections }}
     {{ entry.licence }} {{ entry.language | default: 'English' }} {{ entry.year }} {{ host }}
+    {%- for link in entry.links -%}
+      {{ link.label }} {{ link.url | split: '//' | last | split: '/' | first | remove_first: 'www.' }}
+    {%- endfor -%}
   {%- endcapture -%}
 {{ sep }}{
   "url": {{ wild_url | relative_url | jsonify }},

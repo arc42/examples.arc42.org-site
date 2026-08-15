@@ -356,7 +356,35 @@ Two smaller departures, both deliberate:
 - **The disclaimer appears once**, in the framing paragraph, not per entry.
   Thirty repetitions of "not reviewed" is noise.
 
-Link rot is the page's one running cost. `make check-external` reads the data
+**An entry may now carry more than one link** (2026-08-15). It could not until
+then, and the rule was inherited rather than reasoned: one link per *tile* is
+the stretched-link invariant of `.ex-system-tile`, and `.ex-wild` has no
+stretched link, so nothing structural was ever at stake here. What is at stake
+is the same-tab rule above, and each of the three link sites answers it its own
+way:
+
+- The **title link** is the documentation, always, and prints its host on the
+  byline beneath it. An entry whose title link points at a project's home page
+  instead has become an advertisement.
+- **`links:`** is up to three labelled rows at the foot, under the note's
+  signature, for where the project lives: its own site, its source, its
+  maintainer. The link text *is* the bare host, so the warning is the link. A
+  `<dl>`, so the `<dt>` supplies the accessible name that "swcode.io" alone
+  cannot. The labels are a closed vocabulary for the same reason `kind` is: the
+  block earns its place only if a value can be compared to the same value one
+  entry below. Never funders or commissioning bodies, which are provenance and
+  belong in the note.
+- **The note is markdown** and may link inline. Here there is no host to print,
+  so the schema requires the *link text* to name the destination. The case that
+  bought this was "openCode, the German public sector's Platform for Digital
+  Sovereignty", where the useful part is the aside that it is not `opencode.ai`.
+  A labelled row cannot make that remark; a sentence can.
+
+Link rot is the page's one running cost, and it grew with the above:
+`check-external-links.sh` now reads markdown link targets out of notes as well
+as `url:` keys, because a dead link inside a sentence is worse than a dead one
+in the rail. The sentence goes on asserting whatever it claimed about the
+destination. `make check-external` reads the data
 file and requests every URL; it is **not** part of `make check` or
 `make check-links`, because a build must not fail over somebody else's server.
 
@@ -441,8 +469,11 @@ a shared one.
   `Student coursework`), above the title with section coverage printed beside it
   as plain text (2026-08-11). Everything else that was a chip is one line of
   plain text under the byline. Eighteen pills across five entries were the most
-  clickable-looking things on a page where only the title is a link, and at one
-  weight they gave a reader nothing to rank. See the section above.
+  clickable-looking things on a page where the title was then the only link, and
+  at one weight they gave a reader nothing to rank. Since 2026-08-15 an entry
+  may also carry inline links in its note and a `.ex-wild__also` block of up to
+  three at the foot; the chip argument is unchanged, because none of those are
+  box-shaped either. See the section above.
 - **`.ex-review`** — an arc42 review note (2026-08-14): a subjective remark by
   a named arc42 maintainer, pinned into a section's prose at the passage it
   discusses, the way a comment lands in an architecture-documentation review.
