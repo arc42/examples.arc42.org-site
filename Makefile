@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 
-.PHONY: help dev build stop site check check-links check-brand check-wild-groups check-wild-fields check-system-fields check-review check-external clean install update shell logs new-system
+.PHONY: help dev build stop site check check-links check-brand check-wild-groups check-wild-fields check-structure check-system-fields check-review check-external clean install update shell logs new-system
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-14s\033[0m %s\n", $$1, $$2}'
@@ -18,7 +18,7 @@ stop: ## Stop and remove the running dev container
 site: build ## Generate the static site into _site/
 	docker compose run --rm jekyll bundle exec jekyll build
 
-check: check-brand check-wild-groups check-wild-fields check-system-fields check-review ## Run every check that does not need a build (brand deny-list, in-the-wild grouping and fields, system front matter, review notes)
+check: check-brand check-wild-groups check-wild-fields check-structure check-system-fields check-review ## Run every check that does not need a build (brand deny-list, in-the-wild grouping and fields, example structure and provenance, system front matter, review notes)
 
 check-brand: ## Enforce the ADR-0003 retired-hex deny-list and the one-hue rule
 	sh scripts/check-brand.sh
@@ -28,6 +28,9 @@ check-wild-groups: ## Every in-the-wild entry must name a run that exists
 
 check-wild-fields: ## Every in-the-wild entry has a known kind and an intact facet list
 	sh scripts/check-wild-fields.sh
+
+check-structure: ## Every example has an index.md, a matching permalink, 12 sections (or 0 if upcoming), provenance keys, and _originals not originals
+	sh scripts/check-structure.sh
 
 check-system-fields: ## Every system's index.md has the tile fields, ≤3 decisions, and well-formed keywords
 	sh scripts/check-system-fields.sh

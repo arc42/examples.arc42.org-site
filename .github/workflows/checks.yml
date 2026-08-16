@@ -13,14 +13,14 @@ jobs:
   brand:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Brand deny-list and Imprint Rule
         run: sh scripts/check-brand.sh
 
   links:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2'
@@ -33,45 +33,11 @@ jobs:
   structure:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
+      # The rules live in the script, NOT here. They were inlined in this file
+      # until 2026-08-16, which meant `make check` could not run them and a
+      # local run could not catch what CI caught: `upcoming: true` was taught
+      # to check-system-fields.sh and to both templates and missed the copy
+      # here, and main went red. One implementation, two callers.
       - name: Every example is complete and self-contained
-        run: |
-          set -eu
-          rc=0
-          for dir in _systems/*/; do
-            slug=$(basename "$dir")
-            case "$slug" in _*) continue ;; esac
-
-            if [ ! -f "$dir/index.md" ]; then
-              echo "::error::$slug has no index.md — no dashboard tile"
-              rc=1
-            elif ! grep -q "permalink: /systems/$slug/" "$dir/index.md"; then
-              echo "::error::$slug: permalink does not match its directory name"
-              rc=1
-            fi
-
-            # Twelve sections, always. A missing section breaks the rail and
-            # the stepper, and CONTRIBUTING asks for a one-line "not documented
-            # in the original" instead of a deleted file.
-            n=$(find "$dir" -maxdepth 1 -name '[0-9][0-9]-*.md' | wc -l | tr -d ' ')
-            if [ "$n" -ne 12 ]; then
-              echo "::error::$slug has $n section files, expected 12"
-              rc=1
-            fi
-
-            # Provenance is not optional — these are other people's systems.
-            for key in attribution licence source_url; do
-              grep -q "^$key:" "$dir/index.md" || {
-                echo "::error::$slug: index.md is missing '$key'"
-                rc=1
-              }
-            done
-
-            # The underscore on _originals is load-bearing: without it Jekyll
-            # publishes every source file.
-            if [ -d "$dir/originals" ]; then
-              echo "::error::$slug has originals/ — rename to _originals/ or it gets published"
-              rc=1
-            fi
-          done
-          exit $rc
+        run: sh scripts/check-structure.sh
