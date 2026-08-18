@@ -260,6 +260,40 @@
   added:       2026-08
   group:       start-here
 
+- title:       Heldenhelfer
+  url:         https://gitlab.opencode.de/wuerzburg/heldenhelfer/-/blob/main/architecture_doc/src/docs/arc42/Architecture_HELD_WUE.adoc
+  author:      smart and public GmbH, for Smarte Region Würzburg
+  description: >-
+    A volunteering platform for the clubs and initiatives of Würzburg:
+    a self-built portal for club records and membership, wired by Kafka
+    events to a Nextcloud digital office and a Discourse forum, with
+    Keycloak single sign-on across all three.
+  note: >-
+    One idea carries the whole document: every third-party tool the platform
+    leans on gets a small FastAPI service of its own that listens for club
+    events on Kafka and configures the tool over REST. Section 4 states it,
+    section 5 shows it per tool, and section 6 follows one club from the save
+    button through to shared folders in Nextcloud and a forum configured in
+    Discourse. Section 9 is candid about the cost: cheap block storage was
+    taken over the shared file service to keep the bill down, knowing that
+    rules out horizontal autoscaling until after the pilot.
+
+
+    Development stopped in August 2024 and the repository is archived; the
+    platform carrying the name today at
+    [heldenhelfer.wuerzburg.de](https://heldenhelfer.wuerzburg.de/info/) is a
+    WECHANGE instance, so nothing here will be revised. GitLab renders the
+    AsciiDoc in full but serves the Structurizr SVGs as downloads, so the
+    diagrams show as broken images; open them from
+    `architecture_doc/src/docs/images/`.
+  kind:        Production system
+  facets:      [Public sector, AsciiDoc, Structurizr diagrams, 35 quality scenarios, 7 decision records]
+  sections:    All 12
+  licence:     MIT
+  year:        2024
+  added:       2026-08
+  group:       real-systems
+
 - title:       geOrchestra Gateway — Architecture Documentation
   url:         https://docs.georchestra.org/gateway/en/latest/arc42/
   author:      The geOrchestra project
