@@ -279,9 +279,8 @@
 
 
     Development on this codebase stopped in August 2024 and the repository is
-    archived. The platform running under the name today at
-    [heldenhelfer.wuerzburg.de](https://heldenhelfer.wuerzburg.de/info/) is a
-    WECHANGE instance, built on different software entirely.
+    archived; the live platform now runs at
+    [heldenhelfer.wuerzburg.de](https://heldenhelfer.wuerzburg.de/info/).
   kind:        Production system
   facets:      [Public sector, AsciiDoc, Structurizr diagrams, 35 quality scenarios, 7 decision records]
   sections:    All 12

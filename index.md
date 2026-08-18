@@ -34,9 +34,8 @@ endnotes: >-
   every example below it "a complete architecture documentation", and an
   `upcoming: true` tile is the one thing on this page that is not: it has no
   sections at all. Counting it made the page's first claim false — so the
-  landing set is split, the number promises only what is written, and the
-  announced ones get their own clause instead of being folded in silently.
-  Both halves stay computed; neither goes stale.
+  landing set is split and the number promises only what is written. It stays
+  computed; it never goes stale.
 {%- endcomment -%}
 {%- assign landings = site.systems
       | where_exp: 'd', 'd.url contains "/systems/"'
@@ -45,8 +44,5 @@ endnotes: >-
 {%- assign upcoming = landings | where: 'upcoming', true -%}
 {%- assign example_count = landings.size | minus: upcoming.size -%}
 Each of the {{ example_count }} completed examples below is a **complete
-architecture documentation** of a real system, written along the same
-twelve-part arc42 structure. Different domains, different scales, different
-technologies.{% if upcoming.size == 1 %} One more is announced and on its
-way.{% elsif upcoming.size > 1 %} {{ upcoming.size }} more are announced and on
-their way.{% endif %}
+architecture documentation** of a real system, written along the arc42
+structure. Different domains, different scales, different technologies.
