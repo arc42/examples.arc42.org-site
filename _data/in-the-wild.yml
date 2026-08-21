@@ -233,6 +233,22 @@
 # behind it is what we claim.
 # ============================================================================
 
+- title:       Atlassian Tools — Architecture Documentation
+  url:         https://huber-and.github.io/atlassian-tools
+  author:      Andreas Huber
+  description: >-
+    Documentation of a Maven plugin and two Java libraries that publish
+    Antora-generated documentation to Confluence Cloud — for teams that write
+    docs as AsciiDoc but need them visible to colleagues who only look in
+    Confluence. Twelve arc42 chapters, self-published by the tool it
+    describes to both this site and a live Confluence space.
+  kind:        Production system
+  facets:      [Antora, AsciiDoc, PlantUML diagrams, Confluence Cloud publishing, 16 quality scenarios, 7 decision records]
+  sections:    All 12
+  licence:     Apache-2.0
+  added:       2026-08
+  group:       real-systems
+  
 - title:       Star Wars Death Star arc42 Documentation
   url:         https://github.com/juangcarmona/starwars-deathstar-arc42-documentation
   author:      Juan G. Carmona
