@@ -8,6 +8,14 @@ tagline: Docs-as-code toolchain, documenting its own ground-up rewrite.
 
 domain: Developer tooling
 
+highlights:
+  - section: 8
+    why: crosscutting concepts opening with a STRIDE threat model
+  - section: 9
+    why: twelve ADRs, one of them marked superseded
+  - section: 11
+    why: technical debt listed beside the risks, and what got resolved
+
 main_goal: >-
   Turn AsciiDoc documentation into published HTML, PDF, microsites and
   Confluence pages — cross-platform, from one wrapper script, with the v4

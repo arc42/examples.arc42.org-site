@@ -8,6 +8,10 @@ tagline: In-car speed measurement and video evidence for police pursuits.
 
 domain: Embedded / law enforcement
 
+highlights:
+  - section: 10
+    why: a quality tree with the scenarios hanging off it
+
 main_goal: >-
   Produce measurements and video recordings accurate and tamper-evident enough
   to hold up in court, while keeping every legally approved part inside one

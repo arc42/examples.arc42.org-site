@@ -8,6 +8,14 @@ tagline: National research data infrastructure for Earth sciences.
 
 domain: Research data infrastructure
 
+highlights:
+  - section: 3
+    why: says what is out of scope, which most documents skip
+  - section: 4
+    why: strategy told as the set of services it produces
+  - section: 7
+    why: two infrastructure levels, from containers to domains
+
 main_goal: >-
   Make the scattered data, software and training material of the Earth System
   Sciences findable, accessible, interoperable and reusable — by linking

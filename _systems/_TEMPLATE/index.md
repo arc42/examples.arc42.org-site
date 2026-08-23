@@ -27,6 +27,15 @@ tagline: One line, under 60 characters, saying what it is.
 # the dashboard filter matches on it.
 domain: Business domain
 
+# Optional. The curated band on /sections/NN-slug/ — one line per section this
+# documentation is worth reading for. See _systems/htmlsc/index.md for the
+# rules; scripts/check-sections.sh checks that each `section` is one this
+# system actually has.
+#
+# highlights:
+#   - section: 5
+#     why: small enough to read at once, still three levels deep
+
 # One sentence. The single thing this architecture had to get right.
 main_goal: The most important goal the architecture had to achieve.
 

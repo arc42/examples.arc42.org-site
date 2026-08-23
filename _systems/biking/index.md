@@ -8,6 +8,14 @@ tagline: Self-hosted bike-mileage and GPS-track tracker, Spring Boot on Java 8.
 
 domain: Personal / fitness tracking
 
+highlights:
+  - section: 2
+    why: three kinds of constraint, kept apart
+  - section: 8
+    why: twelve concepts, each one short enough to finish
+  - section: 12
+    why: a plain table of terms, which is all a glossary needs
+
 main_goal: >-
   Stay simple enough to double as a learning project for Java 8, Spring Boot
   and AngularJS, while still being a real system one person runs in production.

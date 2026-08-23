@@ -8,6 +8,27 @@ tagline: Broken-link checker for generated HTML documentation.
 
 domain: Developer tooling
 
+# The curated band on /sections/NN-slug/ — "worth starting with".
+#
+# Declared HERE, in the system's own directory, and not in a central
+# _data/section-picks.yml: that file would be exactly the registry
+# _includes/system-context.html forbids, and it would be the file nobody
+# remembers to revisit when a system is added.
+#
+# Optional, per system and per section. A system with none appears in the full
+# list on each page and is simply never a lead, which is what lets an import
+# ship complete before anyone has decided what it is exemplary at.
+#
+# `why` completes an implied "read this one because...": one line, lower case,
+# no closing full stop, under about sixty characters. It is about THIS SECTION
+# of this document, not about the system — "4M requests a day" is a fact about
+# the software and belongs in `scale`.
+highlights:
+  - section: 5
+    why: small enough to read at once, still three levels deep
+  - section: 9
+    why: two decisions, one of them a deliberate postponement
+
 main_goal: >-
   Find broken links and missing images in generated HTML, from inside an
   automated build.

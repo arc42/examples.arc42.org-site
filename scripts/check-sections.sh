@@ -13,6 +13,13 @@
 #    The price of that decision is that a rename here 404s there silently. This
 #    is where the noise gets made instead.
 #
+# 2. HIGHLIGHTS MUST NAME SECTIONS THEIR SYSTEM HAS. `highlights:` in a
+#    system's index.md declares the curated band on those pages. An entry
+#    naming a section that system has not written renders NOTHING at all --
+#    _layouts/section-index.html resolves the section file first and skips the
+#    pick when it is missing. A dead link would at least be visible; a pick
+#    that silently is not there is not. So it is caught here.
+#
 # Parsed with grep and sed rather than a YAML library so it has no dependency
 # beyond a POSIX shell, matching scripts/check-system-fields.sh.
 #
@@ -64,9 +71,59 @@ if [ "$expected" != "$actual" ]; then
   FAILED=1
 fi
 
+
+# ---- 2. Highlights name sections their system actually has ------------------
+#
+# The front matter block only: a `section:` in body prose is not front matter,
+# and the awk below stops at the closing ---.
+SYS_DIR="${3:-_systems}"
+
+highlight_problems=$(
+  for f in "$SYS_DIR"/*/index.md; do
+    [ -f "$f" ] || continue
+    name=$(basename "$(dirname "$f")")
+    [ "$name" = "_TEMPLATE" ] && continue
+
+    # Every section number this system declares a highlight for.
+    nums=$(awk '
+      NR == 1 && /^---[[:space:]]*$/ { infm = 1; next }
+      !infm { next }
+      /^---[[:space:]]*$/ { infm = 0; next }
+      /^highlights:[[:space:]]*$/ { inh = 1; next }
+      inh && /^[a-z_]+:/ { inh = 0 }
+      inh && /^[[:space:]]+-[[:space:]]*section:[[:space:]]*[0-9]+/ {
+        line = $0
+        sub(/^.*section:[[:space:]]*/, "", line)
+        sub(/[^0-9].*$/, "", line)
+        print line
+      }
+    ' "$f")
+
+    for n in $nums; do
+      # Zero-padded, because the files are 01-... through 12-....
+      pad=$(printf '%02d' "$n")
+      if ! ls "$SYS_DIR/$name/$pad"-*.md >/dev/null 2>&1; then
+        echo "$name|highlights names section $n, but $SYS_DIR/$name/ has no $pad-*.md"
+      fi
+    done
+  done
+)
+
+if [ -n "$highlight_problems" ]; then
+  echo "check-sections: a highlight names a section its system does not have" >&2
+  printf '%s\n' "$highlight_problems" | sed -E 's/^([^|]*)\|(.*)$/  \1:\n    \2/' >&2
+  echo "" >&2
+  echo "A highlight for a section a system has not written renders nothing at" >&2
+  echo "all on /sections/NN-slug/ -- the layout resolves the section file first" >&2
+  echo "and skips the pick when it is missing. Fix the number, or write the" >&2
+  echo "section." >&2
+  FAILED=1
+fi
+
 if [ "$FAILED" -eq 0 ]; then
   count=$(printf '%s\n' "$expected" | wc -l | tr -d ' ')
-  echo "check-sections: $count routes, each matching its section file in $TEMPLATE_DIR."
+  picked=$(grep -l '^highlights:' "$SYS_DIR"/*/index.md 2>/dev/null | wc -l | tr -d ' ')
+  echo "check-sections: $count routes matching $TEMPLATE_DIR, and every highlight on $picked systems names a section that exists."
 fi
 
 exit "$FAILED"

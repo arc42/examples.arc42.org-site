@@ -8,6 +8,12 @@ tagline: Customer contact handling for mass-market campaigns.
 
 domain: Customer relationship management
 
+highlights:
+  - section: 1
+    why: quality goals broken into aspects, then into scenarios
+  - section: 6
+    why: one import scenario, followed all the way down
+
 main_goal: >-
   Absorb a new mandator or campaign — new data structures, new file formats —
   without changing code.

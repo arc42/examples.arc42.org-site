@@ -8,6 +8,12 @@ tagline: Mainframe migration of 20 million financial records.
 
 domain: Financial services
 
+highlights:
+  - section: 1
+    why: quality goals with numbers in them, and non-goals
+  - section: 5
+    why: pipes and filters, named as the structural decision
+
 main_goal: >-
   Move ~20 million person and account records off VSAM/EBCDIC into a new Java
   object model, audit-proof, inside a single 24-hour window.

@@ -8,6 +8,10 @@ tagline: Usage statistics and uptime monitoring for arc42's websites.
 
 domain: Site observability
 
+highlights:
+  - section: 6
+    why: four scenarios, including startup and a health probe
+
 main_goal: >-
   Give every arc42 family site an honest, self-monitoring status page —
   one that says so when its own data goes stale, instead of failing
