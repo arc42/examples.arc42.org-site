@@ -1,0 +1,153 @@
+// ============================================================================
+// The cross-system section views — /sections/NN-slug/.
+//
+// TWO BANDS THAT MUST NOT LOOK ALIKE. The first is an opinion (a maintainer
+// saying this section is worth your time and why); the second is a generated
+// fact. If they render at the same weight the reader has to read both to find
+// out which is which, and the first band's whole value is that it can be
+// skimmed in three seconds.
+//
+// So: the picks get the serif title and a line of prose; the full list is a
+// flat run of names, one per line, at body weight with the domain trailing in
+// --muted. No cards, no fills, no radius on either. This page is not a
+// dashboard, and .ex-tile's affordances make a promise about a full read that
+// a section-level index does not make (the same argument _sass/_in-the-wild.scss
+// makes at length for the reading list).
+//
+// The jump grid at the foot is .ex-sectiongrid, already defined in
+// _system.scss. It is reused verbatim on purpose — see the comment in
+// _includes/section-grid.html — and the only addition here is the --current
+// modifier for the cell that points at the page you are on.
+//
+// Colour pairs, measured (ADR-0002):
+//   --ground-deep on --paper   14.12:1   (pick title link, list link)
+//   --ink         on --paper   13.41:1   (why line)
+//   --muted       on --paper    5.50:1   (domain, eyebrow)
+// ============================================================================
+
+// ---- Page head --------------------------------------------------------------
+
+.ex-sechead {
+  margin: 0 0 var(--s7);
+}
+
+.ex-sechead__num {
+  margin: 0 0 var(--s2);
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.ex-sechead__title {
+  margin: 0 0 var(--s3);
+  font-family: var(--serif);
+}
+
+.ex-sechead__blurb {
+  margin: 0;
+  max-width: var(--measure);
+  color: var(--ink);
+}
+
+// ---- Bands ------------------------------------------------------------------
+
+.ex-band {
+  margin: 0 0 var(--s8);
+
+  > :last-child {
+    margin-bottom: 0;
+  }
+}
+
+// ---- Band one: the picks ----------------------------------------------------
+//
+// A rule ABOVE each pick rather than a border around it: the bibliography
+// treatment, for the same reason /in-the-wild/ uses it. The first pick keeps
+// its rule — it separates the list from the h2, and without it the first entry
+// reads as a subtitle of the heading.
+
+.ex-picks {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-width: var(--measure);
+}
+
+.ex-pick {
+  padding: var(--s4) 0;
+  border-top: 1px solid var(--hairline);
+
+  &:last-child {
+    border-bottom: 1px solid var(--hairline);
+  }
+}
+
+.ex-pick__domain {
+  margin: 0 0 var(--s1);
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+
+.ex-pick__title {
+  margin: 0 0 var(--s2);
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  line-height: 1.25;
+
+  a {
+    color: var(--link);
+  }
+}
+
+// The one line of maintainers' voice. It is prose, not metadata, so it takes
+// the body face at body size — the whole point of the band is that a reader
+// reads this sentence rather than skipping it as a caption.
+.ex-pick__why {
+  margin: 0;
+  color: var(--ink);
+}
+
+// ---- Band two: every system -------------------------------------------------
+//
+// A run of names, one per line, with the domain trailing. Deliberately flatter
+// than the picks above it: this band is a complete list, and a reader arrives
+// at it already knowing which section they want.
+
+.ex-syslist {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-width: var(--measure);
+}
+
+.ex-syslist__item {
+  padding: var(--s3) 0;
+  border-top: 1px solid var(--hairline);
+
+  &:last-child {
+    border-bottom: 1px solid var(--hairline);
+  }
+}
+
+.ex-syslist__link {
+  color: var(--link);
+}
+
+.ex-syslist__domain {
+  margin-left: var(--s3);
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+// ---- The jump grid's current cell -------------------------------------------
+//
+// Not a link, because it points at the page the reader is on. It keeps the
+// cell's box so the grid does not develop a hole, and loses the affordance so
+// nothing invites a click that does nothing.
+
+.ex-sectiongrid__cell--current {
+  background: var(--wash-active);
+  color: var(--muted);
+  cursor: default;
+}

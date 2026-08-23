@@ -2,15 +2,146 @@
 layout: default
 ---
 {%- comment -%}
+============================================================================
   One arc42 section, across every documented system.
 
-  TWELVE PAGES, ONE LAYOUT. The twelve stubs in _pages/sections/ carry nothing
-  but front matter; everything on the rendered page is built here from
-  `page.section` and `page.slug`.
+  TWELVE PAGES, ONE LAYOUT. The stubs in _pages/sections/ carry nothing but
+  front matter; everything here is built from `page.section` and `page.slug`.
 
-  Stub for now. The two bands land in the task that follows this one.
+  TWO BANDS, AND THE ORDER MATTERS. "Worth starting with" is maintainers'
+  voice: a system, and one line saying why this particular section of this
+  particular document repays the time. "All systems" is generated and complete.
+  The first band is an opinion and the second is a fact, and a reader who
+  distrusts the opinion has the fact directly underneath it.
+
+  THE LOOP RUNS OVER SYSTEMS, NOT OVER SECTION DOCUMENTS, and in the same tile
+  order the dashboard uses. Selecting section documents directly with
+  `where: 'order', 5` is the trap: system LANDING pages carry `order` too, for
+  tile placement. They are 10, 20, 30 and up today, so that filter works by
+  accident and breaks the first time a system is ordered below 12.
+
+  NO COUNTS IN THE COPY. Not "eight systems", not "all twelve". This page
+  exists precisely because the corpus grows, so a number here dates the
+  sentence the day it is written. Same rule as the home page tagline
+  (_config.yml) and as the pointer added to docs.arc42.org on 2026-08-21.
+============================================================================
 {%- endcomment -%}
+
+{%- comment -%}
+  Landing pages, in dashboard order. The same triple filter _layouts/home.html
+  and search.json use, so the three views cannot disagree about what a system
+  is.
+
+  An ANNOUNCED system (`upcoming: true`, currently rgcat) passes this filter —
+  it has a title and a tagline — and then falls out below when it turns out to
+  have no file for this section. That is the right outcome and it needs no
+  special case: an announced example appears here the day its sections land.
+{%- endcomment -%}
+{%- assign landings = site.systems
+      | where_exp: 'd', 'd.url contains "/systems/"'
+      | where_exp: 'd', 'd.title'
+      | where_exp: 'd', 'd.tagline'
+      | sort: 'order' -%}
+
+{%- comment -%}
+  BAND ONE, captured rather than counted. The heading may only be emitted if
+  something ends up under it, and Liquid cannot look ahead — so the band is
+  rendered into a string first and the heading is emitted only if that string
+  has anything in it. Twelve pages with a permanently empty "Worth starting
+  with" would teach readers to ignore the band, which costs more than it saves.
+
+  Each pick is resolved through the same section lookup band two uses, so a
+  `highlights` entry naming a section its system does not have renders nothing
+  rather than a dead link. scripts/check-sections.sh should have caught that
+  before the build; this is the belt to its braces.
+{%- endcomment -%}
+{%- capture picks_html -%}
+  {%- for sys in landings -%}
+    {%- assign hit = sys.highlights | where: 'section', page.section | first -%}
+    {%- if hit -%}
+      {%- assign sys_slug = sys.path | remove_first: '_systems/' | split: '/' | first -%}
+      {%- assign sec_prefix = '_systems/' | append: sys_slug | append: '/' | append: page.slug | append: '.' -%}
+      {%- assign sec = site.systems | where_exp: 'd', 'd.path contains sec_prefix' | first -%}
+      {%- if sec -%}
+  <li class="ex-pick">
+    {%- if sys.domain %}<p class="ex-pick__domain">{{ sys.domain }}</p>{% endif -%}
+    <h3 class="ex-pick__title"><a href="{{ sec.url | relative_url }}">{{ sys.title }}</a></h3>
+    <p class="ex-pick__why">{{ hit.why }}</p>
+  </li>
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- assign picks_html = picks_html | strip -%}
+
+{%- comment -%}
+  BAND TWO. Every system that has a file for this section, picks included.
+  Leaving the highlighted ones out would make the band incomplete, and a
+  reader who scanned band one and then could not find that system in the full
+  list would reasonably conclude the list was broken.
+
+  The link goes to the SECTION, not to the system's landing page. A reader on
+  this page has already chosen the section; landing them one click short of it
+  is the thing this whole page family exists to fix.
+{%- endcomment -%}
+{%- capture all_html -%}
+  {%- for sys in landings -%}
+    {%- assign sys_slug = sys.path | remove_first: '_systems/' | split: '/' | first -%}
+    {%- assign sec_prefix = '_systems/' | append: sys_slug | append: '/' | append: page.slug | append: '.' -%}
+    {%- assign sec = site.systems | where_exp: 'd', 'd.path contains sec_prefix' | first -%}
+    {%- if sec -%}
+  <li class="ex-syslist__item">
+    <a class="ex-syslist__link" href="{{ sec.url | relative_url }}">{{ sys.title }}</a>
+    {%- if sys.domain %}<span class="ex-syslist__domain">{{ sys.domain }}</span>{% endif -%}
+  </li>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- assign all_html = all_html | strip -%}
+
 <div class="ex-shell ex-shell--prose">
-  <h1>{{ page.section }}. {{ page.title }}</h1>
-  <p>{{ page.blurb }}</p>
+
+  <nav class="ex-breadcrumb" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="{{ '/' | relative_url }}">Examples</a></li>
+      <li><a href="{{ '/sections/' | relative_url }}">The twelve sections</a></li>
+      <li aria-current="page">{{ page.title }}</li>
+    </ol>
+  </nav>
+
+  <header class="ex-sechead">
+    <p class="ex-sechead__num">arc42 section {{ page.section }}</p>
+    <h1 class="ex-sechead__title">{{ page.title }}</h1>
+    <p class="ex-sechead__blurb">{{ page.blurb }}</p>
+  </header>
+
+  {%- if picks_html != '' -%}
+  <section class="ex-band" aria-labelledby="ex-picks-h">
+    <h2 class="ex-h2" id="ex-picks-h">Worth starting with</h2>
+    <ul class="ex-picks">{{ picks_html }}</ul>
+  </section>
+  {%- endif -%}
+
+  {%- if all_html != '' -%}
+  <section class="ex-band" aria-labelledby="ex-all-h">
+    <h2 class="ex-h2" id="ex-all-h">This section in every documentation</h2>
+    <ul class="ex-syslist">{{ all_html }}</ul>
+  </section>
+  {%- else -%}
+  <div class="ex-note">
+    <p><strong>Nothing here yet.</strong> No documented system has written this
+    section. See <a href="{{ '/contribute/' | relative_url }}">Contribute</a>.</p>
+  </div>
+  {%- endif -%}
+
+  {%- comment -%}
+    The sibling nav, and the reason /sections/ needs no masthead slot: every
+    one of the twelve reaches the other eleven, and the breadcrumb reaches the
+    parent.
+  {%- endcomment -%}
+  <section class="ex-band">
+    <h2 class="ex-h2">The other sections</h2>
+    {% include section-grid.html current=page.section %}
+  </section>
+
 </div>
