@@ -1,0 +1,40 @@
+{%- comment -%}
+  The twelve-cell jump grid over the /sections/ pages.
+
+  It is the SAME component as the one on a system's landing page
+  (_layouts/system.html, .ex-sectiongrid) and deliberately so: on that page it
+  jumps between the twelve sections of one system, and here it jumps between
+  the twelve views across all of them. A reader who has learned the shape once
+  does not have to learn it twice, and the twelve oversized numerals are the
+  site's one piece of typographic character.
+
+  The list is built from the stubs' own front matter, so a renamed section is
+  one edit in one file. Sorting on `section` and not on `title` or on the
+  page's URL: the arc42 sequence is the only order this grid may ever be in.
+
+  Parameters
+    current  optional — the section number of the page doing the including.
+             That cell renders as plain text with aria-current, because a link
+             to the page you are already on is a dead end for a keyboard user
+             and a lie to a screen reader.
+
+  Include it as:  {% include section-grid.html current=page.section %}
+{%- endcomment -%}
+{%- assign section_pages = site.pages | where_exp: 'p', 'p.layout == "section-index"' | sort: 'section' -%}
+<ol class="ex-sectiongrid">
+  {%- for s in section_pages -%}
+  {%- if include.current and s.section == include.current -%}
+  <li class="ex-sectiongrid__cell ex-sectiongrid__cell--current" aria-current="page">
+    <span class="ex-sectiongrid__num">{{ s.section }}</span>
+    <span class="ex-sectiongrid__name">{{ s.title }}</span>
+  </li>
+  {%- else -%}
+  <li class="ex-sectiongrid__cell">
+    <a href="{{ s.url | relative_url }}">
+      <span class="ex-sectiongrid__num">{{ s.section }}</span>
+      <span class="ex-sectiongrid__name">{{ s.title }}</span>
+    </a>
+  </li>
+  {%- endif -%}
+  {%- endfor -%}
+</ol>

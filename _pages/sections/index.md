@@ -16,8 +16,6 @@ search_body: false
   The list is built from the twelve stubs in this directory, not written out
   here, so renaming a section is one edit in one file.
 {%- endcomment -%}
-{%- assign section_pages = site.pages | where_exp: 'p', 'p.layout == "section-index"' | sort: 'section' -%}
-
 <div class="ex-shell ex-shell--prose">
   <nav class="ex-breadcrumb" aria-label="Breadcrumb">
     <ol>
@@ -36,14 +34,5 @@ search_body: false
     <a href="https://docs.arc42.org">docs.arc42.org</a>.</p>
   </div>
 
-  <ol class="ex-sectiongrid">
-    {%- for s in section_pages -%}
-    <li class="ex-sectiongrid__cell">
-      <a href="{{ s.url | relative_url }}">
-        <span class="ex-sectiongrid__num">{{ s.section }}</span>
-        <span class="ex-sectiongrid__name">{{ s.title }}</span>
-      </a>
-    </li>
-    {%- endfor -%}
-  </ol>
+  {% include section-grid.html %}
 </div>
