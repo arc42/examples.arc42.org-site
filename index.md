@@ -13,6 +13,11 @@ title: Architecture examples
 # rather than `relative_url`; `baseurl` is empty in _config.yml, and
 # `make check-links` fails the build if that ever stops being true.
 endnotes: >-
+  Reading for one arc42 section rather than for one system? Every section has
+  a page of its own, gathering that section from each documentation here:
+  [the twelve sections](/sections/).
+
+
   Looking for short, section-sized illustrations instead? Those live with the
   template documentation at [docs.arc42.org](https://docs.arc42.org).
 

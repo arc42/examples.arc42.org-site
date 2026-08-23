@@ -672,11 +672,45 @@ in the markup at zero cost, but the tint stays off until someone reopens the
 vocabulary question — and the site's colour story below the hero is the wash
 ladder (see *The field*), not hues.
 
-## Deferred: cross-system section views
+## Cross-system section views
 
-A `/sections/03-context/` page listing every system's section 3 — the "all
-context views together" idea — is **not built**. The structure already supports
-it: every section file carries `order`, so the page is a short Liquid loop over
-`site.systems` grouped by `order`. It was left out of the first version because
-it is worth building once there are enough examples for a comparison to say
-something.
+Built 2026-08-23. `/sections/` and twelve pages under it, one per arc42
+section, each gathering that section from every documented system. The
+deferral this replaces said the idea was worth building "once there are enough
+examples for a comparison to say something", and that is the condition that
+changed.
+
+Each page carries two bands. **Worth starting with** is maintainers' voice: a
+system, and one line saying why that section of that document repays the time.
+**This section in every documentation** is generated and complete. The first is
+an opinion, the second is a fact, and the fact sits directly under the opinion.
+
+The curated band is declared per system, in `highlights:` in its own
+`index.md`, because a central `_data/section-picks.yml` is exactly the registry
+`_includes/system-context.html` forbids, and it would be the file nobody
+remembers to revisit when a system is added.
+
+The loop runs over system LANDING pages and then resolves each system's file
+for this section by path. It does not select section documents with
+`where: 'order', 5`, which is the trap this design walked up to and stepped
+around: landing pages carry `order` too, for tile placement, so that filter
+works only by accident of every landing order being at least 10.
+
+docs.arc42.org links its twelve section pages here. It learns exactly one thing
+per section: a URL, in its own `_data/sections.yml`. No data crosses the
+boundary, not system names, not depth, and above all not a count. A JSON feed
+was considered and rejected: the family already runs one for training dates, so
+the pattern is proven, but a feed only earns its keep if the consumer renders
+something that varies, and docs deliberately renders nothing that varies.
+
+The price of that decision is that a renamed route here 404s there silently, so
+`scripts/check-sections.sh` asserts the twelve route slugs are exactly the
+section filenames in `_systems/_TEMPLATE/`. That check is what stands behind
+the twenty-four outbound links. It also asserts that every `highlights` entry
+names a section its system actually has, because such an entry renders nothing
+at all rather than a dead link.
+
+Not in the masthead nav. The nav is a designed surface and `/sections/` is
+reached from the home page and from sibling links on the twelve pages
+themselves. If it earns a slot later, that is a separate decision with its own
+layout consequences.
