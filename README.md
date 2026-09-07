@@ -11,7 +11,7 @@ keywords, so a reader can pick an example in a few seconds.
 ## Build & serve
 
 ```bash
-make dev          # local dev server via Docker (http://localhost:4042)
+make dev          # local dev server via Docker (http://localhost:4230)
 make site         # build the static site into _site/
 make check        # brand deny-list + Imprint Rule checks
 make check-links  # build + validate internal links/HTML (html-proofer)
@@ -24,7 +24,7 @@ make help         # all targets
 The dev image is built from this repo's own `Dockerfile` (Ruby 3.2, gems
 pinned via `Gemfile.lock`). Run `make install` after editing the `Gemfile`.
 
-> This site's dev server uses port 4042 (not Jekyll's default 4000) so it can
+> This site's dev server uses port 4230 (not Jekyll's default 4000) so it can
 > run alongside other arc42 sites' dev servers without a port clash.
 
 Without Make: `docker compose up`. Native Ruby: `bundle install && bundle exec

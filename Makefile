@@ -5,8 +5,8 @@
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-14s\033[0m %s\n", $$1, $$2}'
 
-dev: ## Start the local Jekyll dev server with live reload (http://localhost:4042)
-	@echo "==> Open http://localhost:4042  (NOT http://0.0.0.0:4042 — Firefox refuses to connect to 0.0.0.0)"
+dev: ## Start the local Jekyll dev server with live reload (http://localhost:4230)
+	@echo "==> Open http://localhost:4230  (NOT http://0.0.0.0:4230 — Firefox refuses to connect to 0.0.0.0)"
 	docker compose up --build
 
 build: ## Build the Docker dev image (examples-arc42-site:latest) from the Gemfile-pinned gems
