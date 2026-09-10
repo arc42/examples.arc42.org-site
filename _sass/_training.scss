@@ -28,14 +28,10 @@
 //   --muted        on --arc42-maroon-bg    5.2:1   (where, gloss, as-of)
 // ============================================================================
 
-.ex-shell--training {
-  padding-top: 0;
-  padding-bottom: var(--s7);
-}
-
 .subtle-ad {
   max-width: var(--measure);
   padding: var(--s5);
+  list-style: none;
 
   background: var(--arc42-maroon-bg);
   border: 1px solid var(--arc42-maroon);
@@ -45,10 +41,41 @@
   color: var(--ink);
   line-height: 1.5;
 
-  // The wild page puts it after the invitation; the home page after the
-  // endnotes. Both are prose blocks, and one step of --s7 separates it from
-  // either.
+  // On /in-the-wild/ it follows the invitation block, one step of --s7
+  // below it. In the grid the gap is the grid's, and the tile variant zeroes
+  // this.
   margin-top: var(--s7);
+
+  // Body and flower side by side once there is room; below that the flower
+  // is hidden rather than shrunk, because a 96px flower above four rows of
+  // dates is a thumbnail, and this art is not a thumbnail.
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--s5);
+  align-items: end;
+
+  @media (min-width: 43rem) {
+    &:has(.subtle-ad__flower) {
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+  }
+
+  &__flower {
+    display: none;
+    width: clamp(140px, 18vw, 220px);
+    height: auto;
+    justify-self: end;
+    align-self: end;
+    user-select: none;
+
+    @media (min-width: 43rem) {
+      display: block;
+    }
+  }
+
+  &__body {
+    min-width: 0;
+  }
 
   &__kicker {
     margin: 0 0 var(--s2);
@@ -160,4 +187,22 @@
 .training-dates__asof {
   font-size: 0.875rem;
   color: var(--muted);
+}
+
+// ---- The tile variant (home page) --------------------------------------------
+// The last item of .ex-grid. Two columns wide wherever the grid has two or
+// more: the grid's tracks are minmax(19rem, 1fr) with a --s5 gap inside a
+// shell padded --s5 either side, so two tracks exist from 2×304 + 24 + 48 =
+// 680px up, and 43rem is the first rem step past that. Below it the span is
+// dropped, because `span 2` on a one-column grid creates an implicit second
+// column and the page scrolls sideways. With nine examples and the
+// invitation the grid holds ten tiles, and a two-wide twelfth cell closes a
+// three-column grid to four full rows and a two-column grid to six.
+.subtle-ad--tile {
+  max-width: none;
+  margin-top: 0;
+
+  @media (min-width: 43rem) {
+    grid-column: span 2;
+  }
 }

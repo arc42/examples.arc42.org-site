@@ -303,9 +303,20 @@ the site asking for something.
 
 ## Learn from the originals
 
-The training note (2026-09-10). The home page and `/in-the-wild/` end with
-the arc42 team's note about its training, headed *Learn from the originals*,
-with the next date of each course. It is the family's `subtle-ad`, the
+The training note (2026-09-10). The arc42 team's note about its training,
+headed *Learn from the originals*, with the next date of each course. On the
+home page it is the **last tile of the grid, two columns wide**; on
+`/in-the-wild/` it closes the page after the invitation. It began the day in
+a fourth shell under the home page's endnotes, and moved the same afternoon:
+the foot of the page is the part nobody scrolls to, and the grid is where the
+reader already is. With nine examples and the invitation the grid holds ten
+tiles, and a two-wide twelfth cell closes a three-column grid to four full
+rows with no orphan. The span is dropped below 43rem, where the grid has one
+column and a span would scroll the page sideways.
+
+It is not an `.ex-tile`: it has several links, so the stretched-link
+invariant does not apply, and it takes no lift on hover because it is not a
+thing that opens. It is the family's `subtle-ad`, the
 component docs.arc42.org, faq.arc42.org, arc42.org and arc42.de render at the
 foot of their pages, and it takes the family's class names under the
 Same-Name Rule the footer follows: a published interface, matched, keeps its
@@ -337,6 +348,13 @@ filtered payload, a date that merely passes changes the file, and that commit
 is what triggers the rebuild that keeps "today" honest. The dispatch is an
 accelerator, never a dependency: if it does not arrive, the weekly run bounds
 staleness at one week, and a failed fetch keeps the last snapshot.
+
+A flower. The tile carries a piece of the herbarium art at its right, from
+`assets/images/brand/contribution-flower.png`, decorative and `alt=""`. The
+include renders it only when the file exists, so the art can arrive
+separately from the markup and a tile with a broken image never ships. It is
+hidden below 43rem rather than shrunk: a 96px flower above four rows of dates
+would be a thumbnail, and this art is not a thumbnail.
 
 Two departures from docs' copy of the component. The kicker is real text,
 not generated content, because "from the arc42 team" is the disclosure a

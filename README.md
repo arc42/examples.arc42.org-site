@@ -11,8 +11,8 @@ grid is not a system: it invites the reader to contribute one.
 
 ## Training dates
 
-The *Learn from the originals* block on the home page and on `/in-the-wild/`
-is rendered at build time from `_data/trainings.json`, an expiry-filtered copy
+The *Learn from the originals* tile, last in the home page grid and a block
+on `/in-the-wild/`, is rendered at build time from `_data/trainings.json`, an expiry-filtered copy
 of <https://trainings.arc42.org/api/trainings.json> that
 `.github/workflows/refresh-trainings.yml` refreshes weekly (Mondays 04:53
 UTC), manually via workflow dispatch, or on the `trainings-updated`
