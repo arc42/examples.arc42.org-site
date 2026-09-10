@@ -25,6 +25,22 @@ endnotes: >-
   More arc42 documentation exists that cannot live here — other people's
   systems, on other people's sites, under licences that do not let us
   republish them. Those are listed under [In the Wild](/in-the-wild/).
+# The invitation tile (2026-09-10). Content and slot live here, as the
+# endnotes do; the markup is _includes/invite-tile.html and the placement is
+# in _layouts/home.html. `after` is the catalogue number it follows. 4 puts
+# it at the centre of a three-by-three block, and a fixed slot keeps it there
+# as examples arrive instead of letting it drift to the end of the grid. It is
+# not a system, so it is not counted by the sentence above the grid and it
+# carries no catalogue number.
+invite:
+  after: 4
+  eyebrow: An invitation
+  title: Your documentation belongs here
+  text: >-
+    A few thousand people read these examples every month. If you have
+    documented a real system along arc42 and may publish it, we would like to
+    add it. If you cannot republish it, a link is welcome too.
+  call: How to contribute
 ---
 
 {%- comment -%}

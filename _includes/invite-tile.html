@@ -1,0 +1,30 @@
+{%- comment -%}
+  The invitation tile (2026-09-10): the site asking for examples, placed in
+  the dashboard grid by _layouts/home.html. Everything it says comes from
+  `invite` in index.md's front matter, because it is content and content
+  lives in the page file.
+
+  It is NOT a system tile. No catalogue number, no domain, no goal, no
+  decisions: those fields are the summary of a completed audit, and this tile
+  has read nothing. It borrows the tile's geometry (.ex-tile) so it sits in
+  the grid's rhythm, and inverts the surface (.ex-invite) so nobody mistakes
+  it for an eleventh example. Rationale in DESIGN.md, "The invitation".
+
+  One link, on the title, stretched over the tile: the invariant every tile
+  keeps. The call line at the bottom is plain text for the same reason.
+{%- endcomment -%}
+<li class="ex-tile ex-tile--invite ex-invite">
+  {%- if include.invite.eyebrow -%}
+  <p class="ex-tile__domain ex-invite__eyebrow">{{ include.invite.eyebrow }}</p>
+  {%- endif -%}
+
+  <h2 class="ex-tile__title ex-invite__title">
+    <a class="ex-tile__link" href="{{ '/contribute/' | relative_url }}">{{ include.invite.title }}</a>
+  </h2>
+
+  <p class="ex-tile__goal ex-invite__text">{{ include.invite.text }}</p>
+
+  {%- if include.invite.call -%}
+  <p class="ex-invite__call">{{ include.invite.call }}</p>
+  {%- endif -%}
+</li>

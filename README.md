@@ -6,7 +6,8 @@ twelve sections of the [arc42](https://arc42.org) template. Published at
 
 The home page is a dashboard of tiles — one per system, each carrying its
 domain, its main goal, its strategic decisions and its technologies as
-keywords, so a reader can pick an example in a few seconds.
+keywords, so a reader can pick an example in a few seconds. One tile in the
+grid is not a system: it invites the reader to contribute one.
 
 ## Build & serve
 

@@ -265,6 +265,42 @@ it still reports supplying one without the other. The four tile fields are
 owed either way: an announced tile that says nothing about what is coming is
 just a gap in the grid.
 
+## The invitation
+
+The dashboard asks for examples (2026-09-10). A few thousand people read the
+page every month and the corpus grows only when one of them sends something,
+so the ask sits where the readers are: one tile in the grid, at the fifth
+slot, the centre of a three-by-three block. It is placed by catalogue
+position, `invite.after` in `index.md`, not appended after the last example,
+because a card at the end of the grid is the one nobody scrolls to, and a
+fixed slot keeps it central as examples arrive. The catalogue numbering runs
+past it unbroken: the numeral counts systems, and this is not one.
+
+It is not a system tile, and it is not the announced-example treatment
+either. Dashed and recessed says "an example, not yet written". This has
+read nothing and summarises nothing, so it takes the family's other surface:
+`--ground` with `--tint` on it, the pairing the masthead, the footer and the
+`COMING SOON` band already use for "chrome, not content". One dark sheet
+among nine paper ones is the eye-catcher the ask needs, with no new hue and
+no legend owed, because the ground already carries exactly this meaning. The
+distinction is not visual alone: the eyebrow says *An invitation*, the title
+is a sentence addressed to the reader, and there is no domain, goal, decision
+list or scale to mistake for an audit.
+
+The tile keeps `.ex-tile`'s geometry, stretched link and hover lift, so it
+sits in the grid's rhythm and behaves like its neighbours under the cursor.
+Its content is front matter on `index.md`, as the endnotes are, because it is
+content; the markup is `_includes/invite-tile.html`, the surface is
+`_sass/_invite.scss`. The intro sentence's count is untouched: the invitation
+is not a landing page and never enters `landings`.
+
+The same component closes `/in-the-wild/` as a block at the measure, after
+the last run, with the run heading's serif so it reads as part of that page.
+That list grows only when somebody sends a link, and the ask is made once, at
+the end, after a reader has seen what an entry looks like. The box is not
+`.ex-note`: the wash box is an aside in the reader's own voice, and this is
+the site asking for something.
+
 ## The filter is gone
 
 The dashboard filter (label, search input, live count, empty state,

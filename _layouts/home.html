@@ -44,7 +44,23 @@ layout: default
     <ul class="ex-grid">
       {%- for sys in systems -%}
         {% include system-tile.html sys=sys index=forloop.index %}
+        {%- comment -%}
+          THE INVITATION (2026-09-10) follows the tile whose catalogue number
+          index.md names in `invite.after`. It is rendered inside the loop so
+          that it holds a fixed slot near the centre of the grid, and the
+          numbering runs past it unbroken: `index` still counts systems only.
+        {%- endcomment -%}
+        {%- if page.invite and forloop.index == page.invite.after -%}
+          {% include invite-tile.html invite=page.invite %}
+        {%- endif -%}
       {%- endfor -%}
+      {%- comment -%}
+        Fewer examples than the slot asks for: the invitation closes the grid
+        rather than vanishing.
+      {%- endcomment -%}
+      {%- if page.invite and systems.size < page.invite.after -%}
+        {% include invite-tile.html invite=page.invite %}
+      {%- endif -%}
     </ul>
   </div>
 </section>

@@ -1,0 +1,116 @@
+// ============================================================================
+// The invitation (2026-09-10): the site asking for examples.
+//
+// Two places, one component. On the home page it is a tile in the dashboard
+// grid (.ex-tile.ex-invite), on /in-the-wild/ it is a block at the foot of the
+// reading list (.ex-invite--block). Both are the site speaking, not a
+// documentation being shown, and the surface says so: --ground with --tint on
+// it, the pairing the masthead, the footer and the "coming soon" stamp already
+// use for "chrome, not content". No new hue. One dark sheet among the paper
+// ones is the eye-catcher the tile needs, and it costs nothing from the
+// palette because the ground is spoken for by exactly this meaning.
+//
+// Not the dashed, recessed treatment of an announced example: that says "an
+// example, not yet written", and this is not an example at all. Not .ex-note
+// either: the wash box is an aside in the reader's own voice, and this is
+// an ask.
+//
+// The border stays, in the ground's own colour. The fill against the field is
+// what makes it an object (--ground on --wash-calm, far past 3:1), so the
+// edge has no contrast duty; it exists so the geometry matches its
+// neighbours to the pixel.
+//
+// Colour pairs, measured (ADR-0002):
+//   --tint      on --ground   12.44:1   (title)
+//   --tint-soft on --ground    8.93:1   (eyebrow, text, call line)
+//   --focus-ring-on-band       8.15:1   (the on-band ring, as in the masthead)
+// ============================================================================
+.ex-invite {
+  background: var(--ground);
+  border-color: var(--ground);
+  color: var(--tint-soft);
+
+  // The default ring is --ground-deep, invisible on --ground. Same fix the
+  // masthead needed, for the same reason.
+  :focus-visible {
+    outline-color: var(--focus-ring-on-band);
+  }
+
+  &__eyebrow {
+    color: var(--tint-soft);
+  }
+
+  &__title a {
+    color: var(--tint);
+  }
+
+  &__text {
+    color: var(--tint-soft);
+  }
+
+  // Plain text, not a second link: the stretched link on the title already
+  // covers the whole tile. It sits where a system tile puts its scale line,
+  // on a rule mixed from the two on-band colours, because the hairline token
+  // is a dark rgba and disappears on the ground.
+  &__call {
+    margin-top: auto;
+    padding-top: var(--s3);
+    border-top: 1px solid color-mix(in oklab, var(--ground), var(--tint) 25%);
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--tint-soft);
+  }
+}
+
+// The tile variant. .ex-tile's hover swaps the border to --ground-deep, which
+// is a no-op here; the lift and shadow still register, and the border steps
+// to the soft tint so the hover has an edge as it has on every other tile.
+.ex-tile--invite {
+  @media (hover: hover) {
+    &:hover { border-color: var(--tint-soft); }
+  }
+  &:focus-within { border-color: var(--tint-soft); }
+}
+
+// The block variant on /in-the-wild/. It sits after the last run, at the
+// measure, and its title takes the run heading's serif so it reads as part
+// of that page rather than as a tile that lost its grid.
+.ex-invite--block {
+  max-width: var(--measure);
+  margin-top: var(--s8);
+  padding: var(--s5);
+  border: 1px solid var(--ground);
+  border-radius: var(--radius);
+
+  .ex-invite__eyebrow {
+    margin: 0 0 var(--s3);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .ex-invite__title {
+    margin: 0;
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    line-height: 1.2;
+
+    a {
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+        text-decoration-thickness: 2px;
+      }
+    }
+  }
+
+  .ex-invite__text {
+    margin: var(--s3) 0 0;
+    font-family: var(--serif);
+    font-size: 1.0625rem;
+    line-height: 1.45;
+  }
+}
