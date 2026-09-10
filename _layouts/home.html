@@ -81,6 +81,19 @@ layout: default
   </div>
 </div>
 {%- endif -%}
+
+{%- comment -%}
+  LEARN FROM THE ORIGINALS (2026-09-10). The arc42 team's training note, the
+  last thing before the footer: after every example and after every link
+  that sends a reader elsewhere for documentation. It is the family's
+  subtle-ad, rendered from _data/trainings.json by
+  _includes/training-dates.html; rationale in DESIGN.md, "Learn from the
+  originals". A fourth shell, on paper, because it is prose-width content
+  like the endnotes above it and not a band of its own.
+{%- endcomment -%}
+<div class="ex-shell ex-shell--training">
+  {% include training-dates.html %}
+</div>
 {%- else -%}
 <div class="ex-shell">
   <div class="ex-note">

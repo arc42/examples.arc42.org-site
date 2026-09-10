@@ -301,6 +301,49 @@ the end, after a reader has seen what an entry looks like. The box is not
 `.ex-note`: the wash box is an aside in the reader's own voice, and this is
 the site asking for something.
 
+## Learn from the originals
+
+The training note (2026-09-10). The home page and `/in-the-wild/` end with
+the arc42 team's note about its training, headed *Learn from the originals*,
+with the next date of each course. It is the family's `subtle-ad`, the
+component docs.arc42.org, faq.arc42.org, arc42.org and arc42.de render at the
+foot of their pages, and it takes the family's class names under the
+Same-Name Rule the footer follows: a published interface, matched, keeps its
+name.
+
+It is the first thing on this site to spend `--arc42-maroon`, which
+`_sass/_tokens.scss` has carried as "sponsor quarantine only" since the
+palette was set. The quarantine is the point: the maroon appears in this box
+and nowhere else, so a reader who knows the family's note recognises it, and
+a reader who does not still sees a colour nothing else on the page uses, on a
+hard offset shadow no content surface carries. Both say "an aside from the
+maintainers, not part of the examples".
+
+The rows are the next date of **each course**, in date order, not the next
+eight dates across all courses as docs renders. On a home page four rows that
+show four different courses say more than five rows of which three are the
+same one. A course with no admissible date has no row; zero rows degrade to
+the sentence and the link. Cancelled and full dates never render, waitlist
+renders with a marker, and every row carries a DE/EN badge because language
+is a required field of the feed.
+
+The data is a snapshot. `_data/trainings.json` is the expiry-filtered copy
+of `trainings.arc42.org/api/trainings.json` that
+`.github/workflows/refresh-trainings.yml` commits weekly, on demand, and on
+the `trainings-updated` dispatch the trainings site sends after its feed
+republishes. This site has no build step of its own, GitHub Pages builds it,
+so nothing is fetched at build or run time. Because the workflow stores the
+filtered payload, a date that merely passes changes the file, and that commit
+is what triggers the rebuild that keeps "today" honest. The dispatch is an
+accelerator, never a dependency: if it does not arrive, the weekly run bounds
+staleness at one week, and a failed fetch keeps the last snapshot.
+
+Two departures from docs' copy of the component. The kicker is real text,
+not generated content, because "from the arc42 team" is the disclosure a
+screen-reader user most needs before the heading. And the heading is an `h2`
+at this site's scale, because here it heads a block of its own rather than a
+footnote under an article.
+
 ## The filter is gone
 
 The dashboard filter (label, search input, live count, empty state,

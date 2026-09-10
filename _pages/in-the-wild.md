@@ -136,6 +136,14 @@ search_body: false
     One entry in a data file is all it takes. The note is ours to write.</p>
   </aside>
 
+  {%- comment -%}
+    LEARN FROM THE ORIGINALS (2026-09-10). The training note, after the
+    invitation, so the page's last two blocks are the two things the site
+    asks of a reader: a link, then an hour or three of their time. Same
+    include as the home page.
+  {%- endcomment -%}
+  {% include training-dates.html %}
+
   {%- else -%}
   <div class="ex-prose">
     <div class="ex-note">

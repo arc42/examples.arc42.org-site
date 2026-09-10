@@ -9,6 +9,20 @@ domain, its main goal, its strategic decisions and its technologies as
 keywords, so a reader can pick an example in a few seconds. One tile in the
 grid is not a system: it invites the reader to contribute one.
 
+## Training dates
+
+The *Learn from the originals* block on the home page and on `/in-the-wild/`
+is rendered at build time from `_data/trainings.json`, an expiry-filtered copy
+of <https://trainings.arc42.org/api/trainings.json> that
+`.github/workflows/refresh-trainings.yml` refreshes weekly (Mondays 04:53
+UTC), manually via workflow dispatch, or on the `trainings-updated`
+`repository_dispatch` event the trainings site sends after its feed
+republishes, committing only when the dates actually changed. Edit dates in
+the trainings repo's `_data/trainings.yml`, never here.
+`_includes/training-dates.html` owns the rendering, `_sass/_training.scss` the
+styling. Same integration as docs.arc42.org, faq.arc42.org, arc42.org and
+arc42.de.
+
 ## Build & serve
 
 ```bash

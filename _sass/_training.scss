@@ -1,0 +1,163 @@
+// ============================================================================
+// Learn from the originals (2026-09-10): the arc42 team's training note.
+//
+// This is the family's .subtle-ad, the component docs.arc42.org, faq and
+// arc42.org render at the foot of their pages, and under the Same-Name Rule
+// (DESIGN.md, the footer) it takes the family's class names because it
+// matches the family's spec: a quiet note in the maroon that every family
+// site quarantines for exactly this use. _sass/_tokens.scss has carried
+// --arc42-maroon as "sponsor quarantine only" since the palette was set, and
+// this is the first thing on the site to spend it. It buys nothing else:
+// the maroon appears here and nowhere else, so a reader who has met the
+// family's note on docs.arc42.org recognises it, and a reader who has not
+// still sees a box in a colour nothing else on the page uses, on a hard
+// offset shadow that no content surface carries. Both say "aside from the
+// maintainers, not part of the examples".
+//
+// Two departures from docs' copy of the component, both deliberate:
+// · the kicker is real text (.subtle-ad__kicker), not a ::before with
+//   `content:`. Generated text is not reliably announced, and "from the
+//   arc42 team" is the disclosure a screen-reader user most needs before
+//   the heading.
+// · the heading is an h2 at this site's heading scale, because on the home
+//   page it heads a band of its own, not a footnote under an article.
+//
+// Colour pairs, measured (ADR-0002):
+//   --arc42-maroon on --arc42-maroon-bg    7.9:1   (kicker, heading, badge)
+//   --ink          on --arc42-maroon-bg   12.6:1   (text)
+//   --muted        on --arc42-maroon-bg    5.2:1   (where, gloss, as-of)
+// ============================================================================
+
+.ex-shell--training {
+  padding-top: 0;
+  padding-bottom: var(--s7);
+}
+
+.subtle-ad {
+  max-width: var(--measure);
+  padding: var(--s5);
+
+  background: var(--arc42-maroon-bg);
+  border: 1px solid var(--arc42-maroon);
+  border-radius: var(--radius);
+  box-shadow: 3px 3px 0 0 var(--arc42-maroon);
+
+  color: var(--ink);
+  line-height: 1.5;
+
+  // The wild page puts it after the invitation; the home page after the
+  // endnotes. Both are prose blocks, and one step of --s7 separates it from
+  // either.
+  margin-top: var(--s7);
+
+  &__kicker {
+    margin: 0 0 var(--s2);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--arc42-maroon);
+  }
+
+  &__title {
+    margin: 0 0 var(--s2);
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    line-height: 1.2;
+    color: var(--arc42-maroon);
+  }
+
+  &__text {
+    margin: 0;
+    max-width: var(--measure);
+  }
+
+  a {
+    color: var(--ground-deep);
+  }
+}
+
+// ---- The rows ---------------------------------------------------------------
+// One per course, chronological: a rail, a node per row. A quiet echo of
+// trainings.arc42.org's timeline in this site's tokens; the feed carries
+// facts, never markup.
+
+.training-dates__label {
+  margin: var(--s5) 0 var(--s2);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--arc42-maroon);
+}
+
+.training-dates {
+  margin: 0 0 var(--s4) var(--s1);
+  padding: var(--s1) 0 var(--s1) var(--s4);
+  list-style: none;
+  border-left: 1px solid var(--arc42-maroon);
+}
+
+.training-dates__row {
+  position: relative;
+  margin: var(--s2) 0;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: calc(-1 * var(--s4) - 4px);
+    top: 0.45em;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--arc42-maroon);
+  }
+}
+
+.training-dates__when {
+  font-family: var(--mono);
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+
+.training-dates__lang {
+  display: inline-block;
+  margin: 0 0.1em;
+  padding: 0 5px;
+  border: 1px solid var(--arc42-maroon);
+  border-radius: var(--radius);
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--arc42-maroon);
+}
+
+.training-dates__where {
+  color: var(--muted);
+}
+
+.training-dates__slug {
+  display: block;
+  margin-top: 1px;
+  font-size: 0.9375rem;
+  color: var(--muted);
+}
+
+.training-dates__waitlist {
+  font-size: 0.75em;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--arc42-maroon);
+}
+
+.training-dates__more {
+  margin: 0;
+  font-size: 0.9375rem;
+}
+
+.training-dates__asof {
+  font-size: 0.875rem;
+  color: var(--muted);
+}
