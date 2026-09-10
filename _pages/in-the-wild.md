@@ -118,6 +118,24 @@ search_body: false
   </ol>
   {%- endif -%}
 
+  {%- comment -%}
+    THE INVITATION (2026-09-10). This list grows only when somebody sends a
+    link, so the page asks for one, once, at the end, after a reader has seen
+    what an entry looks like. Same component as the dashboard's invitation
+    tile (_sass/_invite.scss); here it is a block at the measure, not a tile.
+    One link, on the heading, straight to the part of /contribute/ about
+    links.
+  {%- endcomment -%}
+  <aside class="ex-invite ex-invite--block" aria-labelledby="invite-wild">
+    <p class="ex-invite__eyebrow">An invitation</p>
+    <h2 class="ex-invite__title" id="invite-wild">
+      <a href="{{ '/contribute/' | relative_url }}#documentation-we-cannot-host">Know one that is missing here?</a>
+    </h2>
+    <p class="ex-invite__text">If you have published an arc42 documentation
+    of a real system, or read one that belongs on this list, send us the link.
+    One entry in a data file is all it takes. The note is ours to write.</p>
+  </aside>
+
   {%- else -%}
   <div class="ex-prose">
     <div class="ex-note">
