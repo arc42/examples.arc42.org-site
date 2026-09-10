@@ -61,6 +61,19 @@ layout: default
       {%- if page.invite and systems.size < page.invite.after -%}
         {% include invite-tile.html invite=page.invite %}
       {%- endif -%}
+      {%- comment -%}
+        LEARN FROM THE ORIGINALS (2026-09-10): the arc42 team's training
+        note, the LAST item of the grid and two columns wide wherever the
+        grid has two or more. It sat in a fourth shell under the endnotes for
+        one afternoon, which is the part of the page nobody scrolls to; in
+        the grid it is where the reader already is. It is the family's
+        subtle-ad rendered from _data/trainings.json by
+        _includes/training-dates.html, not an .ex-tile: it has several
+        links, so the stretched-link invariant does not apply, and its
+        surface is the maroon aside, not paper. Rationale in DESIGN.md,
+        "Learn from the originals".
+      {%- endcomment -%}
+      {% include training-dates.html tag="li" modifier="subtle-ad--tile" %}
     </ul>
   </div>
 </section>
@@ -81,6 +94,7 @@ layout: default
   </div>
 </div>
 {%- endif -%}
+
 {%- else -%}
 <div class="ex-shell">
   <div class="ex-note">

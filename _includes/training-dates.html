@@ -1,0 +1,127 @@
+{%- comment -%}
+  Learn from the originals (2026-09-10): the arc42 team's training note, with
+  the NEXT DATE OF EACH COURSE, rendered at build time from
+  _data/trainings.json. That file is the expiry-filtered copy of
+  https://trainings.arc42.org/api/trainings.json that
+  .github/workflows/refresh-trainings.yml commits weekly and on demand; the
+  same integration docs.arc42.org, faq.arc42.org, arc42.org and arc42.de run.
+
+  Rendering rules:
+  · one row per course, its earliest upcoming date, rows in date order. Not
+    the next N dates across all courses, as docs renders: on a home page four
+    rows that show four different courses say more than five rows of which
+    three are the same one. The feed's course order is not used.
+  · expiry-filtered again here (belt and braces over the workflow's filter),
+    so a stale data file degrades to fewer rows, never to an ended course.
+  · cancelled and full dates are skipped; a course whose only remaining dates
+    are cancelled or full has no row. Waitlist renders with a marker.
+  · every row carries a visible DE/EN badge. Language is a required feed
+    field so no consumer has to guess it from a city name.
+  · course links prefer the English detail page (url_en), falling back to url.
+  · zero rows degrades to the sentence and the link.
+
+  The sort walks every course once, collecting "start|course_index|date_index"
+  for the first admissible date: Liquid cannot sort across nested arrays, but
+  it can sort strings, and ISO dates sort lexicographically.
+
+  The trainer claim is precise on purpose: most classes are taught by the
+  two people who created arc42, but not all. So the intro says "most", and a
+  row whose trainers differ from that baseline names them.
+{%- endcomment -%}
+{%- assign today = 'now' | date: '%Y-%m-%d' -%}
+{%- assign keys = "" | split: "" -%}
+{%- assign upcoming = 0 -%}
+{%- for course in site.data.trainings.courses -%}
+  {%- assign picked = false -%}
+  {%- for d in course.dates -%}
+    {%- if d.end >= today and d.status != 'cancelled' and d.status != 'full' -%}
+      {%- assign upcoming = upcoming | plus: 1 -%}
+      {%- unless picked -%}
+        {%- capture key -%}{{ d.start }}|{{ forloop.parentloop.index0 }}|{{ forloop.index0 }}{%- endcapture -%}
+        {%- assign keys = keys | push: key -%}
+        {%- assign picked = true -%}
+      {%- endunless -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endfor -%}
+{%- assign keys = keys | sort -%}
+{%- assign baseline_duo = "Peter Hruschka, Gernot Starke" -%}
+{%- comment -%}
+  WRAPPER. On the home page this is the last item of the tile grid, so the
+  caller passes tag="li" and the modifier "subtle-ad--tile"; on /in-the-wild/
+  it stands alone as an <aside>. One include, two containers, because the
+  rows and the copy must never drift apart between the two pages.
+{%- endcomment -%}
+{%- assign tag = include.tag | default: "aside" -%}
+<{{ tag }} class="subtle-ad{% if include.modifier %} {{ include.modifier }}{% endif %}" aria-labelledby="training-heading">
+  <p class="subtle-ad__kicker">From the arc42 team</p>
+  <h2 class="subtle-ad__title" id="training-heading">Learn from the originals</h2>
+  <p class="subtle-ad__text">
+    The people who created arc42 also teach it. Practical architecture
+    training, most classes with Peter Hruschka and Gernot Starke (dates with
+    other trainers say so), and solid preparation for
+    <a rel="noopener noreferrer nofollow" target="_blank" href="https://www.isaqb.org">iSAQB</a>
+    certification.
+  </p>
+  {%- if keys.size > 0 %}
+  <p class="training-dates__label" id="training-dates-label">Next date of each course</p>
+  <ul class="training-dates" aria-labelledby="training-dates-label">
+    {%- for key in keys %}
+    {%- assign parts = key | split: '|' -%}
+    {%- assign ci = parts[1] | plus: 0 -%}
+    {%- assign di = parts[2] | plus: 0 -%}
+    {%- assign course = site.data.trainings.courses[ci] -%}
+    {%- assign d = course.dates[di] -%}
+    {%- capture when -%}
+      {%- assign start_month = d.start | date: "%Y-%m" -%}
+      {%- assign end_month = d.end | date: "%Y-%m" -%}
+      {%- if start_month == end_month -%}
+        {{- d.start | date: "%-d" }}&#8211;{{ d.end | date: "%-d&nbsp;%b&nbsp;%Y" -}}
+      {%- else -%}
+        {{- d.start | date: "%-d&nbsp;%b" }}&#8211;{{ d.end | date: "%-d&nbsp;%b&nbsp;%Y" -}}
+      {%- endif -%}
+    {%- endcapture -%}
+    {%- comment -%}
+      The gloss: labels like Req4Arc, IMPROVE or ADOC mean nothing to a
+      first-time reader, and the feed's `title` glosses them as
+      "LABEL: explanation". Everything after the first ": " becomes a muted
+      second line. A title without a colon falls back to the course's
+      certification; a course with neither gets no gloss.
+    {%- endcomment -%}
+    {%- assign title_head = course.title | split: ": " | first -%}
+    {%- assign slug = course.title | remove_first: title_head | remove_first: ": " | downcase -%}
+    {%- if slug == "" and course.certification -%}
+      {%- capture slug -%}preparation for {{ course.certification }} certification{%- endcapture -%}
+    {%- endif -%}
+    {%- assign trainers = d.trainers | default: course.trainers -%}
+    {%- assign trainers_key = trainers | join: ", " -%}
+    {%- capture gloss -%}
+      {%- if slug != "" %}{{ slug }}{% endif -%}
+      {%- if trainers_key != baseline_duo and trainers_key != "" -%}
+        {%- if slug != "" %} &middot; {% endif -%}with {{ trainers | join: " &amp; " }}
+      {%- endif -%}
+    {%- endcapture -%}
+    <li class="training-dates__row">
+      <a class="training-dates__when" rel="noopener noreferrer nofollow" target="_blank" href="{{ d.url }}">{{ when }}</a>
+      <b class="training-dates__lang" title="held in {% if d.language == 'de' %}German{% else %}English{% endif %}">{{ d.language | upcase }}</b>
+      <span class="training-dates__what">
+        <a class="training-dates__course" rel="noopener noreferrer nofollow" target="_blank" href="{{ course.url_en | default: course.url }}">{{ course.short_title }}</a>
+        <span class="training-dates__where">&middot; {% if d.format == "online" %}online{% else %}{{ d.city }}{% endif %}</span>
+        {%- if d.status == "waitlist" %} <span class="training-dates__waitlist">waitlist</span>{% endif %}
+        {%- if gloss != "" %}<span class="training-dates__slug">{{ gloss }}</span>{% endif %}
+      </span>
+    </li>
+    {%- endfor %}
+  </ul>
+  <p class="training-dates__more">
+    All {{ upcoming }} dates and every course:
+    <a rel="noopener noreferrer nofollow" target="_blank" href="https://trainings.arc42.org">trainings.arc42.org</a>
+    <span class="training-dates__asof">&middot; as of {{ site.data.trainings.generated | date: "%-d %b %Y" }}</span>
+  </p>
+  {%- else %}
+  <p class="subtle-ad__text">
+    See upcoming dates and topics at
+    <a rel="noopener noreferrer nofollow" target="_blank" href="https://trainings.arc42.org">trainings.arc42.org</a>.
+  </p>
+  {%- endif %}
+</{{ tag }}>

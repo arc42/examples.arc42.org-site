@@ -1,0 +1,14 @@
+{%- comment -%}
+  The contribution flower (2026-09-10): a piece of the herbarium art in the
+  top-right corner of the invitation, on the dashboard tile and on the
+  /in-the-wild/ block. Decorative, alt="", pointer-events off so the tile's
+  stretched link still covers the corner it sits in. Rendered only when the
+  asset exists: the art arrives separately from the markup, and an
+  invitation with a broken image is worse than one with none. Drop a
+  transparent PNG at assets/images/brand/contribution-flower.png and it
+  appears on both pages; docs/ keeps the full-size source.
+{%- endcomment -%}
+{%- assign flower = site.static_files | where: "path", "/assets/images/brand/contribution-flower.png" | first -%}
+{%- if flower -%}
+<img class="ex-invite__flower" src="{{ flower.path | relative_url }}" alt="" width="104" height="109" loading="lazy" decoding="async">
+{%- endif -%}

@@ -127,6 +127,7 @@ search_body: false
     links.
   {%- endcomment -%}
   <aside class="ex-invite ex-invite--block" aria-labelledby="invite-wild">
+    {% include invite-flower.html %}
     <p class="ex-invite__eyebrow">An invitation</p>
     <h2 class="ex-invite__title" id="invite-wild">
       <a href="{{ '/contribute/' | relative_url }}#documentation-we-cannot-host">Know one that is missing here?</a>
@@ -135,6 +136,14 @@ search_body: false
     of a real system, or read one that belongs on this list, send us the link.
     One entry in a data file is all it takes. The note is ours to write.</p>
   </aside>
+
+  {%- comment -%}
+    LEARN FROM THE ORIGINALS (2026-09-10). The training note, after the
+    invitation, so the page's last two blocks are the two things the site
+    asks of a reader: a link, then an hour or three of their time. Same
+    include as the home page.
+  {%- endcomment -%}
+  {% include training-dates.html %}
 
   {%- else -%}
   <div class="ex-prose">
