@@ -294,6 +294,16 @@ content; the markup is `_includes/invite-tile.html`, the surface is
 `_sass/_invite.scss`. The intro sentence's count is untouched: the invitation
 is not a landing page and never enters `landings`.
 
+A flower. The invitation carries a piece of the herbarium art in its
+top-right corner, from `assets/images/brand/contribution-flower.png`,
+decorative and `alt=""`, on the tile and on the `/in-the-wild/` block alike.
+It sits where a system tile prints its catalogue number, the one corner this
+tile leaves empty, and the eyebrow and title keep clear of it. The include
+renders it only when the file exists, so the art can arrive separately from
+the markup and an invitation with a broken image never ships. It is not on
+the training note: the flower says "grow this collection", and the training
+note is not asking for that.
+
 The same component closes `/in-the-wild/` as a block at the measure, after
 the last run, with the run heading's serif so it reads as part of that page.
 That list grows only when somebody sends a link, and the ask is made once, at
@@ -348,13 +358,6 @@ filtered payload, a date that merely passes changes the file, and that commit
 is what triggers the rebuild that keeps "today" honest. The dispatch is an
 accelerator, never a dependency: if it does not arrive, the weekly run bounds
 staleness at one week, and a failed fetch keeps the last snapshot.
-
-A flower. The tile carries a piece of the herbarium art at its right, from
-`assets/images/brand/contribution-flower.png`, decorative and `alt=""`. The
-include renders it only when the file exists, so the art can arrive
-separately from the markup and a tile with a broken image never ships. It is
-hidden below 43rem rather than shrunk: a 96px flower above four rows of dates
-would be a thumbnail, and this art is not a thumbnail.
 
 Two departures from docs' copy of the component. The kicker is real text,
 not generated content, because "from the arc42 team" is the disclosure a

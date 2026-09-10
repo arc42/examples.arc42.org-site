@@ -26,9 +26,44 @@
 //   --focus-ring-on-band       8.15:1   (the on-band ring, as in the masthead)
 // ============================================================================
 .ex-invite {
+  position: relative;               // the flower's containing block
   background: var(--ground);
   border-color: var(--ground);
   color: var(--tint-soft);
+
+  // The flower, top right, in the corner a system tile gives its catalogue
+  // number: this tile has no number, and the corner was empty. The eyebrow
+  // and the title keep clear of it; the text below runs the full width
+  // underneath, because the flower ends where the title does. Absolute and
+  // pointer-events: none, so the stretched link still covers the corner.
+  // 7rem on the tile: at the tile's type sizes the eyebrow and a two-line
+  // title stand about 120px tall, and the flower (419×440 at this width)
+  // ends inside that, above the first line of text.
+  &__flower {
+    position: absolute;
+    top: var(--s3);
+    right: var(--s3);
+    width: 7rem;
+    height: auto;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  &__eyebrow,
+  &__title {
+    padding-right: 7.5rem;
+  }
+
+  // On a phone the tile is about 290px inside its padding, and 7.5rem of
+  // clearance left 170px for a title whose longest word, "documentation",
+  // needs 190px at this size: it broke mid-word. A smaller flower and less
+  // clearance give the word its 200px.
+  @media (max-width: 30rem) {
+    &__flower { width: 5rem; }
+
+    &__eyebrow,
+    &__title { padding-right: 5.75rem; }
+  }
 
   // The default ring is --ground-deep, invisible on --ground. Same fix the
   // masthead needed, for the same reason.
@@ -112,5 +147,20 @@
     font-family: var(--serif);
     font-size: 1.0625rem;
     line-height: 1.45;
+  }
+
+  // The block's title is one line, so the flower reaches down into the
+  // text. It is larger here, the block has the room, and the whole body
+  // keeps clear of it instead of only the title.
+  .ex-invite__flower {
+    top: var(--s4);
+    right: var(--s4);
+    width: 8.5rem;
+  }
+
+  .ex-invite__eyebrow,
+  .ex-invite__title,
+  .ex-invite__text {
+    padding-right: 10rem;
   }
 }

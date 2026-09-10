@@ -51,16 +51,9 @@
   caller passes tag="li" and the modifier "subtle-ad--tile"; on /in-the-wild/
   it stands alone as an <aside>. One include, two containers, because the
   rows and the copy must never drift apart between the two pages.
-
-  THE FLOWER (2026-09-10). Decorative, alt="", and rendered only when the
-  file exists: the art arrives separately from the markup, and a tile with a
-  broken image is worse than a tile with none. Drop a transparent PNG at
-  assets/images/brand/contribution-flower.png and it appears on both pages.
 {%- endcomment -%}
 {%- assign tag = include.tag | default: "aside" -%}
-{%- assign flower = site.static_files | where: "path", "/assets/images/brand/contribution-flower.png" | first -%}
 <{{ tag }} class="subtle-ad{% if include.modifier %} {{ include.modifier }}{% endif %}" aria-labelledby="training-heading">
-  <div class="subtle-ad__body">
   <p class="subtle-ad__kicker">From the arc42 team</p>
   <h2 class="subtle-ad__title" id="training-heading">Learn from the originals</h2>
   <p class="subtle-ad__text">
@@ -130,12 +123,5 @@
     See upcoming dates and topics at
     <a rel="noopener noreferrer nofollow" target="_blank" href="https://trainings.arc42.org">trainings.arc42.org</a>.
   </p>
-  {%- endif %}
-  </div>
-  {%- comment -%} AFTER the body, so it takes the grid's second column; first
-      in the markup it would take the first, and the reset's img max-width
-      would shrink it to a 1fr track the auto body had emptied. {%- endcomment -%}
-  {%- if flower %}
-  <img class="subtle-ad__flower" src="{{ flower.path | relative_url }}" alt="" width="220" height="220" loading="lazy" decoding="async">
   {%- endif %}
 </{{ tag }}>

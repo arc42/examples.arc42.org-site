@@ -127,6 +127,7 @@ search_body: false
     links.
   {%- endcomment -%}
   <aside class="ex-invite ex-invite--block" aria-labelledby="invite-wild">
+    {% include invite-flower.html %}
     <p class="ex-invite__eyebrow">An invitation</p>
     <h2 class="ex-invite__title" id="invite-wild">
       <a href="{{ '/contribute/' | relative_url }}#documentation-we-cannot-host">Know one that is missing here?</a>

@@ -46,36 +46,6 @@
   // this.
   margin-top: var(--s7);
 
-  // Body and flower side by side once there is room; below that the flower
-  // is hidden rather than shrunk, because a 96px flower above four rows of
-  // dates is a thumbnail, and this art is not a thumbnail.
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: var(--s5);
-  align-items: end;
-
-  @media (min-width: 43rem) {
-    &:has(.subtle-ad__flower) {
-      grid-template-columns: minmax(0, 1fr) auto;
-    }
-  }
-
-  &__flower {
-    display: none;
-    width: clamp(140px, 18vw, 220px);
-    height: auto;
-    justify-self: end;
-    align-self: end;
-    user-select: none;
-
-    @media (min-width: 43rem) {
-      display: block;
-    }
-  }
-
-  &__body {
-    min-width: 0;
-  }
 
   &__kicker {
     margin: 0 0 var(--s2);
