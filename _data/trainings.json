@@ -1,13 +1,13 @@
 {
   "$schema": "https://trainings.arc42.org/api/trainings.schema.json",
-  "generated": "2026-09-09T18:50:03+00:00",
+  "generated": "2026-09-14T10:08:09+00:00",
   "courses": [
     {
       "blurb": "Two expert trainers at all times, highly practical and pragmatic, ideal preparation for iSAQB CPSA-Foundation certification.",
       "certification": "iSAQB CPSA-Foundation",
       "url_en": "https://trainings.arc42.org/courses/msa/",
       "id": "msa",
-      "short_title": "Mastering SW Architectures",
+      "short_title": "MSA",
       "title": "Mastering Software Architectures",
       "url": "https://www.arc42.de/info-msa/",
       "trainers": [
@@ -169,6 +169,24 @@
           "format": "online",
           "status": "open",
           "url": "https://www.arc42.de/termine#msa-06-2027"
+        },
+        {
+          "trainers": [
+            "Wolfgang Reimesch"
+          ],
+          "pricing": "2.100 €",
+          "price": {
+            "amount": 2100,
+            "currency": "EUR"
+          },
+          "id": "msa-sep-2027-en",
+          "code": "27-09 MSA-EN",
+          "start": "2027-09-28",
+          "end": "2027-09-30",
+          "language": "en",
+          "format": "online",
+          "status": "open",
+          "url": "https://www.arc42.de/termine#msa-sep-2027-en"
         }
       ]
     },
@@ -289,6 +307,8 @@
             "currency": "EUR",
             "alumni": 2050
           },
+          "few_seats": "only few seats available",
+          "seats_limited": true,
           "id": "req4arc-sep-2026",
           "code": "26-09 Req4Arc",
           "start": "2026-09-15",
@@ -333,6 +353,26 @@
           "format": "public",
           "status": "open",
           "url": "https://www.arc42.de/termine#req4arc-sep-2027"
+        },
+        {
+          "country": "DE",
+          "trainers": [
+            "Wolfgang Reimesch"
+          ],
+          "pricing": "Normalpreis: 2.200 € (für unsere Alumni 2.050 €)",
+          "price": {
+            "amount": 2200,
+            "currency": "EUR",
+            "alumni": 2050
+          },
+          "id": "req4arc-jun-2027",
+          "code": "27-06 Req4Arc-EN",
+          "start": "2027-06-15",
+          "end": "2027-06-17",
+          "language": "en",
+          "format": "online",
+          "status": "open",
+          "url": "https://www.arc42.de/termine#req4arc-jun-2027"
         }
       ]
     },
@@ -358,11 +398,11 @@
           "trainers": [
             "Gernot Starke"
           ],
-          "pricing": "Normalpreis: 2.200 € (für unsere Alumni 2.050 €)",
+          "pricing": "Normalpreis: 1.500 € (für unsere Alumni 1.350 €)",
           "price": {
-            "amount": 2200,
+            "amount": 1500,
             "currency": "EUR",
-            "alumni": 2050
+            "alumni": 1350
           },
           "id": "adoc-oct-2026",
           "code": "26-10 ADOC",
@@ -376,11 +416,14 @@
         {
           "city": "Mannheim / Frankfurt (t.b.d.)",
           "country": "DE",
-          "pricing": "Normalpreis: 2.200 € (für unsere Alumni 2.050 €)",
+          "trainers": [
+            "Dr. Gernot Starke"
+          ],
+          "pricing": "Normalpreis: 1.500 € (für unsere Alumni 1.350 €)",
           "price": {
-            "amount": 2200,
+            "amount": 1500,
             "currency": "EUR",
-            "alumni": 2050
+            "alumni": 1350
           },
           "id": "adoc-jun-2027",
           "code": "27-06 ADOC",
@@ -390,6 +433,26 @@
           "format": "public",
           "status": "open",
           "url": "https://www.arc42.de/termine#adoc-jun-2027"
+        },
+        {
+          "country": "DE",
+          "trainers": [
+            "Wolfgang Reimesch"
+          ],
+          "pricing": "Normalpreis: 1.900 € (für unsere Alumni 1.750 €)",
+          "price": {
+            "amount": 1900,
+            "currency": "EUR",
+            "alumni": 1750
+          },
+          "id": "adoc-oct-2027",
+          "code": "27-10 ADOC-EN",
+          "start": "2027-10-12",
+          "end": "2027-10-13",
+          "language": "en",
+          "format": "online",
+          "status": "open",
+          "url": "https://www.arc42.de/termine#adoc-oct-2027"
         }
       ]
     }
