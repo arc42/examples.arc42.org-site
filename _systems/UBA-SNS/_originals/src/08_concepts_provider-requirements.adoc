@@ -1,0 +1,84 @@
+ifndef::imagesdir[:imagesdir: ../images]
+
+=== Anforderungen an einen Betriebsdienstleister
+
+==== Architektur und Skalierung
+
+Die SNS-Anwendungen sollten auf einer eigenen virtuellen oder physischen Maschine deployed und betrieben werden.
+Die drei Anwendungen laufen alle als Docker-Container auf einem Container-Plattform. Die Datenhaltung muss logisch
+getrennt in einer eigenen Datenbank realisiert werden. (Die Datenbanken können auf einem gemeinsamen
+Datenbank-Host betrieben werden.)
+
+Vor den Anwendungen agiert ein Web-Server als Reverse-Proxy, der die Verteilung auf die jeweilige Anwendung übernimmt.
+Jede Anwendung wird von einer variablen Anzahl an Passenger-Worker-Prozessen betrieben. (Passenger ist ein Ruby-Applikationsserver).
+
+image:sns-architektur.png[]
+
+===== Software
+
+* *Betriebssystem*: Als Server-Betriebssystem empfehlen wir die jeweils aktuelle Version von Ubuntu in der LTS-Version  (Long Term Support).
+* *Ruby*: Ruby (MRI) in der jeweils aktuellen Version (mindestens 3.0)
+* *Datenbank*: Das SNS-System benötigt unterschiedliche Datenbankmanagementsysteme. Der Umweltthesaurus und die Umweltchronik basieren auf PostgreSQL.
+
+=====  Hardware
+
+Die Hardware-Anforderungen gelten pro Maschine/VM:
+
+* *CPU*: 8 Kerne, 64-Bit
+* *RAM*: mindestens 16 GB RAM
+* *Festplattenspeicher*: mindestens 80 GB, vorzugsweise SSDs
+
+=====  Monitoring
+
+Alle Instanzen sollten durch den Dienstleister automatisiert überwacht werden. Das umfasst Standarmesswerte wie bspw.
+CPU-, RAM- und I/O-Auslastung als auch das Aufrechterhalten von applikationskritischen Prozessen. Hierzu gehören:
+
+* Webserver
+* Applikationsserver
+* Datenbankserver
+
+=====  Backup
+
+Es muss ein tägliches automatisches Backup der System- und Applikationsdatenbanken erfolgen. Den Entwicklern muss die
+Möglichkeit gegeben werden, Backup-Prozesse (Manuelles Auslösen, Wiederherstellen etc.) selbständig oder auf Ticket-Basis
+zu verwalten und anzufordern. Deployment und Wartung
+
+Für das Deployment von Anwendungssourcen sowie Wartungsaufgaben ist den Entwicklern ein vollwertiger SSH-Zugang über
+einen separaten Benutzer bereitzustellen, root-Rechte sind dazu nicht nötig. Die Entwickler müssen die Möglichkeit haben, selbständig
+
+* den Webserver und Docker-Container neu zu starten
+* Jobs im Kontext des Anwendungsverzeichnisses auszuführen
+* sich als jew. Anwendungsuser gegen die Datenbankkonsole zu verbinden
+
+Der Datenbankbenutzer benötigt neben den normalen Lese-, Schreib- und Löschoperationen außerdem Berechtigungen,
+Schemaänderungen durchzuführen.
+
+=== Anforderungen an Dienstleister Wartung/Weiterentwicklung
+
+Ein vom UBA auszuwählender, neuer SNS-Dienstleister bekommt sowohl den aktuellen Source-Code von SNS als auch eine
+Dokumentation von SNS zur Verfügung gestellt. Möglicherweise sind auch Einführungsworkshop(s) möglich/nötig.
+
+==== Technologien
+
+===== Must-have
+
+* Langjährige Erfahrung in Software-Entwicklung und -Wartung
+* Git und GitHub
+* SQL, PostgreSQL und ActiveRecord
+* Ruby on Rails
+* Web-Technologien, insbesondere HTML und CSS
+* JavaScript
+* Rails-Hosting/Deployment
+
+===== Should-have
+
+* RDF
+* Semantic Web Standards
+* SKOS https://www.w3.org/TR/skos-primer/
+* Rails Engines
+* Linked Data
+
+===== Nice-2-have
+
+* Thesaurus/Vokabular Management Systeme
+*   iQvoc (http://iqvoc.net/)

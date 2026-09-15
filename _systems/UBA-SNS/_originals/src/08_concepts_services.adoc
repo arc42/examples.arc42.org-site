@@ -1,0 +1,72 @@
+ifndef::imagesdir[:imagesdir: ../images]
+
+=== Dienste
+
+Mit den Webdiensten von SNS steht Anbietern von Umweltinformationen (z.B. Umweltportale) eine semantische Unterstützung für ihre Anwendungen zur Verfügung.
+Alle Dienste verfügen über eine grafische Benutzeroberfläche sowie eine API für die Integration in Fachanwendungen.
+
+Zu den Diensten gehören:
+
+* Suche: Durchsuchen des Datenbestands mit Suchwörtern
+* SimilarTerms: Ausgabe Ähnlicher Begriffe zu einer Sucheingabe
+* AutoClassify: Verschlagwortung von Dokumenten mit Hilfe des SNS-Wortguts
+* Anniversary: Ausgabe von Ereignissen "heute vor X Jahren"
+
+Die technischen Schnittstellenbeschreibungen sind öffentlich einsehbar und under folgenden Link erreichbar: https://sns.uba.de/de/api
+
+==== Suche
+
+Die Suche ermöglicht das Auffinden von passenden Fachwörtern bzw. Umweltereignissen anhand von Suchwörtern und
+Suchräumen. Im Umthes stehen darüber hinaus Informationen über alternative Benennungen des gefundenen Fachworts sowie
+dessen Beziehungen zu anderen Fachwörtern des SNS-Wortbestands zur Verfügung. Auch Definitionen zur Bestimmung der
+Bedeutung der Fachwörter sind in den meisten Fällen als Zusatzinformation vorhanden.
+
+Der Dienst ist unter folgenden URLs erreichbar:
+
+* https://sns.uba.de/umthes/de/search.html
+* https://sns.uba.de/chronik/de/search.html
+
+Bekannte Integrationen:
+
+* InGrid: https://dev.informationgrid.eu/umweltchronik
+
+==== SimilarTerms
+
+Hierbei handelt es sich um einen Dienst zur Ermittlung von semantisch "ähnlichen" Wörtern zum eingegebenen Suchwort.
+So liefert SimilarTerms für die Suche nach "Biosprit" u.a. die Ähnlichen Begriffe "Biokraftstoff", "Ökosprit" und
+"Kraftstoff aus Biomasse".
+
+Der Dienst ist unter folgender URL erreichbar: https://sns.uba.de/umthes/de/similar.html
+
+image:sns-services-similar.png[]
+
+===== Anwendungsfall
+
+Der SimilarTerms-Dienst kann auch eingesetzt werden, um die Suche in Fachanwendungen zu verbessern. So könnte bei einer
+Suche mit der Zeichenkette "Biosprit" z.B. die o.g. Begriffe "Biokraftstoff" und "Ökosprit" mitberücksichtigt werden.
+Dies würde das Suchergebnis aufwerten.
+
+
+==== AutoClassify
+
+Bei AutoClassify handelt es sich um einen Dienst zur automatischen Verschlagwortung von Dokumenten. Der Dienst zerlegt
+einen Eingabetext in seine Bestandteile, durchsucht an Hand dieser das Wortgut des UMTHES und gibt dann passende
+Begriffe (Schlagwörter) inklusive Scoring als Antwort zurück.
+
+AutoClassify unterstützt die Analyse von eingegebenem Freitext, es ist aber auch möglich nur eine URL-Adresse
+einzugeben. Bei Analyse einer URL versucht AutoClassify den Haupttextkörper der Webseite zu extrahieren
+(d.h. ohne Seitennavigationen, Werbung etc.) und führt anschließend die Textanalyse durch.
+
+Der Dienst ist unter folgender URL erreichbar: https://sns.uba.de/umthes/de/classification.html
+
+image:sns-services-autoclassify.png[]
+
+
+==== Anniversary
+
+Dieser Dienst gibt Umweltereignisse aus, die sich an einem frei wählbaren Datum vor "x-Jahren" ereignet haben
+(ohne Eingabedatum wird das aktuelle Datum verwendet).
+
+Der Dienst ist unter folgender URL erreichbar: https://sns.uba.de/chronik/de/anniversary.html
+
+image:sns-services-anniversary.png[]
