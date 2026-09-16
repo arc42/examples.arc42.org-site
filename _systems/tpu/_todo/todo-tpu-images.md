@@ -33,7 +33,7 @@ rendered figures, republished on the same terms.
 | 1 | Fig. 1: TPU Use Cases | `01-use-cases.jpg` | 01 | 4 | 997 × 1196 | UML use case |
 | 2 | Fig. 3.1: TPU Business Context | `03_1-business-context.jpg` | 03 | 7 | 1192 × 838 | context diagram |
 | 3 | Fig. 3.2: TPU The Complete Device | `03_2-complete-device.jpg` | 03 | 8 | 1600 × 1200 | **photo**, downscaled from 3648 × 2736 |
-| 4 | Fig. 3.3: TPU Technical Context | `03_3-technical-context.jpg` | 03 | 9 | 1184 × 1142 | context diagram |
+| 4 | Fig. 3.3: TPU Technical Context | `03_3-technical-context.jpg` | 03 | 9 | 1138 × 974 | context diagram — corrected by the authors (rearcam control arrow), docs.arc42.org-site issue #87 |
 | 5 | Fig. 5.1: TPU Level 1: White Box TPU | `05_1-whitebox-tpu.jpg` | 05 | 11 | 1147 × 879 | building blocks |
 | 6 | Fig. 5.2: White Box Measuring Unit | `05_2-whitebox-measuring-unit.jpg` | 05 | 13 | 1155 × 1016 | building blocks |
 | 7 | Fig. 5.3: White Box Video Unit | `05_3-whitebox-video-unit.jpg` | 05 | 15 | 1427 × 1070 | building blocks |
