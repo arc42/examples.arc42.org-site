@@ -346,7 +346,7 @@ Source chapters `05_building_block_view.adoc`, `06_runtime_view.adoc`, `07_deplo
 
 - **05.** Six images, every one preceded by a `.Caption` line that becomes the alt text: *Over All Building Block View* (`structurizr-1-SystemContext-001.svg`), *Level 1 - HELD Application View* (`Container-001`), *Level 2 - Hero Portal Backend View* (`Component-001`), *Level 2 - Digital Office View* (`Component-002`), *Level 2 - Club Forum View* (`Component-003`), *Level 2 - IAM SCH Realm View* (`Component-004`). H3s (`=== Level 1 …`) become H2s. `[[EVS]]` after `*EVS*` is an anchor; drop it. The Collabora link `https://www.collaboraoffice.com[Collabora]` becomes `[Collabora](https://www.collaboraoffice.com)`.
 - **06.** One H2 *Create Club Workflow*, one image (`runtime_view_club_creation_new.svg`, alt *Create Club for digital office runtime view*), three paragraphs.
-- **07.** One H2 *Overall Deployment View* and one image (`structurizr-1-Deployment-001.svg`). There is no caption line and no prose; use the heading as the alt text. That is the whole section, and it stays that short.
+- **07.** One H2 *Overall Deployment View*, one image (`structurizr-1-Deployment-001.svg`, no caption line: use the heading as the alt text), and one closing paragraph about the Open Telekom Cloud. That is the whole section, and it stays that short.
 - **08.** Two H2s, *Logging Concept* and *REST Security*. The first contains a JSON log example in a `----` block: fence it as ```` ```json ````. The second uses `` `Authorization` `` inline code; keep it.
 
 Front matter titles: `Building Block View`/5, `Runtime View`/6, `Deployment View`/7, `Cross-cutting Concepts`/8.
