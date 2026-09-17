@@ -31,7 +31,7 @@ Explicit overview of stakeholders of the system, i.e. all person, roles or organ
 
 | Role/Name | Contact | Expectations |
 |---|---|---|
-| Product Manager | Smarte Region Würzburg (https://www.stadt-land-wue.de/stadtlandwue/index.html) | Reliable and efficient in terms of providing the necessary requirements |
-| Product Owner | Smart and Public Team (https://smartandpublic.de/) | Flexible with regard to new functions |
-| Developer | Smart and Public Team (https://smartandpublic.de/) | Flexible and reliable in terms of code maintenance and testability. |
-| Tester | Smart and Public Team (https://smartandpublic.de/) | Reliable in terms of testing the functional requirements as well as the quality scenarios. |
+| Product Manager | Smarte Region Würzburg (<https://www.stadt-land-wue.de/stadtlandwue/index.html>) | Reliable and efficient in terms of providing the necessary requirements |
+| Product Owner | Smart and Public Team (<https://smartandpublic.de/>) | Flexible with regard to new functions |
+| Developer | Smart and Public Team (<https://smartandpublic.de/>) | Flexible and reliable in terms of code maintenance and testability. |
+| Tester | Smart and Public Team (<https://smartandpublic.de/>) | Reliable in terms of testing the functional requirements as well as the quality scenarios. |
