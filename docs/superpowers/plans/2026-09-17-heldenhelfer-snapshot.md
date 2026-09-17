@@ -55,7 +55,7 @@ Apply these uniformly; they are the whole difference between the two formats in 
 | `:jbake-*:`, `:filename:`, `:toc:`, `:sectnums:`, `ifndef::imagesdir[...]`, `[[section-…]]` anchors on the H2 | drop |
 | `== Title` (the section's own H2) | drop; the layout prints `title:` |
 | `=== Sub` / `==== Sub` | `## Sub` / `### Sub` |
-| `==== Actors [[actors]]` | `## Actors {#actors}` (kramdown header id; section 12 links to it) |
+| `==== Actors [[actors]]` | `### Actors {#actors}` (kramdown header id, one level under `## Business Context`; section 12 links to it) |
 | `.Caption` line followed by `image::…/images/f.svg[]` | `![Caption](../images/f.svg)` |
 | `image::…[ "Alt" ]` with explicit alt | use the explicit alt |
 | `// comment` lines (including the `// plantuml::` lines) | drop |
