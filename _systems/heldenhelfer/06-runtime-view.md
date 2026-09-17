@@ -1,24 +1,16 @@
 ---
-# The ONLY front matter a section file needs.
-#
-# There is deliberately no `system:` key: the system is derived from the
-# directory this file sits in (see _includes/system-context.html). That is
-# what makes a system directory copyable and removable in one move.
 title: Runtime View
 order: 6
 ---
 
-<!--
-  arc42 section 6 — How the building blocks interact for the scenarios that matter. Only the scenarios that are actually interesting.
+## Create Club Workflow
 
-  Delete this comment and write the real content. If the original
-  documentation has nothing for this section, say so in one line
-  ("Not documented in the original.") rather than deleting the file —
-  the rail and the stepper expect all twelve, and an honest gap is
-  itself useful to a reader comparing examples.
+After a club was created the following workflow happens to configure the digital office and the club forum:
 
-  Images: put them in ../images/ and reference them relatively,
-  e.g. ![Context diagram](../images/03-context.png)
--->
+![Create Club for digital office runtime view](../images/runtime_view_club_creation_new.svg)
 
-_Replace this with the system's section 6 content._
+A *HELD Member* creates a new club via the *Hero Portal Web UI*. If the save button is clicked, then a backend call via REST API to the *Hero Portal Backend* is done. The backend saves the club in the database, sends a club created event to kafka and returns a positive response to the Web UI.
+
+After the club created event appears on the kafka message bus, the *Digital Office Sidecar Backend* starts the configuration process. Folders, groups and shares are configured to nextcloud directly. The assignment of the users to the groups works via client roles in keycloak. If a user has a client role with the same name as a nextcloud group, than the user is directly member of this group.
+
+In parallel to the *Digital Office* configuration, the *Club Forum* configuration is done. The *Club Forum Sidecar Backend* receives the club created event and configures discourse directly.

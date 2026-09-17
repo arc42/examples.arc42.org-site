@@ -1,24 +1,10 @@
 ---
-# The ONLY front matter a section file needs.
-#
-# There is deliberately no `system:` key: the system is derived from the
-# directory this file sits in (see _includes/system-context.html). That is
-# what makes a system directory copyable and removable in one move.
 title: Deployment View
 order: 7
 ---
 
-<!--
-  arc42 section 7 — The technical infrastructure and the mapping of building blocks onto it.
+## Overall Deployment View
 
-  Delete this comment and write the real content. If the original
-  documentation has nothing for this section, say so in one line
-  ("Not documented in the original.") rather than deleting the file —
-  the rail and the stepper expect all twelve, and an honest gap is
-  itself useful to a reader comparing examples.
+![Overall Deployment View](../images/structurizr-1-Deployment-001.svg)
 
-  Images: put them in ../images/ and reference them relatively,
-  e.g. ![Context diagram](../images/03-context.png)
--->
-
-_Replace this with the system's section 7 content._
+As a cloud provider the Open Telekom Cloud is used due to data protection reasons. In order to achieve synergies with the Smart City Hub and to reduce operation costs, the SCH cloud instance will be used. That means that the HELD application runs on the same kubernetes cluster as the SCH applications but in an other namespace. Also the Database server and the File service is used from SCH.

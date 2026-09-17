@@ -1,24 +1,42 @@
 ---
-# The ONLY front matter a section file needs.
-#
-# There is deliberately no `system:` key: the system is derived from the
-# directory this file sits in (see _includes/system-context.html). That is
-# what makes a system directory copyable and removable in one move.
 title: Cross-cutting Concepts
 order: 8
 ---
 
-<!--
-  arc42 section 8 — Concepts that show up in many places
+## Logging Concept
 
-  Delete this comment and write the real content. If the original
-  documentation has nothing for this section, say so in one line
-  ("Not documented in the original.") rather than deleting the file —
-  the rail and the stepper expect all twelve, and an honest gap is
-  itself useful to a reader comparing examples.
+Within the HELD system, a common format for log-messages shall be established, combined with a common convention of choosing the appropriate log-destination. The common format can be different on each environment. On the LOCAL environments there are a simple text format ideally because it's good human readable.
 
-  Images: put them in ../images/ and reference them relatively,
-  e.g. ![Context diagram](../images/03-context.png)
--->
+On the cloud environments a json format shall be preferred. The logs are scraped by prometheus and are shown on grafana. The json format improves the filtering and searching of log entries.
 
-_Replace this with the system's section 8 content._
+The following example shows a json log entry:
+
+```json
+{
+  "event": "Successfully executed use case to created club.",
+  "url": "http://hero-portal-backend-service.hero-staging.svc.cluster.local:8000/api/clubs",
+  "method": "POST",
+  "request_id": "b80febfd-3a45-466f-b4fc-e33571df0595",
+  "headers": {
+    "url": "URL('http://hero-portal-backend-service.hero-staging.svc.cluster.local:8000/api/clubs')",
+    "x-request-id": "(none)",
+    "x-real-ip": "(none)",
+    "x-forwarded-for": "(none)",
+    "user-agent": "node",
+    "referer": "(none)",
+    "sec-ch-ua-platform": "(none)",
+    "sec-ch-ua-mobile": "(none)",
+    "sec-ch-ua": "(none)"
+  },
+  "level": "debug",
+  "timestamp": "2024-03-19T06:46:40.095377Z",
+  "filename": "create_club.py",
+  "lineno": 134
+}
+```
+
+Here the information are separated in different object. Another helpful part of the message is the request id. Every time a new request comes a request id will be generated. This Id will then be added on each log entry which is caused by this request. Therefore a filtering after special requests are possible.
+
+## REST Security
+
+Every private REST endpoint shall be secured by a Bearer Token. That means that every request must have an `Authorization`-Header with a JWT Token. The service then has to check the signature of the JWT Token against the public key of the keycloak realm. After the user is authenticated the included roles can be validated for authorization.
