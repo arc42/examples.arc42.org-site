@@ -1,0 +1,107 @@
+= Architecture Documentation Heldenhelfer Würzburg
+v1.5.0, 01.07.2024
+:description: Description of the Architecture in different layers
+:organization: smart and public GmbH
+:doctype: book
+:chapter-signifier:
+:preface-title: History
+//Settings
+:experimental:
+:reproducible:
+:icons: font
+:icon-set: fas
+:listing-caption: Listing
+:sectnums:
+:toc:
+:toclevels: 3
+:xrefstyle: short
+:pdf-themesdir: ../pdfTheme
+:pdf-theme: custom
+:title-logo-image: image:../../images/spg_long.svg[arc42, 400, 400]
+:imagesdir: ./images
+:jbake-menu: -
+// configure DE settings for asciidoc
+include::chapters/config.adoc[]
+:revnumber: 1.5.0
+:revdate: 01.07.2024
+:revremark: Status: In Progress
+// toc-title definition MUST follow document title without blank line!
+:toc-title: Inhaltsverzeichnis
+
+[%notitle]
+--
+[abstract]
+//{description}
+--
+
+//additional style for arc42 help callouts
+ifdef::backend-html5[]
+++++
+<style>
+.arc42help {font-size:small; width: 14px; height: 16px; overflow: hidden; position: absolute; right: 0; padding: 2px 0 3px 2px;}
+.arc42help::before {content: "?";}
+.arc42help:hover {width:auto; height: auto; z-index: 100; padding: 10px;}
+.arc42help:hover::before {content: "";}
+@media print {
+	.arc42help {display:none;}
+}
+</style>
+++++
+endif::backend-html5[]
+
+// Dokumentenhistorie
+include::chapters/00_history.adoc[]
+
+
+// numbering from here on
+:numbered:
+
+<<<<
+// 1. Introduction and Goals
+include::chapters/01_introduction_and_goals.adoc[]
+
+<<<<
+// 2. Architecture Constraints
+include::chapters/02_architecture_constraints.adoc[]
+
+<<<<
+// 3. System Scope and Context
+include::chapters/03_system_scope_and_context.adoc[]
+
+<<<<
+// 4. Solution Strategy
+include::chapters/04_solution_strategy.adoc[]
+
+<<<<
+// 5. Building Block View
+include::chapters/05_building_block_view.adoc[]
+
+<<<<
+// 6. Runtime View
+include::chapters/06_runtime_view.adoc[]
+
+<<<<
+// 7. Deployment View
+include::chapters/07_deployment_view.adoc[]
+
+<<<<
+// 8. Concepts
+include::chapters/08_concepts.adoc[]
+
+<<<<
+// 9. Architecture Decisions
+include::chapters/09_architecture_decisions.adoc[]
+
+<<<<
+// 10. Quality Requirements
+include::chapters/10_quality_requirements.adoc[]
+
+<<<<
+// 11. Technical Risks
+include::chapters/11_technical_risks.adoc[]
+
+<<<<
+// 12. Glossary
+include::chapters/12_glossary.adoc[]
+
+

@@ -1,0 +1,99 @@
+:jbake-title: Building Block View
+:jbake-type: page_toc
+:jbake-status: published
+:jbake-menu: arc42
+:jbake-order: 5
+:filename: /chapters/05_building_block_view.adoc
+ifndef::imagesdir[:imagesdir: ../../images]
+
+:toc:
+
+ifndef::imagesdir[:imagesdir: ../images]
+
+[[section-building-block-view]]
+
+
+== Building Block View
+
+This area describes the different levels of the HELD application. 
+
+.Over All Building Block View
+image::../../../src/docs/images/structurizr-1-SystemContext-001.svg[]
+// plantuml::../structurizr/images/SystemContext-1.puml["structurizr-SystemContext",format=svg]
+
+
+=== Level 1 - HELD Application
+
+.Level 1 - HELD Application View
+image::../../../src/docs/images/structurizr-1-Container-001.svg[]
+// plantuml::../structurizr/images/Container-1.puml["structurizr-Container",format=svg]
+
+*Hero Portal Web UI* - This is the Web UI microservice which contains every Web UI logic for the Hero Portal.
+
+*Hero Portal Backend* - This is the backend microservice which contains every backend logic for the Hero Portal.
+
+*Club Forum* - As the club forum the open source software _Discourse_ is used.
+
+*Digital Office* - The open source software _Nextcloud_ is used for the Digital Office measure.
+
+*Identity Provider Sidecar Backend* - Central Sidecar Service that communicates with the identity provider (keycloak) via REST API. To avoid that every service knows the admin credentials from keycloak to configure or read something, this sidecar service exist. Every service that want to interact with keycloak can do this via the sidecar. The authentication works over an API key. Because of different API keys it is also possible to implement a small authorization, so that not every service can do anything on keycloak. This shall enhance the security.  
+
+*External Systems* - As external systems there are the Identity and Access Management system, the monitoring system, a database server, file store systems and event streaming system. There are also the known actors which uses the HELD application. 
+
+=== Level 2 - Hero Portal Backend
+
+.Level 2 - Hero Portal Backend View
+image::../../../src/docs/images/structurizr-1-Component-001.svg[]
+// plantuml::../structurizr/images/Component-1.puml["structurizr-Component",format=svg]
+
+*Clubs* - The clubs module of the Hero Portal Backend Micro Service. It handles the CRUD operations for the clubs. Furthermore members could be invited here into different clubs. This module also stores the information about which actors are members and which are administrators via the user id. Over the _Identity Provider Sidecar Backend_-Service the user information with _Keycloak_ is synchronized.
+
+*Event Streaming* - A event streaming service (Kafka) is used to publish _ClubEvents_ (e.g. _ClubCreated_). With this mechanism the _Hero Portal Backend_ is completely decoupled from the third-party systems. Every Sidecar of the third-party system can subscribe the _ClubEvents_ Messages and can use the information in it.
+
+=== Level 2 - Digital Office View
+
+.Level 2 - Digital Office View
+image::../../../src/docs/images/structurizr-1-Component-002.svg[]
+
+*Nextcloud* - The main application behind the digital office is the _Nextcloud_ third party open source tool. This application delivers a collaboration platform for the clubs. The club areas are implemented within the share folder basic functionality. Sharing files and folders are basic functionalities and therefore not dependent on other nextcloud apps. Every club has two folders which are called _club area_ in this project context. One is just for administrators and one is for every club member. A club is technically a group in nextcloud. Each club member and admin is in a corresponding group. These groups are used to share the folders. Every configuration is done automatically by the _Hero Portal Backend_.
+
+*Digital Office Sidecar* - The sidecar service is a service for the nextcloud configuration. It's a self written Fast API based service. The idea behind this service is to decouple the digital office configuration from the _Hero Portal Backend_ service via an event streaming platform (Kafka). Every club setting change by club admin is published from the _Hero Portal Backend_. The _Digital Office Sidecar_-Service subscribes all club events and will then configure _Nextcloud_ accordingly via REST API. 
+
+*Nextcloud Office* - This is a nextcloud app installed via the nextcloud app store. It works with a _Collabora_ instance to provide the office functionality.
+    
+*Collabora* - https://www.collaboraoffice.com[Collabora] is a own instance in the kubernetes cluster and is used by the _Nextcloud Office_ application.
+
+*OpenID Connect Login* - This is a nextcloud extension that provides the SSO functionality with keycloak.
+
+*EVS* [[EVS]] - To avoid higher costs the _Elastic Volume Service_ is used at the beginning to store the nextcloud data. The advantage is that this kind of storage is cheap and fast. The disadvantage is that there is only a _ReadWriteOnce_ access possible. Therefore this kind of storage is not usable if the horizontal pod autoscaling shall be used. For the autoscaling functionality the storage must be switched to the _SFS Turbo_ Service of the _Open Telekom Cloud_. 
+
+=== Level 2 - Club Forum View
+
+.Level 2 - Club Forum View
+image::../../../src/docs/images/structurizr-1-Component-003.svg[]
+
+*Discourse* - The main application behind the club forum is the open source third party application https://www.discourse.org[Discourse]. In discourse it's possible to install plug-ins, which are providing more functionality. The image of this view shows all installed plug-ins.
+
+*Club Forum Sidecar* - The sidecar service is a service for the discourse configuration. It's a self written Fast API based service. The idea behind this service is to decouple the club forum configuration from the _Hero Portal Backend_ service via an event streaming platform (Kafka). Every club setting change by club admin is published from the _Hero Portal Backend_. The _Club Forum Sidecar_-Service subscribes all club events and will then configure _Discourse_ accordingly via REST API. 
+
+*Club Forum Redis* - _Discourse_ is not able to run without a Redis-Database. The used https://github.com/bitnami/charts/blob/main/bitnami/discourse/README.md[Helm-Chart] from Bitnami offers the possibility to deploy a Redis master and replica instance directly with Discourse. This is used for now. If this is not stable a service from the _Open Telekom Cloud_ can be used instead. 
+
+*EVS* - As File Store the _Elastic Volume Service_ is used. The access to this storage is _ReadWriteOnce_. Every Redis instance creates it's own EVS. Also for discourse itself the EVS is used. First tries with an OBS failed because of access rights problems.
+
+
+=== Level 2 - IAM SCH Realm
+
+.Level 2 - IAM SCH Realm View
+image::../../../src/docs/images/structurizr-1-Component-004.svg[]
+// plantuml::../structurizr/images/Component-2.puml["structurizr-Component",format=svg]
+
+*Hero Portal Application* - This is a client in Keycloak. It's responsible to authenticate and authorize users within the Hero Portal Web UI via the OIDC protocol. The client shall have the following roles:
+
+* HP Administration - That is the role the actor _HELD Admin_ shall obtain to authorize against the Hero Portal Backend
+
+*Digital Office Application* - This keycloak client handles the authentication and authorization of the digital office. Nextcloud also uses this client to synchronize the user information within keycloak.The client shall have the following roles:
+
+* DO Administration - That is the role the actor _HELD Admin_ shall obtain to have access to the nextcloud administration settings.
+* DO Mitglied - This role shall be added to every authenticated actor like _HELD Member_, _Club Admin_, _Club Member_ to have access to nextcloud.
+
+*Club Forum Application* - The club forum (discourse) uses this keycloak client to authenticate and authorize the users.

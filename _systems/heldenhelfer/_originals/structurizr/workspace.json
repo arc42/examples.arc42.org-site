@@ -1,0 +1,2956 @@
+{
+  "id" : 1,
+  "name" : "Name",
+  "description" : "Description",
+  "lastModifiedDate" : "2025-01-03T06:34:00Z",
+  "lastModifiedAgent" : "structurizr-javascript",
+  "properties" : {
+    "structurizr.dsl" : "d29ya3NwYWNlIHsKCiAgICBtb2RlbCB7CiAgICAgICAgaGVsZF9hZG1pbiA9IHBlcnNvbiAiSEVMRCBBZG1pbiIgIkF1dGhlbnRpY2F0ZWQgdXNlciB3aXRoIGFkbWluaXN0cmF0b3IgcHJpdmlsZWdlcyBvZiB0aGUgSEVMRCBBcHBsaWNhdGlvbiIgIkhFTERfUGVyc29ucyIKICAgICAgICBoZWxkX21lbWJlciA9IHBlcnNvbiAiSEVMRCBNZW1iZXIiICJBdXRoZW50aWNhdGVkIHVzZXIgb2YgdGhlIEhFTEQgQXBwbGljYXRpb24gd2l0aCBubyBjbHViIG1lbWJlcnNoaXAiICAiSEVMRF9QZXJzb25zIgogICAgICAgIGNsdWJfYWRtaW4gPSBwZXJzb24gIkNsdWIgQWRtaW4iICJVc2VyIHdpdGggYWRtaW5pc3RyYXRvciBwcml2aWxlZ2VzIG9mIGF0IGxlYXN0IG9uZSBjbHViIiAiSEVMRF9QZXJzb25zIgogICAgICAgIGNsdWJfbWVtYmVyID0gcGVyc29uICJDbHViIE1lbWJlciIgIkF1dGhlbnRpY2F0ZWQgdXNlciB3aXRoIG1lbWJlcnNoaXAgdG8gYXQgbGVhc3Qgb25lIGNsdWIiICJIRUxEX1BlcnNvbnMiCiAgICAgICAgdW5rbm93biA9IHBlcnNvbiAiVW5rbm93biIgIlVuYXV0aGVudGljYXRlZCB1c2VyIiAgIkhFTERfUGVyc29ucyIKICAgICAgICBhdXRoZW50aWNhdGVkX3VzZXJzID0gcGVyc29uICJBdXRoZW50aWNhdGVkIFVzZXJzIiAiSEVMRCBBZG1pbiwgSEVMRCBNZW1iZXIsIENsdWIgQWRtaW4sIENsdWIgTWVtYmVyIiAiR3JvdXBlZF9BY3RvciIKICAgICAgICBldmVyeW9uZSA9IHBlcnNvbiAiRXZlcnlvbmUiICJIRUxEIEFkbWluLCBIRUxEIE1lbWJlciwgQ2x1YiBBZG1pbiwgQ2x1YiBNZW1iZXIsIFVua25vd24iICJHcm91cGVkX0FjdG9yIgoKICAgICAgICBncm91cCAiQ2xvdWQgRW52aXJvbm1lbnQiIHsKICAgICAgICAgICAgaGVsZF9hcHBsaWNhdGlvbiA9IHNvZnR3YXJlU3lzdGVtICJIRUxEIiAiSGVsZGVuaGVsZmVyIEFwcGxpY2F0aW9ucyIgIkhFTERfQ29yZV9TeXN0ZW0iIHsKICAgICAgICAgICAgICAgIGhlcm9fcG9ydGFsX3dlYl91aSA9IGNvbnRhaW5lciAiSGVybyBQb3J0YWwgV2ViIFVJIiAiU2luZ2xlcGFnZSBBcHBsaWNhdGlvbiIgIk5leHQuanMiICJIRUxEX0NvbXBvbmVudHMiIHsKICAgICAgICAgICAgICAgICAgICBoZXJvX3BvcnRhbF93ZWJfdWlfc2VydmVyID0gY29tcG9uZW50ICJXZWIgVUkiICJTZXJ2ZXIgY29tcG9uZW50IgogICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgaGVyb19wb3J0YWxfYmFja2VuZCA9IGNvbnRhaW5lciAiSGVybyBQb3J0YWwgQmFja2VuZCIgIkJhY2tlbmQgTWljcm9zZXJ2aWNlIiAiRmFzdEFQSSIgIkhFTERfQ29tcG9uZW50cyIgewogICAgICAgICAgICAgICAgICAgIGhlcm9fcG9ydGFsX2JhY2tlbmRfY2x1YnMgPSBjb21wb25lbnQgIkNsdWJzIiAiQWRtaW5pc3RyYXRpb24gY29tcG9uZW50IG9mIHRoZSBjbHVicyIKICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgIGlkZW50aXR5X3Byb3ZpZGVyX3NpZGVjYXJfYmFja2VuZCA9IGNvbnRhaW5lciAiSWRlbnRpdHkgUHJvdmlkZXIgU2lkZWNhciBCYWNrZW5kIiAiQmFja2VuZCBNaWNyb3NlcnZpY2UgZm9yIGlkZW50aXR5IHByb3ZpZGVyIGNvbmZpZ3VyYXRpb24iICJGYXN0QVBJIiAiSEVMRF9Db21wb25lbnRzIiB7CiAgICAgICAgICAgICAgICAgICAga2NfY29uZmlndXJlX3NlcnZpY2UgPSBjb21wb25lbnQgIktleWNsb2FrIENvbmZpZ3VyZSBTZXJ2aWNlIiAiQ29uZmlndXJhdGlvbiBjb21wb25lbnQgZm9yIGtleWNsb2FrIgogICAgICAgICAgICAgICAgICAgIGtjX3F1ZXJ5X3NlcnZpY2UgPSBjb21wb25lbnQgIktleWNsb2FrIFF1ZXJ5IFNlcnZpY2UiICJRdWVyeSBjb21wb25lbnQgdG8gZ2V0IGtleWNsb2FrIGluZm9ybWF0aW9uIgogICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgY2x1Yl9mb3J1bSA9IGNvbnRhaW5lciAiQ2x1YiBGb3J1bSIgIkNvbW11bml0eSBQb3J0YWwgYmFzZWQgb24gT3BlbiBTb3VyY2UgU29mdHdhcmUgJ0Rpc2NvdXJzZSciICJEaXNjb3Vyc2UiICJIRUxEX0NvbXBvbmVudHMiICB7CiAgICAgICAgICAgICAgICAgICAgY2x1Yl9mb3J1bV9zaWRlY2FyID0gY29tcG9uZW50ICJDbHViIEZvcnVtIFNpZGVjYXIiICJTaWRlY2FyIHNlcnZpY2UgZm9yIGRpc2NvdXJzZSBjb25maWd1cmF0aW9uIgogICAgICAgICAgICAgICAgICAgIGNsdWJfZm9ydW1fbWFpbiA9IGNvbXBvbmVudCAiRGlzY291cnNlIiAiTWFpbiBEaXNjb3Vyc2UgaW5zdGFsbGF0aW9uIgogICAgICAgICAgICAgICAgICAgIGNsdWJfZm9ydW1fY2FrZWRheSA9IGNvbXBvbmVudCAiQ2FrZWRheSIgIkRpc2NvdXJzZSBQbHVnLUluIgogICAgICAgICAgICAgICAgICAgIGNsdWJfZm9ydW1fc29sdmVkID0gY29tcG9uZW50ICJTb2x2ZWQiICJEaXNjb3Vyc2UgUGx1Zy1JbiIKICAgICAgICAgICAgICAgICAgICBjbHViX2ZvcnVtX3llYXJseV9yZXZpZXcgPSBjb21wb25lbnQgIlllYXJseSBSZXZpZXciICJEaXNjb3Vyc2UgUGx1Zy1JbiIKICAgICAgICAgICAgICAgICAgICBjbHViX2ZvcnVtX2NoZWNrbGlzdCA9IGNvbXBvbmVudCAiQ2hlY2tsaXN0IiAiRGlzY291cnNlIFBsdWctSW4iCiAgICAgICAgICAgICAgICAgICAgY2x1Yl9mb3J1bV9kb2NzID0gY29tcG9uZW50ICJEb2NzIiAiRGlzY291cnNlIFBsdWctSW4iCiAgICAgICAgICAgICAgICAgICAgY2x1Yl9mb3J1bV9vYXV0aCA9IGNvbXBvbmVudCAiT0F1dGggMi4wICYgT3BlbklEIENvbm5lY3QgU3VwcG9ydCIgIkRpc2NvdXJzZSBQbHVnLUluIgogICAgICAgICAgICAgICAgICAgIGNsdWJfZm9ydW1fdG9waWNfdm90aW5nID0gY29tcG9uZW50ICJUb3BpYyBWb3RpbmciICJEaXNjb3Vyc2UgUGx1Zy1JbiIKICAgICAgICAgICAgICAgICAgICBjbHViX2ZvcnVtX2Fzc2lnbiA9IGNvbXBvbmVudCAiQXNzaWduIiAiRGlzY291cnNlIFBsdWctSW4iCiAgICAgICAgICAgICAgICAgICAgY2x1Yl9mb3J1bV9mb290bm90ZSA9IGNvbXBvbmVudCAiRm9vdG5vdGUiICJEaXNjb3Vyc2UgUGx1Zy1JbiIKICAgICAgICAgICAgICAgICAgICBjbHViX2ZvcnVtX3Nwb2lsZXJfYWxlcnQgPSBjb21wb25lbnQgIlNwb2lsZXIgQWxlcnQiICJEaXNjb3Vyc2UgUGx1Zy1JbiIKICAgICAgICAgICAgICAgICAgICBjbHViX2ZvcnVtX3RlbXBsYXRlcyA9IGNvbXBvbmVudCAiVGVtcGxhdGVzIiAiRGlzY291cnNlIFBsdWctSW4iCiAgICAgICAgICAgICAgICAgICAgY2x1Yl9mb3J1bV9yZWRpc19tYXN0ZXIgPSBjb21wb25lbnQgIkNsdWIgRnJvdW0gUmVzZGlzIE1hc3RlciIgIlJlYWwgVGltZSBEYXRhIFBsYXRmb3JtIiAKICAgICAgICAgICAgICAgICAgICBjbHViX2ZvcnVtX3JlZGlzX3JlcGxpY2EgPSBjb21wb25lbnQgIkNsdWIgRnJvdW0gUmVzZGlzIFJlcGxpY2EiICJSZWFsIFRpbWUgRGF0YSBQbGF0Zm9ybSIKICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgIGRpZ2l0YWxfb2ZmaWNlID0gY29udGFpbmVyICJEaWdpdGFsIE9mZmljZSIgIkRpZ2l0YWwgT2ZmaWNlIGJhc2VkIG9uIE9wZW4gU291cmNlIFNvZnR3YXJlICdOZXh0Y2xvdWQnIiAiTmV4dGNsb3VkIiAiSEVMRF9Db21wb25lbnRzIiB7CiAgICAgICAgICAgICAgICAgICAgZGlnaXRhbF9vZmZpY2Vfc2lkZWNhciA9IGNvbXBvbmVudCAiRGlnaXRhbCBPZmZpY2UgU2lkZWNhciIgIlNpZGVjYXIgc2VydmljZSBmb3IgbmV4dGNsb3VkIGNvbmZpZ3VyYXRpb24iCiAgICAgICAgICAgICAgICAgICAgZGlnaXRhbF9vZmZpY2VfbWFpbiA9IGNvbXBvbmVudCAiTmV4dGNsb3VkIiAiTWFpbiBOZXh0Y2xvdWQgaW5zdGFsbGF0aW9uIgogICAgICAgICAgICAgICAgICAgIGRpZ2l0YWxfb2ZmaWNlX29mZmljZSA9IGNvbXBvbmVudCAiTmV4dGNsb3VkIE9mZmljZSIgIk5leHRjbG91ZCBPZmZpY2UgQXBwIgogICAgICAgICAgICAgICAgICAgIGRpZ2l0YWxfb2ZmaWNlX29pZGMgPSBjb21wb25lbnQgIk9wZW5JRCBDb25uZWN0IExvZ2luIiAiTmV4dGNsb3VkIE9JREMgQXBwIgogICAgICAgICAgICAgICAgICAgIGRpZ2l0YWxfb2ZmaWNlX2NvbGxhYm9yYSA9IGNvbXBvbmVudCAiQ29sbGFib3JhIiAiQ29sbGFib3JhIFNlcnZpY2UiCiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgIH0gICAKICAgICAgICAgICAgc2NoX2FwcGxpY2F0aW9uID0gc29mdHdhcmVTeXN0ZW0gIlNDSCIgIlNtYXJ0IENpdHkgSHViIEFwcGxpY2F0aW9ucyIgIlNDSF9Db3JlX1N5c3RlbSJ7CiAgICAgICAgICAgICAgICBkYXRhX21hcmtldF93ZWJfdWkgPSBjb250YWluZXIgIkRhdGEgTWFya2V0IFdlYiBVSSIKICAgICAgICAgICAgICAgIGRhdGFfbWFya2V0X2JhY2tlbmQgPSBjb250YWluZXIgIkRhdGEgTWFya2V0IEJhY2tlbmQiCiAgICAgICAgICAgIH0KICAgICAgICAgICAgaWRlbnRpdHlfcHJvdmlkZXIgPSBzb2Z0d2FyZVN5c3RlbSAiSUFNIiAiSWRlbnRpdHktIGFuZCBBY2Nlc3NtYW5hZ2VtZW50IiAiQ29yZV9TeXN0ZW0iIHsKICAgICAgICAgICAgICAgIHNjaF9yZWFsbSA9IGNvbnRhaW5lciAiU0NIIFJlYWxtIiB7CiAgICAgICAgICAgICAgICAgICAgaGVyb19wb3J0YWxfYXBwbGljYXRpb24gPSBjb21wb25lbnQgIkhlcm8gUG9ydGFsIEFwcGxpY2F0aW9uIiAiS2V5Y2xvYWsgY2xpZW50IgogICAgICAgICAgICAgICAgICAgIGRpZ2l0YWxfb2ZmaWNlX2FwcGxpY2F0aW9uID0gY29tcG9uZW50ICJEaWdpdGFsIE9mZmljZSBBcHBsaWNhdGlvbiIgIktleWNsb2FrIENsaWVudCIKICAgICAgICAgICAgICAgICAgICBjbHViX2ZvcnVtX2FwcGxpY2F0aW9uID0gY29tcG9uZW50ICJDbHViIEZvcnVtIEFwcGxpY2F0aW9uIiAiS2V5Y2xvYWsgQ2xpZW50IgogICAgICAgICAgICAgICAgfQogICAgICAgICAgICB9CiAgICAgICAgICAgIG1vbml0b3JpbmcgPSBzb2Z0d2FyZVN5c3RlbSAiTW9uaXRvcmluZyIgIk1vbml0b3JpbmcgYW5kIExvZ2dpbmciICAiQ29yZV9TeXN0ZW0iCiAgICAgICAgICAgIGRhdGFiYXNlX3NlcnZlciA9IHNvZnR3YXJlU3lzdGVtICJEYXRhYmFzZSBTZXJ2ZXIiICJQb3N0Z3JlU1FMIFNlcnZlciIgIlRBR19EYXRhX1N0b3JhZ2UiewogICAgICAgICAgICAgICAgc2NoX2RhdGFiYXNlcyA9IGNvbnRhaW5lciAiU0NIIERhdGFiYXNlcyIgIkRhdGFiYXNlcyBvZiB0aGUgU21hcnQgQ2l0eSBIdWIiICJQb3N0Z3JlU1FMIiAiVEFHX0RhdGFfU3RvcmFnZSIKICAgICAgICAgICAgICAgIGhlcm9fcG9ydGFsX2RhdGFiYXNlID0gY29udGFpbmVyICJIZXJvIFBvcnRhbCBEYXRhYmFzZSIgIiIgIlBvc3RncmVTUUwiICJUQUdfRGF0YV9TdG9yYWdlIiB7CiAgICAgICAgICAgICAgICAgICAgY2x1YnNfc2NoZW1hID0gY29tcG9uZW50ICJDbHVicyIgIkNsdWJzIGRhdGFiYXNlIHNjaGVtYSIKICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgIGRpZ2l0YWxfb2ZmaWNlX2RhdGFiYXNlID0gY29udGFpbmVyICJEaWdpdGFsIE9mZmljZSBEYXRhYmFzZSIgIk5leHRjbG91ZCBEQiIgIlBvc3RncmVTUUwiICJUQUdfRGF0YV9TdG9yYWdlIiB7CiAgICAgICAgICAgICAgICAgICAgZGlnaXRhbF9vZmZpY2VfcHVibGljX3NjaGVtYSA9IGNvbXBvbmVudCAiUHVibGljIiAiUHVibGljIGRhdGFiYXNlIHNjaGVtYSIKICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgIGNsdWJfZm9ydW1fZGF0YWJhc2UgPSBjb250YWluZXIgIkRpc2NvdXJzZSBEYXRhYmFzZSIgIiIgIlBvc3RncmVTUUwiICJUQUdfRGF0YV9TdG9yYWdlIiB7CiAgICAgICAgICAgICAgICAgICAgY2x1Yl9mb3J1bV9wdWJsaWNfc2NoZW1hID0gY29tcG9uZW50ICJQdWJsaWMiICJQdWJsaWMgZGF0YWJhc2Ugc2NoZW1hIgogICAgICAgICAgICAgICAgfQogICAgICAgICAgICB9CiAgICAgICAgICAgIGV2ZW50X3N0cmVhbWluZyA9IHNvZnR3YXJlU3lzdGVtICJFdmVudCBTdHJlYW1pbmciICJEaXN0cmlidXRlZCBNZXNzYWdlIFNlcnZpY2UgKEthZmthKSIgIk1lc3NhZ2VfU3lzdGVtIgogICAgICAgICAgICBmaWxlX3N0b3JlID0gc29mdHdhcmVTeXN0ZW0gIkZpbGUgU3lzdGVtIiAiU2NhbGFibGUgRmlsZSBTZXJ2aWNlIiAgIlRBR19EYXRhX1N0b3JhZ2UiIHsKICAgICAgICAgICAgICAgIHNjaF9maWxlX2RpcmVjdG9yeSA9IGNvbnRhaW5lciAiU0NIIEZpbGUgRGlyZWN0b3J5IiAiRGlyZWN0b3J5IG9mIHRoZSBTbWFydCBDaXR5IEh1YiIgIlNGUyIgIlRBR19EYXRhX1N0b3JhZ2UiCiAgICAgICAgICAgICAgICBoZXJvX3BvcnRhbF9maWxlX2RpcmVjdG9yeSA9IGNvbnRhaW5lciAiSGVybyBQb3J0YWwgRGlyZWN0b3J5IiAiRGlyZWN0b3J5IG9mIEhlcm8gUG9ydGFsIiAiU0ZTIiAiVEFHX0RhdGFfU3RvcmFnZSIKICAgICAgICAgICAgfQogICAgICAgICAgICBldnNfcGVyc2lzdGVudF92b2x1bWUgPSBzb2Z0d2FyZVN5c3RlbSAiRVZTIiAiRWxhc3RpYyBWb2x1bWUgU2VydmljZSIgIlRBR19EYXRhX1N0b3JhZ2UiIHsKICAgICAgICAgICAgICAgIGRpZ2l0YWxfb2ZmaWNlX25leHRjbG91ZCA9IGNvbnRhaW5lciAiRGlnaXRhbCBPZmZpY2UgUGVyc2lzdGVuY2UiICIiICIiICJUQUdfRGF0YV9TdG9yYWdlIgogICAgICAgICAgICAgICAgZGlnaXRhbF9vZmZpY2VfbmV4dGNsb3VkX2RhdGEgPSBjb250YWluZXIgIkRpZ2l0YWwgT2ZmaWNlIERhdGEgUGVyc2lzdGVuY2UiICIiICIiICJUQUdfRGF0YV9TdG9yYWdlIgogICAgICAgICAgICAgICAgY2x1Yl9mb3J1bV9yZWRpc19tYXN0ZXJfZGF0YSA9IGNvbnRhaW5lciAiQ2x1YiBGb3J1bSBSZWRpcyBNYXN0ZXIgUGVyc2lzdGVuY2UiICIiICIiICJUQUdfRGF0YV9TdG9yYWdlIgogICAgICAgICAgICAgICAgY2x1Yl9mb3J1bV9yZWRpc19yZXBsaWNhX2RhdGEgPSBjb250YWluZXIgIkNsdWIgRm9ydW0gUmVkaXMgUmVwbGljYSBQZXJzaXN0ZW5jZSIgIiIgIiIgIlRBR19EYXRhX1N0b3JhZ2UiCiAgICAgICAgICAgICAgICBjbHViX2ZvcnVtX3BlcnNpc3RlbmNlID0gY29udGFpbmVyICJDbHViIEZvcnVtIERhdGEgUGVyc2lzdGVuY2UiICIiICIiICJUQUdfRGF0YV9TdG9yYWdlIgogICAgICAgICAgICB9CiAgICAgICAgfQogICAgICAgIGJyb3dzZXIgPSBzb2Z0d2FyZVN5c3RlbSAiSW50ZXJuZXQgQnJvd3NlciIgIkNocm9tZSwgRmlyZWZveCwgRWRnZSwgLi4uIiAiQ2xpZW50X1N5c3RlbSIKCiAgICAgICAgIyBhY3RvcnMKICAgICAgICBoZWxkX2FkbWluIC0+IGhlbGRfYXBwbGljYXRpb24gIlVzZXMiCgogICAgICAgIGhlbGRfbWVtYmVyIC0+IGhlbGRfYXBwbGljYXRpb24gIlVzZXMiCgogICAgICAgIGNsdWJfYWRtaW4gLT4gaGVsZF9hcHBsaWNhdGlvbiAiVXNlcyIKCiAgICAgICAgY2x1Yl9tZW1iZXIgLT4gaGVsZF9hcHBsaWNhdGlvbiAiVXNlcyIKCiAgICAgICAgdW5rbm93biAtPiBoZWxkX2FwcGxpY2F0aW9uICJVc2VzIgoKICAgICAgICBhdXRoZW50aWNhdGVkX3VzZXJzIC0+IGhlcm9fcG9ydGFsX3dlYl91aSAiVXNlcyIKICAgICAgICBhdXRoZW50aWNhdGVkX3VzZXJzIC0+IGRpZ2l0YWxfb2ZmaWNlICJVc2VzIgogICAgICAgIGF1dGhlbnRpY2F0ZWRfdXNlcnMgLT4gY2x1Yl9mb3J1bSAiVXNlcyIKCiAgICAgICAgZXZlcnlvbmUgLT4gaGVyb19wb3J0YWxfd2ViX3VpICJVc2VzIgogICAgICAgIAogICAgICAgICMgY29udGFpbmVycwogICAgICAgIGhlbGRfYXBwbGljYXRpb24gLT4gaWRlbnRpdHlfcHJvdmlkZXIgIlNpbmdsZSBTaWduIE9uIgoKICAgICAgICBicm93c2VyIC0+IGhlcm9fcG9ydGFsX3dlYl91aSAiVXNlcyIKICAgICAgICBicm93c2VyIC0+IGRpZ2l0YWxfb2ZmaWNlICJVc2VzIgogICAgICAgIGJyb3dzZXIgLT4gY2x1Yl9mb3J1bSAiVXNlcyIKCiAgICAgICAgaWRlbnRpdHlfcHJvdmlkZXJfc2lkZWNhcl9iYWNrZW5kIC0+IGlkZW50aXR5X3Byb3ZpZGVyICJSZWFkIGFuZCBjaGFuZ2UgY29uZmlndXJhdGlvbi9pbmZvcm1hdGlvbiIgIlJFU1QgQVBJIgoKICAgICAgICAjIGNvbXBvbmVudHMKICAgICAgICBoZXJvX3BvcnRhbF93ZWJfdWlfc2VydmVyIC0+IGhlcm9fcG9ydGFsX2JhY2tlbmRfY2x1YnMgIkNsdWJzIEFkbWluaXN0cmF0aW9uIiAiUkVTVCBBUEkiCiAgICAgICAgaGVyb19wb3J0YWxfd2ViX3VpX3NlcnZlciAtPiBoZXJvX3BvcnRhbF9hcHBsaWNhdGlvbiAiR2V0IEFjY2VzcyBUb2tlbnMiICJSRVNUIEFQSSIgIlRBR19oZXJvX3BvcnRhbF93ZWJfdWlfdG9faWFtX3JlbGF0aW9uc2hpcCIKCiAgICAgICAgaGVyb19wb3J0YWxfYmFja2VuZF9jbHVicyAtPiBjbHVic19zY2hlbWEgIkNsdWJzIGRhdGEgcGVyc2lzdGVuY2UiICJTUUwiCiAgICAgICAgIyBoZXJvX3BvcnRhbF9iYWNrZW5kX2NsdWJzIC0+IGRpZ2l0YWxfb2ZmaWNlICJDb25maWd1cmVzIENsdWIgQXJlYSIgIlJFU1QgQVBJIgogICAgICAgICMgaGVyb19wb3J0YWxfYmFja2VuZF9jbHVicyAtPiBjbHViX2ZvcnVtICJDb25maWd1cmVzIENsdWIgQXJlYSIgIlJFU1QgQVBJIgogICAgICAgIGhlcm9fcG9ydGFsX2JhY2tlbmRfY2x1YnMgLT4gaGVyb19wb3J0YWxfZmlsZV9kaXJlY3RvcnkgIlN0b3JlcyBGaWxlcyIgIkNTSSIKICAgICAgICBoZXJvX3BvcnRhbF9iYWNrZW5kX2NsdWJzIC0+IGV2ZW50X3N0cmVhbWluZyAiUHVibGlzaCBDbHViIEV2ZW50cyIKICAgICAgICBoZXJvX3BvcnRhbF9iYWNrZW5kX2NsdWJzIC0+IGtjX3F1ZXJ5X3NlcnZpY2UgIkdldCB1c2VyIGluZm9ybWF0aW9uIiAiUkVTVCBBUEkiCgogICAgICAgIGtjX2NvbmZpZ3VyZV9zZXJ2aWNlIC0+IGRpZ2l0YWxfb2ZmaWNlX2FwcGxpY2F0aW9uICJDcmVhdGUgYW5kIEFzc2lnbiBncm91cCByb2xlcyIKICAgICAgICAKICAgICAgICBkaWdpdGFsX29mZmljZV9zaWRlY2FyIC0+IGRpZ2l0YWxfb2ZmaWNlX21haW4gIkRpZ2l0YWwgT2ZmaWNlIGFyZWEgY29uZmlndXJhdGlvbiIgIlJFU1QgQVBJIgogICAgICAgIGRpZ2l0YWxfb2ZmaWNlX3NpZGVjYXIgLT4ga2NfY29uZmlndXJlX3NlcnZpY2UgIkNyZWF0ZSBhbmQgQXNzaWduIGdyb3VwIHJvbGVzIiAiUkVTVCBBUEkiICJUQUdfZGlnaXRhbF9vZmZpY2VfdG9fZXZlbnRfc3RyZWFtaW5nX3JlbGF0aW9uc2hpcCIKICAgICAgICBkaWdpdGFsX29mZmljZV9zaWRlY2FyIC0+IGV2ZW50X3N0cmVhbWluZyAiU3Vic2NyaWJlIENsdWIgRXZlbnRzIiAiIiAiVEFHX2RpZ2l0YWxfb2ZmaWNlX3RvX2V2ZW50X3N0cmVhbWluZ19yZWxhdGlvbnNoaXAiCgogICAgICAgIGRpZ2l0YWxfb2ZmaWNlX21haW4gLT4gZGlnaXRhbF9vZmZpY2VfcHVibGljX3NjaGVtYSAiRGlnaXRhbCBPZmZpY2UgZGF0YSBwZXJzaXN0ZW5jZSIgIlNRTCIgIlRBR19kaWdpdGFsX29mZmljZV90b19wb3N0Z3Jlc19yZWxhdGlvbnNoaXAiCiAgICAgICAgZGlnaXRhbF9vZmZpY2VfbWFpbiAtPiBkaWdpdGFsX29mZmljZV9vZmZpY2UgIlVzZXMgSW5zdGFsbGVkIEFwcCIKICAgICAgICBkaWdpdGFsX29mZmljZV9tYWluIC0+IGRpZ2l0YWxfb2ZmaWNlX29pZGMgIlVzZXMgSW5zdGFsbGVkIEFwcCIKICAgICAgICBkaWdpdGFsX29mZmljZV9tYWluIC0+IGRpZ2l0YWxfb2ZmaWNlX25leHRjbG91ZCAiUGVzaXN0cyBkYXRhIiAiQ1NJIgogICAgICAgIGRpZ2l0YWxfb2ZmaWNlX21haW4gLT4gZGlnaXRhbF9vZmZpY2VfbmV4dGNsb3VkX2RhdGEgIlBlc2lzdHMgZGF0YSIgIkNTSSIKCiAgICAgICAgZGlnaXRhbF9vZmZpY2Vfb2lkYyAtPiBkaWdpdGFsX29mZmljZV9hcHBsaWNhdGlvbiAiQXV0aGVudGljYXRlcy9BdXRob3JpemVzIFVzZXIiICJPcGVuSUQgQ29ubmVjdCIgIlRBR19kaWdpdGFsX29mZmljZV90b19pYW1fcmVsYXRpb25zaGlwIgoKICAgICAgICBkaWdpdGFsX29mZmljZV9vZmZpY2UgLT4gZGlnaXRhbF9vZmZpY2VfY29sbGFib3JhICJVc2VzIFNlcnZlciIKCiAgICAgICAgY2x1Yl9mb3J1bV9zaWRlY2FyIC0+IGNsdWJfZm9ydW1fbWFpbiAiQ2x1YiBGb3J1bSBhcmVhIGNvbmZpZ3VyYXRpb24iICJSRVNUIEFQSSIKICAgICAgICBjbHViX2ZvcnVtX3NpZGVjYXIgLT4gZXZlbnRfc3RyZWFtaW5nICJTdWJzY3JpYmUgQ2x1YiBFdmVudHMiICIiICJUQUdfY2x1Yl9mb3J1bV90b19ldmVudF9zdHJlYW1pbmdfcmVsYXRpb25zaGlwIgoKICAgICAgICBjbHViX2ZvcnVtX21haW4gLT4gY2x1Yl9mb3J1bV9wdWJsaWNfc2NoZW1hICJDbHViIEZvcnVtIGRhdGEgcGVyc2lzdGVuY2UiICJTUUwiICJUQUdfY2x1Yl9mb3J1bV90b19wb3N0Z3Jlc19yZWxhdGlvbnNoaXAiCiAgICAgICAgY2x1Yl9mb3J1bV9tYWluIC0+IGNsdWJfZm9ydW1fcGVyc2lzdGVuY2UgIlBlcnNpc3RzIGRhdGEiICJDU0kiICJUQUdfY2x1Yl9mb3J1bV90b19wdmNfcmVsYXRpb25zaGlwIgogICAgICAgIGNsdWJfZm9ydW1fbWFpbiAtPiBjbHViX2ZvcnVtX3JlZGlzX21hc3RlciAiUGVyc2lzdHMgZGF0YSIgIiIgIlRBR19jbHViX2ZvcnVtX3RvX3JlZGlzX3JlbGF0aW9uc2hpcCIKICAgICAgICBjbHViX2ZvcnVtX21haW4gLT4gY2x1Yl9mb3J1bV9jYWtlZGF5ICJVc2UgUGx1Zy1JbiIKICAgICAgICBjbHViX2ZvcnVtX21haW4gLT4gY2x1Yl9mb3J1bV9zb2x2ZWQgIlVzZSBQbHVnLUluIgogICAgICAgIGNsdWJfZm9ydW1fbWFpbiAtPiBjbHViX2ZvcnVtX3llYXJseV9yZXZpZXcgIlVzZSBQbHVnLUluIgogICAgICAgIGNsdWJfZm9ydW1fbWFpbiAtPiBjbHViX2ZvcnVtX2NoZWNrbGlzdCAiVXNlIFBsdWctSW4iCiAgICAgICAgY2x1Yl9mb3J1bV9tYWluIC0+IGNsdWJfZm9ydW1fZG9jcyAiVXNlIFBsdWctSW4iCiAgICAgICAgY2x1Yl9mb3J1bV9tYWluIC0+IGNsdWJfZm9ydW1fb2F1dGggIlVzZSBQbHVnLUluIgogICAgICAgIGNsdWJfZm9ydW1fbWFpbiAtPiBjbHViX2ZvcnVtX3RvcGljX3ZvdGluZyAiVXNlIFBsdWctSW4iCiAgICAgICAgY2x1Yl9mb3J1bV9tYWluIC0+IGNsdWJfZm9ydW1fYXNzaWduICJVc2UgUGx1Zy1JbiIKICAgICAgICBjbHViX2ZvcnVtX21haW4gLT4gY2x1Yl9mb3J1bV9mb290bm90ZSAiVXNlIFBsdWctSW4iCiAgICAgICAgY2x1Yl9mb3J1bV9tYWluIC0+IGNsdWJfZm9ydW1fc3BvaWxlcl9hbGVydCAiVXNlIFBsdWctSW4iCiAgICAgICAgY2x1Yl9mb3J1bV9tYWluIC0+IGNsdWJfZm9ydW1fdGVtcGxhdGVzICJVc2UgUGx1Zy1JbiIKCiAgICAgICAgY2x1Yl9mb3J1bV9vYXV0aCAtPiBjbHViX2ZvcnVtX2FwcGxpY2F0aW9uICJBdXRoZW50aWNhdGVzL0F1dGhvcml6ZXMgVXNlciIgIk9wZW5JRCBDb25uZWN0IiAiVEFHX2NsdWJfZm9ydW1fdG9faWFtX3JlbGF0aW9uc2hpcCIKCiAgICAgICAgY2x1Yl9mb3J1bV9yZWRpc19tYXN0ZXIgLT4gY2x1Yl9mb3J1bV9yZWRpc19yZXBsaWNhICJTeW5jaHJvbmlzZXMgZGF0YSIKICAgICAgICBjbHViX2ZvcnVtX3JlZGlzX21hc3RlciAtPiBjbHViX2ZvcnVtX3JlZGlzX21hc3Rlcl9kYXRhICJQZXJzaXN0cyBkYXRhIgoKICAgICAgICBjbHViX2ZvcnVtX3JlZGlzX3JlcGxpY2EgLT4gY2x1Yl9mb3J1bV9yZWRpc19yZXBsaWNhX2RhdGEgIlBlcnNpc3RzIGRhdGEiCgogICAgICAgIHNjaF9kZXBsb3ltZW50ID0gZGVwbG95bWVudEVudmlyb25tZW50ICJEZXZlbG9wbWVudCIgewogICAgICAgICAgICBvdGMgPSBkZXBsb3ltZW50Tm9kZSAiT3BlbiBUZWxla29tIENsb3VkInsKICAgICAgICAgICAgICAgIGNjZSA9IGRlcGxveW1lbnROb2RlICJDQ0UiICIiICJLdWJlcm5ldGVzIENsdXN0ZXIiICJUQUdfRGVwbG95bWVudF9DQ0UiewogICAgICAgICAgICAgICAgICAgIGFwcF9uYW1lc3BhY2UgPSBkZXBsb3ltZW50Tm9kZSAiYXBwIiAiIiAiS3ViZXJuZXRlcyBOYW1lc3BhY2UiewogICAgICAgICAgICAgICAgICAgICAgICBzb2Z0d2FyZVN5c3RlbUluc3RhbmNlIHNjaF9hcHBsaWNhdGlvbgogICAgICAgICAgICAgICAgICAgICAgICBzb2Z0d2FyZVN5c3RlbUluc3RhbmNlIGlkZW50aXR5X3Byb3ZpZGVyCiAgICAgICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgICAgIG1vbml0b3JpbmdfbmFtZXNwYWNlID0gZGVwbG95bWVudE5vZGUgIm1vbml0b3JpbmciICIiICJLdWJlcm5ldGVzIE5hbWVzcGFjZSIgewogICAgICAgICAgICAgICAgICAgICAgICBzb2Z0d2FyZVN5c3RlbUluc3RhbmNlIG1vbml0b3JpbmcKICAgICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICAgICAgaGVyb19uYW1lc3BhY2UgPSBkZXBsb3ltZW50Tm9kZSAiaGVybyIgIiIgIkt1YmVybmV0ZXMgTmFtZXNwYWNlIiB7CiAgICAgICAgICAgICAgICAgICAgICAgIGNvbnRhaW5lckluc3RhbmNlIGhlcm9fcG9ydGFsX2JhY2tlbmQKICAgICAgICAgICAgICAgICAgICAgICAgY29udGFpbmVySW5zdGFuY2UgaGVyb19wb3J0YWxfd2ViX3VpCiAgICAgICAgICAgICAgICAgICAgICAgIGNvbnRhaW5lckluc3RhbmNlIGRpZ2l0YWxfb2ZmaWNlCiAgICAgICAgICAgICAgICAgICAgICAgIGNvbnRhaW5lckluc3RhbmNlIGNsdWJfZm9ydW0KICAgICAgICAgICAgICAgICAgICAgICAgY29udGFpbmVySW5zdGFuY2UgaWRlbnRpdHlfcHJvdmlkZXJfc2lkZWNhcl9iYWNrZW5kCiAgICAgICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgcmRzID0gZGVwbG95bWVudE5vZGUgIlJEUyIgIiIgIkRhdGFiYXNlIFNlcnZlciIgIlRBR19EZXBsb3ltZW50X1JEUyJ7CiAgICAgICAgICAgICAgICAgICAgY29udGFpbmVySW5zdGFuY2Ugc2NoX2RhdGFiYXNlcwogICAgICAgICAgICAgICAgICAgIGNvbnRhaW5lckluc3RhbmNlIGhlcm9fcG9ydGFsX2RhdGFiYXNlCiAgICAgICAgICAgICAgICAgICAgY29udGFpbmVySW5zdGFuY2UgZGlnaXRhbF9vZmZpY2VfZGF0YWJhc2UKICAgICAgICAgICAgICAgICAgICBjb250YWluZXJJbnN0YW5jZSBjbHViX2ZvcnVtX2RhdGFiYXNlCiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICBkbXMgPSBkZXBsb3ltZW50Tm9kZSAiRE1TIiAiIiAiRGlzdHJpYnV0ZWQgRGF0YWJhc2UgU2VydmljZSIgIlRBR19EZXBsb3ltZW50X0RNUyJ7CiAgICAgICAgICAgICAgICAgICAgc29mdHdhcmVTeXN0ZW1JbnN0YW5jZSBldmVudF9zdHJlYW1pbmcKICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgIHNmcyA9IGRlcGxveW1lbnROb2RlICJTRlMiICIiICJTY2FsYWJsZSBGaWxlIFNlcnZpY2UiICJUQUdfRGVwbG95bWVudF9TRlMiewogICAgICAgICAgICAgICAgICAgIGNvbnRhaW5lckluc3RhbmNlIHNjaF9maWxlX2RpcmVjdG9yeQogICAgICAgICAgICAgICAgICAgIGNvbnRhaW5lckluc3RhbmNlIGhlcm9fcG9ydGFsX2ZpbGVfZGlyZWN0b3J5CiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICBldnMgPSBkZXBsb3ltZW50Tm9kZSAiRVZTIiAiIiAiRWxhc3RpYyBWb2x1bWUgU2VydmljZSIgIlRBR19EZXBsb3ltZW50X0VWUyIgewogICAgICAgICAgICAgICAgICAgIGNvbnRhaW5lckluc3RhbmNlIGRpZ2l0YWxfb2ZmaWNlX25leHRjbG91ZAogICAgICAgICAgICAgICAgICAgIGNvbnRhaW5lckluc3RhbmNlIGRpZ2l0YWxfb2ZmaWNlX25leHRjbG91ZF9kYXRhCiAgICAgICAgICAgICAgICAgICAgY29udGFpbmVySW5zdGFuY2UgY2x1Yl9mb3J1bV9yZWRpc19tYXN0ZXJfZGF0YQogICAgICAgICAgICAgICAgICAgIGNvbnRhaW5lckluc3RhbmNlIGNsdWJfZm9ydW1fcmVkaXNfcmVwbGljYV9kYXRhCiAgICAgICAgICAgICAgICAgICAgY29udGFpbmVySW5zdGFuY2UgY2x1Yl9mb3J1bV9wZXJzaXN0ZW5jZQogICAgICAgICAgICAgICAgfQogICAgICAgICAgICB9CiAgICAgICAgICAgIGNsaWVudCA9IGRlcGxveW1lbnROb2RlICJDbGllbnQgRGV2aWNlIiAiIiAiQ2xpZW50IGJyb3dzZXIgKE1vYmlsZSwgUEMsIC4uLikiICJUQUdfRGVwbG95bWVudF9jbGllbnQiewogICAgICAgICAgICAgICAgc29mdHdhcmVTeXN0ZW1JbnN0YW5jZSBicm93c2VyCiAgICAgICAgICAgIH0KICAgICAgICB9CgogICAgICAgIAogICAgfQoKICAgIHZpZXdzIHsKICAgICAgICBzeXN0ZW1sYW5kc2NhcGUgIlN5c3RlbUxhbmRzY2FwZSIgewogICAgICAgICAgICBpbmNsdWRlIGVsZW1lbnQudGFnPT1IRUxEX0NvcmVfU3lzdGVtCiAgICAgICAgICAgIGluY2x1ZGUgZWxlbWVudC50YWc9PVNDSF9Db3JlX1N5c3RlbQogICAgICAgICAgICBpbmNsdWRlIGVsZW1lbnQudGFnPT1Db3JlX1N5c3RlbQogICAgICAgICAgICBpbmNsdWRlIGVsZW1lbnQudGFnPT1IRUxEX1BlcnNvbnMKICAgICAgICB9CiAgICAgICAgc3lzdGVtQ29udGV4dCBoZWxkX2FwcGxpY2F0aW9uIHsKICAgICAgICAgICAgaW5jbHVkZSAqCiAgICAgICAgICAgIGV4Y2x1ZGUgZWxlbWVudC50YWc9PUNsaWVudF9TeXN0ZW0KICAgICAgICAgICAgZXhjbHVkZSBlbGVtZW50LnRhZz09R3JvdXBlZF9BY3RvcgogICAgICAgIH0KCiAgICAgICAgY29udGFpbmVyIGhlbGRfYXBwbGljYXRpb24gewogICAgICAgICAgICBpbmNsdWRlICoKICAgICAgICAgICAgZXhjbHVkZSBlbGVtZW50LnRhZz09Q2xpZW50X1N5c3RlbQogICAgICAgIH0KCiAgICAgICAgY29tcG9uZW50IGhlcm9fcG9ydGFsX2JhY2tlbmQgewogICAgICAgICAgICBpbmNsdWRlICoKICAgICAgICAgICAgZXhjbHVkZSByZWxhdGlvbnNoaXAudGFnPT1UQUdfZGlnaXRhbF9vZmZpY2VfdG9faWFtX3JlbGF0aW9uc2hpcAogICAgICAgICAgICBleGNsdWRlIHJlbGF0aW9uc2hpcC50YWc9PVRBR19kaWdpdGFsX29mZmljZV90b19wb3N0Z3Jlc19yZWxhdGlvbnNoaXAKICAgICAgICAgICAgZXhjbHVkZSByZWxhdGlvbnNoaXAudGFnPT1UQUdfaGVyb19wb3J0YWxfd2ViX3VpX3RvX2lhbV9yZWxhdGlvbnNoaXAKICAgICAgICAgICAgZXhjbHVkZSByZWxhdGlvbnNoaXAudGFnPT1UQUdfY2x1Yl9mb3J1bV90b19pYW1fcmVsYXRpb25zaGlwCiAgICAgICAgICAgIGV4Y2x1ZGUgcmVsYXRpb25zaGlwLnRhZz09VEFHX2NsdWJfZm9ydW1fdG9fcHZjX3JlbGF0aW9uc2hpcAogICAgICAgICAgICBleGNsdWRlIHJlbGF0aW9uc2hpcC50YWc9PVRBR19jbHViX2ZvcnVtX3RvX3Bvc3RncmVzX3JlbGF0aW9uc2hpcAogICAgICAgICAgICBleGNsdWRlIHJlbGF0aW9uc2hpcC50YWc9PVRBR19jbHViX2ZvcnVtX3RvX2V2ZW50X3N0cmVhbWluZ19yZWxhdGlvbnNoaXAKICAgICAgICAgICAgZXhjbHVkZSByZWxhdGlvbnNoaXAudGFnPT1UQUdfZGlnaXRhbF9vZmZpY2VfdG9fZXZlbnRfc3RyZWFtaW5nX3JlbGF0aW9uc2hpcAogICAgICAgIH0KCiAgICAgICAgY29tcG9uZW50IGRpZ2l0YWxfb2ZmaWNlIHsKICAgICAgICAgICAgaW5jbHVkZSAqCiAgICAgICAgfQoKICAgICAgICBjb21wb25lbnQgY2x1Yl9mb3J1bSB7CiAgICAgICAgICAgIGluY2x1ZGUgKgogICAgICAgIH0KCiAgICAgICAgY29tcG9uZW50IHNjaF9yZWFsbSB7CiAgICAgICAgICAgIGluY2x1ZGUgKgogICAgICAgIH0KCiAgICAgICAgZGVwbG95bWVudCAqIHNjaF9kZXBsb3ltZW50IHsKICAgICAgICAgICAgaW5jbHVkZSBlbGVtZW50LnRhZz09VEFHX0RlcGxveW1lbnRfQ0NFCiAgICAgICAgICAgIGluY2x1ZGUgZWxlbWVudC50YWc9PVRBR19EZXBsb3ltZW50X0RNUwogICAgICAgICAgICBpbmNsdWRlIGVsZW1lbnQudGFnPT1UQUdfRGVwbG95bWVudF9SRFMKICAgICAgICAgICAgaW5jbHVkZSBlbGVtZW50LnRhZz09VEFHX0RlcGxveW1lbnRfU0ZTCiAgICAgICAgICAgIGluY2x1ZGUgZWxlbWVudC50YWc9PVRBR19EZXBsb3ltZW50X0VWUwogICAgICAgICAgICBpbmNsdWRlIGVsZW1lbnQudGFnPT1UQUdfRGVwbG95bWVudF9jbGllbnQKICAgICAgICAgICAgaW5jbHVkZSBlbGVtZW50LnRhZz09VEFHX0RlcGxveW1lbnRfT0JTCiAgICAgICAgfQoKICAgICAgICBzdHlsZXMgewogICAgICAgICAgICBlbGVtZW50ICJIRUxEX0NvcmVfU3lzdGVtIiB7CiAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kICMwMDgwMmIKICAgICAgICAgICAgICAgIGNvbG9yICNmZmZmZmYKICAgICAgICAgICAgICAgIHNoYXBlIFJvdW5kZWRCb3gKICAgICAgICAgICAgICAgIG9wYWNpdHkgODAKICAgICAgICAgICAgfQogICAgICAgICAgICBlbGVtZW50ICJIRUxEX0NvbXBvbmVudHMiIHsKICAgICAgICAgICAgICAgIGJhY2tncm91bmQgIzAwODAyYgogICAgICAgICAgICAgICAgY29sb3IgI2ZmZmZmZgogICAgICAgICAgICAgICAgc2hhcGUgUm91bmRlZEJveAogICAgICAgICAgICAgICAgb3BhY2l0eSA2MAogICAgICAgICAgICB9CiAgICAgICAgICAgIGVsZW1lbnQgIlRBR19EYXRhX1N0b3JhZ2UiIHsKICAgICAgICAgICAgICAgIGJhY2tncm91bmQgI2ZmMzM4NQogICAgICAgICAgICAgICAgY29sb3IgI2ZmZmZmZgogICAgICAgICAgICAgICAgc2hhcGUgQ3lsaW5kZXIKICAgICAgICAgICAgICAgIG9wYWNpdHkgNjAKICAgICAgICAgICAgfQogICAgICAgICAgICBlbGVtZW50ICJNZXNzYWdlX1N5c3RlbSIgewogICAgICAgICAgICAgICAgYmFja2dyb3VuZCAjZmYzMzg1CiAgICAgICAgICAgICAgICBjb2xvciAjZmZmZmZmCiAgICAgICAgICAgICAgICBzaGFwZSBQaXBlCiAgICAgICAgICAgICAgICBvcGFjaXR5IDYwCiAgICAgICAgICAgIH0KICAgICAgICB9CiAgICAgICAgdGhlbWUgZGVmYXVsdAogICAgfQoKfQo="
+  },
+  "configuration" : { },
+  "model" : {
+    "people" : [ {
+      "id" : "6",
+      "tags" : "Element,Person,Grouped_Actor",
+      "properties" : {
+        "structurizr.dsl.identifier" : "authenticated_users"
+      },
+      "name" : "Authenticated Users",
+      "description" : "HELD Admin, HELD Member, Club Admin, Club Member",
+      "relationships" : [ {
+        "id" : "73",
+        "tags" : "Relationship",
+        "properties" : {
+          "structurizr.dsl.identifier" : "1ce7fbe5-20e7-470c-a080-d892042ef0d7"
+        },
+        "sourceId" : "6",
+        "destinationId" : "32",
+        "description" : "Uses"
+      }, {
+        "id" : "72",
+        "sourceId" : "6",
+        "destinationId" : "8",
+        "description" : "Uses",
+        "linkedRelationshipId" : "71"
+      }, {
+        "id" : "74",
+        "tags" : "Relationship",
+        "properties" : {
+          "structurizr.dsl.identifier" : "0a7663ea-9133-456c-b14e-37d1493673bc"
+        },
+        "sourceId" : "6",
+        "destinationId" : "16",
+        "description" : "Uses"
+      }, {
+        "id" : "71",
+        "tags" : "Relationship",
+        "properties" : {
+          "structurizr.dsl.identifier" : "747f5531-afdd-4647-bd9f-5ce9178c5d55"
+        },
+        "sourceId" : "6",
+        "destinationId" : "9",
+        "description" : "Uses"
+      } ],
+      "location" : "Unspecified"
+    }, {
+      "id" : "5",
+      "tags" : "Element,Person,HELD_Persons",
+      "properties" : {
+        "structurizr.dsl.identifier" : "unknown"
+      },
+      "name" : "Unknown",
+      "description" : "Unauthenticated user",
+      "relationships" : [ {
+        "id" : "70",
+        "tags" : "Relationship",
+        "properties" : {
+          "structurizr.dsl.identifier" : "abd270ed-b7c3-46f2-9fca-86b2031a9d93"
+        },
+        "sourceId" : "5",
+        "destinationId" : "8",
+        "description" : "Uses"
+      } ],
+      "location" : "Unspecified"
+    }, {
+      "id" : "1",
+      "tags" : "Element,Person,HELD_Persons",
+      "properties" : {
+        "structurizr.dsl.identifier" : "held_admin"
+      },
+      "name" : "HELD Admin",
+      "description" : "Authenticated user with administrator privileges of the HELD Application",
+      "relationships" : [ {
+        "id" : "66",
+        "tags" : "Relationship",
+        "properties" : {
+          "structurizr.dsl.identifier" : "8976ce04-1fdb-45be-9442-2f92c33eda75"
+        },
+        "sourceId" : "1",
+        "destinationId" : "8",
+        "description" : "Uses"
+      } ],
+      "location" : "Unspecified"
+    }, {
+      "id" : "3",
+      "tags" : "Element,Person,HELD_Persons",
+      "properties" : {
+        "structurizr.dsl.identifier" : "club_admin"
+      },
+      "name" : "Club Admin",
+      "description" : "User with administrator privileges of at least one club",
+      "relationships" : [ {
+        "id" : "68",
+        "tags" : "Relationship",
+        "properties" : {
+          "structurizr.dsl.identifier" : "651f1ff6-67ab-4449-9c7b-7c4e0bf1eea1"
+        },
+        "sourceId" : "3",
+        "destinationId" : "8",
+        "description" : "Uses"
+      } ],
+      "location" : "Unspecified"
+    }, {
+      "id" : "7",
+      "tags" : "Element,Person,Grouped_Actor",
+      "properties" : {
+        "structurizr.dsl.identifier" : "everyone"
+      },
+      "name" : "Everyone",
+      "description" : "HELD Admin, HELD Member, Club Admin, Club Member, Unknown",
+      "relationships" : [ {
+        "id" : "75",
+        "tags" : "Relationship",
+        "properties" : {
+          "structurizr.dsl.identifier" : "938bb66a-ab5d-4dcb-ab49-dbc7b7058b17"
+        },
+        "sourceId" : "7",
+        "destinationId" : "9",
+        "description" : "Uses"
+      }, {
+        "id" : "76",
+        "sourceId" : "7",
+        "destinationId" : "8",
+        "description" : "Uses",
+        "linkedRelationshipId" : "75"
+      } ],
+      "location" : "Unspecified"
+    }, {
+      "id" : "2",
+      "tags" : "Element,Person,HELD_Persons",
+      "properties" : {
+        "structurizr.dsl.identifier" : "held_member"
+      },
+      "name" : "HELD Member",
+      "description" : "Authenticated user of the HELD Application with no club membership",
+      "relationships" : [ {
+        "id" : "67",
+        "tags" : "Relationship",
+        "properties" : {
+          "structurizr.dsl.identifier" : "b17f4b90-beab-4bb3-8a0b-ccf6f2647b68"
+        },
+        "sourceId" : "2",
+        "destinationId" : "8",
+        "description" : "Uses"
+      } ],
+      "location" : "Unspecified"
+    }, {
+      "id" : "4",
+      "tags" : "Element,Person,HELD_Persons",
+      "properties" : {
+        "structurizr.dsl.identifier" : "club_member"
+      },
+      "name" : "Club Member",
+      "description" : "Authenticated user with membership to at least one club",
+      "relationships" : [ {
+        "id" : "69",
+        "tags" : "Relationship",
+        "properties" : {
+          "structurizr.dsl.identifier" : "24a637e0-3d0b-42ec-bb37-b27ed37145e0"
+        },
+        "sourceId" : "4",
+        "destinationId" : "8",
+        "description" : "Uses"
+      } ],
+      "location" : "Unspecified"
+    } ],
+    "softwareSystems" : [ {
+      "id" : "59",
+      "tags" : "Element,Software System,TAG_Data_Storage",
+      "properties" : {
+        "structurizr.dsl.identifier" : "evs_persistent_volume"
+      },
+      "name" : "EVS",
+      "description" : "Elastic Volume Service",
+      "group" : "Cloud Environment",
+      "location" : "Unspecified",
+      "containers" : [ {
+        "id" : "64",
+        "tags" : "Element,Container,TAG_Data_Storage",
+        "properties" : {
+          "structurizr.dsl.identifier" : "club_forum_persistence"
+        },
+        "name" : "Club Forum Data Persistence",
+        "documentation" : { }
+      }, {
+        "id" : "61",
+        "tags" : "Element,Container,TAG_Data_Storage",
+        "properties" : {
+          "structurizr.dsl.identifier" : "digital_office_nextcloud_data"
+        },
+        "name" : "Digital Office Data Persistence",
+        "documentation" : { }
+      }, {
+        "id" : "62",
+        "tags" : "Element,Container,TAG_Data_Storage",
+        "properties" : {
+          "structurizr.dsl.identifier" : "club_forum_redis_master_data"
+        },
+        "name" : "Club Forum Redis Master Persistence",
+        "documentation" : { }
+      }, {
+        "id" : "63",
+        "tags" : "Element,Container,TAG_Data_Storage",
+        "properties" : {
+          "structurizr.dsl.identifier" : "club_forum_redis_replica_data"
+        },
+        "name" : "Club Forum Redis Replica Persistence",
+        "documentation" : { }
+      }, {
+        "id" : "60",
+        "tags" : "Element,Container,TAG_Data_Storage",
+        "properties" : {
+          "structurizr.dsl.identifier" : "digital_office_nextcloud"
+        },
+        "name" : "Digital Office Persistence",
+        "documentation" : { }
+      } ],
+      "documentation" : { }
+    }, {
+      "id" : "65",
+      "tags" : "Element,Software System,Client_System",
+      "properties" : {
+        "structurizr.dsl.identifier" : "browser"
+      },
+      "name" : "Internet Browser",
+      "description" : "Chrome, Firefox, Edge, ...",
+      "relationships" : [ {
+        "id" : "79",
+        "sourceId" : "65",
+        "destinationId" : "8",
+        "description" : "Uses",
+        "linkedRelationshipId" : "78"
+      }, {
+        "id" : "78",
+        "tags" : "Relationship",
+        "properties" : {
+          "structurizr.dsl.identifier" : "cde24688-4303-46f8-bdaa-7358e2376123"
+        },
+        "sourceId" : "65",
+        "destinationId" : "9",
+        "description" : "Uses"
+      }, {
+        "id" : "80",
+        "tags" : "Relationship",
+        "properties" : {
+          "structurizr.dsl.identifier" : "770973de-735a-45a5-b470-1c6edb2204ce"
+        },
+        "sourceId" : "65",
+        "destinationId" : "32",
+        "description" : "Uses"
+      }, {
+        "id" : "81",
+        "tags" : "Relationship",
+        "properties" : {
+          "structurizr.dsl.identifier" : "7d64f22c-c6d7-4308-94bc-296a9adb7a40"
+        },
+        "sourceId" : "65",
+        "destinationId" : "16",
+        "description" : "Uses"
+      } ],
+      "location" : "Unspecified",
+      "documentation" : { }
+    }, {
+      "id" : "47",
+      "tags" : "Element,Software System,TAG_Data_Storage",
+      "properties" : {
+        "structurizr.dsl.identifier" : "database_server"
+      },
+      "name" : "Database Server",
+      "description" : "PostgreSQL Server",
+      "group" : "Cloud Environment",
+      "location" : "Unspecified",
+      "containers" : [ {
+        "id" : "51",
+        "tags" : "Element,Container,TAG_Data_Storage",
+        "properties" : {
+          "structurizr.dsl.identifier" : "digital_office_database"
+        },
+        "name" : "Digital Office Database",
+        "description" : "Nextcloud DB",
+        "technology" : "PostgreSQL",
+        "components" : [ {
+          "id" : "52",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "digital_office_public_schema"
+          },
+          "name" : "Public",
+          "description" : "Public database schema",
+          "documentation" : { }
+        } ],
+        "documentation" : { }
+      }, {
+        "id" : "49",
+        "tags" : "Element,Container,TAG_Data_Storage",
+        "properties" : {
+          "structurizr.dsl.identifier" : "hero_portal_database"
+        },
+        "name" : "Hero Portal Database",
+        "technology" : "PostgreSQL",
+        "components" : [ {
+          "id" : "50",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "clubs_schema"
+          },
+          "name" : "Clubs",
+          "description" : "Clubs database schema",
+          "documentation" : { }
+        } ],
+        "documentation" : { }
+      }, {
+        "id" : "48",
+        "tags" : "Element,Container,TAG_Data_Storage",
+        "properties" : {
+          "structurizr.dsl.identifier" : "sch_databases"
+        },
+        "name" : "SCH Databases",
+        "description" : "Databases of the Smart City Hub",
+        "technology" : "PostgreSQL",
+        "documentation" : { }
+      }, {
+        "id" : "53",
+        "tags" : "Element,Container,TAG_Data_Storage",
+        "properties" : {
+          "structurizr.dsl.identifier" : "club_forum_database"
+        },
+        "name" : "Discourse Database",
+        "technology" : "PostgreSQL",
+        "components" : [ {
+          "id" : "54",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "club_forum_public_schema"
+          },
+          "name" : "Public",
+          "description" : "Public database schema",
+          "documentation" : { }
+        } ],
+        "documentation" : { }
+      } ],
+      "documentation" : { }
+    }, {
+      "id" : "41",
+      "tags" : "Element,Software System,Core_System",
+      "properties" : {
+        "structurizr.dsl.identifier" : "identity_provider"
+      },
+      "name" : "IAM",
+      "description" : "Identity- and Accessmanagement",
+      "group" : "Cloud Environment",
+      "location" : "Unspecified",
+      "containers" : [ {
+        "id" : "42",
+        "tags" : "Element,Container",
+        "properties" : {
+          "structurizr.dsl.identifier" : "sch_realm"
+        },
+        "name" : "SCH Realm",
+        "components" : [ {
+          "id" : "43",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "hero_portal_application"
+          },
+          "name" : "Hero Portal Application",
+          "description" : "Keycloak client",
+          "documentation" : { }
+        }, {
+          "id" : "44",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "digital_office_application"
+          },
+          "name" : "Digital Office Application",
+          "description" : "Keycloak Client",
+          "documentation" : { }
+        }, {
+          "id" : "45",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "club_forum_application"
+          },
+          "name" : "Club Forum Application",
+          "description" : "Keycloak Client",
+          "documentation" : { }
+        } ],
+        "documentation" : { }
+      } ],
+      "documentation" : { }
+    }, {
+      "id" : "38",
+      "tags" : "Element,Software System,SCH_Core_System",
+      "properties" : {
+        "structurizr.dsl.identifier" : "sch_application"
+      },
+      "name" : "SCH",
+      "description" : "Smart City Hub Applications",
+      "group" : "Cloud Environment",
+      "location" : "Unspecified",
+      "containers" : [ {
+        "id" : "40",
+        "tags" : "Element,Container",
+        "properties" : {
+          "structurizr.dsl.identifier" : "data_market_backend"
+        },
+        "name" : "Data Market Backend",
+        "documentation" : { }
+      }, {
+        "id" : "39",
+        "tags" : "Element,Container",
+        "properties" : {
+          "structurizr.dsl.identifier" : "data_market_web_ui"
+        },
+        "name" : "Data Market Web UI",
+        "documentation" : { }
+      } ],
+      "documentation" : { }
+    }, {
+      "id" : "55",
+      "tags" : "Element,Software System,Message_System",
+      "properties" : {
+        "structurizr.dsl.identifier" : "event_streaming"
+      },
+      "name" : "Event Streaming",
+      "description" : "Distributed Message Service (Kafka)",
+      "group" : "Cloud Environment",
+      "location" : "Unspecified",
+      "documentation" : { }
+    }, {
+      "id" : "56",
+      "tags" : "Element,Software System,TAG_Data_Storage",
+      "properties" : {
+        "structurizr.dsl.identifier" : "file_store"
+      },
+      "name" : "File System",
+      "description" : "Scalable File Service",
+      "group" : "Cloud Environment",
+      "location" : "Unspecified",
+      "containers" : [ {
+        "id" : "57",
+        "tags" : "Element,Container,TAG_Data_Storage",
+        "properties" : {
+          "structurizr.dsl.identifier" : "sch_file_directory"
+        },
+        "name" : "SCH File Directory",
+        "description" : "Directory of the Smart City Hub",
+        "technology" : "SFS",
+        "documentation" : { }
+      }, {
+        "id" : "58",
+        "tags" : "Element,Container,TAG_Data_Storage",
+        "properties" : {
+          "structurizr.dsl.identifier" : "hero_portal_file_directory"
+        },
+        "name" : "Hero Portal Directory",
+        "description" : "Directory of Hero Portal",
+        "technology" : "SFS",
+        "documentation" : { }
+      } ],
+      "documentation" : { }
+    }, {
+      "id" : "8",
+      "tags" : "Element,Software System,HELD_Core_System",
+      "properties" : {
+        "structurizr.dsl.identifier" : "held_application"
+      },
+      "name" : "HELD",
+      "description" : "Heldenhelfer Applications",
+      "relationships" : [ {
+        "id" : "171",
+        "sourceId" : "8",
+        "destinationId" : "64",
+        "description" : "Persists data",
+        "technology" : "CSI",
+        "linkedRelationshipId" : "167"
+      }, {
+        "id" : "145",
+        "sourceId" : "8",
+        "destinationId" : "59",
+        "description" : "Pesists data",
+        "technology" : "CSI",
+        "linkedRelationshipId" : "140"
+      }, {
+        "id" : "144",
+        "sourceId" : "8",
+        "destinationId" : "60",
+        "description" : "Pesists data",
+        "technology" : "CSI",
+        "linkedRelationshipId" : "140"
+      }, {
+        "id" : "102",
+        "sourceId" : "8",
+        "destinationId" : "49",
+        "description" : "Clubs data persistence",
+        "technology" : "SQL",
+        "linkedRelationshipId" : "95"
+      }, {
+        "id" : "137",
+        "sourceId" : "8",
+        "destinationId" : "51",
+        "description" : "Digital Office data persistence",
+        "technology" : "SQL",
+        "linkedRelationshipId" : "130"
+      }, {
+        "id" : "136",
+        "sourceId" : "8",
+        "destinationId" : "52",
+        "description" : "Digital Office data persistence",
+        "technology" : "SQL",
+        "linkedRelationshipId" : "130"
+      }, {
+        "id" : "93",
+        "sourceId" : "8",
+        "destinationId" : "43",
+        "description" : "Get Access Tokens",
+        "technology" : "REST API",
+        "linkedRelationshipId" : "87"
+      }, {
+        "id" : "112",
+        "sourceId" : "8",
+        "destinationId" : "55",
+        "description" : "Publish Club Events",
+        "linkedRelationshipId" : "110"
+      }, {
+        "id" : "109",
+        "sourceId" : "8",
+        "destinationId" : "56",
+        "description" : "Stores Files",
+        "technology" : "CSI",
+        "linkedRelationshipId" : "104"
+      }, {
+        "id" : "94",
+        "sourceId" : "8",
+        "destinationId" : "42",
+        "description" : "Get Access Tokens",
+        "technology" : "REST API",
+        "linkedRelationshipId" : "87"
+      }, {
+        "id" : "101",
+        "sourceId" : "8",
+        "destinationId" : "50",
+        "description" : "Clubs data persistence",
+        "technology" : "SQL",
+        "linkedRelationshipId" : "95"
+      }, {
+        "id" : "103",
+        "sourceId" : "8",
+        "destinationId" : "47",
+        "description" : "Clubs data persistence",
+        "technology" : "SQL",
+        "linkedRelationshipId" : "95"
+      }, {
+        "id" : "148",
+        "sourceId" : "8",
+        "destinationId" : "61",
+        "description" : "Pesists data",
+        "technology" : "CSI",
+        "linkedRelationshipId" : "146"
+      }, {
+        "id" : "166",
+        "sourceId" : "8",
+        "destinationId" : "53",
+        "description" : "Club Forum data persistence",
+        "technology" : "SQL",
+        "linkedRelationshipId" : "159"
+      }, {
+        "id" : "190",
+        "sourceId" : "8",
+        "destinationId" : "45",
+        "description" : "Authenticates/Authorizes User",
+        "technology" : "OpenID Connect",
+        "linkedRelationshipId" : "184"
+      }, {
+        "id" : "122",
+        "sourceId" : "8",
+        "destinationId" : "44",
+        "description" : "Create and Assign group roles",
+        "linkedRelationshipId" : "117"
+      }, {
+        "id" : "165",
+        "sourceId" : "8",
+        "destinationId" : "54",
+        "description" : "Club Forum data persistence",
+        "technology" : "SQL",
+        "linkedRelationshipId" : "159"
+      }, {
+        "id" : "108",
+        "sourceId" : "8",
+        "destinationId" : "58",
+        "description" : "Stores Files",
+        "technology" : "CSI",
+        "linkedRelationshipId" : "104"
+      }, {
+        "id" : "199",
+        "sourceId" : "8",
+        "destinationId" : "63",
+        "description" : "Persists data",
+        "linkedRelationshipId" : "196"
+      }, {
+        "id" : "77",
+        "tags" : "Relationship",
+        "properties" : {
+          "structurizr.dsl.identifier" : "24153e90-b0fd-4daf-af60-1d4d630a4c2e"
+        },
+        "sourceId" : "8",
+        "destinationId" : "41",
+        "description" : "Single Sign On"
+      }, {
+        "id" : "195",
+        "sourceId" : "8",
+        "destinationId" : "62",
+        "description" : "Persists data",
+        "linkedRelationshipId" : "192"
+      } ],
+      "group" : "Cloud Environment",
+      "location" : "Unspecified",
+      "containers" : [ {
+        "id" : "9",
+        "tags" : "Element,Container,HELD_Components",
+        "properties" : {
+          "structurizr.dsl.identifier" : "hero_portal_web_ui"
+        },
+        "name" : "Hero Portal Web UI",
+        "description" : "Singlepage Application",
+        "relationships" : [ {
+          "id" : "86",
+          "sourceId" : "9",
+          "destinationId" : "11",
+          "description" : "Clubs Administration",
+          "technology" : "REST API",
+          "linkedRelationshipId" : "83"
+        }, {
+          "id" : "91",
+          "sourceId" : "9",
+          "destinationId" : "42",
+          "description" : "Get Access Tokens",
+          "technology" : "REST API",
+          "linkedRelationshipId" : "87"
+        }, {
+          "id" : "90",
+          "sourceId" : "9",
+          "destinationId" : "43",
+          "description" : "Get Access Tokens",
+          "technology" : "REST API",
+          "linkedRelationshipId" : "87"
+        }, {
+          "id" : "92",
+          "sourceId" : "9",
+          "destinationId" : "41",
+          "description" : "Get Access Tokens",
+          "technology" : "REST API",
+          "linkedRelationshipId" : "87"
+        }, {
+          "id" : "85",
+          "sourceId" : "9",
+          "destinationId" : "12",
+          "description" : "Clubs Administration",
+          "technology" : "REST API",
+          "linkedRelationshipId" : "83"
+        } ],
+        "technology" : "Next.js",
+        "components" : [ {
+          "id" : "10",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "hero_portal_web_ui_server"
+          },
+          "name" : "Web UI",
+          "description" : "Server component",
+          "relationships" : [ {
+            "id" : "84",
+            "sourceId" : "10",
+            "destinationId" : "11",
+            "description" : "Clubs Administration",
+            "technology" : "REST API",
+            "linkedRelationshipId" : "83"
+          }, {
+            "id" : "87",
+            "tags" : "Relationship,TAG_hero_portal_web_ui_to_iam_relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "cac25d31-14db-4ebe-9d7b-68af1c4a98a9"
+            },
+            "sourceId" : "10",
+            "destinationId" : "43",
+            "description" : "Get Access Tokens",
+            "technology" : "REST API"
+          }, {
+            "id" : "83",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "bef455a7-f520-4e18-95a5-70c7730e50c7"
+            },
+            "sourceId" : "10",
+            "destinationId" : "12",
+            "description" : "Clubs Administration",
+            "technology" : "REST API"
+          }, {
+            "id" : "88",
+            "sourceId" : "10",
+            "destinationId" : "42",
+            "description" : "Get Access Tokens",
+            "technology" : "REST API",
+            "linkedRelationshipId" : "87"
+          }, {
+            "id" : "89",
+            "sourceId" : "10",
+            "destinationId" : "41",
+            "description" : "Get Access Tokens",
+            "technology" : "REST API",
+            "linkedRelationshipId" : "87"
+          } ],
+          "documentation" : { }
+        } ],
+        "documentation" : { }
+      }, {
+        "id" : "13",
+        "tags" : "Element,Container,HELD_Components",
+        "properties" : {
+          "structurizr.dsl.identifier" : "identity_provider_sidecar_backend"
+        },
+        "name" : "Identity Provider Sidecar Backend",
+        "description" : "Backend Microservice for identity provider configuration",
+        "relationships" : [ {
+          "id" : "82",
+          "tags" : "Relationship",
+          "properties" : {
+            "structurizr.dsl.identifier" : "2552fef0-2d70-4d3d-8c10-60c62442ea39"
+          },
+          "sourceId" : "13",
+          "destinationId" : "41",
+          "description" : "Read and change configuration/information",
+          "technology" : "REST API"
+        }, {
+          "id" : "120",
+          "sourceId" : "13",
+          "destinationId" : "44",
+          "description" : "Create and Assign group roles",
+          "linkedRelationshipId" : "117"
+        }, {
+          "id" : "121",
+          "sourceId" : "13",
+          "destinationId" : "42",
+          "description" : "Create and Assign group roles",
+          "linkedRelationshipId" : "117"
+        } ],
+        "technology" : "FastAPI",
+        "components" : [ {
+          "id" : "15",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "kc_query_service"
+          },
+          "name" : "Keycloak Query Service",
+          "description" : "Query component to get keycloak information",
+          "documentation" : { }
+        }, {
+          "id" : "14",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "kc_configure_service"
+          },
+          "name" : "Keycloak Configure Service",
+          "description" : "Configuration component for keycloak",
+          "relationships" : [ {
+            "id" : "119",
+            "sourceId" : "14",
+            "destinationId" : "41",
+            "description" : "Create and Assign group roles",
+            "linkedRelationshipId" : "117"
+          }, {
+            "id" : "117",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "631f1f0f-694b-4425-8b86-759ec568057c"
+            },
+            "sourceId" : "14",
+            "destinationId" : "44",
+            "description" : "Create and Assign group roles"
+          }, {
+            "id" : "118",
+            "sourceId" : "14",
+            "destinationId" : "42",
+            "description" : "Create and Assign group roles",
+            "linkedRelationshipId" : "117"
+          } ],
+          "documentation" : { }
+        } ],
+        "documentation" : { }
+      }, {
+        "id" : "16",
+        "tags" : "Element,Container,HELD_Components",
+        "properties" : {
+          "structurizr.dsl.identifier" : "club_forum"
+        },
+        "name" : "Club Forum",
+        "description" : "Community Portal based on Open Source Software 'Discourse'",
+        "relationships" : [ {
+          "id" : "170",
+          "sourceId" : "16",
+          "destinationId" : "59",
+          "description" : "Persists data",
+          "technology" : "CSI",
+          "linkedRelationshipId" : "167"
+        }, {
+          "id" : "187",
+          "sourceId" : "16",
+          "destinationId" : "45",
+          "description" : "Authenticates/Authorizes User",
+          "technology" : "OpenID Connect",
+          "linkedRelationshipId" : "184"
+        }, {
+          "id" : "162",
+          "sourceId" : "16",
+          "destinationId" : "54",
+          "description" : "Club Forum data persistence",
+          "technology" : "SQL",
+          "linkedRelationshipId" : "159"
+        }, {
+          "id" : "169",
+          "sourceId" : "16",
+          "destinationId" : "64",
+          "description" : "Persists data",
+          "technology" : "CSI",
+          "linkedRelationshipId" : "167"
+        }, {
+          "id" : "164",
+          "sourceId" : "16",
+          "destinationId" : "47",
+          "description" : "Club Forum data persistence",
+          "technology" : "SQL",
+          "linkedRelationshipId" : "159"
+        }, {
+          "id" : "194",
+          "sourceId" : "16",
+          "destinationId" : "62",
+          "description" : "Persists data",
+          "linkedRelationshipId" : "192"
+        }, {
+          "id" : "188",
+          "sourceId" : "16",
+          "destinationId" : "42",
+          "description" : "Authenticates/Authorizes User",
+          "technology" : "OpenID Connect",
+          "linkedRelationshipId" : "184"
+        }, {
+          "id" : "198",
+          "sourceId" : "16",
+          "destinationId" : "63",
+          "description" : "Persists data",
+          "linkedRelationshipId" : "196"
+        }, {
+          "id" : "189",
+          "sourceId" : "16",
+          "destinationId" : "41",
+          "description" : "Authenticates/Authorizes User",
+          "technology" : "OpenID Connect",
+          "linkedRelationshipId" : "184"
+        }, {
+          "id" : "158",
+          "sourceId" : "16",
+          "destinationId" : "55",
+          "description" : "Subscribe Club Events",
+          "linkedRelationshipId" : "157"
+        }, {
+          "id" : "163",
+          "sourceId" : "16",
+          "destinationId" : "53",
+          "description" : "Club Forum data persistence",
+          "technology" : "SQL",
+          "linkedRelationshipId" : "159"
+        } ],
+        "technology" : "Discourse",
+        "components" : [ {
+          "id" : "28",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "club_forum_spoiler_alert"
+          },
+          "name" : "Spoiler Alert",
+          "description" : "Discourse Plug-In",
+          "documentation" : { }
+        }, {
+          "id" : "26",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "club_forum_assign"
+          },
+          "name" : "Assign",
+          "description" : "Discourse Plug-In",
+          "documentation" : { }
+        }, {
+          "id" : "25",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "club_forum_topic_voting"
+          },
+          "name" : "Topic Voting",
+          "description" : "Discourse Plug-In",
+          "documentation" : { }
+        }, {
+          "id" : "29",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "club_forum_templates"
+          },
+          "name" : "Templates",
+          "description" : "Discourse Plug-In",
+          "documentation" : { }
+        }, {
+          "id" : "21",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "club_forum_yearly_review"
+          },
+          "name" : "Yearly Review",
+          "description" : "Discourse Plug-In",
+          "documentation" : { }
+        }, {
+          "id" : "18",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "club_forum_main"
+          },
+          "name" : "Discourse",
+          "description" : "Main Discourse installation",
+          "relationships" : [ {
+            "id" : "177",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "0e36fc9f-33f2-4e60-924d-1589f61e41f0"
+            },
+            "sourceId" : "18",
+            "destinationId" : "23",
+            "description" : "Use Plug-In"
+          }, {
+            "id" : "175",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "56314f67-3b6f-4581-9ae6-ba84b6e8ebdc"
+            },
+            "sourceId" : "18",
+            "destinationId" : "21",
+            "description" : "Use Plug-In"
+          }, {
+            "id" : "181",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "d029f887-d67d-494d-b0a7-7c459c71c309"
+            },
+            "sourceId" : "18",
+            "destinationId" : "27",
+            "description" : "Use Plug-In"
+          }, {
+            "id" : "160",
+            "sourceId" : "18",
+            "destinationId" : "53",
+            "description" : "Club Forum data persistence",
+            "technology" : "SQL",
+            "linkedRelationshipId" : "159"
+          }, {
+            "id" : "168",
+            "sourceId" : "18",
+            "destinationId" : "59",
+            "description" : "Persists data",
+            "technology" : "CSI",
+            "linkedRelationshipId" : "167"
+          }, {
+            "id" : "179",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "3ff488c6-0421-4a61-9331-5e4d1cd2ee0c"
+            },
+            "sourceId" : "18",
+            "destinationId" : "25",
+            "description" : "Use Plug-In"
+          }, {
+            "id" : "183",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "51b67a99-5174-4a8e-9b12-0166a70d0f75"
+            },
+            "sourceId" : "18",
+            "destinationId" : "29",
+            "description" : "Use Plug-In"
+          }, {
+            "id" : "182",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "74e74d82-6221-4fa8-b1c2-a5fc18361719"
+            },
+            "sourceId" : "18",
+            "destinationId" : "28",
+            "description" : "Use Plug-In"
+          }, {
+            "id" : "176",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "cf71ed05-4b60-4866-ae73-a5b9d17c50cb"
+            },
+            "sourceId" : "18",
+            "destinationId" : "22",
+            "description" : "Use Plug-In"
+          }, {
+            "id" : "180",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "bcdcacb5-3a0a-4662-99e8-0bc73d6a3af8"
+            },
+            "sourceId" : "18",
+            "destinationId" : "26",
+            "description" : "Use Plug-In"
+          }, {
+            "id" : "159",
+            "tags" : "Relationship,TAG_club_forum_to_postgres_relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "5dffcb91-c272-49cc-8464-5ed7e431b672"
+            },
+            "sourceId" : "18",
+            "destinationId" : "54",
+            "description" : "Club Forum data persistence",
+            "technology" : "SQL"
+          }, {
+            "id" : "167",
+            "tags" : "Relationship,TAG_club_forum_to_pvc_relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "e7100263-2e9a-4605-a648-5b5f86c3fcd2"
+            },
+            "sourceId" : "18",
+            "destinationId" : "64",
+            "description" : "Persists data",
+            "technology" : "CSI"
+          }, {
+            "id" : "174",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "312a4c95-e6e7-407e-a0aa-4f3e9b1b5e9a"
+            },
+            "sourceId" : "18",
+            "destinationId" : "20",
+            "description" : "Use Plug-In"
+          }, {
+            "id" : "172",
+            "tags" : "Relationship,TAG_club_forum_to_redis_relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "95072d8d-fd32-47f7-aab6-d347a491ed49"
+            },
+            "sourceId" : "18",
+            "destinationId" : "30",
+            "description" : "Persists data"
+          }, {
+            "id" : "173",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "ce55c518-d38e-48b8-a4ae-5dbdecdaa7e9"
+            },
+            "sourceId" : "18",
+            "destinationId" : "19",
+            "description" : "Use Plug-In"
+          }, {
+            "id" : "161",
+            "sourceId" : "18",
+            "destinationId" : "47",
+            "description" : "Club Forum data persistence",
+            "technology" : "SQL",
+            "linkedRelationshipId" : "159"
+          }, {
+            "id" : "178",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "d789e50b-16cc-4af1-afa6-0520cefcd6e6"
+            },
+            "sourceId" : "18",
+            "destinationId" : "24",
+            "description" : "Use Plug-In"
+          } ],
+          "documentation" : { }
+        }, {
+          "id" : "19",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "club_forum_cakeday"
+          },
+          "name" : "Cakeday",
+          "description" : "Discourse Plug-In",
+          "documentation" : { }
+        }, {
+          "id" : "20",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "club_forum_solved"
+          },
+          "name" : "Solved",
+          "description" : "Discourse Plug-In",
+          "documentation" : { }
+        }, {
+          "id" : "17",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "club_forum_sidecar"
+          },
+          "name" : "Club Forum Sidecar",
+          "description" : "Sidecar service for discourse configuration",
+          "relationships" : [ {
+            "id" : "156",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "85d7e2e3-d146-4240-af8c-ca4e70f5e246"
+            },
+            "sourceId" : "17",
+            "destinationId" : "18",
+            "description" : "Club Forum area configuration",
+            "technology" : "REST API"
+          }, {
+            "id" : "157",
+            "tags" : "Relationship,TAG_club_forum_to_event_streaming_relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "3b3a14d9-9c3d-4fa2-8892-e3f7bc044602"
+            },
+            "sourceId" : "17",
+            "destinationId" : "55",
+            "description" : "Subscribe Club Events"
+          } ],
+          "documentation" : { }
+        }, {
+          "id" : "24",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "club_forum_oauth"
+          },
+          "name" : "OAuth 2.0 & OpenID Connect Support",
+          "description" : "Discourse Plug-In",
+          "relationships" : [ {
+            "id" : "186",
+            "sourceId" : "24",
+            "destinationId" : "41",
+            "description" : "Authenticates/Authorizes User",
+            "technology" : "OpenID Connect",
+            "linkedRelationshipId" : "184"
+          }, {
+            "id" : "185",
+            "sourceId" : "24",
+            "destinationId" : "42",
+            "description" : "Authenticates/Authorizes User",
+            "technology" : "OpenID Connect",
+            "linkedRelationshipId" : "184"
+          }, {
+            "id" : "184",
+            "tags" : "Relationship,TAG_club_forum_to_iam_relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "5f973631-d9bf-4c04-9206-dbf09ffbdf8f"
+            },
+            "sourceId" : "24",
+            "destinationId" : "45",
+            "description" : "Authenticates/Authorizes User",
+            "technology" : "OpenID Connect"
+          } ],
+          "documentation" : { }
+        }, {
+          "id" : "30",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "club_forum_redis_master"
+          },
+          "name" : "Club Froum Resdis Master",
+          "description" : "Real Time Data Platform",
+          "relationships" : [ {
+            "id" : "191",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "fc4153a1-47b0-41a2-b846-6c1cb54d98bc"
+            },
+            "sourceId" : "30",
+            "destinationId" : "31",
+            "description" : "Synchronises data"
+          }, {
+            "id" : "193",
+            "sourceId" : "30",
+            "destinationId" : "59",
+            "description" : "Persists data",
+            "linkedRelationshipId" : "192"
+          }, {
+            "id" : "192",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "ff1f1ee1-26a1-4f7c-bc2e-d475562fadba"
+            },
+            "sourceId" : "30",
+            "destinationId" : "62",
+            "description" : "Persists data"
+          } ],
+          "documentation" : { }
+        }, {
+          "id" : "23",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "club_forum_docs"
+          },
+          "name" : "Docs",
+          "description" : "Discourse Plug-In",
+          "documentation" : { }
+        }, {
+          "id" : "22",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "club_forum_checklist"
+          },
+          "name" : "Checklist",
+          "description" : "Discourse Plug-In",
+          "documentation" : { }
+        }, {
+          "id" : "27",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "club_forum_footnote"
+          },
+          "name" : "Footnote",
+          "description" : "Discourse Plug-In",
+          "documentation" : { }
+        }, {
+          "id" : "31",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "club_forum_redis_replica"
+          },
+          "name" : "Club Froum Resdis Replica",
+          "description" : "Real Time Data Platform",
+          "relationships" : [ {
+            "id" : "197",
+            "sourceId" : "31",
+            "destinationId" : "59",
+            "description" : "Persists data",
+            "linkedRelationshipId" : "196"
+          }, {
+            "id" : "196",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "d20662c2-b87d-4be8-b605-0dbcf73898cf"
+            },
+            "sourceId" : "31",
+            "destinationId" : "63",
+            "description" : "Persists data"
+          } ],
+          "documentation" : { }
+        } ],
+        "documentation" : { }
+      }, {
+        "id" : "11",
+        "tags" : "Element,Container,HELD_Components",
+        "properties" : {
+          "structurizr.dsl.identifier" : "hero_portal_backend"
+        },
+        "name" : "Hero Portal Backend",
+        "description" : "Backend Microservice",
+        "relationships" : [ {
+          "id" : "99",
+          "sourceId" : "11",
+          "destinationId" : "49",
+          "description" : "Clubs data persistence",
+          "technology" : "SQL",
+          "linkedRelationshipId" : "95"
+        }, {
+          "id" : "107",
+          "sourceId" : "11",
+          "destinationId" : "56",
+          "description" : "Stores Files",
+          "technology" : "CSI",
+          "linkedRelationshipId" : "104"
+        }, {
+          "id" : "115",
+          "sourceId" : "11",
+          "destinationId" : "15",
+          "description" : "Get user information",
+          "technology" : "REST API",
+          "linkedRelationshipId" : "113"
+        }, {
+          "id" : "116",
+          "sourceId" : "11",
+          "destinationId" : "13",
+          "description" : "Get user information",
+          "technology" : "REST API",
+          "linkedRelationshipId" : "113"
+        }, {
+          "id" : "100",
+          "sourceId" : "11",
+          "destinationId" : "47",
+          "description" : "Clubs data persistence",
+          "technology" : "SQL",
+          "linkedRelationshipId" : "95"
+        }, {
+          "id" : "98",
+          "sourceId" : "11",
+          "destinationId" : "50",
+          "description" : "Clubs data persistence",
+          "technology" : "SQL",
+          "linkedRelationshipId" : "95"
+        }, {
+          "id" : "106",
+          "sourceId" : "11",
+          "destinationId" : "58",
+          "description" : "Stores Files",
+          "technology" : "CSI",
+          "linkedRelationshipId" : "104"
+        }, {
+          "id" : "111",
+          "sourceId" : "11",
+          "destinationId" : "55",
+          "description" : "Publish Club Events",
+          "linkedRelationshipId" : "110"
+        } ],
+        "technology" : "FastAPI",
+        "components" : [ {
+          "id" : "12",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "hero_portal_backend_clubs"
+          },
+          "name" : "Clubs",
+          "description" : "Administration component of the clubs",
+          "relationships" : [ {
+            "id" : "104",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "c6d886b1-da4b-48c3-ba97-e44feba10f22"
+            },
+            "sourceId" : "12",
+            "destinationId" : "58",
+            "description" : "Stores Files",
+            "technology" : "CSI"
+          }, {
+            "id" : "95",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "b1df0a08-f773-4647-bdad-45aeb3f6d6a5"
+            },
+            "sourceId" : "12",
+            "destinationId" : "50",
+            "description" : "Clubs data persistence",
+            "technology" : "SQL"
+          }, {
+            "id" : "96",
+            "sourceId" : "12",
+            "destinationId" : "49",
+            "description" : "Clubs data persistence",
+            "technology" : "SQL",
+            "linkedRelationshipId" : "95"
+          }, {
+            "id" : "113",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "58b17ce1-3c63-4387-90db-0f11b108ccf4"
+            },
+            "sourceId" : "12",
+            "destinationId" : "15",
+            "description" : "Get user information",
+            "technology" : "REST API"
+          }, {
+            "id" : "97",
+            "sourceId" : "12",
+            "destinationId" : "47",
+            "description" : "Clubs data persistence",
+            "technology" : "SQL",
+            "linkedRelationshipId" : "95"
+          }, {
+            "id" : "110",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "48926328-a725-4b2b-be37-f6d393b8466b"
+            },
+            "sourceId" : "12",
+            "destinationId" : "55",
+            "description" : "Publish Club Events"
+          }, {
+            "id" : "105",
+            "sourceId" : "12",
+            "destinationId" : "56",
+            "description" : "Stores Files",
+            "technology" : "CSI",
+            "linkedRelationshipId" : "104"
+          }, {
+            "id" : "114",
+            "sourceId" : "12",
+            "destinationId" : "13",
+            "description" : "Get user information",
+            "technology" : "REST API",
+            "linkedRelationshipId" : "113"
+          } ],
+          "documentation" : { }
+        } ],
+        "documentation" : { }
+      }, {
+        "id" : "32",
+        "tags" : "Element,Container,HELD_Components",
+        "properties" : {
+          "structurizr.dsl.identifier" : "digital_office"
+        },
+        "name" : "Digital Office",
+        "description" : "Digital Office based on Open Source Software 'Nextcloud'",
+        "relationships" : [ {
+          "id" : "153",
+          "sourceId" : "32",
+          "destinationId" : "42",
+          "description" : "Authenticates/Authorizes User",
+          "technology" : "OpenID Connect",
+          "linkedRelationshipId" : "149"
+        }, {
+          "id" : "143",
+          "sourceId" : "32",
+          "destinationId" : "59",
+          "description" : "Pesists data",
+          "technology" : "CSI",
+          "linkedRelationshipId" : "140"
+        }, {
+          "id" : "133",
+          "sourceId" : "32",
+          "destinationId" : "52",
+          "description" : "Digital Office data persistence",
+          "technology" : "SQL",
+          "linkedRelationshipId" : "130"
+        }, {
+          "id" : "129",
+          "sourceId" : "32",
+          "destinationId" : "55",
+          "description" : "Subscribe Club Events",
+          "linkedRelationshipId" : "128"
+        }, {
+          "id" : "152",
+          "sourceId" : "32",
+          "destinationId" : "44",
+          "description" : "Authenticates/Authorizes User",
+          "technology" : "OpenID Connect",
+          "linkedRelationshipId" : "149"
+        }, {
+          "id" : "127",
+          "sourceId" : "32",
+          "destinationId" : "13",
+          "description" : "Create and Assign group roles",
+          "technology" : "REST API",
+          "linkedRelationshipId" : "124"
+        }, {
+          "id" : "134",
+          "sourceId" : "32",
+          "destinationId" : "51",
+          "description" : "Digital Office data persistence",
+          "technology" : "SQL",
+          "linkedRelationshipId" : "130"
+        }, {
+          "id" : "135",
+          "sourceId" : "32",
+          "destinationId" : "47",
+          "description" : "Digital Office data persistence",
+          "technology" : "SQL",
+          "linkedRelationshipId" : "130"
+        }, {
+          "id" : "154",
+          "sourceId" : "32",
+          "destinationId" : "41",
+          "description" : "Authenticates/Authorizes User",
+          "technology" : "OpenID Connect",
+          "linkedRelationshipId" : "149"
+        }, {
+          "id" : "142",
+          "sourceId" : "32",
+          "destinationId" : "60",
+          "description" : "Pesists data",
+          "technology" : "CSI",
+          "linkedRelationshipId" : "140"
+        }, {
+          "id" : "126",
+          "sourceId" : "32",
+          "destinationId" : "14",
+          "description" : "Create and Assign group roles",
+          "technology" : "REST API",
+          "linkedRelationshipId" : "124"
+        }, {
+          "id" : "147",
+          "sourceId" : "32",
+          "destinationId" : "61",
+          "description" : "Pesists data",
+          "technology" : "CSI",
+          "linkedRelationshipId" : "146"
+        } ],
+        "technology" : "Nextcloud",
+        "components" : [ {
+          "id" : "33",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "digital_office_sidecar"
+          },
+          "name" : "Digital Office Sidecar",
+          "description" : "Sidecar service for nextcloud configuration",
+          "relationships" : [ {
+            "id" : "124",
+            "tags" : "Relationship,TAG_digital_office_to_event_streaming_relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "ce6725bd-7d7c-4d6a-a6e8-762a2a8cd0b7"
+            },
+            "sourceId" : "33",
+            "destinationId" : "14",
+            "description" : "Create and Assign group roles",
+            "technology" : "REST API"
+          }, {
+            "id" : "128",
+            "tags" : "Relationship,TAG_digital_office_to_event_streaming_relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "453d5eb7-14bc-4480-8d18-742c1204e4fb"
+            },
+            "sourceId" : "33",
+            "destinationId" : "55",
+            "description" : "Subscribe Club Events"
+          }, {
+            "id" : "123",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "21411036-464d-48d5-a917-c06b43af6e3b"
+            },
+            "sourceId" : "33",
+            "destinationId" : "34",
+            "description" : "Digital Office area configuration",
+            "technology" : "REST API"
+          }, {
+            "id" : "125",
+            "sourceId" : "33",
+            "destinationId" : "13",
+            "description" : "Create and Assign group roles",
+            "technology" : "REST API",
+            "linkedRelationshipId" : "124"
+          } ],
+          "documentation" : { }
+        }, {
+          "id" : "36",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "digital_office_oidc"
+          },
+          "name" : "OpenID Connect Login",
+          "description" : "Nextcloud OIDC App",
+          "relationships" : [ {
+            "id" : "151",
+            "sourceId" : "36",
+            "destinationId" : "41",
+            "description" : "Authenticates/Authorizes User",
+            "technology" : "OpenID Connect",
+            "linkedRelationshipId" : "149"
+          }, {
+            "id" : "149",
+            "tags" : "Relationship,TAG_digital_office_to_iam_relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "d8bcd0f0-40c1-483a-bb3a-9449ccbf404c"
+            },
+            "sourceId" : "36",
+            "destinationId" : "44",
+            "description" : "Authenticates/Authorizes User",
+            "technology" : "OpenID Connect"
+          }, {
+            "id" : "150",
+            "sourceId" : "36",
+            "destinationId" : "42",
+            "description" : "Authenticates/Authorizes User",
+            "technology" : "OpenID Connect",
+            "linkedRelationshipId" : "149"
+          } ],
+          "documentation" : { }
+        }, {
+          "id" : "37",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "digital_office_collabora"
+          },
+          "name" : "Collabora",
+          "description" : "Collabora Service",
+          "documentation" : { }
+        }, {
+          "id" : "34",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "digital_office_main"
+          },
+          "name" : "Nextcloud",
+          "description" : "Main Nextcloud installation",
+          "relationships" : [ {
+            "id" : "140",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "3e45c3c7-5cb2-4962-9121-c68dd47424a7"
+            },
+            "sourceId" : "34",
+            "destinationId" : "60",
+            "description" : "Pesists data",
+            "technology" : "CSI"
+          }, {
+            "id" : "131",
+            "sourceId" : "34",
+            "destinationId" : "51",
+            "description" : "Digital Office data persistence",
+            "technology" : "SQL",
+            "linkedRelationshipId" : "130"
+          }, {
+            "id" : "146",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "1b84552f-dddd-4025-8e78-59e3960d691a"
+            },
+            "sourceId" : "34",
+            "destinationId" : "61",
+            "description" : "Pesists data",
+            "technology" : "CSI"
+          }, {
+            "id" : "132",
+            "sourceId" : "34",
+            "destinationId" : "47",
+            "description" : "Digital Office data persistence",
+            "technology" : "SQL",
+            "linkedRelationshipId" : "130"
+          }, {
+            "id" : "139",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "d7754505-e145-470b-89b0-87f02391ee62"
+            },
+            "sourceId" : "34",
+            "destinationId" : "36",
+            "description" : "Uses Installed App"
+          }, {
+            "id" : "130",
+            "tags" : "Relationship,TAG_digital_office_to_postgres_relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "7bb0ba6e-00d9-4433-b5e5-4f3af11ac9d4"
+            },
+            "sourceId" : "34",
+            "destinationId" : "52",
+            "description" : "Digital Office data persistence",
+            "technology" : "SQL"
+          }, {
+            "id" : "141",
+            "sourceId" : "34",
+            "destinationId" : "59",
+            "description" : "Pesists data",
+            "technology" : "CSI",
+            "linkedRelationshipId" : "140"
+          }, {
+            "id" : "138",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "62214522-579d-4f7c-a061-2b0ffb4f40d9"
+            },
+            "sourceId" : "34",
+            "destinationId" : "35",
+            "description" : "Uses Installed App"
+          } ],
+          "documentation" : { }
+        }, {
+          "id" : "35",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "digital_office_office"
+          },
+          "name" : "Nextcloud Office",
+          "description" : "Nextcloud Office App",
+          "relationships" : [ {
+            "id" : "155",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "6d992daf-9fff-48f0-ba18-cc68172fa9a1"
+            },
+            "sourceId" : "35",
+            "destinationId" : "37",
+            "description" : "Uses Server"
+          } ],
+          "documentation" : { }
+        } ],
+        "documentation" : { }
+      } ],
+      "documentation" : { }
+    }, {
+      "id" : "46",
+      "tags" : "Element,Software System,Core_System",
+      "properties" : {
+        "structurizr.dsl.identifier" : "monitoring"
+      },
+      "name" : "Monitoring",
+      "description" : "Monitoring and Logging",
+      "group" : "Cloud Environment",
+      "location" : "Unspecified",
+      "documentation" : { }
+    } ],
+    "deploymentNodes" : [ {
+      "id" : "200",
+      "tags" : "Element,Deployment Node",
+      "properties" : {
+        "structurizr.dsl.identifier" : "otc"
+      },
+      "name" : "Open Telekom Cloud",
+      "environment" : "Development",
+      "instances" : "1",
+      "children" : [ {
+        "id" : "228",
+        "tags" : "Element,Deployment Node,TAG_Deployment_DMS",
+        "properties" : {
+          "structurizr.dsl.identifier" : "dms"
+        },
+        "name" : "DMS",
+        "environment" : "Development",
+        "technology" : "Distributed Database Service",
+        "instances" : "1",
+        "softwareSystemInstances" : [ {
+          "id" : "229",
+          "tags" : "Software System Instance",
+          "properties" : {
+            "structurizr.dsl.identifier" : "64156133-3260-4bec-8b93-3f2daf52a6e8"
+          },
+          "environment" : "Development",
+          "deploymentGroups" : [ "Default" ],
+          "instanceId" : 1,
+          "softwareSystemId" : "55"
+        } ]
+      }, {
+        "id" : "237",
+        "tags" : "Element,Deployment Node,TAG_Deployment_EVS",
+        "properties" : {
+          "structurizr.dsl.identifier" : "evs"
+        },
+        "name" : "EVS",
+        "environment" : "Development",
+        "technology" : "Elastic Volume Service",
+        "instances" : "1",
+        "containerInstances" : [ {
+          "id" : "238",
+          "tags" : "Container Instance",
+          "properties" : {
+            "structurizr.dsl.identifier" : "7839db17-38d7-4095-9577-e43bb2f33791"
+          },
+          "environment" : "Development",
+          "deploymentGroups" : [ "Default" ],
+          "instanceId" : 1,
+          "containerId" : "60"
+        }, {
+          "id" : "244",
+          "tags" : "Container Instance",
+          "properties" : {
+            "structurizr.dsl.identifier" : "a16df018-f707-4490-84e6-99caf4aa1a67"
+          },
+          "environment" : "Development",
+          "deploymentGroups" : [ "Default" ],
+          "instanceId" : 1,
+          "containerId" : "63"
+        }, {
+          "id" : "240",
+          "tags" : "Container Instance",
+          "properties" : {
+            "structurizr.dsl.identifier" : "b4a8a8e4-600d-46c5-9cda-9da336f9b5b1"
+          },
+          "environment" : "Development",
+          "deploymentGroups" : [ "Default" ],
+          "instanceId" : 1,
+          "containerId" : "61"
+        }, {
+          "id" : "242",
+          "tags" : "Container Instance",
+          "properties" : {
+            "structurizr.dsl.identifier" : "ae9c1edf-9d7d-4745-adce-29d6a5e88db6"
+          },
+          "environment" : "Development",
+          "deploymentGroups" : [ "Default" ],
+          "instanceId" : 1,
+          "containerId" : "62"
+        }, {
+          "id" : "246",
+          "tags" : "Container Instance",
+          "properties" : {
+            "structurizr.dsl.identifier" : "0d4261f2-0072-4eda-8632-dc16ac3a232d"
+          },
+          "environment" : "Development",
+          "deploymentGroups" : [ "Default" ],
+          "instanceId" : 1,
+          "containerId" : "64"
+        } ]
+      }, {
+        "id" : "233",
+        "tags" : "Element,Deployment Node,TAG_Deployment_SFS",
+        "properties" : {
+          "structurizr.dsl.identifier" : "sfs"
+        },
+        "name" : "SFS",
+        "environment" : "Development",
+        "technology" : "Scalable File Service",
+        "instances" : "1",
+        "containerInstances" : [ {
+          "id" : "235",
+          "tags" : "Container Instance",
+          "properties" : {
+            "structurizr.dsl.identifier" : "c7d3bff1-5685-4226-a4b6-cf955f6c35e3"
+          },
+          "environment" : "Development",
+          "deploymentGroups" : [ "Default" ],
+          "instanceId" : 1,
+          "containerId" : "58"
+        }, {
+          "id" : "234",
+          "tags" : "Container Instance",
+          "properties" : {
+            "structurizr.dsl.identifier" : "bd3d3f6d-e78f-415c-b16b-4c4496384071"
+          },
+          "environment" : "Development",
+          "deploymentGroups" : [ "Default" ],
+          "instanceId" : 1,
+          "containerId" : "57"
+        } ]
+      }, {
+        "id" : "220",
+        "tags" : "Element,Deployment Node,TAG_Deployment_RDS",
+        "properties" : {
+          "structurizr.dsl.identifier" : "rds"
+        },
+        "name" : "RDS",
+        "environment" : "Development",
+        "technology" : "Database Server",
+        "instances" : "1",
+        "containerInstances" : [ {
+          "id" : "222",
+          "tags" : "Container Instance",
+          "properties" : {
+            "structurizr.dsl.identifier" : "cc3d15a5-c84d-4550-a76f-7f9a2c6748fa"
+          },
+          "environment" : "Development",
+          "deploymentGroups" : [ "Default" ],
+          "instanceId" : 1,
+          "containerId" : "49"
+        }, {
+          "id" : "226",
+          "tags" : "Container Instance",
+          "properties" : {
+            "structurizr.dsl.identifier" : "0124e154-05b0-4f6d-807e-f7322485613d"
+          },
+          "environment" : "Development",
+          "deploymentGroups" : [ "Default" ],
+          "instanceId" : 1,
+          "containerId" : "53"
+        }, {
+          "id" : "224",
+          "tags" : "Container Instance",
+          "properties" : {
+            "structurizr.dsl.identifier" : "a16936d7-3cb9-481a-b467-e698c8ee6343"
+          },
+          "environment" : "Development",
+          "deploymentGroups" : [ "Default" ],
+          "instanceId" : 1,
+          "containerId" : "51"
+        }, {
+          "id" : "221",
+          "tags" : "Container Instance",
+          "properties" : {
+            "structurizr.dsl.identifier" : "9e90f2fa-31c2-4cd3-b1b8-281aef43044a"
+          },
+          "environment" : "Development",
+          "deploymentGroups" : [ "Default" ],
+          "instanceId" : 1,
+          "containerId" : "48"
+        } ]
+      }, {
+        "id" : "201",
+        "tags" : "Element,Deployment Node,TAG_Deployment_CCE",
+        "properties" : {
+          "structurizr.dsl.identifier" : "cce"
+        },
+        "name" : "CCE",
+        "environment" : "Development",
+        "technology" : "Kubernetes Cluster",
+        "instances" : "1",
+        "children" : [ {
+          "id" : "202",
+          "tags" : "Element,Deployment Node",
+          "properties" : {
+            "structurizr.dsl.identifier" : "app_namespace"
+          },
+          "name" : "app",
+          "environment" : "Development",
+          "technology" : "Kubernetes Namespace",
+          "instances" : "1",
+          "softwareSystemInstances" : [ {
+            "id" : "203",
+            "tags" : "Software System Instance",
+            "properties" : {
+              "structurizr.dsl.identifier" : "242af208-0ce3-4b07-844e-40917cc3daaa"
+            },
+            "environment" : "Development",
+            "deploymentGroups" : [ "Default" ],
+            "instanceId" : 1,
+            "softwareSystemId" : "38"
+          }, {
+            "id" : "204",
+            "tags" : "Software System Instance",
+            "properties" : {
+              "structurizr.dsl.identifier" : "0eb1e372-15ac-4c14-952c-7833fe807881"
+            },
+            "environment" : "Development",
+            "deploymentGroups" : [ "Default" ],
+            "instanceId" : 1,
+            "softwareSystemId" : "41"
+          } ]
+        }, {
+          "id" : "207",
+          "tags" : "Element,Deployment Node",
+          "properties" : {
+            "structurizr.dsl.identifier" : "hero_namespace"
+          },
+          "name" : "hero",
+          "environment" : "Development",
+          "technology" : "Kubernetes Namespace",
+          "instances" : "1",
+          "containerInstances" : [ {
+            "id" : "216",
+            "tags" : "Container Instance",
+            "properties" : {
+              "structurizr.dsl.identifier" : "911d4aa2-c31f-4a9e-af97-48116f453347"
+            },
+            "relationships" : [ {
+              "id" : "219",
+              "sourceId" : "216",
+              "destinationId" : "204",
+              "description" : "Read and change configuration/information",
+              "technology" : "REST API",
+              "linkedRelationshipId" : "82"
+            } ],
+            "environment" : "Development",
+            "deploymentGroups" : [ "Default" ],
+            "instanceId" : 1,
+            "containerId" : "13"
+          }, {
+            "id" : "214",
+            "tags" : "Container Instance",
+            "properties" : {
+              "structurizr.dsl.identifier" : "6c21a949-1d69-4b59-a15a-21a832158247"
+            },
+            "relationships" : [ {
+              "id" : "227",
+              "sourceId" : "214",
+              "destinationId" : "226",
+              "description" : "Club Forum data persistence",
+              "technology" : "SQL",
+              "linkedRelationshipId" : "163"
+            }, {
+              "id" : "243",
+              "sourceId" : "214",
+              "destinationId" : "242",
+              "description" : "Persists data",
+              "linkedRelationshipId" : "194"
+            }, {
+              "id" : "245",
+              "sourceId" : "214",
+              "destinationId" : "244",
+              "description" : "Persists data",
+              "linkedRelationshipId" : "198"
+            }, {
+              "id" : "215",
+              "sourceId" : "214",
+              "destinationId" : "204",
+              "description" : "Authenticates/Authorizes User",
+              "technology" : "OpenID Connect",
+              "linkedRelationshipId" : "189"
+            }, {
+              "id" : "247",
+              "sourceId" : "214",
+              "destinationId" : "246",
+              "description" : "Persists data",
+              "technology" : "CSI",
+              "linkedRelationshipId" : "169"
+            }, {
+              "id" : "232",
+              "sourceId" : "214",
+              "destinationId" : "229",
+              "description" : "Subscribe Club Events",
+              "linkedRelationshipId" : "158"
+            } ],
+            "environment" : "Development",
+            "deploymentGroups" : [ "Default" ],
+            "instanceId" : 1,
+            "containerId" : "16"
+          }, {
+            "id" : "212",
+            "tags" : "Container Instance",
+            "properties" : {
+              "structurizr.dsl.identifier" : "4ba8cb61-1521-4b0f-ad09-cbb93bfa980c"
+            },
+            "relationships" : [ {
+              "id" : "213",
+              "sourceId" : "212",
+              "destinationId" : "204",
+              "description" : "Authenticates/Authorizes User",
+              "technology" : "OpenID Connect",
+              "linkedRelationshipId" : "154"
+            }, {
+              "id" : "239",
+              "sourceId" : "212",
+              "destinationId" : "238",
+              "description" : "Pesists data",
+              "technology" : "CSI",
+              "linkedRelationshipId" : "142"
+            }, {
+              "id" : "217",
+              "sourceId" : "212",
+              "destinationId" : "216",
+              "description" : "Create and Assign group roles",
+              "technology" : "REST API",
+              "linkedRelationshipId" : "127"
+            }, {
+              "id" : "230",
+              "sourceId" : "212",
+              "destinationId" : "229",
+              "description" : "Subscribe Club Events",
+              "linkedRelationshipId" : "129"
+            }, {
+              "id" : "225",
+              "sourceId" : "212",
+              "destinationId" : "224",
+              "description" : "Digital Office data persistence",
+              "technology" : "SQL",
+              "linkedRelationshipId" : "134"
+            }, {
+              "id" : "241",
+              "sourceId" : "212",
+              "destinationId" : "240",
+              "description" : "Pesists data",
+              "technology" : "CSI",
+              "linkedRelationshipId" : "147"
+            } ],
+            "environment" : "Development",
+            "deploymentGroups" : [ "Default" ],
+            "instanceId" : 1,
+            "containerId" : "32"
+          }, {
+            "id" : "209",
+            "tags" : "Container Instance",
+            "properties" : {
+              "structurizr.dsl.identifier" : "b20ac76c-95ea-42ad-91f0-383ffd5b9339"
+            },
+            "relationships" : [ {
+              "id" : "210",
+              "sourceId" : "209",
+              "destinationId" : "208",
+              "description" : "Clubs Administration",
+              "technology" : "REST API",
+              "linkedRelationshipId" : "86"
+            }, {
+              "id" : "211",
+              "sourceId" : "209",
+              "destinationId" : "204",
+              "description" : "Get Access Tokens",
+              "technology" : "REST API",
+              "linkedRelationshipId" : "92"
+            } ],
+            "environment" : "Development",
+            "deploymentGroups" : [ "Default" ],
+            "instanceId" : 1,
+            "containerId" : "9"
+          }, {
+            "id" : "208",
+            "tags" : "Container Instance",
+            "properties" : {
+              "structurizr.dsl.identifier" : "1a1a1f2b-99c9-49ff-8689-fc6a54192ada"
+            },
+            "relationships" : [ {
+              "id" : "231",
+              "sourceId" : "208",
+              "destinationId" : "229",
+              "description" : "Publish Club Events",
+              "linkedRelationshipId" : "111"
+            }, {
+              "id" : "236",
+              "sourceId" : "208",
+              "destinationId" : "235",
+              "description" : "Stores Files",
+              "technology" : "CSI",
+              "linkedRelationshipId" : "106"
+            }, {
+              "id" : "223",
+              "sourceId" : "208",
+              "destinationId" : "222",
+              "description" : "Clubs data persistence",
+              "technology" : "SQL",
+              "linkedRelationshipId" : "99"
+            }, {
+              "id" : "218",
+              "sourceId" : "208",
+              "destinationId" : "216",
+              "description" : "Get user information",
+              "technology" : "REST API",
+              "linkedRelationshipId" : "116"
+            } ],
+            "environment" : "Development",
+            "deploymentGroups" : [ "Default" ],
+            "instanceId" : 1,
+            "containerId" : "11"
+          } ]
+        }, {
+          "id" : "205",
+          "tags" : "Element,Deployment Node",
+          "properties" : {
+            "structurizr.dsl.identifier" : "monitoring_namespace"
+          },
+          "name" : "monitoring",
+          "environment" : "Development",
+          "technology" : "Kubernetes Namespace",
+          "instances" : "1",
+          "softwareSystemInstances" : [ {
+            "id" : "206",
+            "tags" : "Software System Instance",
+            "properties" : {
+              "structurizr.dsl.identifier" : "2b0e74f9-2d68-4880-abe0-432e4fc142ff"
+            },
+            "environment" : "Development",
+            "deploymentGroups" : [ "Default" ],
+            "instanceId" : 1,
+            "softwareSystemId" : "46"
+          } ]
+        } ]
+      } ]
+    }, {
+      "id" : "248",
+      "tags" : "Element,Deployment Node,TAG_Deployment_client",
+      "properties" : {
+        "structurizr.dsl.identifier" : "client"
+      },
+      "name" : "Client Device",
+      "environment" : "Development",
+      "technology" : "Client browser (Mobile, PC, ...)",
+      "instances" : "1",
+      "softwareSystemInstances" : [ {
+        "id" : "249",
+        "tags" : "Software System Instance",
+        "properties" : {
+          "structurizr.dsl.identifier" : "5bc3be02-ddc2-48f2-9e24-0efee7c270d6"
+        },
+        "relationships" : [ {
+          "id" : "252",
+          "sourceId" : "249",
+          "destinationId" : "214",
+          "description" : "Uses",
+          "linkedRelationshipId" : "81"
+        }, {
+          "id" : "250",
+          "sourceId" : "249",
+          "destinationId" : "209",
+          "description" : "Uses",
+          "linkedRelationshipId" : "78"
+        }, {
+          "id" : "251",
+          "sourceId" : "249",
+          "destinationId" : "212",
+          "description" : "Uses",
+          "linkedRelationshipId" : "80"
+        } ],
+        "environment" : "Development",
+        "deploymentGroups" : [ "Default" ],
+        "instanceId" : 1,
+        "softwareSystemId" : "65"
+      } ]
+    } ]
+  },
+  "documentation" : { },
+  "views" : {
+    "systemLandscapeViews" : [ {
+      "key" : "SystemLandscape",
+      "order" : 1,
+      "dimensions" : {
+        "width" : 2198,
+        "height" : 1997
+      },
+      "enterpriseBoundaryVisible" : true,
+      "elements" : [ {
+        "id" : "1",
+        "x" : 209,
+        "y" : 337
+      }, {
+        "id" : "46",
+        "x" : 1527,
+        "y" : 220
+      }, {
+        "id" : "2",
+        "x" : 199,
+        "y" : 847
+      }, {
+        "id" : "3",
+        "x" : 224,
+        "y" : 1387
+      }, {
+        "id" : "4",
+        "x" : 854,
+        "y" : 1392
+      }, {
+        "id" : "38",
+        "x" : 777,
+        "y" : 220
+      }, {
+        "id" : "5",
+        "x" : 1439,
+        "y" : 1397
+      }, {
+        "id" : "8",
+        "x" : 777,
+        "y" : 820
+      }, {
+        "id" : "41",
+        "x" : 1527,
+        "y" : 820
+      } ],
+      "relationships" : [ {
+        "id" : "70"
+      }, {
+        "id" : "67"
+      }, {
+        "id" : "77"
+      }, {
+        "id" : "66"
+      }, {
+        "id" : "69"
+      }, {
+        "id" : "68"
+      } ]
+    } ],
+    "systemContextViews" : [ {
+      "key" : "SystemContext-001",
+      "generatedKey" : true,
+      "order" : 2,
+      "softwareSystemId" : "8",
+      "dimensions" : {
+        "width" : 2236,
+        "height" : 2445
+      },
+      "enterpriseBoundaryVisible" : true,
+      "elements" : [ {
+        "id" : "55",
+        "x" : 1566,
+        "y" : 706
+      }, {
+        "id" : "1",
+        "x" : 820,
+        "y" : 200
+      }, {
+        "id" : "56",
+        "x" : 1555,
+        "y" : 1871
+      }, {
+        "id" : "2",
+        "x" : 215,
+        "y" : 205
+      }, {
+        "id" : "3",
+        "x" : 200,
+        "y" : 695
+      }, {
+        "id" : "47",
+        "x" : 1561,
+        "y" : 1086
+      }, {
+        "id" : "4",
+        "x" : 220,
+        "y" : 1175
+      }, {
+        "id" : "59",
+        "x" : 1555,
+        "y" : 1476
+      }, {
+        "id" : "5",
+        "x" : 225,
+        "y" : 1680
+      }, {
+        "id" : "8",
+        "x" : 797,
+        "y" : 1147
+      }, {
+        "id" : "41",
+        "x" : 810,
+        "y" : 1730
+      } ],
+      "relationships" : [ {
+        "id" : "70"
+      }, {
+        "id" : "109"
+      }, {
+        "id" : "67"
+      }, {
+        "id" : "145"
+      }, {
+        "id" : "66"
+      }, {
+        "id" : "77"
+      }, {
+        "id" : "69"
+      }, {
+        "id" : "68"
+      }, {
+        "id" : "112"
+      }, {
+        "id" : "103"
+      } ]
+    } ],
+    "containerViews" : [ {
+      "key" : "Container-001",
+      "generatedKey" : true,
+      "order" : 3,
+      "softwareSystemId" : "8",
+      "dimensions" : {
+        "width" : 3560,
+        "height" : 2805
+      },
+      "externalSoftwareSystemBoundariesVisible" : false,
+      "elements" : [ {
+        "id" : "55",
+        "x" : 1136,
+        "y" : 205
+      }, {
+        "id" : "11",
+        "x" : 1715,
+        "y" : 1145
+      }, {
+        "id" : "56",
+        "x" : 2910,
+        "y" : 1594
+      }, {
+        "id" : "13",
+        "x" : 2351,
+        "y" : 1739
+      }, {
+        "id" : "47",
+        "x" : 2774,
+        "y" : 203
+      }, {
+        "id" : "59",
+        "x" : 1935,
+        "y" : 199
+      }, {
+        "id" : "16",
+        "x" : 946,
+        "y" : 784
+      }, {
+        "id" : "6",
+        "x" : 200,
+        "y" : 909
+      }, {
+        "id" : "7",
+        "x" : 234,
+        "y" : 1583
+      }, {
+        "id" : "9",
+        "x" : 962,
+        "y" : 1399
+      }, {
+        "id" : "41",
+        "x" : 1276,
+        "y" : 2304
+      }, {
+        "id" : "32",
+        "x" : 2246,
+        "y" : 759
+      } ],
+      "relationships" : [ {
+        "id" : "82"
+      }, {
+        "id" : "92"
+      }, {
+        "id" : "71"
+      }, {
+        "id" : "164",
+        "vertices" : [ {
+          "x" : 2055,
+          "y" : 819
+        } ]
+      }, {
+        "id" : "74"
+      }, {
+        "id" : "86"
+      }, {
+        "id" : "73",
+        "vertices" : [ {
+          "x" : 1184,
+          "y" : 1283
+        } ]
+      }, {
+        "id" : "170"
+      }, {
+        "id" : "75"
+      }, {
+        "id" : "107"
+      }, {
+        "id" : "129"
+      }, {
+        "id" : "100",
+        "vertices" : [ {
+          "x" : 2870,
+          "y" : 1239
+        } ]
+      }, {
+        "id" : "111"
+      }, {
+        "id" : "135"
+      }, {
+        "id" : "143"
+      }, {
+        "id" : "154",
+        "vertices" : [ {
+          "x" : 2166,
+          "y" : 1614
+        } ]
+      }, {
+        "id" : "127",
+        "vertices" : [ {
+          "x" : 2726,
+          "y" : 1374
+        } ]
+      }, {
+        "id" : "189",
+        "vertices" : [ {
+          "x" : 1541,
+          "y" : 1619
+        } ]
+      }, {
+        "id" : "158"
+      }, {
+        "id" : "116"
+      } ]
+    } ],
+    "componentViews" : [ {
+      "key" : "Component-001",
+      "generatedKey" : true,
+      "order" : 4,
+      "dimensions" : {
+        "width" : 2325,
+        "height" : 1460
+      },
+      "containerId" : "11",
+      "externalContainerBoundariesVisible" : false,
+      "elements" : [ {
+        "id" : "55",
+        "x" : 210,
+        "y" : 200
+      }, {
+        "id" : "12",
+        "x" : 922,
+        "y" : 587
+      }, {
+        "id" : "56",
+        "x" : 200,
+        "y" : 590
+      }, {
+        "id" : "13",
+        "x" : 1675,
+        "y" : 825
+      }, {
+        "id" : "47",
+        "x" : 205,
+        "y" : 960
+      }, {
+        "id" : "9",
+        "x" : 1675,
+        "y" : 430
+      } ],
+      "relationships" : [ {
+        "id" : "97"
+      }, {
+        "id" : "85"
+      }, {
+        "id" : "110"
+      }, {
+        "id" : "114"
+      }, {
+        "id" : "105"
+      } ]
+    }, {
+      "key" : "Component-002",
+      "generatedKey" : true,
+      "order" : 5,
+      "dimensions" : {
+        "width" : 3015,
+        "height" : 2235
+      },
+      "containerId" : "32",
+      "externalContainerBoundariesVisible" : false,
+      "elements" : [ {
+        "id" : "33",
+        "x" : 1530,
+        "y" : 220
+      }, {
+        "id" : "55",
+        "x" : 2340,
+        "y" : 205
+      }, {
+        "id" : "34",
+        "x" : 1535,
+        "y" : 796
+      }, {
+        "id" : "35",
+        "x" : 775,
+        "y" : 1115
+      }, {
+        "id" : "13",
+        "x" : 2355,
+        "y" : 901
+      }, {
+        "id" : "47",
+        "x" : 205,
+        "y" : 231
+      }, {
+        "id" : "36",
+        "x" : 1559,
+        "y" : 1644
+      }, {
+        "id" : "59",
+        "x" : 200,
+        "y" : 676
+      }, {
+        "id" : "37",
+        "x" : 974,
+        "y" : 1644
+      }, {
+        "id" : "41",
+        "x" : 2365,
+        "y" : 1631
+      } ],
+      "relationships" : [ {
+        "id" : "82"
+      }, {
+        "id" : "141"
+      }, {
+        "id" : "151"
+      }, {
+        "id" : "132"
+      }, {
+        "id" : "155"
+      }, {
+        "id" : "123"
+      }, {
+        "id" : "138"
+      }, {
+        "id" : "139"
+      }, {
+        "id" : "128"
+      }, {
+        "id" : "125"
+      } ]
+    }, {
+      "key" : "Component-004",
+      "generatedKey" : true,
+      "order" : 7,
+      "dimensions" : {
+        "width" : 1705,
+        "height" : 1806
+      },
+      "containerId" : "42",
+      "externalContainerBoundariesVisible" : false,
+      "elements" : [ {
+        "id" : "44",
+        "x" : 1030,
+        "y" : 704
+      }, {
+        "id" : "45",
+        "x" : 1030,
+        "y" : 1214
+      }, {
+        "id" : "8",
+        "x" : 200,
+        "y" : 719
+      }, {
+        "id" : "43",
+        "x" : 1035,
+        "y" : 219
+      } ],
+      "relationships" : [ {
+        "id" : "93"
+      }, {
+        "id" : "190"
+      }, {
+        "id" : "122"
+      } ]
+    }, {
+      "key" : "Component-003",
+      "generatedKey" : true,
+      "order" : 6,
+      "dimensions" : {
+        "width" : 4230,
+        "height" : 2416
+      },
+      "containerId" : "16",
+      "externalContainerBoundariesVisible" : false,
+      "elements" : [ {
+        "id" : "22",
+        "x" : 225,
+        "y" : 595
+      }, {
+        "id" : "55",
+        "x" : 3564,
+        "y" : 201
+      }, {
+        "id" : "23",
+        "x" : 220,
+        "y" : 1825
+      }, {
+        "id" : "24",
+        "x" : 1745,
+        "y" : 1825
+      }, {
+        "id" : "47",
+        "x" : 3570,
+        "y" : 575
+      }, {
+        "id" : "25",
+        "x" : 745,
+        "y" : 1825
+      }, {
+        "id" : "59",
+        "x" : 3570,
+        "y" : 930
+      }, {
+        "id" : "26",
+        "x" : 1255,
+        "y" : 1825
+      }, {
+        "id" : "27",
+        "x" : 1780,
+        "y" : 220
+      }, {
+        "id" : "28",
+        "x" : 225,
+        "y" : 1030
+      }, {
+        "id" : "17",
+        "x" : 2524,
+        "y" : 225
+      }, {
+        "id" : "18",
+        "x" : 1399,
+        "y" : 1010
+      }, {
+        "id" : "29",
+        "x" : 225,
+        "y" : 1425
+      }, {
+        "id" : "19",
+        "x" : 755,
+        "y" : 220
+      }, {
+        "id" : "41",
+        "x" : 3580,
+        "y" : 1815
+      }, {
+        "id" : "30",
+        "x" : 2189,
+        "y" : 1365
+      }, {
+        "id" : "31",
+        "x" : 2939,
+        "y" : 1375
+      }, {
+        "id" : "20",
+        "x" : 1270,
+        "y" : 220
+      }, {
+        "id" : "21",
+        "x" : 225,
+        "y" : 220
+      } ],
+      "relationships" : [ {
+        "id" : "172"
+      }, {
+        "id" : "183"
+      }, {
+        "id" : "173"
+      }, {
+        "id" : "197"
+      }, {
+        "id" : "174"
+      }, {
+        "id" : "186"
+      }, {
+        "id" : "175"
+      }, {
+        "id" : "191"
+      }, {
+        "id" : "180"
+      }, {
+        "id" : "193"
+      }, {
+        "id" : "181"
+      }, {
+        "id" : "182"
+      }, {
+        "id" : "161"
+      }, {
+        "id" : "168"
+      }, {
+        "id" : "157"
+      }, {
+        "id" : "156"
+      }, {
+        "id" : "176"
+      }, {
+        "id" : "177"
+      }, {
+        "id" : "178"
+      }, {
+        "id" : "179"
+      } ]
+    } ],
+    "deploymentViews" : [ {
+      "key" : "Deployment-001",
+      "generatedKey" : true,
+      "order" : 8,
+      "dimensions" : {
+        "width" : 4786,
+        "height" : 3268
+      },
+      "environment" : "Development",
+      "elements" : [ {
+        "id" : "233",
+        "x" : 700,
+        "y" : 700
+      }, {
+        "id" : "212",
+        "x" : 2695,
+        "y" : 1639
+      }, {
+        "id" : "234",
+        "x" : 1796,
+        "y" : 244
+      }, {
+        "id" : "235",
+        "x" : 1251,
+        "y" : 239
+      }, {
+        "id" : "214",
+        "x" : 2705,
+        "y" : 954
+      }, {
+        "id" : "237",
+        "x" : 175,
+        "y" : 175
+      }, {
+        "id" : "216",
+        "x" : 1920,
+        "y" : 1454
+      }, {
+        "id" : "238",
+        "x" : 4096,
+        "y" : 2499
+      }, {
+        "id" : "240",
+        "x" : 3446,
+        "y" : 2504
+      }, {
+        "id" : "220",
+        "x" : 700,
+        "y" : 700
+      }, {
+        "id" : "242",
+        "x" : 3461,
+        "y" : 2004
+      }, {
+        "id" : "221",
+        "x" : 4096,
+        "y" : 899
+      }, {
+        "id" : "200",
+        "x" : 700,
+        "y" : 700
+      }, {
+        "id" : "222",
+        "x" : 3431,
+        "y" : 379
+      }, {
+        "id" : "244",
+        "x" : 4096,
+        "y" : 2004
+      }, {
+        "id" : "201",
+        "x" : 700,
+        "y" : 700
+      }, {
+        "id" : "202",
+        "x" : 525,
+        "y" : 525
+      }, {
+        "id" : "224",
+        "x" : 3431,
+        "y" : 894
+      }, {
+        "id" : "246",
+        "x" : 4095,
+        "y" : 1534
+      }, {
+        "id" : "203",
+        "x" : 2525,
+        "y" : 2494
+      }, {
+        "id" : "204",
+        "x" : 1915,
+        "y" : 2484
+      }, {
+        "id" : "226",
+        "x" : 4096,
+        "y" : 379
+      }, {
+        "id" : "248",
+        "x" : 700,
+        "y" : 700
+      }, {
+        "id" : "205",
+        "x" : 175,
+        "y" : 175
+      }, {
+        "id" : "249",
+        "x" : 220,
+        "y" : 1458
+      }, {
+        "id" : "206",
+        "x" : 1276,
+        "y" : 2494
+      }, {
+        "id" : "228",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "207",
+        "x" : 525,
+        "y" : 525
+      }, {
+        "id" : "229",
+        "x" : 2581,
+        "y" : 244
+      }, {
+        "id" : "208",
+        "x" : 1965,
+        "y" : 954
+      }, {
+        "id" : "209",
+        "x" : 1265,
+        "y" : 949
+      } ],
+      "relationships" : [ {
+        "id" : "239",
+        "vertices" : [ {
+          "x" : 3431,
+          "y" : 2299
+        } ]
+      }, {
+        "id" : "215"
+      }, {
+        "id" : "213"
+      }, {
+        "id" : "211",
+        "vertices" : [ {
+          "x" : 1860,
+          "y" : 1669
+        } ]
+      }, {
+        "id" : "210"
+      }, {
+        "id" : "231"
+      }, {
+        "id" : "232",
+        "vertices" : [ {
+          "x" : 2791,
+          "y" : 909
+        } ]
+      }, {
+        "id" : "243"
+      }, {
+        "id" : "245"
+      }, {
+        "id" : "223"
+      }, {
+        "id" : "247"
+      }, {
+        "id" : "219"
+      }, {
+        "id" : "225",
+        "vertices" : [ {
+          "x" : 3371,
+          "y" : 1544
+        } ]
+      }, {
+        "id" : "236"
+      }, {
+        "id" : "218"
+      }, {
+        "id" : "217"
+      }, {
+        "id" : "227"
+      }, {
+        "id" : "250"
+      }, {
+        "id" : "252",
+        "vertices" : [ {
+          "x" : 2290,
+          "y" : 1363
+        } ]
+      }, {
+        "id" : "230",
+        "vertices" : [ {
+          "x" : 3321,
+          "y" : 939
+        } ]
+      }, {
+        "id" : "241"
+      }, {
+        "id" : "251",
+        "vertices" : [ {
+          "x" : 1430,
+          "y" : 1903
+        } ]
+      } ]
+    } ],
+    "configuration" : {
+      "branding" : { },
+      "styles" : {
+        "elements" : [ {
+          "tag" : "HELD_Core_System",
+          "background" : "#00802b",
+          "color" : "#ffffff",
+          "shape" : "RoundedBox",
+          "opacity" : 80
+        }, {
+          "tag" : "HELD_Components",
+          "background" : "#00802b",
+          "color" : "#ffffff",
+          "shape" : "RoundedBox",
+          "opacity" : 60
+        }, {
+          "tag" : "TAG_Data_Storage",
+          "background" : "#ff3385",
+          "color" : "#ffffff",
+          "shape" : "Cylinder",
+          "opacity" : 60
+        }, {
+          "tag" : "Message_System",
+          "background" : "#ff3385",
+          "color" : "#ffffff",
+          "shape" : "Pipe",
+          "opacity" : 60
+        } ]
+      },
+      "themes" : [ "https://static.structurizr.com/themes/default/theme.json" ],
+      "terminology" : { },
+      "metadataSymbols" : "SquareBrackets",
+      "lastSavedView" : "Component-001"
+    }
+  }
+}

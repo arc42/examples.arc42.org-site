@@ -1,0 +1,40 @@
+:homepage: https://www.smartandpublic.de
+
+:keywords: software-architecture, documentation, template, arc42
+
+
+An overview of created document versions with the changes they have undergone. +
+
+[cols="1,1,2" options="header"]
+|===
+|Version|Date|Changes
+
+| 1.5.0
+| 01.07.2024
+a| *Adjust hero-portal-backend components documentation* - Changed Chapters 02, 03, 05, 06, 08
+
+| 1.4.0
+| 17.06.2024
+a| *Added identity-provider-sidecar to documentation, Added HP Mitglied role decision* - Changed Chapters 05, 06, 07, 09
+
+| 1.3.0
+| 05.06.2024
+a| *Added decision: Club forum persistence change from obs to evs* - Changed Chapters 05, 07, 09
+
+| 1.2.0
+| 14.05.2024
+a| *Added Sidecar documentation for digital office and club forum* - Changed Chapters 02, 04, 05, 12
+
+| 1.1.0
+| 22.04.2024
+a| *Added Digital Office and Club Forum views, Finalize Quality Scenarios*  
+
+| 1.0.0
+| 23.03.2024
+a| *Internally coordinated first version*  
+
+|0.1.0
+|22.02.2024
+a| *Initial Revision*
+|===
+

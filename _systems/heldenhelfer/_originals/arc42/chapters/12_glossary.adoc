@@ -1,0 +1,41 @@
+:jbake-title: Glossary
+:jbake-type: page_toc
+:jbake-status: published
+:jbake-menu: arc42
+:jbake-order: 12
+:filename: /chapters/12_glossary.adoc
+ifndef::imagesdir[:imagesdir: ../../images]
+
+:toc:
+
+ifndef::imagesdir[:imagesdir: ../images]
+
+[[section-glossary]]
+== Glossary
+|===
+| *Term* | *Definition*
+| BE | Backend
+| Club | Verein 
+| Club Admin | Verein Admin, Actor (see <<actors>>)
+| Club forum | Vereinsforum (Maßnahme)
+| Club Member | Verein Mitglied, Actor (see <<actors>>)
+| CRUD | Create, Read, Update, Delete
+| Digital Office | Digitales Büro (Maßnahme)
+| Event Streaming | Ubiquitous language for the event streaming platform (Kafka) 
+| EVS | Elastic Volume Service
+| FE | Frontend
+| HELD | Heldenhelfer Application
+| HELD Admin | HELD Admin, Actor (see <<actors>>)
+| HELD Member | HELD Mitglied, Actor (see <<actors>>)
+| IAM | Identity and Access Management
+| OBS | Object Storage Service
+| OIDC | Open ID Connect
+| POD | Smallest deployable unit in kubernetes
+| PO | Product Owner
+| PM | Product Manager
+| SCH | Smart City Hub
+| SSO | Single Sign On
+| UI | User Interface
+| Unknown | Unbekannt, Actor (see <<actors>>)
+| UX | User Experience
+|===

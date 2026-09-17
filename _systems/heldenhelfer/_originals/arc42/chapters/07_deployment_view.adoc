@@ -1,0 +1,22 @@
+:jbake-title: Deployment View
+:jbake-type: page_toc
+:jbake-status: published
+:jbake-menu: arc42
+:jbake-order: 7
+:filename: /chapters/07_deployment_view.adoc
+ifndef::imagesdir[:imagesdir: ../../images]
+
+:toc:
+
+ifndef::imagesdir[:imagesdir: ../images]
+
+[[section-deployment-view]]
+
+
+== Deployment View
+
+=== Overall Deployment View
+image::../../../src/docs/images/structurizr-1-Deployment-001.svg[]
+// plantuml::../structurizr/images/Deployment-1.puml["structurizr-Deployment",format=svg]
+
+As a cloud provider the Open Telekom Cloud is used due to data protection reasons. In order to achieve synergies with the Smart City Hub and to reduce operation costs, the SCH cloud instance will be used. That means that the HELD application runs on the same kubernetes cluster as the SCH applications but in an other namespace. Also the Database server and the File service is used from SCH.

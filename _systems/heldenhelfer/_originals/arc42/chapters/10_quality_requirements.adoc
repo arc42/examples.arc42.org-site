@@ -1,0 +1,59 @@
+:jbake-title: Quality Requirements
+:jbake-type: page_toc
+:jbake-status: published
+:jbake-menu: arc42
+:jbake-order: 10
+:filename: /chapters/10_quality_requirements.adoc
+ifndef::imagesdir[:imagesdir: ../../images]
+
+:toc:
+
+ifndef::imagesdir[:imagesdir: ../images]
+
+[[section-quality-scenarios]]
+== Quality Requirements
+
+.Quality Criteria Overview
+image::../../../src/docs/images/01_2_iso-25010-topics-EN.drawio.png["Categories of Quality Requirements"]
+
+
+.Quality Scenarios
+[cols="1,4, 1"]
+|===
+| *Characteristic* | *Scenario* | *Prio* 
+| Security | A member is not able to see the email addresses of other members that are not in the same club. | 1
+| Security | A member of a club tries to access private information of another club of which he is not a member and fails to do so. | 1
+| Usability | Users with disabilities can use all the functions of the HELD portal. | 1
+| Usability | The HELD applications gives clear feedback within error messages and helps the user to solve them. | 1
+| Compatibility | A member wants use the Hero portal and is able to do so with an ordinary device. | 1
+| Compatibility | A member wants to us the Hero portal and is able to do so with a common browser. | 1
+| Security | A member of the HELD applications leaves a public computer without a log out and the system are able to invalidate the log in automatically. | 1
+| Security | If a user attempts to access a non-authorized web page by navigating directly to it without logging into the system, access is denied and the attempt is logged. | 1
+| Usability | For the user its clear if the created "content" (e.g club, forum, post) is public or not. | 1
+| Performance | A member looks at the upcoming club dates under normal workload and always has the feeling of working with a high-performance application. | 1
+| Performance | The _Digital Office_ will grow to 1000 users in the next 5 years and the system will remain just as accessible, available and efficient. | 1
+| Reliability | The HELD application should be available 99% of the time within a year. | 1
+| Functional Suitability | The administration uses the club data created by inexperienced users and does not have to validate or cleanse it again. | 1
+| Usability | An experienced member works with the Hero Portal and is not hindered by the help functions offered. | 2
+| Usability | If a function needs longer than 1 sec, a loading information is displayed (e.g. an animated circle / skeletons). | 2
+| Usability | The HELD application supports the user input through validation and error prevention mechanisms. | 2
+| Usability | Users can carry out all activities for which they are authorized without having to re-authenticate or re-log-in. | 2
+| Usability | An administrator wants to change the authorization of a member and must make this change in only one place in the system. | 2
+| Performance | The _Digital Office_ will grow to 10.000 users in the next 10 years and the system will remain just as accessible, available and efficient. | 2
+| Performance | The HELD application and its modules (except _Digital Office_) will grow up to 100.000 users in the next 10 years and the system will remain just as accessible, available and efficient. | 2
+| Performance | An unknown user changes the sorting or filtering of the list of all clubs and receives an up-to-date table within a second. | 2
+| Maintainability | A developer from outside the project receives the source code of the Hero Portal and is able to understand and, if necessary, adapt it within a week. | 2
+| Maintainability | A part of the HELD application can be updated within 10 minutes without a user noticing anything when using the Hero Portal. | 2
+| Functional Suitability | A club is processed and saved by two administrators at the same time. The system can handle this and displays a corresponding message to the administrators. | 2
+| Transferability | An administrator with no experience in maintaining large applications can be trained to maintain the system and make basic settings within a week. | 2
+| Reliability | During normal utilization, the database server fails and the Hero Portal continues to work without any loss of performance. | 3
+| Reliability | An application or service becomes unusable due to an unforeseen event and can be restored within 15 minutes. | 3
+| Maintainability | Knowledgeable people can understand the Hero Portal interfaces without documentation. | 3
+| Maintainability | The HELD application has a problem and the operation team is able to locate the error within 15 min after the problem was reported. | 3
+| Usability | An administrator creates a new club in the Hero Portal and goes through no more than 2 screens to do so. | 3
+| Usability | The HELD application is available in German and English. | 3
+| Usability | A new member uses the Hero Portal and is accompanied by help texts to understand the processes and options in the program. | 3
+| Usability | Users are forwarded to third-party systems as rarely as possible. | 3
+| Transferability | A developer ports the system for a new language and does not need more than 1 person-day, provided that the corresponding text files and properties have already been translated. | 3
+| Compatibility | The hero application can be used with all functionalities on any screen size. | 3
+|===

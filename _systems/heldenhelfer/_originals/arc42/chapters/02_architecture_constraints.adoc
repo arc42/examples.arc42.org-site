@@ -1,0 +1,44 @@
+:jbake-title: Architecture Constraints
+:jbake-type: page_toc
+:jbake-status: published
+:jbake-menu: arc42
+:jbake-order: 2
+:filename: /chapters/02_architecture_constraints.adoc
+ifndef::imagesdir[:imagesdir: ../../images]
+
+:toc:
+
+ifndef::imagesdir[:imagesdir: ../images]
+
+[[section-architecture-constraints]]
+== Architecture Constraints
+
+=== Technical Constraints
+
+The following table shows the technical constraints of the project.
+
+.Technical Constraints
+|===
+| *Constraint* | *Explanation*
+| Python for backend services | Python is used in the SCH project as the language for the backend services.
+| Typescript for Web UIs | Typescript is used in the SCH project as the language for the web UIs.
+| PostgreSQL as a Relational Database| The PostgreSQL relational database system is used in the SCH project. Therefore a server and the know how exists.
+| Kafka | As a event streaming platform Kafka shall be used. It's also in use on the SCH project.
+| FastAPI for backend services | Framework for REST API handling. FastAPI is used in the SCH project.
+| React or React based Framework | React is used in the SCH project and therefore there shall be used a React based framework for Web UIs.
+| Grafana, Prometheus, Loki | These tools are set for monitoring and logging
+| Kubernetes | Kubernetes shall be used as a deployment environment.
+| Open Telekom Cloud | The cloud provider shall be the Open Telekom Cloud because of data protection issues.
+|===
+
+=== Organizational constraints
+
+The following table shows the organizational constraints of the project.
+
+.Organizational constraints
+|===
+| *Constraint* | *Explanation*
+| Team size | 2 FE-developer, 1 BE-developer, 1 Full-Stack-developer, 1 Tester, 1 PO, 0.5 UI/UX designer, 0.5 Scrum Master
+| Open Source | Because it is a subsidized project, the HELD-Application must be Open Source. Therefore all used software frameworks and tools must also be Open Source.
+| Project Time | The implementation time for the project is a half year and the features to implement are a lot. For this reason, attention should be paid to faster function implementation rather than excessive attention to detail.
+|===
