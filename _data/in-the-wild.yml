@@ -276,35 +276,6 @@
   added:       2026-08
   group:       start-here
 
-- title:       Heldenhelfer
-  url:         https://gitlab.opencode.de/wuerzburg/heldenhelfer/-/blob/main/architecture_doc/src/docs/arc42/Architecture_HELD_WUE.adoc
-  author:      smart and public GmbH, for Smarte Region Würzburg
-  description: >-
-    A volunteering platform for the clubs and initiatives of Würzburg:
-    a self-built portal for club records and membership, wired by Kafka
-    events to a Nextcloud digital office and a Discourse forum, with
-    Keycloak single sign-on across all three.
-  note: >-
-    "Heldenhelfer liefert Euch alle Werkzeuge für moderne und effiziente
-    Vereinsarbeit." Mit Heldenhelfer bieten Stadt und Landkreis Würzburg eine
-    Plattform, die ehrenamtlichen Strukturen wie Vereinen dabei hilft, sich
-    intern besser zu organisieren, mit anderen zu vernetzen und sich
-    öffentlich zu präsentieren. Für engagierte Bürger:innen dient sie als
-    zentrale Anlaufstelle, um Termine, Kontakte und Aktionen von Vereinen und
-    Initiativen zu entdecken.
-
-
-    Development on this codebase stopped in August 2024 and the repository is
-    archived; the live platform now runs at
-    [heldenhelfer.wuerzburg.de](https://heldenhelfer.wuerzburg.de/info/).
-  kind:        Production system
-  facets:      [Public sector, AsciiDoc, Structurizr diagrams, 35 quality scenarios, 7 decision records]
-  sections:    All 12
-  licence:     MIT
-  year:        2024
-  added:       2026-08
-  group:       real-systems
-
 - title:       geOrchestra Gateway — Architecture Documentation
   url:         https://docs.georchestra.org/gateway/en/latest/arc42/
   author:      The geOrchestra project
