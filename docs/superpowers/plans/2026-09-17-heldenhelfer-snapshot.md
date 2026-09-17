@@ -61,7 +61,7 @@ Apply these uniformly; they are the whole difference between the two formats in 
 | `// comment` lines (including the `// plantuml::` lines) | drop |
 | `*bold*`, `_italic_`, `` `code` `` | `**bold**`, `*italic*`, `` `code` `` |
 | `https://url[Text]` | `[Text](https://url)` |
-| bare `https://…` inside parentheses | leave as bare URL; kramdown autolinks it |
+| bare `https://…` inside parentheses | `<https://…>`; kramdown GFM does not autolink bare URLs, Asciidoctor does, and the angle-bracket form keeps the URL as the link text |
 | `<<actors>>` | `[Actors](../03-context-and-scope/#actors)` |
 | `<<EVS>>` or `[[EVS]]` inline anchor | drop the anchor; keep the text |
 | numbered list `1.` `2.` | `1.` `2.` (kramdown renumbers) |
