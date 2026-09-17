@@ -1,24 +1,14 @@
 ---
-# The ONLY front matter a section file needs.
-#
-# There is deliberately no `system:` key: the system is derived from the
-# directory this file sits in (see _includes/system-context.html). That is
-# what makes a system directory copyable and removable in one move.
 title: Architecture Decisions
 order: 9
 ---
 
-<!--
-  arc42 section 9 — Important decisions with their context, options and consequences, worst-first.
-
-  Delete this comment and write the real content. If the original
-  documentation has nothing for this section, say so in one line
-  ("Not documented in the original.") rather than deleting the file —
-  the rail and the stepper expect all twelve, and an honest gap is
-  itself useful to a reader comparing examples.
-
-  Images: put them in ../images/ and reference them relatively,
-  e.g. ![Context diagram](../images/03-context.png)
--->
-
-_Replace this with the system's section 9 content._
+| Decision | Date & Key Person | Reasons, consequences, alternatives |
+|---|---|---|
+| The same K8s Cluster, database server, Kafka-Service, … from SCH is used. | 26.01.2024, Technical modeling Heldenhelfer | According to Chapter 4, SCH's infrastructure, existing database servers, monitoring and SSO are to be used. |
+| A separate mono-repository is used for the HELD project (not the SCH repo) | 21.02.2024, SCH- and HELD-Team | • With separate repository there shall be less conflicts when running the pipeline.<br>• If the HELD application shall be installed without the SCH it's better if it's separated.<br>• HELD specific Keycloak configuration shall be included into the HELD-repository |
+| The HELD application shall be deployable outside/without the Smart City Hub | 22.02.2024, PO | The HELD application should be able to be installed and used by individual municipalities. |
+| We continue using the next.js framework for FE | 19.03.2024, Development Team | After a short evaluation of the next.js framework we decided to go on with that and use next specific libraries such as NextAuth.js. |
+| EVS is used within the Persistent Volume Claim for nextcloud | 22.04.2024, Development Team | To avoid running costs the decision was made to use the EVS as volume instead of the SFS turbo. Later after the pilot phase, the switch to SFS turbo shall be made to enable horizontal pod autoscaling. |
+| EVS is used within the Persistent Volume Claim for discourse | 04.06.2024, Development Team | Discourse looses it's plugins after round about 8 hours, when using the ReadWriteMany access mode with OBS. With an EVS files system and ReadWriteOnce access mode it works. It seems to be a problems with the access rights to the file system. Maybe this can be configured but for now we decided to use the EVS to be faster. Later after the pilot phase we can switch to another file system and investigate the problem. |
+| *HP Mitglied* Role removed | 13.06.2024, Development Team | It's not possible to give users client-specific default roles after registration. Therefore we decided to remove the *HP Mitglied* role, so that an adjustment of the smart city hub default roles are not necessary. The role *DO Mitglied* will also not added to the default roles. This role will be added by the *Digital Office Sidecar Backend*-Service. |

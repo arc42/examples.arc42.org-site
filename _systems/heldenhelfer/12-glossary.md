@@ -1,24 +1,31 @@
 ---
-# The ONLY front matter a section file needs.
-#
-# There is deliberately no `system:` key: the system is derived from the
-# directory this file sits in (see _includes/system-context.html). That is
-# what makes a system directory copyable and removable in one move.
 title: Glossary
 order: 12
 ---
 
-<!--
-  arc42 section 12 — Domain and technical terms, so everyone means the same thing.
-
-  Delete this comment and write the real content. If the original
-  documentation has nothing for this section, say so in one line
-  ("Not documented in the original.") rather than deleting the file —
-  the rail and the stepper expect all twelve, and an honest gap is
-  itself useful to a reader comparing examples.
-
-  Images: put them in ../images/ and reference them relatively,
-  e.g. ![Context diagram](../images/03-context.png)
--->
-
-_Replace this with the system's section 12 content._
+| Term | Definition |
+|---|---|
+| BE | Backend |
+| Club | Verein |
+| Club Admin | Verein Admin, Actor (see [Actors](../03-context-and-scope/#actors)) |
+| Club forum | Vereinsforum (Maßnahme) |
+| Club Member | Verein Mitglied, Actor (see [Actors](../03-context-and-scope/#actors)) |
+| CRUD | Create, Read, Update, Delete |
+| Digital Office | Digitales Büro (Maßnahme) |
+| Event Streaming | Ubiquitous language for the event streaming platform (Kafka) |
+| EVS | Elastic Volume Service |
+| FE | Frontend |
+| HELD | Heldenhelfer Application |
+| HELD Admin | HELD Admin, Actor (see [Actors](../03-context-and-scope/#actors)) |
+| HELD Member | HELD Mitglied, Actor (see [Actors](../03-context-and-scope/#actors)) |
+| IAM | Identity and Access Management |
+| OBS | Object Storage Service |
+| OIDC | Open ID Connect |
+| POD | Smallest deployable unit in kubernetes |
+| PO | Product Owner |
+| PM | Product Manager |
+| SCH | Smart City Hub |
+| SSO | Single Sign On |
+| UI | User Interface |
+| Unknown | Unbekannt, Actor (see [Actors](../03-context-and-scope/#actors)) |
+| UX | User Experience |
