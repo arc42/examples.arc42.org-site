@@ -385,7 +385,7 @@ Source chapters `09_architecture_decisions.adoc`, `10_quality_requirements.adoc`
 - **09.** One three-column table, header row *Decision | Date & Key Person | Reasons, consequences, alternatives*, seven rows. The second row's third cell is an `a|` cell holding a three-item bullet list: render as `• With separate repository …<br>• If the HELD application …<br>• HELD specific Keycloak …`. Multi-line cells in the source are one cell each; join their lines with a space.
 - **10.** One image (`01_2_iso-25010-topics-EN.drawio.png`, alt from the source: *Categories of Quality Requirements*), then the scenario table: three columns *Characteristic | Scenario | Prio*, thirty-five rows. Count them after conversion.
 - **11.** One four-column table *ID | Problem/Risk | Impact | Description*, two rows (R1, R2). The first row's cells are split across source lines; join them.
-- **12.** Two-column table *Term | Definition*, twenty-four rows. Four rows contain `<<actors>>`; each becomes `[Actors](../03-context-and-scope/#actors)`. The German glosses (Verein, Maßnahme, Unbekannt) are the authors' text and stay.
+- **12.** Two-column table *Term | Definition*, twenty-four rows. Five rows contain `<<actors>>` (Club Admin, Club Member, HELD Admin, HELD Member, Unknown); each becomes `[Actors](../03-context-and-scope/#actors)`. The German glosses (Verein, Maßnahme, Unbekannt) are the authors' text and stay.
 
 Front matter titles: `Architecture Decisions`/9, `Quality Requirements`/10, `Risks and Technical Debt`/11, `Glossary`/12.
 
