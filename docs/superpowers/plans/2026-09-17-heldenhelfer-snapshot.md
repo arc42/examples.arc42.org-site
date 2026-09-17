@@ -205,7 +205,7 @@ main_goal: >-
   files and forum, assembled from open source parts behind a single login.
 
 decisions:
-  - Third-party tools wired by Kafka events, one sidecar each
+  - Kafka events and one sidecar per third-party tool
   - Keycloak of the Smart City Hub for single sign-on
   - Clean Architecture in every self-written service
 
@@ -220,7 +220,7 @@ keywords:
   - building-block
   - concept
 
-scale: 5 self-built services beside Nextcloud and Discourse · team of about 6 · half a year · pilot 2024
+scale: 5 self-built services beside Nextcloud and Discourse · team of 7 · half a year · pilot 2024
 
 order: 100
 
@@ -251,23 +251,23 @@ Würzburg** and runs at
 built and documented by smart and public GmbH on their behalf, on the
 infrastructure of the region's Smart City Hub.
 
-The architecture is small and easy to hold in one view. Two services are
-written for the project, a Next.js web UI and a FastAPI backend. Everything
-else is an open source product configured at runtime: when a club is created,
-the backend publishes an event to Kafka, and one sidecar service per product
-picks it up and configures Nextcloud, Discourse or Keycloak through their
-APIs. Section 6 walks through exactly that flow.
+The architecture is small and easy to hold in one view. Five services are
+written for the project: a Next.js web UI, a FastAPI backend, and three small
+sidecars. Nextcloud, Discourse and Keycloak are open source products
+configured at runtime: when a club is created, the backend publishes an event
+to Kafka, and the Nextcloud and Discourse sidecars pick it up and configure
+their product through its API. Section 6 walks through exactly that flow.
 
-Worth reading for the quality requirements, thirty-five scenarios sorted by
-priority in section 10, and for the decision log in section 9, where each entry
-carries a date and the people who took it, and two of them record choosing the
-cheaper storage for the pilot with the switch deliberately postponed.
+Two things make it worth reading. The quality requirements in section 10 are
+thirty-five scenarios sorted by priority. The decision log in section 9 gives
+each entry a date and the people who took it, and two entries settle for the
+simpler storage during the pilot and postpone the switch on purpose.
 
 This is a snapshot of documentation version 1.5.0, dated 1 July 2024, the
 last of seven revisions listed in the original's document history. Development
 stopped in August 2024 and the repository on openCode is archived, so the
 snapshot is also the final state. The sources, including the Structurizr model
-the diagrams were exported from, are kept alongside.
+the diagrams were exported from, are kept in this site's repository.
 ```
 
 - [ ] **Step 1: Write the file** as above.
