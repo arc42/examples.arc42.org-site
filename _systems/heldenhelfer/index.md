@@ -38,7 +38,7 @@ keywords:
 
 scale: 5 self-built services beside Nextcloud and Discourse · team of 7 · half a year · pilot 2024
 
-order: 100
+order: 90
 
 # ---------------------------------------------------------------------------
 # Provenance. The platform and its documentation belong to Smarte Region

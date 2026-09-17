@@ -37,7 +37,7 @@ technologies:
 
 scale: Master's thesis · Ruhr-Universität Bochum · source not yet public
 
-order: 90
+order: 100
 
 # ---------------------------------------------------------------------------
 # Provenance. RGCAT is Per Starke's master's thesis project, supervised by Jan
