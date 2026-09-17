@@ -1,24 +1,30 @@
 ---
-# The ONLY front matter a section file needs.
-#
-# There is deliberately no `system:` key: the system is derived from the
-# directory this file sits in (see _includes/system-context.html). That is
-# what makes a system directory copyable and removable in one move.
 title: Context and Scope
 order: 3
 ---
 
-<!--
-  arc42 section 3 — The system's boundary and its communication partners. Business context first, technical context second.
+## Business Context
 
-  Delete this comment and write the real content. If the original
-  documentation has nothing for this section, say so in one line
-  ("Not documented in the original.") rather than deleting the file —
-  the rail and the stepper expect all twelve, and an honest gap is
-  itself useful to a reader comparing examples.
+![System Context View](../images/structurizr-1-SystemLandscape.svg)
 
-  Images: put them in ../images/ and reference them relatively,
-  e.g. ![Context diagram](../images/03-context.png)
--->
+**HELD** - The HELD Application that consist of microservices. To see the HELD Application in more detail have a look at the building block view.
 
-_Replace this with the system's section 3 content._
+## Actors {#actors}
+
+**HELD Admin** - An authenticated user who has administrator privileges (*superadmin*) of all HELD applications and clubs. The *HELD Admin* isn't a member of a club, but is able to change/delete all of them. Even though the actor has *superadmin* privileges, a full access to the data of a club shall not be possible.
+
+**HELD Member** - An authenticated user with no special privileges and no club membership. Because the *HELD Member* has already a keycloak account it would be possible to join clubs without further steps.
+
+**Club Admin** - An authenticated user with a membership of at least one club. In this club the *Club Admin* has administrator privileges to edit this special club. The creator of a club is automatically *Club Admin*.
+
+**Club Member** - An authenticated user who is a member of a club with access to the functions of the club. The *Club Member* has access to all resources of a club, but no privilege to change club specific configuration.
+
+**Unknown** - An unauthenticated user which shall have access to an overview list of all clubs. The user does not have the privileges to see usage data of the clubs. If the *Unknown* wants to join a club a registration to the identity provider is firstly necessary.
+
+## External Systems
+
+**SCH** - The Smart City Hub applications has for now no direct interface to the HELD Application. If there are some requirements in the future the communication shall be over dedicated Interfaces like for example the *Kafka* Message Queue.
+
+**Monitoring** - The existing monitoring solution of the Smart City Hub cluster shall be used. That are the tools *Grafana*, *Prometheus* and *Loki*.
+
+**IAM** - The Identity- and Accessmanagement solution *Keycloak* of the Smart City Hub shall be used for providing the user a single sign on solution.

@@ -1,24 +1,37 @@
 ---
-# The ONLY front matter a section file needs.
-#
-# There is deliberately no `system:` key: the system is derived from the
-# directory this file sits in (see _includes/system-context.html). That is
-# what makes a system directory copyable and removable in one move.
 title: Introduction and Goals
 order: 1
 ---
 
-<!--
-  arc42 section 1 — What does the system do, who wants it, and what must it be good at? Requirements overview, quality goals, stakeholders.
+## Requirements Overview
 
-  Delete this comment and write the real content. If the original
-  documentation has nothing for this section, say so in one line
-  ("Not documented in the original.") rather than deleting the file —
-  the rail and the stepper expect all twelve, and an honest gap is
-  itself useful to a reader comparing examples.
+A detailed description about the Goals and Requirements of the HELD-Application can be found in the technical modelling file, which is internally available.
 
-  Images: put them in ../images/ and reference them relatively,
-  e.g. ![Context diagram](../images/03-context.png)
--->
+The epics and user stories are maintained in JIRA
 
-_Replace this with the system's section 1 content._
+## Quality Goals
+
+The main quality goals of the project are the following:
+
+1. A member is not able to see the email addresses of other members that are not in the same club.
+2. A member of a club tries to access private information of another club of which he is not a member and fails to do so.
+3. Users with disabilities can use all the functions of the HELD portal.
+4. The HELD applications gives clear feedback within error messages and helps the user to solve them.
+5. A member wants use the Hero portal and is able to do so with an ordinary device.
+
+## Stakeholders
+
+Explicit overview of stakeholders of the system, i.e. all person, roles or organizations that
+
+- should know the architecture
+- have to be convinced of the architecture
+- have to work with the architecture or with code
+- need the documentation of the architecture for their work
+- have to come up with decisions about the system or its development
+
+| Role/Name | Contact | Expectations |
+|---|---|---|
+| Product Manager | Smarte Region Würzburg (https://www.stadt-land-wue.de/stadtlandwue/index.html) | Reliable and efficient in terms of providing the necessary requirements |
+| Product Owner | Smart and Public Team (https://smartandpublic.de/) | Flexible with regard to new functions |
+| Developer | Smart and Public Team (https://smartandpublic.de/) | Flexible and reliable in terms of code maintenance and testability. |
+| Tester | Smart and Public Team (https://smartandpublic.de/) | Reliable in terms of testing the functional requirements as well as the quality scenarios. |

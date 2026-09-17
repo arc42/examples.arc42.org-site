@@ -1,24 +1,30 @@
 ---
-# The ONLY front matter a section file needs.
-#
-# There is deliberately no `system:` key: the system is derived from the
-# directory this file sits in (see _includes/system-context.html). That is
-# what makes a system directory copyable and removable in one move.
 title: Architecture Constraints
 order: 2
 ---
 
-<!--
-  arc42 section 2 — Anything that limits freedom of design
+## Technical Constraints
 
-  Delete this comment and write the real content. If the original
-  documentation has nothing for this section, say so in one line
-  ("Not documented in the original.") rather than deleting the file —
-  the rail and the stepper expect all twelve, and an honest gap is
-  itself useful to a reader comparing examples.
+The following table shows the technical constraints of the project.
 
-  Images: put them in ../images/ and reference them relatively,
-  e.g. ![Context diagram](../images/03-context.png)
--->
+| Constraint | Explanation |
+|---|---|
+| Python for backend services | Python is used in the SCH project as the language for the backend services. |
+| Typescript for Web UIs | Typescript is used in the SCH project as the language for the web UIs. |
+| PostgreSQL as a Relational Database | The PostgreSQL relational database system is used in the SCH project. Therefore a server and the know how exists. |
+| Kafka | As a event streaming platform Kafka shall be used. It's also in use on the SCH project. |
+| FastAPI for backend services | Framework for REST API handling. FastAPI is used in the SCH project. |
+| React or React based Framework | React is used in the SCH project and therefore there shall be used a React based framework for Web UIs. |
+| Grafana, Prometheus, Loki | These tools are set for monitoring and logging |
+| Kubernetes | Kubernetes shall be used as a deployment environment. |
+| Open Telekom Cloud | The cloud provider shall be the Open Telekom Cloud because of data protection issues. |
 
-_Replace this with the system's section 2 content._
+## Organizational constraints
+
+The following table shows the organizational constraints of the project.
+
+| Constraint | Explanation |
+|---|---|
+| Team size | 2 FE-developer, 1 BE-developer, 1 Full-Stack-developer, 1 Tester, 1 PO, 0.5 UI/UX designer, 0.5 Scrum Master |
+| Open Source | Because it is a subsidized project, the HELD-Application must be Open Source. Therefore all used software frameworks and tools must also be Open Source. |
+| Project Time | The implementation time for the project is a half year and the features to implement are a lot. For this reason, attention should be paid to faster function implementation rather than excessive attention to detail. |

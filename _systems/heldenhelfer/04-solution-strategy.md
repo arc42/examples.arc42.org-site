@@ -1,24 +1,23 @@
 ---
-# The ONLY front matter a section file needs.
-#
-# There is deliberately no `system:` key: the system is derived from the
-# directory this file sits in (see _includes/system-context.html). That is
-# what makes a system directory copyable and removable in one move.
 title: Solution Strategy
 order: 4
 ---
 
-<!--
-  arc42 section 4 — The handful of fundamental decisions that shaped everything else — technology, decomposition, patterns, how quality goals are met.
+This section lists specific approaches for implementing the desired requirements.
 
-  Delete this comment and write the real content. If the original
-  documentation has nothing for this section, say so in one line
-  ("Not documented in the original.") rather than deleting the file —
-  the rail and the stepper expect all twelve, and an honest gap is
-  itself useful to a reader comparing examples.
+## Software
 
-  Images: put them in ../images/ and reference them relatively,
-  e.g. ![Context diagram](../images/03-context.png)
--->
+1. **Hero Portal Application** - Central landing page for registered HELD members after login. This will be implemented individually.
+2. **Microservice approach** - Wherever HELD functionalities are implemented individually, it benefits from a microservice approach, e.g. flexibility through loose coupling or individually selectable base technology.
+3. **Clean Architecture** - Wherever a HELD (micro)-service is implemented individually, the Clean Architecture approach is used. This has the advantage in writing testable, maintainable, changeable and independent code.
+4. **IAM** - Central IAM system, hosted in the SCH. Used to implement a roles/rights model. This has an influence on the user level, but also on system layers, when deciding whether functions may be executed or whether data may be accessed.
+5. **Runtime environment** - The HELD Application is explicitly designed for operation in a cloud environment. The approach benefits from the abstraction of underlying hardware, the horizontal and vertical scaling that is possible at all times and a very short recovery time in the event of system failures.
+6. **Discourse** - The open source tool *Discourse* is used as a community platform for the clubs. It will be integrated into the IAM and the HELD Application.
+7. **Nextcloud** - To implement the functionality "Digital Office" the open source software *Nextcloud* is used.
+8. **Event Streaming** - Wherever a third-party tool needs to be configured, the event streaming platform *Kafka* shall be used. Every third-party tool shall have it's own sidecar service that receives commands and events from *Kafka*. With this approach each third-party tool is decoupled from the whole system and can be deployed and destroyed without any dependencies to the rest of the system.
 
-_Replace this with the system's section 4 content._
+## Organization
+
+1. **Development Model** - The development model is a SCRUM process, with close cooperation between POs on the service provider side and PMs on the *Smarte Region Würzburg* side.
+2. **Work packages** - The realization of the SCH takes place in defined sections, so-called work packages. These can be processed sequentially and in parallel. Prioritization is carried out by the project team. Before a work package is implemented, the content and questions are discussed by the PO and PM so that the epics of the SCRUM process for a work package are clearly defined.
+3. **Architecture Documentation** - The entire architecture is documented on the basis of the arc42 template and visualized with images based on the C4 approach. The entire documentation is created in parallel with the development and is available to the customer (at least) at any time via the HELD confluence page.
