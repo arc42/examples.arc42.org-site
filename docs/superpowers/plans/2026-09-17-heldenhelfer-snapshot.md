@@ -265,9 +265,13 @@ simpler storage during the pilot and postpone the switch on purpose.
 
 This is a snapshot of documentation version 1.5.0, dated 1 July 2024, the
 last of seven revisions listed in the original's document history. Development
-stopped in August 2024 and the repository on openCode is archived, so the
-snapshot is also the final state. The sources, including the Structurizr model
-the diagrams were exported from, are kept in this site's repository.
+stopped in August 2024. Hendrik Herschlein, project manager for Heldenhelfer at
+Smarte Region Würzburg, added a note when granting permission for this
+snapshot: the repository on openCode is archived, because it is no longer
+actively developed, at least not by them, so neither code nor documentation
+will change from their side. The snapshot is therefore also the final state.
+The sources, including the Structurizr model the diagrams were exported from,
+are kept in this site's repository.
 ```
 
 - [ ] **Step 1: Write the file** as above.
