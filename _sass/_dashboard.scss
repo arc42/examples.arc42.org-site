@@ -352,6 +352,138 @@
   }
 }
 
+// ---- Tabs: "Featured", "Added Sep 2026" ---------------------------------------
+// Editorial labels hung on the tile's top edge, half above the border and
+// half inside it, like the index tab on a herbarium sheet (2026-09-25).
+//
+// NO NEW HUE, and for the stamp's reason: the ground with --tint on it is the
+// site's "chrome, not content" pairing (masthead, footer, COMING SOON, the
+// invitation), and a tab is the site remarking on a tile, not the tile's own
+// content. 12.44:1.
+//
+// ABSOLUTE, SO IT COSTS NO HEIGHT. A label in the flow above the title would
+// push title, goal and decisions down on exactly the tiles that carry it, and
+// comparing across a row is the one thing the dashboard is for. Top-left, so
+// it never meets the catalogue numeral in the top-right corner. Half of it
+// hangs into the grid gap (--s5, 24px) or the field's top padding; the tab is
+// ~20px tall, so 10px of it sits outside the tile and 14px of clear padding
+// stays above the domain eyebrow.
+//
+// `translate` as its own property, as on the stamp: the tile animates
+// `transform` on hover, and the tab must not fight it.
+.ex-tile__tabs {
+  position: absolute;
+  top: 0;
+  left: var(--s5);
+  translate: 0 -50%;
+  display: flex;
+  gap: var(--s1);
+  margin: 0;
+  pointer-events: none;               // the stretched link stays one target
+  z-index: 1;
+}
+
+.ex-tile__tab {
+  padding: 2px var(--s2);
+  border-radius: var(--radius);
+  background: var(--ground);
+  color: var(--tint);                 // 12.44:1 on --ground
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+// ---- The featured tile ------------------------------------------------------
+// One system moved to the head of the grid, two cells wide wherever the grid
+// has two columns (2026-09-25). It is an ordinary tile plus a plate: one
+// figure from the documentation, and the maintainers' sentence on why.
+//
+// It costs no space above the grid. The page spent a day in August moving
+// everything that was not an example out from between the hero and the first
+// tile, and a featured band there would undo that. Inside the grid it takes
+// one extra cell, the size of the tile it displaced.
+//
+// PLATE LEFT, TEXT RIGHT. The catalogue numeral lives in the tile's top-right
+// corner and the tabs in its top-left; with the text column on the right the
+// numeral sits over the text as it does on every other tile, and the tabs sit
+// over the plate. The source order is the reverse (body first), so a screen
+// reader meets the title before the picture.
+//
+// THE TEXT COLUMN IS ONE TILE WIDE. Across a two-cell span C of content
+// width, a single tile's content is C/2 − 36px (two gaps of 24px and the
+// tile's own padding, halved). At that width the goal and the decisions wrap
+// exactly as they would in an ordinary tile, so the row's baselines hold
+// against the neighbour.
+.ex-tile--featured {
+  .ex-tile__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s3);
+    flex: 1;                          // lets __scale's auto margin reach the floor
+  }
+
+  .ex-tile__pick {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s3);
+  }
+
+  // Mounted like a plate: the figure on paper inside a hairline, so a
+  // diagram with a transparent or white ground still reads as an object.
+  .ex-tile__plate {
+    margin: 0;
+    padding: var(--s3);
+    background: var(--paper);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 18rem;
+      object-fit: contain;
+    }
+  }
+
+  .ex-tile__why {
+    margin: 0;
+    font-size: 0.9375rem;
+    line-height: 1.45;
+    color: var(--ink);                // 13.41:1 on --paper
+
+    strong { color: var(--ground-deep); }
+  }
+
+  // One column: the plate goes. A diagram at a phone's ~290px is too small
+  // to read, and it would add ~200px above every other example on the
+  // device where the grid already starts 728px down. The sentence stays, on
+  // its own rule after the byline, where a single-column tile has no row to
+  // keep in line.
+  @media (max-width: 42.99rem) {
+    .ex-tile__plate { display: none; }
+
+    .ex-tile__pick {
+      padding-top: var(--s3);
+      border-top: 1px solid var(--hairline);
+    }
+  }
+
+  @media (min-width: 43rem) {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) calc(50% - var(--s5) - var(--s3));
+    grid-template-areas: "pick body";
+    column-gap: var(--s5);
+
+    .ex-tile__body { grid-area: body; }
+    .ex-tile__pick { grid-area: pick; }
+  }
+}
+
 // The CHIPS lived here until 2026-08-12. They left the tile on 2026-08-11
 // (55-of-58 singleton values — see the tile comments above) and the system
 // facts block a day later, when the same count was run there: `technologies`

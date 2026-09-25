@@ -27,11 +27,13 @@ endnotes: >-
   republish them. Those are listed under [In the Wild](/in-the-wild/).
 # The invitation tile (2026-09-10). Content and slot live here, as the
 # endnotes do; the markup is _includes/invite-tile.html and the placement is
-# in _layouts/home.html. `after` is the catalogue number it follows. 4 puts
-# it at the centre of a three-by-three block, and a fixed slot keeps it there
-# as examples arrive instead of letting it drift to the end of the grid. It is
-# not a system, so it is not counted by the sentence above the grid and it
-# carries no catalogue number.
+# in _layouts/home.html. `after` is the number of grid CELLS it follows
+# (2026-09-25; it was the catalogue number until the featured tile, which
+# fills two cells, made the two differ). 4 puts it at the centre of a
+# three-by-three block, and a fixed slot keeps it there as examples arrive
+# instead of letting it drift to the end of the grid. It is not a system, so
+# it is not counted by the sentence above the grid and it carries no
+# catalogue number.
 invite:
   after: 4
   eyebrow: An invitation
@@ -41,6 +43,36 @@ invite:
     documented a real system along arc42 and may publish it, we would like to
     add it. If you cannot republish it, a link is welcome too.
   call: How to contribute
+# "Recently added" (2026-09-25). A tile whose `imported:` month falls inside
+# the last `months` calendar months, counting the month of the build, gets a
+# tab on its top edge that says when it arrived: "Added Sep 2026". The month
+# is printed, not just "New", because the page changes only when the site is
+# rebuilt and nothing rebuilds it on a timer; a dated tab is still true on a
+# page nobody has rebuilt for a quarter. `since` keeps the founding
+# collection, everything imported in August 2026, from ever counting as new.
+# Rationale in DESIGN.md, "Recently added and featured".
+recent:
+  months: 2
+  since: 2026-09
+# The featured example (2026-09-25). One system, chosen by a person, moved to
+# the head of the grid for as long as `until` has not passed. It keeps its
+# catalogue number, so the order of the others does not change and the gap
+# in the numbering shows where it came from. `why` is the maintainers' voice,
+# the same voice as an /in-the-wild/ note, so write it in that spirit. `image`
+# is a path inside the system's own directory and is shown only where the
+# tile has two columns to show it in. Delete the block, or let `until` pass,
+# and the grid is back to plain `order`.
+featured:
+  system: nfdi4earth
+  until: 2026-10-31
+  why: >-
+    Thirteen authors from a national consortium agreed on one architecture
+    and wrote it down. Section 3 says plainly what the infrastructure will
+    not do, and section 4 explains community- and NFDI4Earth services.
+  image: images/02-software-architecture.png
+  alt: >-
+    The NFDI4Earth services drawn as a honeycomb, coloured by function, with
+    the five services the consortium builds itself numbered one to five.
 ---
 
 {%- comment -%}

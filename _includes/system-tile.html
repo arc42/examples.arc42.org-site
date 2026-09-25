@@ -49,8 +49,49 @@
   sentence, that there is nothing to read yet. It sits directly after the
   title so it reads as "RGCAT — coming soon".
 {%- endcomment -%}
-<li class="ex-tile{% if sys.upcoming %} ex-tile--upcoming{% endif %}"
+{%- comment -%}
+  RECENTLY ADDED (2026-09-25). `include.recent` is index.md's `recent` block.
+  The tile is recent when its `imported:` month is no earlier than
+  `recent.since` and falls inside the last `recent.months` calendar months,
+  counting the build's own month. Months are counted as year × 12 + month, so
+  the window crosses a year boundary correctly. `added` ends up as the
+  printable month ("Sep 2026") or stays empty.
+
+  An announced tile is never "added": it has nothing to read yet, and it
+  already carries the one stamp it needs.
+{%- endcomment -%}
+{%- comment -%}
+  `sys` used to be read bare, as the layout's loop variable. The featured
+  tile is rendered before the loop, where no such variable exists, so the
+  parameter is bound here once and every line below reads the same name.
+{%- endcomment -%}
+{%- assign sys = include.sys -%}
+{%- assign added = '' -%}
+{%- if include.recent and sys.imported and sys.upcoming != true -%}
+  {%- assign imp = sys.imported | append: '' -%}
+  {%- assign since = include.recent.since | append: '' -%}
+  {%- if imp >= since -%}
+    {%- assign imp_parts = imp | split: '-' -%}
+    {%- assign imp_m = imp_parts[0] | times: 12 | plus: imp_parts[1] -%}
+    {%- assign now_y = site.time | date: '%Y' | times: 12 -%}
+    {%- assign now_m = site.time | date: '%m' | plus: now_y -%}
+    {%- assign age = now_m | minus: imp_m -%}
+    {%- if age >= 0 and age < include.recent.months -%}
+      {%- assign added = imp | append: '-01' | date: '%b %Y' -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endif -%}
+
+<li class="ex-tile{% if sys.upcoming %} ex-tile--upcoming{% endif %}{% if include.featured %} ex-tile--featured{% endif %}"
     data-domain="{{ sys.domain | default: 'Uncategorised' | slugify }}">
+
+  {%- comment -%}
+    The featured tile wraps the ordinary tile in `__body` and adds `__pick`
+    after it: the plate and the maintainers' sentence. Body first in the
+    source, so a screen reader meets the title before the pick; the plate is
+    moved to the left only by grid areas in _sass/_dashboard.scss.
+  {%- endcomment -%}
+  {%- if include.featured -%}<div class="ex-tile__body">{%- endif -%}
 
   {%- comment -%}
     The catalogue number. Decorative and aria-hidden: it names a position in
@@ -80,6 +121,26 @@
 
   {%- if sys.upcoming -%}
   <p class="ex-tile__stamp">Coming soon</p>
+  {%- endif -%}
+
+  {%- comment -%}
+    THE TABS (2026-09-25): "Featured" and "Added Sep 2026", hung on the
+    tile's top edge. Absolutely positioned, so they cost the tile no height
+    and the title, goal and decisions stay on the row's shared baseline, the
+    same argument that put the byline last. Real text, directly after the
+    title, for the stamp's reason: a reader who cannot see the tab still
+    hears "NFDI4Earth, Featured, Added Sep 2026". The hidden commas keep the
+    two labels from running together when read aloud.
+  {%- endcomment -%}
+  {%- if include.featured or added != '' -%}
+  <p class="ex-tile__tabs">
+    {%- if include.featured -%}
+    <span class="ex-sr-only">, </span><span class="ex-tile__tab">Featured</span>
+    {%- endif -%}
+    {%- if added != '' -%}
+    <span class="ex-sr-only">, </span><span class="ex-tile__tab">Added {{ added }}</span>
+    {%- endif -%}
+  </p>
   {%- endif -%}
 
   {%- comment -%}
@@ -157,5 +218,26 @@
   {%- endcomment -%}
   {%- if sys.contributed and sys.attribution -%}
   <p class="ex-tile__byline">Created by {{ sys.attribution }}</p>
+  {%- endif -%}
+
+  {%- if include.featured -%}
+  </div>
+  {%- comment -%}
+    The pick: one figure from the documentation itself, mounted like a plate,
+    and one sentence in the maintainers' voice saying why this one. The
+    image is the system's own and is optional; the sentence is not, because
+    a feature nobody explains is only a reordering.
+  {%- endcomment -%}
+  <div class="ex-tile__pick">
+    {%- if include.featured.image -%}
+    <figure class="ex-tile__plate">
+      <img src="{{ sys.url | append: include.featured.image | relative_url }}"
+           alt="{{ include.featured.alt | strip | escape }}" loading="lazy" decoding="async">
+    </figure>
+    {%- endif -%}
+    {%- if include.featured.why -%}
+    <p class="ex-tile__why"><strong>Our pick.</strong> {{ include.featured.why }}</p>
+    {%- endif -%}
+  </div>
   {%- endif -%}
 </li>
