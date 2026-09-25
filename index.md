@@ -68,7 +68,7 @@ featured:
   why: >-
     Thirteen authors from a national consortium agreed on one architecture
     and wrote it down. Section 3 says plainly what the infrastructure will
-    not do, and section 4 tells the strategy as the services it produces.
+    not do, and section 4 explains community- and NFDI4Earth services.
   image: images/02-software-architecture.png
   alt: >-
     The NFDI4Earth services drawn as a honeycomb, coloured by function, with
