@@ -38,27 +38,73 @@ layout: default
   </div>
 </div>
 
+{%- comment -%}
+  THE FEATURED EXAMPLE (2026-09-25). `featured` in index.md names one system
+  by its directory; it is shown first until `until` has passed. Dates are
+  compared as YYYY-MM-DD strings, which sort the way the dates do. A name
+  that matches no system, or a date already past, leaves `feat_url` empty
+  and the grid is plain `order` again: a stale or mistyped feature fails
+  quiet rather than printing a broken tile.
+
+  Its catalogue number is its real position in `order`, found here, so it
+  reads "08" at the head of the grid and the others keep theirs. Rotating
+  the feature never renumbers anything.
+{%- endcomment -%}
+{%- assign feat_url = '' -%}
+{%- assign feat_index = 0 -%}
+{%- if page.featured and page.featured.system -%}
+  {%- assign today = site.time | date: '%Y-%m-%d' -%}
+  {%- assign feat_until = page.featured.until | date: '%Y-%m-%d' | default: '9999-12-31' -%}
+  {%- if feat_until >= today -%}
+    {%- assign wanted = '/systems/' | append: page.featured.system | append: '/' -%}
+    {%- for sys in systems -%}
+      {%- if sys.url == wanted and sys.upcoming != true -%}
+        {%- assign feat_url = wanted -%}
+        {%- assign feat_index = forloop.index -%}
+        {%- assign feat_sys = sys -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endif -%}
+
 {%- if systems.size > 0 -%}
 <section class="ex-field" aria-label="Examples">
   <div class="ex-shell">
     <ul class="ex-grid">
+      {%- comment -%}
+        CELLS, NOT TILES (2026-09-25). The invitation's slot is counted in
+        grid cells, because the featured tile fills two of them in a
+        three-column grid. Counting tiles put the invitation one cell right
+        of the centre it is meant to hold.
+      {%- endcomment -%}
+      {%- assign cells = 0 -%}
+      {%- if feat_url != '' -%}
+        {% include system-tile.html sys=feat_sys index=feat_index featured=page.featured recent=page.recent %}
+        {%- assign cells = 2 -%}
+        {%- comment -%} A slot inside the featured tile's two cells: take the next one. {%- endcomment -%}
+        {%- if page.invite and page.invite.after <= cells -%}
+          {% include invite-tile.html invite=page.invite %}
+        {%- endif -%}
+      {%- endif -%}
       {%- for sys in systems -%}
-        {% include system-tile.html sys=sys index=forloop.index %}
+        {%- if sys.url == feat_url -%}{%- continue -%}{%- endif -%}
+        {% include system-tile.html sys=sys index=forloop.index recent=page.recent %}
+        {%- assign cells = cells | plus: 1 -%}
         {%- comment -%}
-          THE INVITATION (2026-09-10) follows the tile whose catalogue number
-          index.md names in `invite.after`. It is rendered inside the loop so
-          that it holds a fixed slot near the centre of the grid, and the
-          numbering runs past it unbroken: `index` still counts systems only.
+          THE INVITATION (2026-09-10) follows the cell index.md names in
+          `invite.after`. It is rendered inside the loop so that it holds a
+          fixed slot near the centre of the grid, and the numbering runs past
+          it unbroken: `index` still counts systems only.
         {%- endcomment -%}
-        {%- if page.invite and forloop.index == page.invite.after -%}
+        {%- if page.invite and cells == page.invite.after -%}
           {% include invite-tile.html invite=page.invite %}
         {%- endif -%}
       {%- endfor -%}
       {%- comment -%}
-        Fewer examples than the slot asks for: the invitation closes the grid
+        Fewer cells than the slot asks for: the invitation closes the grid
         rather than vanishing.
       {%- endcomment -%}
-      {%- if page.invite and systems.size < page.invite.after -%}
+      {%- if page.invite and cells < page.invite.after -%}
         {% include invite-tile.html invite=page.invite %}
       {%- endif -%}
       {%- comment -%}

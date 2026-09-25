@@ -270,8 +270,10 @@ just a gap in the grid.
 The dashboard asks for examples (2026-09-10). A few thousand people read the
 page every month and the corpus grows only when one of them sends something,
 so the ask sits where the readers are: one tile in the grid, at the fifth
-slot, the centre of a three-by-three block. It is placed by catalogue
-position, `invite.after` in `index.md`, not appended after the last example,
+slot, the centre of a three-by-three block. It is placed by grid cell,
+`invite.after` in `index.md` (by catalogue position until 2026-09-25, when
+the two-cell featured tile made cells and positions differ; see *Recently
+added and featured*), not appended after the last example,
 because a card at the end of the grid is the one nobody scrolls to, and a
 fixed slot keeps it central as examples arrive. The catalogue numbering runs
 past it unbroken: the numeral counts systems, and this is not one.
@@ -310,6 +312,69 @@ That list grows only when somebody sends a link, and the ask is made once, at
 the end, after a reader has seen what an entry looks like. The box is not
 `.ex-note`: the wash box is an aside in the reader's own voice, and this is
 the site asking for something.
+
+## Recently added and featured
+
+Prototype, 2026-09-25. The question was whether the dashboard should rotate
+its order, "example of the week", or sort newest first so the older examples
+drift down. Both were rejected for the same reason: `order` is curated. The
+first tiles are the most complete starting points, and a first-time reader,
+who is most readers, should meet them first. Rotation also renumbers the
+catalogue every week, and the numbers get quoted in trainings.
+
+What shipped instead leaves `order` alone and adds two things on top of it.
+
+**A tab for recent arrivals.** A tile whose `imported:` month falls inside
+`recent.months` (counted back from the build's month) gets a tab on its top
+edge: *Added Sep 2026*. It prints the month and not the word "New", because
+the page changes only when the site is rebuilt and nothing guarantees a
+rebuild; a dated tab stays true on a page nobody has touched for months.
+`recent.since` excludes the founding collection, the nine examples imported
+in August 2026, which would otherwise have made the marker cover almost the
+whole grid.
+
+**One featured example**, named in `featured` on `index.md` with an `until`
+date. It moves to the head of the grid and spans two cells wherever the grid
+has two columns, with one figure from its own documentation mounted as a
+plate and a sentence in the maintainers' voice on why it is worth reading.
+It keeps its catalogue number, so its old slot shows as a gap in the
+numbering and nothing else is renumbered. After `until`, or with a system
+name that matches nothing, the grid falls back to plain `order` without
+printing anything broken.
+
+It costs no band above the grid. *What the home page owes the fold* spent a
+day moving everything that was not an example out of that space, and a
+featured strip there would put it back. In the grid it takes one cell more
+than the tile it replaces.
+
+Constraints this respects, each for a reason recorded elsewhere here:
+
+- **No new hue.** Both tabs are `--ground` with `--tint`, 12.44:1, the
+  pairing the masthead, the footer, the COMING SOON band and the invitation
+  already use for the site remarking on its content. Amber stays with the
+  review notes.
+- **Row alignment.** The tabs are positioned absolutely, top left, half over
+  the border, so they add no height, and they never meet the numeral in the
+  top-right corner. The featured tile's text column is sized to one ordinary
+  tile's content width (C/2 − 36px of a two-cell span), so its goal and
+  decisions wrap as they would in any tile.
+- **One link per tile.** The tabs and the plate let clicks through to the
+  stretched link on the title.
+- **Reading order.** The tabs are real text directly after the title, like
+  the COMING SOON band. The plate sits left only by grid areas; in the
+  source the text comes first.
+- **Phones.** Below 43rem the plate is not shown: a diagram at ~290px is
+  unreadable and would push every other example ~200px further down. The
+  sentence stays, after the byline.
+
+The invitation's slot is counted in cells since this change, so it keeps
+the centre of the first three-by-three block with a featured tile present.
+
+Open: the plate is the first imagery in the grid, and a coloured diagram
+brings the documentation's own colours onto a dashboard that has none. That
+is the example's content, not a per-example colour scheme, so it does not
+reopen *Open decision: colour on tiles*; but it should be watched, and a
+featured tile may leave `image` out.
 
 ## Learn from the originals
 
