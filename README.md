@@ -40,7 +40,12 @@ The dev image is built from this repo's own `Dockerfile` (Ruby 3.2, gems
 pinned via `Gemfile.lock`). Run `make install` after editing the `Gemfile`.
 
 > This site's dev server uses port 4230 (not Jekyll's default 4000) so it can
-> run alongside other arc42 sites' dev servers without a port clash.
+> run alongside other arc42 sites' dev servers without a port clash — see
+> `raw/port-assignment.md` in meta.arc42.org for the full assignment. Jekyll
+> binds 4230 inside the container as well as on the host, so its "Server
+> address:" startup banner names the real port. Three places must stay in step:
+> `SITE_PORT` in the `Makefile`, the mapping plus `--port` in
+> `docker-compose.yml`, and `EXPOSE`/`CMD` in the `Dockerfile`.
 
 Without Make: `docker compose up`. Native Ruby: `bundle install && bundle exec
 jekyll serve`. Production deploys automatically from `main`.
