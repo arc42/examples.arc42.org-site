@@ -28,19 +28,16 @@
         href="{{ '/assets/fonts/libre-caslon-text-700-latin.woff2' | relative_url }}">
 
   {%- comment -%}
-    Analytics (meta.arc42.org ADR-0005): examples.arc42.org's own Plausible
-    site plus the shared rollup.arc42.com, own host first (since 2026-09-14;
-    before that, own site only via the new pa-….js snippet).
+    Analytics: examples.arc42.org's own Plausible dashboard only. The shared
+    rollup.arc42.com was dropped on 2026-09-28 because it doubled billable
+    events (meta.arc42.org ADR-0011, superseding ADR-0005).
 
-    Legacy script on purpose. Plausible's new per-site snippet cannot report
-    into two dashboards, and the rollup is what counts a visitor to several
-    arc42 sites once and shows cross-site journeys as one session.
-    Outbound links and file downloads are chosen by the `src` filename, not by
-    plausible.init() or dashboard toggles. This is the documented exception to
-    LP-1 (no third-party scripts): see ADR-0005. Cookie-less, so no consent
-    banner.
+    Outbound links and file downloads are chosen by the `src` filename of the
+    legacy script, not by plausible.init() or dashboard toggles. This is the
+    documented exception to LP-1 (no third-party scripts): see ADR-0005.
+    Cookie-less, so no consent banner.
   {%- endcomment -%}
-  <script defer data-domain="examples.arc42.org,rollup.arc42.com" src="https://plausible.io/js/script.outbound-links.file-downloads.js"></script>
+  <script defer data-domain="examples.arc42.org" src="https://plausible.io/js/script.outbound-links.file-downloads.js"></script>
 </head>
 <body class="ex-body">
   <a class="ex-skip" href="#main">Skip to content</a>
