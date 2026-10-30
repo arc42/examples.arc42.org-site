@@ -63,16 +63,18 @@ recent:
 # tile has two columns to show it in. Delete the block, or let `until` pass,
 # and the grid is back to plain `order`.
 featured:
-  system: nfdi4earth
-  until: 2026-10-31
+  system: wirschiffendas
+  until: 2026-11-30
   why: >-
-    Thirteen authors from a national consortium agreed on one architecture
-    and wrote it down. Section 3 says plainly what the infrastructure will
-    not do, and section 4 explains community- and NFDI4Earth services.
-  image: images/02-software-architecture.png
+    A single author documented six choreographed services in tables you can
+    check against the running code. Section 6 gives every REST call between
+    services its circuit breaker and fallback, and section 11 traces the
+    technical debt to named microservice anti-patterns.
+  image: images/building-block-view-level2.png
   alt: >-
-    The NFDI4Earth services drawn as a honeycomb, coloured by function, with
-    the five services the consortium builds itself numbered one to five.
+    Component diagram of the analysis subsystem. The coordinator starts
+    Fluids, Fluids calls Drivetrain and Mechanical, both feed EMS, and every
+    service exchanges status and results over Kafka.
 ---
 
 {%- comment -%}

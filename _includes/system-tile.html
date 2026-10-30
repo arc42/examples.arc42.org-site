@@ -59,6 +59,9 @@
 
   An announced tile is never "added": it has nothing to read yet, and it
   already carries the one stamp it needs.
+
+  Nor is the featured tile (2026-10-30). One label per tile is enough, and
+  "Featured" is the one that says why the tile stands first.
 {%- endcomment -%}
 {%- comment -%}
   `sys` used to be read bare, as the layout's loop variable. The featured
@@ -67,7 +70,7 @@
 {%- endcomment -%}
 {%- assign sys = include.sys -%}
 {%- assign added = '' -%}
-{%- if include.recent and sys.imported and sys.upcoming != true -%}
+{%- if include.recent and sys.imported and sys.upcoming != true and include.featured == nil -%}
   {%- assign imp = sys.imported | append: '' -%}
   {%- assign since = include.recent.since | append: '' -%}
   {%- if imp >= since -%}
@@ -129,8 +132,9 @@
     and the title, goal and decisions stay on the row's shared baseline, the
     same argument that put the byline last. Real text, directly after the
     title, for the stamp's reason: a reader who cannot see the tab still
-    hears "NFDI4Earth, Featured, Added Sep 2026". The hidden commas keep the
-    two labels from running together when read aloud.
+    hears "<title>, Added Sep 2026". The hidden comma keeps the label from
+    running into the title when read aloud. A tile carries one tab at most:
+    the featured tile never gets "Added" (see RECENTLY ADDED above).
   {%- endcomment -%}
   {%- if include.featured or added != '' -%}
   <p class="ex-tile__tabs">

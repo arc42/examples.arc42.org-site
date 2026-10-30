@@ -342,6 +342,10 @@ numbering and nothing else is renumbered. After `until`, or with a system
 name that matches nothing, the grid falls back to plain `order` without
 printing anything broken.
 
+A tile carries one tab at most (2026-10-30). A featured example that was
+also imported recently shows *Featured* only, because two tabs on one tile
+read as clutter and *Featured* is the one that explains its position.
+
 It costs no band above the grid. *What the home page owes the fold* spent a
 day moving everything that was not an example out of that space, and a
 featured strip there would put it back. In the grid it takes one cell more
