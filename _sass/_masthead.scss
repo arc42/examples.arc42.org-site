@@ -419,6 +419,26 @@
 }
 
 // ---- Nav ---------------------------------------------------------------------
+// Search and the "42" family button, as one group (2026-11-02). The group is
+// what wraps, never its two members separately: the family popover hangs from
+// the button's right edge (_family.scss), which is only on-screen while the
+// button is the rightmost item of its row. Below 940px the group takes the
+// full second row, as the search form alone used to: field stretched, "42" at
+// its right end. The flex values that used to sit on .arc42-search for that
+// row live here now; see the matching note in _search.scss.
+.ex-masthead__tools {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  flex: 0 1 auto;
+  min-width: 0;
+
+  @media (max-width: 939px) {
+    flex: 1 1 100%;
+    order: 3;
+  }
+}
+
 .ex-nav {
   &__list {
     list-style: none;
