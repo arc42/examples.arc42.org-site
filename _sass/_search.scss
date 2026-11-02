@@ -272,9 +272,12 @@
   // with it. This number is the masthead's, not the rail's: it is where the
   // brand, the nav and this field stop fitting on one line, and it stopped
   // coinciding with the rail breakpoint when that moved to 1040px.
+  //
+  // Since 2026-11-02 the form shares that row with the "42" family button in
+  // .ex-masthead__tools (_masthead.scss), so the full-row basis and the order
+  // moved to the group. Here the field only fills what the button leaves.
   @media (max-width: 939px) {
-    flex: 1 1 100%;
-    order: 3;
+    flex: 1 1 auto;
 
     &__panel { left: 0; right: 0; width: auto; }
   }

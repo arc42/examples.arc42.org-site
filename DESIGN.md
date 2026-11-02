@@ -695,6 +695,44 @@ source-and-licence note on a system overview; it now also marks the arc42
 review notes and their overview disclaimer — the same genre, our voice pinned
 onto somebody else's document, never headings and never cards at rest.
 
+## The 42 family menu
+
+The family component (meta.arc42.org, `wiki/concepts/family-menu.md`), added
+2026-11-02: a **42** button at the right end of the bar that opens a popover
+naming req42, arc42 and systems42, with this site's entry marked "You are
+here". It keeps the family class names (`.family-*`) under the Same-Name Rule,
+because the structure is the family's. Data: `_data/family.yml`. Markup:
+`_includes/family-menu.html`. Styles: `_sass/_family.scss`. Behaviour:
+`assets/js/family-menu.js`. The footer repeats the three links as "The 42
+family: req42 · arc42 · systems42", which is also the path without JavaScript.
+
+What is this site's own:
+
+- **The panel opens with the spine.** A site with no hue has no colour to give
+  a popover except its device, and the sheet that drops from a bar ending in
+  the spine carries the same edge. It is `_includes/spine.html` itself, so the
+  segments still come from `_data/spine.yml` and stay decorative. Paper below
+  it, so every text pair is one the site already measures.
+- **A floating shadow, not the pinned-note one.** The hard offset belongs to
+  annotations pinned onto the page (end of *Site-local components*, above).
+  An open popover floats above the page, which is what the search panel's
+  shadow already says.
+- **The bar's layout contract.** Search and the button share
+  `.ex-masthead__tools`, which wraps as one piece; below 940px it takes the
+  full second row, field stretched and "42" at its right end. The popover
+  hangs from the button's right edge, so the button must stay the rightmost
+  item of its row at every width.
+- **Focus.** The panel's links sit inside `.ex-masthead` in the DOM but on
+  paper, so they take `--focus-ring` (14.12:1), not the amber band ring, which
+  measures 1.5:1 on paper.
+- **"You are here"** wears the ground with `--tint` (12.44:1), the pairing of
+  the COMING SOON stamp: chrome, not content, and no new colour.
+
+The two family dots, `--family-arc` and `--family-req`, are the only colours
+this component adds. They are shared with docs and systems42, decorative
+(each sits next to its site's name in text) and neither is a signature hue in
+BRAND.md's registry. The family still owes an ADR for them.
+
 ## Surfaces
 
 Three tinted surfaces plus the code wash, each with one job — the family cap:

@@ -118,6 +118,17 @@
   --arc42-maroon:     #8a2e2e;  // spine segment 6 · sponsor quarantine only
   --arc42-maroon-bg:  #fcefef;
 
+  // ---- Family identifiers --------------------------------------------------
+  // The dots in the "42" family menu (_family.scss), and nothing else. They
+  // name the sibling sites, so they are docs' and systems42's values verbatim
+  // and look the same on every family site. Decorative: each dot sits next to
+  // its site's name in text (1.4.11 does not apply; for the record, 4.00:1 and
+  // 2.54:1 on --paper). Neither is a signature hue in BRAND.md's registry, so
+  // the Imprint Rule and scripts/check-brand.sh are untouched. The family
+  // still owes an ADR for them: meta.arc42.org, wiki/concepts/family-menu.md.
+  --family-arc: #1d7fe0;
+  --family-req: #17b59d;
+
   // ---- Focus rings ---------------------------------------------------------
   // Two tokens, one per surface, both well over the 3:1 a focus indicator must
   // carry (DESIGN.md §4). Writing `outline: none` obliges you to apply a ring.

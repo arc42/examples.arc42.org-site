@@ -52,6 +52,10 @@
       people reach for repeatedly, and the family's other sites put it in the
       same corner.
 
+      Since 2026-11-02 the "42" family button sits to its right, as it does on
+      docs and faq. Search is the rightmost control you type into; the button
+      closes the row because its popover hangs from the right edge.
+
       Source order matches visual order, left to right, so the tab sequence
       follows the eye. Do not reorder these two with CSS `order` — that splits
       the two apart.
@@ -101,6 +105,7 @@
       The role/aria-*/data-* attributes are the JS and CSS contract. Do not
       rename them without changing both files.
     {%- endcomment -%}
+    <div class="ex-masthead__tools">
     <form class="arc42-search" role="search" method="get"
           action="{{ '/search/' | relative_url }}"
           data-arc42-search="{{ '/search.json' | relative_url }}">
@@ -130,6 +135,17 @@
            aria-label="Search suggestions" data-arc42-search-panel hidden></div>
       <div class="ex-sr-only" aria-live="polite" data-arc42-search-status></div>
     </form>
+
+    {%- comment -%}
+      The "42" family menu closes the bar. It travels with the search form in
+      .ex-masthead__tools, a group that wraps as a whole and never splits: the
+      popover hangs from the button's right edge, so the button must be the
+      rightmost thing on its row at every width. As a loose item in this
+      wrapping row it would drop alone to the left gutter on a mid-size window
+      and open its panel off-screen (docs.arc42.org, 2026-11-01).
+    {%- endcomment %}
+    {% include family-menu.html %}
+    </div>
   </div>
 
   {%- if is_home -%}

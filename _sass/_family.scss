@@ -1,0 +1,215 @@
+// ============================================================================
+// Family menu: the "42" button in the masthead and the popover listing the
+// sibling sites (req42, arc42, systems42). Markup: _includes/family-menu.html.
+//
+// The family component (meta.arc42.org, wiki/concepts/family-menu.md), ported
+// from docs.arc42.org-site/_sass/_family.scss and restated in this site's
+// terms. Three local decisions, each following a rule this site already has:
+//
+//   1. The panel opens with the spine. This site has no signature hue; its
+//      colour is the six-segment device that ends the masthead, so the sheet
+//      that drops from the masthead carries the same edge. Paper below it, so
+//      every text pair stays one this file already measures.
+//   2. A floating shadow, not the pinned-note one. DESIGN.md reserves the hard
+//      offset for annotations pinned onto the page; an open popover is a sheet
+//      floating above it, which is what the search panel's shadow already says.
+//   3. The panel's links take the paper focus ring. They sit inside
+//      .ex-masthead in the DOM, and `.ex-masthead :focus-visible` would give
+//      them the amber band ring, which measures 1.5:1 on paper.
+//
+// Colour pairs, measured (ADR-0002):
+//   --tint       on --ground        12.44:1   (button label at rest)
+//   --tint-soft  on --ground         8.93:1   (button border at rest)
+//   --tint       on --ground-deep   14.37:1   (button, hovered)
+//   --ground     on --tint          12.44:1   (button while open, inverted)
+//   --ink        on --paper         13.41:1   (site names)
+//   --muted      on --paper          5.50:1   (title, hosts, descriptions)
+//   --ink        on --wash-calm     11.64:1   (link row, hovered)
+//   --muted      on --wash-calm      4.77:1   (host, hovered). Not --wash-active:
+//                                             --muted on it is 4.28:1, a fail.
+//   --tint       on --ground        12.44:1   ("You are here")
+//   --focus-ring on --paper         14.12:1   (panel links)
+// ============================================================================
+
+// The panel is anchored to the button's right edge, so the button has to be
+// the rightmost item of its row at every width. The masthead guarantees that
+// by keeping search and button together in .ex-masthead__tools.
+.family {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+// 44px square: the same touch target as the search pill beside it, which also
+// puts the button's bottom edge where the pill's is, so both panels can use
+// the same `top` to clear the spine.
+.family-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1.5px solid var(--tint-soft);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--tint);
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background-color 0.15s;
+
+  &:hover {
+    background: var(--ground-deep);
+    border-color: var(--tint);
+  }
+
+  // Open state is inverted, not just highlighted: the reader should see at a
+  // glance which control the panel below belongs to.
+  &[aria-expanded="true"] {
+    background: var(--tint);
+    border-color: var(--tint);
+    color: var(--ground);
+  }
+}
+
+// `hidden` is kept as the closed state so the panel's links leave the tab
+// order. systems42 overrides [hidden] to display:block for a fade, which
+// leaves invisible links focusable; do not copy that.
+.family-panel {
+  position: absolute;
+  // Clear of the masthead's spine, not across it: the same offset as the
+  // search panel (_search.scss), for the same reason.
+  top: calc(100% + var(--s2) + var(--spine-h));
+  right: 0;
+  // Above the sticky bar (20) and level with the search panel (30); the two
+  // never open at once, because opening one moves focus out of the other.
+  z-index: 30;
+  width: min(360px, calc(100vw - 2 * var(--s4)));
+  padding: 0 var(--s4) var(--s3);
+  overflow: hidden;   // the spine follows the panel's rounded top corners
+
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--wash-border);
+  border-radius: var(--radius);
+  box-shadow: 0 6px 20px rgba(47, 41, 34, 0.18);
+  font-size: 0.95rem;
+  text-align: left;
+
+  &[hidden] {
+    display: none;
+  }
+
+  // The spine as the panel's top edge, bleeding through the side padding.
+  > .ex-spine {
+    width: auto;
+    margin: 0 calc(-1 * var(--s4)) var(--s3);
+  }
+
+  // See note 3 in the header.
+  .ex-masthead & :focus-visible {
+    outline-color: var(--focus-ring);
+  }
+}
+
+.family-title {
+  margin: 0 0 var(--s2);
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.family-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    padding: var(--s2) 0;
+    border-top: 1px solid var(--hairline);
+
+    &:first-child {
+      border-top: 0;
+    }
+  }
+
+  // The site's link rule holds here too: the underline marks the link, not a
+  // colour. It sits on the name only, so the dot and the host stay clean.
+  a {
+    display: inline-flex;
+    align-items: baseline;
+    gap: var(--s2);
+    padding: var(--s1) var(--s2);
+    margin-left: calc(-1 * var(--s2));
+    border-radius: var(--radius);
+    color: var(--ink);
+    text-decoration: none;
+
+    &:hover {
+      background: var(--wash-calm);
+
+      .family-name {
+        text-decoration-color: currentColor;
+        text-decoration-thickness: 2px;
+      }
+    }
+  }
+
+  p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.45;
+
+    b {
+      color: var(--ink);
+    }
+  }
+}
+
+.family-name {
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-decoration: underline;
+  text-decoration-color: var(--link-under);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+.family-host {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+// Decorative: each site is always named in text next to its dot.
+.family-dot {
+  flex: none;
+  align-self: center;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+
+  &--req { background: var(--family-req); }
+  &--arc { background: var(--family-arc); }
+  &--s42 { background: linear-gradient(90deg, var(--family-arc), var(--family-req)); }
+}
+
+// Chrome, not content, so it wears the ground: the same pairing as the
+// COMING SOON stamp on announced tiles. No new colour for "you are here".
+.family-here {
+  display: inline-block;
+  margin-left: var(--s1);
+  padding: 2px var(--s2);
+  border-radius: var(--radius-pill);
+  background: var(--ground);
+  color: var(--tint);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  vertical-align: 0.15em;
+}
