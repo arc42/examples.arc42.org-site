@@ -1,0 +1,70 @@
+<mxfile host="65bd71144e">
+    <diagram id="Hm5X4igwcYQcYxfeWTt-" name="Seite-1">
+        <mxGraphModel dx="3250" dy="1156" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="djwBCwoK5NKQGufLdj_g-5" value="Workflow Module" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+                    <mxGeometry x="-1390" y="40" width="170" height="320" as="geometry"/>
+                </mxCell>
+                <mxCell id="EvjodrVlOHKQedYGVtFx-1" value="Service Module A" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="-1600" y="40" width="170" height="320" as="geometry"/>
+                </mxCell>
+                <mxCell id="djwBCwoK5NKQGufLdj_g-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="EvjodrVlOHKQedYGVtFx-3" target="EvjodrVlOHKQedYGVtFx-10" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="EvjodrVlOHKQedYGVtFx-3" value="Module UI" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#B7C7B6;" parent="1" vertex="1">
+                    <mxGeometry x="-1580" y="80" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="EvjodrVlOHKQedYGVtFx-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="EvjodrVlOHKQedYGVtFx-7" target="EvjodrVlOHKQedYGVtFx-10" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="djwBCwoK5NKQGufLdj_g-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="EvjodrVlOHKQedYGVtFx-7" target="djwBCwoK5NKQGufLdj_g-10" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="EvjodrVlOHKQedYGVtFx-7" value="Module Logic" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#B7C7B6;" parent="1" vertex="1">
+                    <mxGeometry x="-1580" y="270" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="EvjodrVlOHKQedYGVtFx-10" value="Module Logic Interfaces" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#D6E8D5;" parent="1" vertex="1">
+                    <mxGeometry x="-1580" y="181" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="djwBCwoK5NKQGufLdj_g-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="djwBCwoK5NKQGufLdj_g-7" target="djwBCwoK5NKQGufLdj_g-10" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="djwBCwoK5NKQGufLdj_g-7" value="Module UI" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#b85450;fillColor=#F7CDCB;" parent="1" vertex="1">
+                    <mxGeometry x="-1370" y="80" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="djwBCwoK5NKQGufLdj_g-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="djwBCwoK5NKQGufLdj_g-9" target="djwBCwoK5NKQGufLdj_g-10" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="djwBCwoK5NKQGufLdj_g-9" value="Module Logic" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#b85450;fillColor=#F7CDCB;" parent="1" vertex="1">
+                    <mxGeometry x="-1370" y="270" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="djwBCwoK5NKQGufLdj_g-10" value="Module Logic Interfaces" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fad9d5;strokeColor=#ae4132;" parent="1" vertex="1">
+                    <mxGeometry x="-1370" y="181" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="djwBCwoK5NKQGufLdj_g-11" value="Service Module B" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="-1180" y="40" width="170" height="320" as="geometry"/>
+                </mxCell>
+                <mxCell id="djwBCwoK5NKQGufLdj_g-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="djwBCwoK5NKQGufLdj_g-13" target="djwBCwoK5NKQGufLdj_g-16" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="djwBCwoK5NKQGufLdj_g-13" value="Module UI" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#B7C7B6;" parent="1" vertex="1">
+                    <mxGeometry x="-1160" y="80" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="djwBCwoK5NKQGufLdj_g-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="djwBCwoK5NKQGufLdj_g-15" target="djwBCwoK5NKQGufLdj_g-16" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="djwBCwoK5NKQGufLdj_g-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="djwBCwoK5NKQGufLdj_g-15" target="djwBCwoK5NKQGufLdj_g-10" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="djwBCwoK5NKQGufLdj_g-15" value="Module Logic" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#B7C7B6;" parent="1" vertex="1">
+                    <mxGeometry x="-1160" y="270" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="djwBCwoK5NKQGufLdj_g-16" value="Module Logic Interfaces" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#D6E8D5;" parent="1" vertex="1">
+                    <mxGeometry x="-1160" y="181" width="120" height="60" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
