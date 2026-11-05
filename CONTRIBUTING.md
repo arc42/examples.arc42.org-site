@@ -8,8 +8,12 @@ An example is **one directory**. Adding one changes nothing outside it.
   has nothing for a section, say so in one line rather than deleting the file.
   The rail and the stepper expect twelve, and an honest gap is itself useful to
   someone comparing examples.
-- **Real** systems. Anonymised is fine. Invented is not — this site's whole
-  claim is that these are real architectures.
+- **Real** systems. Anonymised is fine. A composite is fine too, if it is
+  assembled from real projects and its overview page says so in plain words;
+  [FotoMaX](https://examples.arc42.org/systems/fotomax/) is one, built from
+  several cyber-physical projects for documentation workshops. A system
+  invented from nothing is not, because this site's whole claim is that these
+  are real architectures.
 - **Provenance.** Who wrote the original, under which licence, and permission
   to republish. A pull request without this cannot be merged, however good the
   documentation is.
@@ -82,6 +86,7 @@ underscore in any directory or file you want published — Jekyll skips those.
 - [ ] `index.md` front matter complete: tagline ≤ 60 chars, ≤ 4 decisions,
       ≤ 6 technologies, keywords not sentences
 - [ ] `attribution`, `licence`, `source_url` present and correct
+- [ ] A composite of several real projects says so on its overview page
 - [ ] Images in the system's own `images/`, referenced relatively
 - [ ] Source material in `_originals/` (underscore intact)
 - [ ] `make check` and `make check-links` pass
