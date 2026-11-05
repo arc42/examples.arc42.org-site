@@ -703,8 +703,9 @@ naming req42, arc42 and systems42, with this site's entry marked "You are
 here". It keeps the family class names (`.family-*`) under the Same-Name Rule,
 because the structure is the family's. Data: `_data/family.yml`. Markup:
 `_includes/family-menu.html`. Styles: `_sass/_family.scss`. Behaviour:
-`assets/js/family-menu.js`. The footer repeats the three links as "The 42
-family: req42 · arc42 · systems42", which is also the path without JavaScript.
+`assets/js/family-menu.js`. Until 2026-11-05 the footer repeated the three
+links as "The 42 family: req42 · arc42 · systems42"; that line is gone, so the
+menu is now the only way to the sibling sites, and it needs JavaScript.
 
 What is this site's own:
 
