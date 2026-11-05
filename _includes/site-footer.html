@@ -46,17 +46,6 @@
       <a href="https://github.com/{{ site.repository }}" target="_blank" rel="noopener noreferrer nofollow">GitHub</a>
     </nav>
 
-    {%- comment -%}
-      The 42 family, from the same _data/family.yml as the masthead menu. This
-      is also the path to the sibling sites without JavaScript.
-    {%- endcomment %}
-    <nav class="footer-links footer-family" aria-label="The 42 family">
-      <span class="footer-family-label">The 42 family:</span>
-      {%- for m in site.data.family %}
-      <a href="{{ m.url }}">{{ m.name }}</a>
-      {%- endfor %}
-    </nav>
-
     <p class="footer-maintainer">
       &copy; 2026 arc42, created by
       <a target="_blank" rel="noopener noreferrer nofollow" href="https://gernotstarke.de">Gernot Starke</a>

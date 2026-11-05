@@ -15,8 +15,8 @@
  * first link; opened by mouse it stays put (e.detail is 0 for a keyboard
  * "click").
  *
- * Progressive enhancement: without this file the button does nothing and the
- * same three links are in the footer.
+ * Without this file the button does nothing. The footer no longer repeats the
+ * three links (removed 2026-11-05), so the sibling sites need JavaScript.
  * =========================================================================== */
 (function () {
   'use strict';

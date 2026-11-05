@@ -106,13 +106,6 @@
   }
 }
 
-// The sibling sites, from _data/family.yml (docs' and faq's footer line). Same
-// middots as the site links; the label is plain muted text (4.77:1 on
-// --wash-calm), so the first link needs no separator.
-.footer-family-label {
-  color: var(--muted);
-}
-
 .footer-maintainer,
 .footer-note {
   flex-basis: 100%;
