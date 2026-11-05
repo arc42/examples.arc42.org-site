@@ -719,7 +719,7 @@ What is this site's own:
   An open popover floats above the page, which is what the search panel's
   shadow already says.
 - **The bar's layout contract.** Search and the button share
-  `.ex-masthead__tools`, which wraps as one piece; below 940px it takes the
+  `.ex-masthead__tools`, which wraps as one piece; below 1020px it takes the
   full second row, field stretched and "42" at its right end. The popover
   hangs from the button's right edge, so the button must stay the rightmost
   item of its row at every width.
@@ -806,9 +806,11 @@ and it is a tablet width.
 **Both rails on this site now collapse at 1040px** — the systems rail and the
 one on `/in-the-wild/` — by different arithmetic and to the same answer.
 
-940px survives as the **masthead's** own breakpoint, which is where the brand,
-the nav and the search field stop fitting on one line. It is no longer the same
-number as the rail, and `_sass/_masthead.scss` says so at the declaration.
+The **masthead** has its own breakpoint, the width where the brand, the nav and
+the search field stop fitting on one line. It was 940px until 2026-11-05 and is
+**1020px** since "By Section" joined the nav (see *Cross-system section views*).
+It is measured, not estimated, and it is not the rail's number;
+`_sass/_masthead.scss` says both at the declaration.
 
 Below the rail breakpoint the rail becomes a horizontal scrolling strip rather
 than disappearing: a twelve-part document must stay navigable on a phone.
@@ -912,7 +914,16 @@ the twenty-four outbound links. It also asserts that every `highlights` entry
 names a section its system actually has, because such an entry renders nothing
 at all rather than a dead link.
 
-Not in the masthead nav. The nav is a designed surface and `/sections/` is
-reached from the home page and from sibling links on the twelve pages
-themselves. If it earns a slot later, that is a separate decision with its own
-layout consequences.
+In the masthead nav since 2026-11-05, as **By Section**, the first item. Until
+then the only way in on this site was a sentence in the home page endnotes,
+below every example tile, and the pages were better known from docs.arc42.org
+than from here. It goes first because it is the site's own content read across
+the corpus; In the Wild links to other people's sites, and Contribute and About
+are about this one. The label names the axis rather than the thing: on a system
+page the rail already lists that document's twelve sections, and a nav item
+called "Sections" would read as those.
+
+The layout consequence the deferral anticipated was the masthead breakpoint.
+A fourth item moved it from 940px to 1020px. Between those widths the bar
+would otherwise have wrapped to two rows while still sticky, which is the
+occluded-anchor bug that breakpoint exists to prevent.
