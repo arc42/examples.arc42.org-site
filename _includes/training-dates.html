@@ -10,7 +10,9 @@
   · one row per course, its earliest upcoming date, rows in date order. Not
     the next N dates across all courses, as docs renders: on a home page four
     rows that show four different courses say more than five rows of which
-    three are the same one. The feed's course order is not used.
+    three are the same one. The feed's course order is not used, and neither
+    is the order of a course's dates: an English run is listed after the German
+    ones, so a course's first date need not be its earliest.
   · expiry-filtered again here (belt and braces over the workflow's filter),
     so a stale data file degrades to fewer rows, never to an ended course.
   · cancelled and full dates are skipped; a course whose only remaining dates
@@ -24,7 +26,7 @@
     counted. No show_on means every site. Same rule as arc42.org and arc42.de.
 
   The sort walks every course once, collecting "start|course_index|date_index"
-  for the first admissible date: Liquid cannot sort across nested arrays, but
+  for its earliest admissible date: Liquid cannot sort across nested arrays, but
   it can sort strings, and ISO dates sort lexicographically.
 
   The trainer claim is precise on purpose: most classes are taught by the
@@ -36,17 +38,20 @@
 {%- assign upcoming = 0 -%}
 {%- for course in site.data.trainings.courses -%}
   {%- if course.show_on -%}{%- unless course.show_on contains site.trainings_site_name -%}{%- continue -%}{%- endunless -%}{%- endif -%}
-  {%- assign picked = false -%}
+  {%- assign earliest_start = "" -%}
+  {%- assign earliest_key = "" -%}
   {%- for d in course.dates -%}
     {%- if d.end >= today and d.status != 'cancelled' and d.status != 'full' -%}
       {%- assign upcoming = upcoming | plus: 1 -%}
-      {%- unless picked -%}
-        {%- capture key -%}{{ d.start }}|{{ forloop.parentloop.index0 }}|{{ forloop.index0 }}{%- endcapture -%}
-        {%- assign keys = keys | push: key -%}
-        {%- assign picked = true -%}
-      {%- endunless -%}
+      {%- if earliest_start == "" or d.start < earliest_start -%}
+        {%- assign earliest_start = d.start -%}
+        {%- capture earliest_key -%}{{ d.start }}|{{ forloop.parentloop.index0 }}|{{ forloop.index0 }}{%- endcapture -%}
+      {%- endif -%}
     {%- endif -%}
   {%- endfor -%}
+  {%- if earliest_key != "" -%}
+    {%- assign keys = keys | push: earliest_key -%}
+  {%- endif -%}
 {%- endfor -%}
 {%- assign keys = keys | sort -%}
 {%- assign baseline_duo = "Peter Hruschka, Gernot Starke" -%}
