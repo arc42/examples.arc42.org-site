@@ -19,6 +19,9 @@
     field so no consumer has to guess it from a city name.
   · course links prefer the English detail page (url_en), falling back to url.
   · zero rows degrades to the sentence and the link.
+  · a course whose `show_on` list exists and does not name this site
+    (site.trainings_site_name, "examples.arc42.org") is skipped: not rendered, not
+    counted. No show_on means every site. Same rule as arc42.org and arc42.de.
 
   The sort walks every course once, collecting "start|course_index|date_index"
   for the first admissible date: Liquid cannot sort across nested arrays, but
@@ -32,6 +35,7 @@
 {%- assign keys = "" | split: "" -%}
 {%- assign upcoming = 0 -%}
 {%- for course in site.data.trainings.courses -%}
+  {%- if course.show_on -%}{%- unless course.show_on contains site.trainings_site_name -%}{%- continue -%}{%- endunless -%}{%- endif -%}
   {%- assign picked = false -%}
   {%- for d in course.dates -%}
     {%- if d.end >= today and d.status != 'cancelled' and d.status != 'full' -%}
@@ -86,12 +90,16 @@
       first-time reader, and the feed's `title` glosses them as
       "LABEL: explanation". Everything after the first ": " becomes a muted
       second line. A title without a colon falls back to the course's
-      certification; a course with neither gets no gloss.
+      certification, and without one to the title itself, as written, when it
+      says more than the short title. Only a course whose title is its short
+      title gets no gloss.
     {%- endcomment -%}
     {%- assign title_head = course.title | split: ": " | first -%}
     {%- assign slug = course.title | remove_first: title_head | remove_first: ": " | downcase -%}
     {%- if slug == "" and course.certification -%}
       {%- capture slug -%}preparation for {{ course.certification }} certification{%- endcapture -%}
+    {%- elsif slug == "" and course.title != course.short_title -%}
+      {%- assign slug = course.title -%}
     {%- endif -%}
     {%- assign trainers = d.trainers | default: course.trainers -%}
     {%- assign trainers_key = trainers | join: ", " -%}
