@@ -132,3 +132,8 @@ exclude:
 # above keys on it — but it is the pattern doing the work, not the filter.
 # An earlier version of this comment claimed otherwise and was wrong; the
 # originals were published.
+
+# This site's name in the trainings feed's `show_on` lists (a course that has
+# the list and does not name this site is not shown here). Spelled as in the
+# admin app's KnownSites and trainings.arc42.org's scripts/verify_consumers.sh.
+trainings_site_name: "examples.arc42.org"
